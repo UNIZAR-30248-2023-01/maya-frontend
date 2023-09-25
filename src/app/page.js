@@ -1,4 +1,4 @@
-import Home from '@/components/Home'
+import LayoutV2 from '@/components/Layout'
 
 export const metadata = {
   title: 'Next PWA',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function Page () {
-  return <Home title='App' />
+  return <LayoutV2 />
 }
