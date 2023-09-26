@@ -11,7 +11,7 @@ import {
   LuCalendar,
   LuTicket
 } from 'react-icons/lu'
-import { DesktopSidebar, MobileSidebar } from './Sidebar'
+import Sidebar from '@/components/Sidebar'
 
 const navigation = [
   { name: 'Overview', href: '#', icon: LuLayoutGrid, current: true },
@@ -33,28 +33,20 @@ export default function Layout ({ children }) {
 
   return (
     <>
-      <MobileSidebar
-        navigation={navigation}
-        teams={teams}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
       <div className="h-screen w-screen flex">
-        <div className='h-full w-fit bg-red-300'>
-          <DesktopSidebar
-            navigation={navigation}
-            teams={teams}
-            sidebarOpen={sidebarOpen}
-            setSidebarOpen={setSidebarOpen}
-          />
-        </div>
-        <div className='h-full flex-1 bg-green-50'>
+        <Sidebar
+          navigation={navigation}
+          teams={teams}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
+        <div className='h-full flex-1'>
           <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
             <button type="button" className="text-gray-700" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <LuMenu className="h-6 w-6" aria-hidden="true" />
             </button>
-            <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Overview</div>
+            <div className="text-sm font-semibold leading-6 text-gray-900">Overview</div>
           </div>
 
           <main className="py-10">

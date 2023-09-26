@@ -10,8 +10,8 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function DesktopSidebar ({ navigation, teams, setSidebarOpen }) {
-  return (
+export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen }) {
+  return sidebarOpen &&
     <div className="hidden h-full lg:z-50 lg:flex lg:w-72 lg:flex-col">
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
@@ -19,8 +19,8 @@ export function DesktopSidebar ({ navigation, teams, setSidebarOpen }) {
           <div className="relative flex items-center">
             <input
               type="text"
-              name="search"
-              id="search"
+              name="search-desktop"
+              id="search-desktop"
               className="block w-full rounded-md border-0 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
@@ -101,7 +101,6 @@ export function DesktopSidebar ({ navigation, teams, setSidebarOpen }) {
       </nav>
       </div>
     </div>
-  )
 }
 
 export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen }) {
@@ -153,8 +152,8 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
                     <div className="relative flex items-center">
                       <input
                         type="text"
-                        name="search"
-                        id="search"
+                        name="search-mobile"
+                        id="search-mobile"
                         className="block w-full rounded-md border-0 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                       <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
@@ -233,5 +232,28 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
         </div>
       </Dialog>
     </Transition.Root>
+  )
+}
+
+export default function Sidebar ({ navigation, teams, sidebarOpen, setSidebarOpen }) {
+  return (
+    <>
+      <div className='lg:hidden'>
+        <MobileSidebar
+          navigation={navigation}
+          teams={teams}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          />
+      </div>
+      <div className='hidden lg:flex'>
+        <DesktopSidebar
+          navigation={navigation}
+          teams={teams}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          />
+      </div>
+    </>
   )
 }
