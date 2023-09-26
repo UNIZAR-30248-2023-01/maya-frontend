@@ -1,8 +1,9 @@
 import '@/styles/globals.css'
+
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
-
 import { Layout } from '@/components/Layout'
+import { getDictionary } from '@/lib/dictionaries'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,12 +12,14 @@ export const metadata = {
   themeColor: '#ffffff'
 }
 
-export default function RootLayout ({ children }) {
+export default async function RootLayout ({ children, params: { lang } }) {
+  const dict = await getDictionary(lang)
+
   return (
-    <html lang="en">
+    <html lang={lang ?? 'en'}>
       <body className={inter.className}>
       <Toaster />
-        <Layout>
+        <Layout dict={dict}>
           {children}
         </Layout>
       </body>

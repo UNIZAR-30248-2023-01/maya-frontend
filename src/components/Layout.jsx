@@ -22,26 +22,27 @@ const navigation = [
   { name: 'In & Outs', href: '#', icon: LuCalendar, current: false },
   { name: 'Tickets', href: '#', icon: LuTicket, current: false }
 ]
+
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
 ]
 
-export function Layout ({ children }) {
+export function Layout ({ dict, children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <>
       <MobileSidebar
-        navigation={navigation}
+        navigation={navigation.map((item) => ({ ...item, name: dict.navigation[item.name] }))}
         teams={teams}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
       <div className="h-screen w-screen flex">
         <DesktopSidebar
-          navigation={navigation}
+          navigation={navigation.map((item) => ({ ...item, name: dict.navigation[item.name] }))}
           teams={teams}
         />
         <div className='h-full flex-1'>
