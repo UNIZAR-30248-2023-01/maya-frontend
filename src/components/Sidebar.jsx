@@ -3,15 +3,14 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { HiXMark } from 'react-icons/hi2'
-import { LuPanelLeft } from 'react-icons/lu'
 import { TeamMember } from '@/components/TeamMember'
 
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen }) {
-  return sidebarOpen &&
+export function DesktopSidebar ({ navigation, teams }) {
+  return (
     <div className="hidden h-full lg:z-50 lg:flex lg:w-72 lg:flex-col">
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
@@ -29,12 +28,6 @@ export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen
               </kbd>
             </div>
           </div>
-        <button
-          onClick={() => setSidebarOpen(false)}
-          className='text-gray-700 hover:text-indigo-600 bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600'
-        >
-          <LuPanelLeft className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
-        </button>
       </div>
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -48,13 +41,13 @@ export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen
                       item.current
                         ? 'bg-gray-50 text-indigo-600'
                         : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium'
                     )}
                   >
                     <item.icon
                       className={classNames(
                         item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                        'h-6 w-6 shrink-0'
+                        'h-5 w-5 shrink-0 stroke-1'
                       )}
                       aria-hidden="true"
                     />
@@ -75,7 +68,7 @@ export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen
                       team.current
                         ? 'bg-gray-50 text-indigo-600'
                         : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium'
                     )}
                   >
                     <span
@@ -83,7 +76,7 @@ export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen
                         team.current
                           ? 'text-indigo-600 border-indigo-600'
                           : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                        'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
+                        'flex h-5 w-5 shrink-0 stroke-1 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
                       )}
                     >
                       {team.initial}
@@ -101,6 +94,7 @@ export function DesktopSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen
       </nav>
       </div>
     </div>
+  )
 }
 
 export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen }) {
@@ -142,7 +136,7 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
                 <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                   <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>
                     <span className="sr-only">Close sidebar</span>
-                    <HiXMark className="h-6 w-6 text-white" aria-hidden="true" />
+                    <HiXMark className="h-5 w-5 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
@@ -175,13 +169,13 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
                                 item.current
                                   ? 'bg-gray-50 text-indigo-600'
                                   : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium'
                               )}
                             >
                               <item.icon
                                 className={classNames(
                                   item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                                  'h-6 w-6 shrink-0'
+                                  'h-5 w-5 shrink-0 stroke-1'
                                 )}
                                 aria-hidden="true"
                               />
@@ -202,7 +196,7 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
                                 team.current
                                   ? 'bg-gray-50 text-indigo-600'
                                   : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium'
                               )}
                             >
                               <span
@@ -210,7 +204,7 @@ export function MobileSidebar ({ navigation, teams, sidebarOpen, setSidebarOpen 
                                   team.current
                                     ? 'text-indigo-600 border-indigo-600'
                                     : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                                  'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
+                                  'flex h-5 w-5 shrink-0 stroke-1 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
                                 )}
                               >
                                 {team.initial}

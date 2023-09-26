@@ -6,7 +6,7 @@ import {
 
 export function TeamMember () {
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 group hover:cursor-pointer">
       <Avatar>
         <AvatarImage src="assets/avatars/memojis/1.webp" />
         <AvatarFallback>OM</AvatarFallback>

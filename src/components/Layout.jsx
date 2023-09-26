@@ -11,7 +11,7 @@ import {
   LuCalendar,
   LuTicket
 } from 'react-icons/lu'
-import Sidebar from '@/components/Sidebar'
+import { DesktopSidebar, MobileSidebar } from '@/components/Sidebar'
 
 const navigation = [
   { name: 'Overview', href: '#', icon: LuLayoutGrid, current: true },
@@ -28,20 +28,24 @@ const teams = [
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
 ]
 
-export default function Layout ({ children }) {
+export function Layout ({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <>
+      <MobileSidebar
+        navigation={navigation}
+        teams={teams}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       <div className="h-screen w-screen flex">
-        <Sidebar
+        <DesktopSidebar
           navigation={navigation}
           teams={teams}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
         />
         <div className='h-full flex-1'>
-          <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
+          <div className="lg:hidden z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
             <button type="button" className="text-gray-700" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <LuMenu className="h-6 w-6" aria-hidden="true" />
@@ -51,8 +55,6 @@ export default function Layout ({ children }) {
 
           <main className="py-10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-y-2">
-              <div className='border-2 border-dashed min-h-full h-24 w-full'/>
-              <div className='border-2 border-dashed min-h-full h-96 w-full'/>
               {children}
             </div>
           </main>
