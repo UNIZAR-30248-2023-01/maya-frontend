@@ -1,4 +1,4 @@
-# next-template
+# MaYA Frontend
 
 ![node](https://img.shields.io/badge/node-20.x-blue)
 ![npm](https://img.shields.io/badge/npm-9.8.1-blue)

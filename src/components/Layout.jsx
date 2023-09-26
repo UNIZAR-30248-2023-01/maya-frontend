@@ -29,27 +29,28 @@ const teams = [
 ]
 
 export default function Layout ({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
-      <div>
-        <MobileSidebar
-          navigation={navigation}
-          teams={teams}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
-
-        {/* Static sidebar for desktop */}
-        <DesktopSidebar
-          navigation={navigation}
-          teams={teams}
-          setSidebarOpen={setSidebarOpen}
-        />
-
-        <div className="lg:pl-72">
-          <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-            <button type="button" className="text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
+    <>
+      <MobileSidebar
+        navigation={navigation}
+        teams={teams}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
+      <div className="h-screen w-screen flex">
+        <div className='h-full w-fit bg-red-300'>
+          <DesktopSidebar
+            navigation={navigation}
+            teams={teams}
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+          />
+        </div>
+        <div className='h-full flex-1 bg-green-50'>
+          <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
+            <button type="button" className="text-gray-700" onClick={() => setSidebarOpen(true)}>
               <span className="sr-only">Open sidebar</span>
               <LuMenu className="h-6 w-6" aria-hidden="true" />
             </button>
@@ -65,5 +66,6 @@ export default function Layout ({ children }) {
           </main>
         </div>
       </div>
+    </>
   )
 }
