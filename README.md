@@ -1,5 +1,9 @@
 # MaYA Frontend
 
+[![CI](https://github.com/UNIZAR-30248-2023-01/maya-frontend/actions/workflows/ci.yaml/badge.svg)](https://github.com/UNIZAR-30248-2023-01/maya-frontend/actions/workflows/ci.yaml)
+[![CD](https://github.com/UNIZAR-30248-2023-01/maya-frontend/actions/workflows/cd.yaml/badge.svg?branch=main)](https://github.com/UNIZAR-30248-2023-01/maya-frontend/actions/workflows/cd.yaml)
+
+
 ![node](https://img.shields.io/badge/node-20.x-blue)
 ![npm](https://img.shields.io/badge/npm-9.8.1-blue)
 
