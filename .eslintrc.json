@@ -6,6 +6,8 @@
     },
     "extends": [
         "standard",
+        "plugin:chai-friendly/recommended",
+        "plugin:cypress/recommended",
         "plugin:react/recommended",
         "next/core-web-vitals"
     ],
@@ -16,5 +18,8 @@
     "plugins": [
         "react"
     ],
-    "rules": {}
+    "rules": {
+        "cypress/no-unnecessary-waiting": "off",
+        "cypress/unsafe-to-chain-command": "off"
+    }
 }
