@@ -7,7 +7,6 @@ concurrency:
 on:
   push:
     branches: [main]
-    paths: ["src/**", "cypress/**", "package.json", "package-lock.json"]
   pull_request:
     branches: [main]
 
