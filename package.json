@@ -46,6 +46,7 @@
   "scripts": {
     "build": "next build",
     "cypress:open": "cypress open",
+    "cypress:test": "cypress run",
     "dev": "next dev",
     "lint": "next lint --cache --fix",
     "prepare": "husky install",

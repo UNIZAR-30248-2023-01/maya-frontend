@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [main]
+    paths: ["src/**", "cypress/**", "package.json", "package-lock.json"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  install:
+    name: Install and Lint 📦 🪅
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
