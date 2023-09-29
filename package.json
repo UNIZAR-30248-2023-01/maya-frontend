@@ -1,4 +1,9 @@
 {
+  "cypress": {
+    "e2e": {
+      "excludeSpecPattern": "**/*.ts"
+    }
+  },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -23,9 +28,12 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",
+    "cypress": "^13.3.0",
     "eslint": "^8.48.0",
     "eslint-config-next": "13.4.2",
     "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-promise": "^6.1.1",
@@ -46,6 +54,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "cypress:open": "cypress open",
+    "cypress:test": "cypress run",
     "dev": "next dev",
     "lint": "next lint --cache --fix",
     "prepare": "husky install",

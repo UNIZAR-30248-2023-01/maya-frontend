@@ -46,3 +46,9 @@ next-env.d.ts
 /public/workbox-*.js.map
 /public/worker-*.js.map
 /public/fallback-*.js
+
+# Cypress
+/cypress/videos
+/cypress/screenshots
+/cypress/reports
+/cypress/fixtures
