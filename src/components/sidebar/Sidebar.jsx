@@ -2,10 +2,9 @@
 
 import { TeamMember } from '@/components/TeamMember'
 
-import { SidebarHeader } from './SidebarHeader'
-import { SidebarNavigation } from './SidebarNavigation'
-import { SidebarTeams } from './SidebarTeams'
-
+import { SidebarHeader } from '@/components/sidebar/SidebarHeader'
+import { SidebarNavigation } from '@/components/sidebar/SidebarNavigation'
+import { SidebarTeams } from '@/components/sidebar/SidebarTeams'
 
 export function Sidebar ({ navigation, teams, sheet = false, setSidebarOpen, sidebarOpen, setSearchOpen }) {
   if (sidebarOpen || sheet) {
@@ -36,6 +35,6 @@ export function Sidebar ({ navigation, teams, sheet = false, setSidebarOpen, sid
       </>
     )
   }
-  
+
   return null
 }

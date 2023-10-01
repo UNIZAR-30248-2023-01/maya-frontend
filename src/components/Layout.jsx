@@ -65,7 +65,7 @@ export function Layout ({ dict, children }) {
           sidebarOpen={sidebarOpen}
           setSearchOpen={setOpen}
         />
-        
+
         <div className='h-full flex-1'>
 
           <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
@@ -74,7 +74,7 @@ export function Layout ({ dict, children }) {
               <LuMenu className="h-6 w-6" aria-hidden="true" />
             </Button>
             }
-            <div className="text-sm font-semibold leading-6 text-gray-900">{dict.navigation['Overview']}</div>
+            <div className="text-sm font-semibold leading-6 text-gray-900">{dict.navigation.Overview}</div>
           </div>
 
           <main className="py-10">
@@ -106,7 +106,7 @@ export function Layout ({ dict, children }) {
                 </Button>
               </SheetTrigger>
 
-              <div className="text-sm font-semibold leading-6 text-gray-900">{dict.navigation['Overview']}</div>
+              <div className="text-sm font-semibold leading-6 text-gray-900">{dict.navigation.Overview}</div>
             </div>
 
             <main className="py-10">
@@ -117,7 +117,7 @@ export function Layout ({ dict, children }) {
           </div>
         </div>
       </Sheet>
-      
+
       <Search open={open} setOpen={setOpen} />
     </>
   )

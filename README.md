@@ -31,18 +31,22 @@
 ### Install dependencies
 
 ```bash
-npm run ci
+npm ci
 ```
 
 ### Run for a development environment
 
 ```bash
+git clone -b develop https://github.com/UNIZAR-30248-2023-01/maya-frontend.git
+npm ci
 npm run dev
 ```
 
 ### Run for a production environment
 
 ```bash
+git clone --depth 1 https://github.com/UNIZAR-30248-2023-01/maya-frontend.git
+npm ci
 npm run build
 npm run start
 ```

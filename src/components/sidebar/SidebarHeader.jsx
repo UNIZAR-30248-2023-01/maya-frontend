@@ -1,4 +1,4 @@
-import { SheetClose } from '../ui/sheet'
+import { SheetClose } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { LuPanelLeft } from 'react-icons/lu'
 
@@ -12,19 +12,21 @@ export function SidebarHeader ({ sheet = false, setOpenSearchCommand, setSidebar
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
-      {sheet ? (
+      {sheet
+        ? (
         <SheetClose asChild>
           <Button variant="ghost" size="icon" className="hover:text-indigo-600 group px-4 py-4">
             <span className="sr-only">Close sidebar</span>
             <LuPanelLeft className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
           </Button>
         </SheetClose>
-      ) : (
+          )
+        : (
           <Button variant="ghost" size="icon" className="hover:text-indigo-600 group px-4 py-4" onClick={ () => setSidebarOpen(false) }>
             <span className="sr-only">Close sidebar</span>
             <LuPanelLeft className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" />
           </Button>
-        )}
+          )}
     </div>
   )
 }
