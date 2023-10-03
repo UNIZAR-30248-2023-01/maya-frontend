@@ -1,16 +1,16 @@
 {
     "navigation": {
-        "Overview": "Overview",
-        "Projects": "Projects",
-        "Teams": "Teams",
-        "Staff": "Staff",
-        "WorkSpaces": "WorkSpaces",
-        "In & Outs": "In & Outs",
-        "Tickets": "Tickets"
+        "in-and-outs": "In & Outs",
+        "overview": "Overview",
+        "projects": "Projects",
+        "staff": "Staff",
+        "teams": "Teams",
+        "tickets": "Tickets",
+        "workSpaces": "WorkSpaces"
     },
     "sonner": {
+        "action": "Set Reminder",
         "description": "You will be notified when the event starts",
-        "title": "Monday, January 3rd at 6:00pm",
-        "action": "Set Reminder"
+        "title": "Monday, January 3rd at 6:00pm"
     }
 }

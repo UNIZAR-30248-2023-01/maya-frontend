@@ -22,13 +22,13 @@ import {
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 const navigation = [
-  { name: 'Overview', href: '#', icon: LuLayoutGrid, current: true },
-  { name: 'Projects', href: '#', icon: LuFileText, current: false },
-  { name: 'Teams', href: '#', icon: LuUsers, current: false },
-  { name: 'Staff', href: '#', icon: LuUser, current: false },
-  { name: 'WorkSpaces', href: '#', icon: LuLaptop2, current: false },
-  { name: 'In & Outs', href: '#', icon: LuCalendar, current: false },
-  { name: 'Tickets', href: '#', icon: LuTicket, current: false }
+  { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
+  { name: 'projects', href: '/projects', icon: LuFileText, current: false },
+  { name: 'teams', href: '/teams', icon: LuUsers, current: false },
+  { name: 'staff', href: '/staff', icon: LuUser, current: false },
+  { name: 'workSpaces', href: '/workspaces', icon: LuLaptop2, current: false },
+  { name: 'in-and-outs', href: '/in-and-outs', icon: LuCalendar, current: false },
+  { name: 'tickets', href: '/tickets', icon: LuTicket, current: false }
 ]
 
 const teams = [
@@ -62,7 +62,7 @@ export function Layout ({ dict, children }) {
                 </Button>
               </SheetTrigger>
 
-              <Breadcrumbs />
+              <Breadcrumbs dict={dict.navigation} />
             </div>
 
             <main className="py-10">

@@ -1,16 +1,16 @@
 {
     "navigation": {
-        "Overview": "Resumen",
-        "Projects": "Proyectos",
-        "Teams": "Equipos",
-        "Staff": "Personal",
-        "WorkSpaces": "Espacios de trabajo",
-        "In & Outs": "Accesos",
-        "Tickets": "Tickets"
+        "in-and-outs": "Accesos",
+        "overview": "Resumen",
+        "projects": "Proyectos",
+        "staff": "Personal",
+        "teams": "Equipos",
+        "tickets": "Tickets",
+        "workSpaces": "Espacios de trabajo"
     },
     "sonner": {
+        "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",
-        "title": "Lunes 3 de enero a las 18:00",
-        "action": "Establecer recordatorio"
+        "title": "Lunes 3 de enero a las 18:00"
     }
 }
