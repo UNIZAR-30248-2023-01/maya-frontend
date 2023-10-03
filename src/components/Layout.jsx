@@ -19,6 +19,7 @@ import {
   SheetContent,
   SheetTrigger
 } from '@/components/ui/sheet'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 const navigation = [
   { name: 'Overview', href: '#', icon: LuLayoutGrid, current: true },
@@ -61,7 +62,7 @@ export function Layout ({ dict, children }) {
                 </Button>
               </SheetTrigger>
 
-              <div className="text-sm font-semibold leading-6 text-gray-900">{dict.navigation.Overview}</div>
+              <Breadcrumbs />
             </div>
 
             <main className="py-10">
