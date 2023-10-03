@@ -17,7 +17,7 @@ export default async function RootLayout ({ children, params: { lang } }) {
 
   return (
     <html lang={lang ?? 'en'}>
-      <body className={inter.className}>
+      <body className={`${inter.className} max-w-screen overflow-x-hidden`}>
       <Toaster />
         <Layout dict={dict}>
           {children}

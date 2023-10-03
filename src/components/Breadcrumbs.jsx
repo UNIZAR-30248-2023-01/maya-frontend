@@ -8,8 +8,6 @@ export function Breadcrumbs ({ dict }) {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
 
-  console.log(dict)
-
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
@@ -22,7 +20,7 @@ export function Breadcrumbs ({ dict }) {
           </div>
         </li>
         {pages.map((page) => (
-          <li key={page.name}>
+          <li key={page}>
             <div className="flex items-center">
               <svg
                 className="h-5 w-5 flex-shrink-0 text-gray-300"

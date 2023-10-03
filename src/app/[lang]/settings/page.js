@@ -1,10 +1,17 @@
-import React from 'react'
+import { Separator } from '@/components/ui/separator'
+import { ProfileForm } from './profile-form'
 
-export default function page () {
+export default function SettingsProfilePage () {
   return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
-    </>
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-medium">Profile</h3>
+        <p className="text-sm text-muted-foreground">
+          This is how others will see you on the site.
+        </p>
+      </div>
+      <Separator />
+      <ProfileForm />
+    </div>
   )
 }

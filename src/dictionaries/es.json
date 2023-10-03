@@ -6,7 +6,13 @@
         "staff": "Personal",
         "teams": "Equipos",
         "tickets": "Tickets",
-        "workSpaces": "Espacios de trabajo"
+        "workSpaces": "Espacios de trabajo",
+        "settings": "Ajustes",
+        "profile": "Perfil",
+        "account": "Cuenta",
+        "appearance": "Apariencia",
+        "notifications": "Notificaciones",
+        "display": "Vista"
     },
     "sonner": {
         "action": "Establecer recordatorio",

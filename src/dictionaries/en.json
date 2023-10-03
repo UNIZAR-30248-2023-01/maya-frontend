@@ -6,7 +6,13 @@
         "staff": "Staff",
         "teams": "Teams",
         "tickets": "Tickets",
-        "workSpaces": "WorkSpaces"
+        "workSpaces": "WorkSpaces",
+        "settings": "Settings",
+        "profile": "Profile",
+        "account": "Account",
+        "appearance": "Appearance",
+        "notifications": "Notifications",
+        "display": "Display"
     },
     "sonner": {
         "action": "Set Reminder",
