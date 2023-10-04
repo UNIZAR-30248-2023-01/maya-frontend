@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 export function Breadcrumbs ({ dict }) {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
-  console.log(pages)
 
   return (
     <nav className="flex" aria-label="Breadcrumb">

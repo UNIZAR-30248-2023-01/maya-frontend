@@ -49,12 +49,12 @@ export function Layout ({ dict, children }) {
             teams={teams}
             sheet={true}
             setSearchOpen={setOpen}
-        />
+          />
         </SheetContent>
 
         <div className="h-screen w-screen flex">
           <div className='h-full flex-1'>
-            <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
+            <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 sticky">
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <span className="sr-only">Open sidebar</span>
