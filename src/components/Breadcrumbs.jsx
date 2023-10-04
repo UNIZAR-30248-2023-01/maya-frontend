@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 export function Breadcrumbs ({ dict }) {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
+  console.log(pages)
 
   return (
     <nav className="flex" aria-label="Breadcrumb">
@@ -35,7 +36,7 @@ export function Breadcrumbs ({ dict }) {
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
-                {dict[page]}
+                {dict[page] || page}
               </Link>
             </div>
           </li>
