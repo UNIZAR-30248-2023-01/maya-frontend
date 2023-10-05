@@ -54,7 +54,7 @@ export function Layout ({ dict, children }) {
 
         <div className="h-screen w-screen flex">
           <div className='h-full flex-1'>
-            <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 sticky">
+            <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <span className="sr-only">Open sidebar</span>

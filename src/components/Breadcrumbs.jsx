@@ -8,6 +8,10 @@ export function Breadcrumbs ({ dict }) {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
 
+  if (pages[0] === 'projects') {
+    pages = [pages[0]]
+  }
+
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
@@ -35,7 +39,7 @@ export function Breadcrumbs ({ dict }) {
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
-                {dict[page] || page}
+                {dict[page]}
               </Link>
             </div>
           </li>

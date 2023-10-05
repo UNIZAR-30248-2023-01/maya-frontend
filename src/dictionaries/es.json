@@ -14,6 +14,35 @@
         "notifications": "Notificaciones",
         "display": "Vista"
     },
+    "project": {
+        "name": "Nombre",
+        "description": "Descripción",
+        "owner": "Propietario",
+        "status": "Estado",
+        "slogan": "Toda tu información en un solo lugar",
+        "info": "Información",
+        "tasks": "Tareas",
+        "members": "Miembros",
+        "calendar": "Calendario",
+        "archive": "Archivar",
+        "unarchive": "Desarchivar"
+    },
+    "tasks": {
+        "name": "Nombre",
+        "assignee": "Responsable",
+        "description": "Descripción",
+        "status": "Estado",
+        "time": "Tiempo dedicado",
+        "add": "Añadir tarea",
+        "edit": "Editar tarea",
+        "delete": "Borrar tarea",
+        "search": "Buscar...",
+        "slogan": "Realiza los cambios en la tarea. Pulsa guardar para finalizar.",
+        "save": "Guardar cambios",
+        "cancel": "Descartar cambios",
+        "deleteTitle": "Estas seguro?",
+        "deleteText": "Esta acción no se puede deshacer. La tarea se borrará de forma permanente."
+    },
     "sonner": {
         "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",

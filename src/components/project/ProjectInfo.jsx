@@ -4,8 +4,12 @@ import {
 } from '@/components/ui/card'
 import { TeamMember } from '@/components/TeamMember'
 import { cn } from '@/lib/utils'
+import { getServerUserById } from '@/services/users'
+import { cookies } from 'next/headers'
 
-export function ProjectInfo ({ project }) {
+export async function ProjectInfo ({ project, dict }) {
+  const user = await getServerUserById({ cookies, id: project.owner })
+
   function getColorClass (status) {
     switch (status) {
       case 'Finished':
@@ -22,7 +26,7 @@ export function ProjectInfo ({ project }) {
   return (
     <div className="flex flex-col mt-8 gap-8">
             <div className="flex flex-col gap-2">
-              <p className="pl-4 font-semibold text-base">Name</p>
+              <p className="pl-4 font-semibold text-base">{dict.project.name}</p>
               <Card className="bg-[#F9F5EF]">
                 <CardHeader>
                   <p>{project.name}</p>
@@ -31,15 +35,15 @@ export function ProjectInfo ({ project }) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="pl-4 font-semibold text-base">Owner</p>
+              <p className="pl-4 font-semibold text-base">{dict.project.owner}</p>
               <Card className="w-fit bg-[#F9F5EF]">
                 <CardHeader>
-                  <TeamMember id={project.owner} />
+                  <TeamMember user={user} />
                 </CardHeader>
               </Card>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="pl-4 font-semibold text-base">Status</p>
+              <p className="pl-4 font-semibold text-base">{dict.project.status}</p>
               <Card className={
                 cn(
                   'w-fit',
@@ -52,7 +56,7 @@ export function ProjectInfo ({ project }) {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="pl-4 text-base font-semibold">Descripcion</p>
+              <p className="pl-4 text-base font-semibold">{dict.project.description}</p>
               <Card className="bg-[#F9F5EF]">
                 <CardHeader>
                   <p>{project.description}</p>

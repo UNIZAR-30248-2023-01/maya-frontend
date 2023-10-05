@@ -14,6 +14,36 @@
         "notifications": "Notifications",
         "display": "Display"
     },
+    "project": {
+        "name": "Name",
+        "description": "Description",
+        "owner": "Owner",
+        "status": "Status",
+        "slogan": "All your info in one place",
+        "info": "Info",
+        "tasks": "Tasks",
+        "members": "Members",
+        "calendar": "Calendar",
+        "archive": "Archive",
+        "unarchive": "Unarchive"
+
+    },
+    "tasks": {
+        "name": "Name",
+        "assignee": "Assignee",
+        "description": "Description",
+        "status": "Status",
+        "time": "Time spent",
+        "add": "Add task",
+        "edit": "Edit task",
+        "delete": "Delete task",
+        "search": "Search...",
+        "slogan": "Make changes to the task here. Click save when you’re done.",
+        "save": "Save changes",
+        "cancel": "Discard changes",
+        "deleteTitle": "Are you absolutely sure?",
+        "deleteText": "This action cannot be undone. This will permanently delete your task ."
+    },
     "sonner": {
         "action": "Set Reminder",
         "description": "You will be notified when the event starts",

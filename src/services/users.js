@@ -1,7 +1,7 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
-export const getClientUserById = async ({ id }) => {
-  const supabase = createClientComponentClient()
+export const getServerUserById = async ({ cookies, id }) => {
+  const supabase = createServerComponentClient({ cookies })
 
   const { data: users, error } = await supabase
     .from('users')
@@ -9,7 +9,7 @@ export const getClientUserById = async ({ id }) => {
     .eq('id', id)
 
   if (error != null) {
-    return error
+    return null
   } else {
     return users[0]
   }

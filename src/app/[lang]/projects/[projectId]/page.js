@@ -1,5 +1,5 @@
 // import { Sonner } from '@/components/Sonner'
-// import { getDictionary } from '@/lib/dictionaries'
+import { getDictionary } from '@/lib/dictionaries'
 // import { getServerProjects } from '@/services/projects'
 import { cookies } from 'next/headers'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -12,14 +12,18 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { getServerProjectById } from '@/services/projects'
 import { ProjectInfo } from '@/components/project/ProjectInfo'
+import { ProjectTasks } from '@/components/project/ProjectTasks'
+import { redirect } from 'next/navigation'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
 
 export default async function Page ({ params: { lang, projectId } }) {
-  // const dict = await getDictionary(lang)
-  // const projects = await getServerProjects(cookies)
+  const dict = await getDictionary(lang)
   const project = await getServerProjectById({ cookies, id: projectId })
-  console.log(project)
+
+  if (project === null) {
+    redirect('/' + lang)
+  }
 
   return (
     <>
@@ -29,7 +33,7 @@ export default async function Page ({ params: { lang, projectId } }) {
           {project.name}
         </h1>
         <p className="text-sm text-muted-foreground">
-          All your info in one place.
+          {dict.project.slogan}
         </p>
       </div>
       <Separator className="my-4" />
@@ -38,25 +42,28 @@ export default async function Page ({ params: { lang, projectId } }) {
         <div className="flex justify-between align-center">
           <TabsList>
             <TabsTrigger className="text-xl" value="info">
-              Info
+              {dict.project.info}
             </TabsTrigger>
-            <TabsTrigger className="text-xl" value="task">
-              Task
+            <TabsTrigger className="text-xl" value="tasks">
+              {dict.project.tasks}
             </TabsTrigger>
-            <TabsTrigger className="text-xl" value="team">
-              Team
+            <TabsTrigger className="text-xl" value="members">
+              {dict.project.members}
             </TabsTrigger>
-            <TabsTrigger className="text-xl" value="plan">
-              Plan
+            <TabsTrigger className="text-xl" value="calendar">
+              {dict.project.calendar}
             </TabsTrigger>
           </TabsList>
-          <Button className="text-xl h-auto px-8">Archive</Button>
+          <Button className="text-xl h-auto px-8">{project.archived ? dict.project.unarchive : dict.project.archive}</Button>
         </div>
 
         <TabsContent value="info">
-          <ProjectInfo project={project} />
+          <ProjectInfo project={project} dict={dict} />
         </TabsContent>
-        <TabsContent value="task">
+        <TabsContent value="tasks">
+          <ProjectTasks projectId={projectId} dict={dict} />
+        </TabsContent>
+        <TabsContent value="members">
           <Card>
             <CardHeader>
               <p>SEARCH</p>
@@ -66,17 +73,7 @@ export default async function Page ({ params: { lang, projectId } }) {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="team">
-          <Card>
-            <CardHeader>
-              <p>SEARCH</p>
-            </CardHeader>
-            <CardContent>
-              <p>TABLE</p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="plan">
+        <TabsContent value="calendar">
           <Card>
             <CardContent>
               <p>CALENDAR</p>

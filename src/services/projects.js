@@ -8,7 +8,7 @@ export const getServerProjects = async (cookies) => {
     .select()
 
   if (error != null) {
-    return error
+    return null
   } else {
     return projects
   }
@@ -22,7 +22,7 @@ export const getClientProjects = async () => {
     .select()
 
   if (error != null) {
-    return error
+    return null
   } else {
     return projects
   }
@@ -37,7 +37,7 @@ export const getServerProjectById = async ({ cookies, id }) => {
     .eq('id', id)
 
   if (error != null) {
-    return error
+    return null
   } else {
     return projects[0]
   }
@@ -52,7 +52,7 @@ export const getClientProjectById = async ({ id }) => {
     .eq('id', id)
 
   if (error != null) {
-    return error
+    return null
   } else {
     return projects[0]
   }
