@@ -21,8 +21,8 @@ import {
   TableRow
 } from '@/components/ui/table'
 
-import { DataTablePagination } from '@/components/ui/data-table-pagination'
-import { DataTableToolbar } from '@/components/ui/data-table-toolbar'
+import { DataTablePagination } from '@/components/ui/table/projects/data-table-pagination'
+import { DataTableToolbar } from '@/components/ui/table/projects/data-table-toolbar'
 
 export function DataTable ({
   columns,
