@@ -16,7 +16,7 @@ import {
   Sheet,
   SheetContent
 } from '@/components/ui/sheet'
-import { Navbar } from '@/components/Navbar'
+import { Navbar } from '@/components/navbar'
 
 const navigation = [
   { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
@@ -51,7 +51,7 @@ export function Layout ({ dict, children }) {
 
         <div className="h-screen w-screen flex">
           <div className='h-full flex-1'>
-            <Navbar dict={dict.navigation}/>
+            <Navbar dict={{ navigation: { ...dict.navigation }, projects: { ...dict.projects } }}/>
             <main className="py-10">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-y-2">
                 {children}

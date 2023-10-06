@@ -1,4 +1,4 @@
-import { Sonner } from '@/components/Sonner'
+import { Sonner } from '@/components/sonner'
 import { getDictionary } from '@/lib/dictionaries'
 import { getServerProjects } from '@/services/projects'
 import { cookies } from 'next/headers'

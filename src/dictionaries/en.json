@@ -14,6 +14,15 @@
         "notifications": "Notifications",
         "display": "Display"
     },
+    "projects": {
+        "new-project": "New Project",
+        "new-table": "New table",
+        "new-table-description": "Projects are a customizable, flexible tool for planning and tracking your work.",
+        "name": "Name",
+        "description": "Short description",
+        "description-placeholder": "A short description about this project.",
+        "create-action": "Create"
+    },
     "sonner": {
         "action": "Set Reminder",
         "description": "You will be notified when the event starts",

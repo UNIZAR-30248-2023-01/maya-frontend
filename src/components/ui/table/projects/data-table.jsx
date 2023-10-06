@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { useRouter } from 'next/navigation'
 
 import { DataTablePagination } from '@/components/ui/table/projects/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/projects/data-table-toolbar'
@@ -32,6 +33,8 @@ export function DataTable ({
   const [columnVisibility, setColumnVisibility] = useState({})
   const [columnFilters, setColumnFilters] = useState([])
   const [sorting, setSorting] = useState([])
+  const router = useRouter()
+  const viewProject = (row) => router.push(`/projects/${String(row.original.title).toLowerCase().replace(/ /g, '-')}`)
 
   const table = useReactTable({
     data,
@@ -85,6 +88,8 @@ export function DataTable ({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  onClick={() => viewProject(row)}
+                  className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

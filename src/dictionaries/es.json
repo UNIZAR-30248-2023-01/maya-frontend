@@ -14,6 +14,15 @@
         "notifications": "Notificaciones",
         "display": "Vista"
     },
+    "projects": {
+        "new-project": "Nuevo proyecto",
+        "new-table": "Nueva tabla",
+        "new-table-description": "Los proyectos son una herramienta personalizable y flexible para planificar y hacer un seguimiento de su trabajo.",
+        "name": "Nombre",
+        "description": "Descripción breve",
+        "description-placeholder": "Breve descripción del proyecto.",
+        "create-action": "Crear"
+    },
     "sonner": {
         "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",

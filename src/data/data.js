@@ -1,7 +1,4 @@
 import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
   CheckCircledIcon,
   CircleIcon,
   CrossCircledIcon,
@@ -24,7 +21,7 @@ export const labels = [
   }
 ]
 
-export const statuses = [
+export const filters = [
   {
     value: 'backlog',
     label: 'Backlog',
@@ -49,23 +46,5 @@ export const statuses = [
     value: 'canceled',
     label: 'Canceled',
     icon: CrossCircledIcon
-  }
-]
-
-export const priorities = [
-  {
-    label: 'Low',
-    value: 'low',
-    icon: ArrowDownIcon
-  },
-  {
-    label: 'Medium',
-    value: 'medium',
-    icon: ArrowRightIcon
-  },
-  {
-    label: 'High',
-    value: 'high',
-    icon: ArrowUpIcon
   }
 ]

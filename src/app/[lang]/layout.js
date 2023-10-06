@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
-import { Layout } from '@/components/Layout'
+import { Layout } from '@/components/layout'
 import { getDictionary } from '@/lib/dictionaries'
 
 const inter = Inter({ subsets: ['latin'] })

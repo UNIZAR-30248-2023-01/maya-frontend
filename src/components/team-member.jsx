@@ -10,7 +10,7 @@ export function TeamMember () {
     <Link href="/settings">
       <div className="flex items-center space-x-4 group hover:cursor-pointer">
         <Avatar>
-          <AvatarImage src="assets/avatars/memojis/1.webp" />
+          <AvatarImage src="/assets/avatars/memojis/1.webp" />
           <AvatarFallback>OM</AvatarFallback>
         </Avatar>
         <div>
