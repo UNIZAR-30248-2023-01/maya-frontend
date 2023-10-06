@@ -18,7 +18,7 @@ export const getServerTasksOnAProjectWithUsers = async ({ cookies, projectId }) 
 const getUsersByTaskId = async ({ supabase, tasks }) => {
   const { data: usersTask, error } = await supabase
     .from('tasks')
-    .select('*, assignee:task_user(id:user_id)')
+    .select('*, assignee:task_user(id:user_id, users(name))')
     .in('id', tasks.map((task) => { return task.task_id }))
     .order('created_at', { ascending: true })
 

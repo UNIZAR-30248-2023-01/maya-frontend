@@ -24,6 +24,7 @@ import {
 
 import { DataTablePagination } from '@/components/ui/table/tasks/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/tasks/data-table-toolbar'
+import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
 
 export function DataTable ({
   columns,
@@ -56,8 +57,6 @@ export function DataTable ({
     getFacetedUniqueValues: getFacetedUniqueValues()
   })
 
-  console.log(table.getRowModel().rows[1].getVisibleCells()[1].getContext().row.getValue('assignee')[0].id)
-
   return (
     <div className="space-y-4">
       <DataTableToolbar table={table} />
@@ -88,15 +87,32 @@ export function DataTable ({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                    >
+                      <Sheet>
+                        <SheetContent>
+                          Ver
+                          {' ' + row.original.id}
+                        </SheetContent>
+                        {row.getVisibleCells().map((cell) => (
+                          <TableCell key={cell.id}>
+                            {cell.getContext().column.id === 'actions'
+                              ? (
+                                  flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                  )
+                                )
+                              : (
+                                <SheetTrigger className='w-full h-full'>
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext()
+                                )}
+                                </SheetTrigger>
+                                )}
+                          </TableCell>
+                        ))}
+                      </Sheet>
                 </TableRow>
                   ))
                 )
@@ -112,14 +128,23 @@ export function DataTable ({
                 )}
           </TableBody>
           <TableFooter>
-            <TableRow>
-              <TableCell
-                colSpan={columns.length}
-                className='border-t'
-              >
-                + Add task
-              </TableCell>
-            </TableRow>
+            <Sheet>
+              <SheetContent>
+                Añadir
+              </SheetContent>
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className='border-t w-full h-full'
+                >
+                  <div className='w-full h-full'>
+                    <SheetTrigger className='w-full h-full text-start'>
+                      + Add task
+                    </SheetTrigger>
+                  </div>
+                </TableCell>
+              </TableRow>
+            </Sheet>
           </TableFooter>
         </Table>
       </div>

@@ -1,35 +1,40 @@
 'use client'
 
-import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { LuPencilLine, LuTrash2 } from 'react-icons/lu'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
 
 export function DataTableRowActions ({
   row
 }) {
+  console.log(row)
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <Sheet>
+      <SheetContent>
+        Editar
+        {' ' + row.original.id}
+      </SheetContent>
+      <div className='flex flex-row justify-end'>
+        <SheetTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+          >
+            <LuPencilLine className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Open edit task sidebar</span>
+          </Button>
+        </SheetTrigger>
         <Button
           variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+          size="icon"
         >
-          <DotsHorizontalIcon className="h-4 w-4" />
-          <span className="sr-only">Open menu</span>
+          <LuTrash2 className="h-4 w-4 text-red-600" aria-hidden="true" />
+          <span className="sr-only">Delete task</span>
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>
-          Delete
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </div>
+
+    </Sheet>
   )
 }

@@ -28,7 +28,7 @@ export const columns = [
   {
     accessorKey: 'assignee',
     header: ({ column }) => (
-      <DataTableColumnHeader className='text-xs' column={column} title="Assignee" />
+      <DataTableColumnHeader column={column} title="Assignee" />
     ),
     cell: ({ row }) => {
       return (
@@ -38,6 +38,10 @@ export const columns = [
               <li key={row.getValue('assignee').at(0).id}>
                 <Avatar className='border-2 border-white'>
                   <AvatarImage src="/assets/avatars/memojis/4.webp" />
+                  <AvatarFallback>
+                    {row.getValue('assignee').at(0).users.name.split(' ').at(0)[0]
+                      .concat(row.getValue('assignee').at(0).users.name.split(' ').at(1)[0])}
+                  </AvatarFallback>
                 </Avatar>
               </li>
               {row.getValue('assignee').slice(1).map((avatar) => {
@@ -45,6 +49,10 @@ export const columns = [
                   <li key={avatar.id}>
                     <Avatar className='-ml-3 border-2 border-white'>
                       <AvatarImage src="/assets/avatars/memojis/1.webp" />
+                      <AvatarFallback>
+                        {avatar.users.name.split(' ').at(0)[0]
+                          .concat(avatar.users.name.split(' ').at(1)[0])}
+                      </AvatarFallback>
                     </Avatar>
                   </li>
                 )

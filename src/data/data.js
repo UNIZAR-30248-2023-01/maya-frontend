@@ -1,33 +1,25 @@
-import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckCircledIcon,
-  CircleIcon,
-  CircleBackslashIcon,
-  StopwatchIcon
-} from '@radix-ui/react-icons'
+import { LuArrowUp, LuArrowDown, LuArrowRight, LuCircleDashed, LuCircleSlash, LuCheckCircle2, LuTimer } from 'react-icons/lu'
 
 export const statuses = [
   {
     value: 'Not started',
     label: 'Not started',
-    icon: CircleIcon
+    icon: LuCircleDashed
   },
   {
     value: 'In progress',
     label: 'In Progress',
-    icon: StopwatchIcon
+    icon: LuTimer
   },
   {
     value: 'Finished',
     label: 'Finished',
-    icon: CheckCircledIcon
+    icon: LuCheckCircle2
   },
   {
     value: 'Bloqued',
     label: 'Bloqued',
-    icon: CircleBackslashIcon
+    icon: LuCircleSlash
   }
 ]
 
@@ -35,16 +27,16 @@ export const priorities = [
   {
     label: 'Low',
     value: 'Low',
-    icon: ArrowDownIcon
+    icon: LuArrowDown
   },
   {
     label: 'Medium',
     value: 'Medium',
-    icon: ArrowRightIcon
+    icon: LuArrowRight
   },
   {
     label: 'High',
     value: 'High',
-    icon: ArrowUpIcon
+    icon: LuArrowUp
   }
 ]

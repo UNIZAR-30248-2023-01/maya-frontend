@@ -1,7 +1,6 @@
 import {
   Card,
-  CardContent,
-  CardHeader
+  CardContent
 } from '@/components/ui/card'
 import { cookies } from 'next/headers'
 import { getServerTasksOnAProjectWithUsers } from '@/services/tasks'
@@ -11,20 +10,11 @@ import { columns } from '@/components/ui/table/tasks/columns'
 export async function ProjectTasks ({ projectId, dict }) {
   const tasks = await getServerTasksOnAProjectWithUsers({ cookies, projectId })
 
-  // console.log(tasks)
-
   return (
-    <>
-      <DataTable data={tasks} columns={columns} />
-    </>
+    <Card>
+      <CardContent className='pt-6'>
+        <DataTable data={tasks} columns={columns} />
+      </CardContent>
+    </Card>
   )
-
-  { /* <Card>
-            <CardHeader>
-              <p>{projectId}</p>
-            </CardHeader>
-            <CardContent>
-              <pre>{JSON.stringify(tasks, null, 2)}</pre>
-            </CardContent>
-    </Card> */ }
 }
