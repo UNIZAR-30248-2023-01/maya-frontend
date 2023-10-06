@@ -57,3 +57,18 @@ export const getClientProjectById = async ({ id }) => {
     return projects[0]
   }
 }
+
+export const getServerProjectMembersById = async ({ cookies, id }) => {
+  const supabase = createServerComponentClient({ cookies })
+
+  const { data: members, error } = await supabase
+    .from('project_user')
+    .select('user:users(*)')
+    .eq('project_id', id)
+
+  if (error != null) {
+    return error
+  } else {
+    return members
+  }
+}
