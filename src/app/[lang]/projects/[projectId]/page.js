@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { getServerProjectById } from '@/services/projects'
+import { getServerProjectById, getServerProjectMembersById } from '@/services/projects'
 import { ProjectInfo } from '@/components/project/ProjectInfo'
 import { ProjectTasks } from '@/components/project/ProjectTasks'
 import { redirect } from 'next/navigation'
@@ -20,6 +20,7 @@ import { redirect } from 'next/navigation'
 export default async function Page ({ params: { lang, projectId } }) {
   const dict = await getDictionary(lang)
   const project = await getServerProjectById({ cookies, id: projectId })
+  const members = await getServerProjectMembersById({ cookies, id: projectId })
 
   if (project === null) {
     redirect('/' + lang)
@@ -66,7 +67,7 @@ export default async function Page ({ params: { lang, projectId } }) {
         <TabsContent value="members">
           <Card>
             <CardHeader>
-              <p>SEARCH</p>
+              <pre>{JSON.stringify(members, null, 2)}</pre>
             </CardHeader>
             <CardContent>
               <p>TABLE</p>
