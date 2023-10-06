@@ -4,68 +4,47 @@ import {
   ArrowUpIcon,
   CheckCircledIcon,
   CircleIcon,
-  CrossCircledIcon,
-  QuestionMarkCircledIcon,
+  CircleBackslashIcon,
   StopwatchIcon
 } from '@radix-ui/react-icons'
 
-export const labels = [
-  {
-    value: 'bug',
-    label: 'Bug'
-  },
-  {
-    value: 'feature',
-    label: 'Feature'
-  },
-  {
-    value: 'documentation',
-    label: 'Documentation'
-  }
-]
-
 export const statuses = [
   {
-    value: 'backlog',
-    label: 'Backlog',
-    icon: QuestionMarkCircledIcon
-  },
-  {
-    value: 'todo',
-    label: 'Todo',
+    value: 'Not started',
+    label: 'Not started',
     icon: CircleIcon
   },
   {
-    value: 'in progress',
+    value: 'In progress',
     label: 'In Progress',
     icon: StopwatchIcon
   },
   {
-    value: 'done',
-    label: 'Done',
+    value: 'Finished',
+    label: 'Finished',
     icon: CheckCircledIcon
   },
   {
-    value: 'canceled',
-    label: 'Canceled',
-    icon: CrossCircledIcon
+    value: 'Bloqued',
+    label: 'Bloqued',
+    icon: CircleBackslashIcon
   }
 ]
 
 export const priorities = [
   {
     label: 'Low',
-    value: 'low',
+    value: 'Low',
     icon: ArrowDownIcon
   },
   {
     label: 'Medium',
-    value: 'medium',
+    value: 'Medium',
     icon: ArrowRightIcon
   },
   {
     label: 'High',
-    value: 'high',
+    value: 'High',
     icon: ArrowUpIcon
   }
 ]
