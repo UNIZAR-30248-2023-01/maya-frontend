@@ -23,7 +23,8 @@ import { Separator } from '@/components/ui/separator'
 export function DataTableFacetedFilter ({
   column,
   title,
-  options
+  options,
+  dict
 }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
@@ -75,7 +76,7 @@ export function DataTableFacetedFilter ({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{dict.tasks.noResults}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
@@ -125,7 +126,7 @@ export function DataTableFacetedFilter ({
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    {dict.tasks.clear}
                   </CommandItem>
                 </CommandGroup>
               </>

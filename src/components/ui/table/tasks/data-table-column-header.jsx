@@ -31,7 +31,7 @@ export function DataTableColumnHeader ({
             size="sm"
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
-            <span>{title}</span>
+            <div className='text-sm'>{title}</div>
             {column.getIsSorted() === 'desc'
               ? (
               <ArrowDownIcon className="ml-2 h-4 w-4" />

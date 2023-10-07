@@ -22,13 +22,16 @@ import {
   TableRow
 } from '@/components/ui/table'
 
+import { Task } from '@/components/task/Task'
+
 import { DataTablePagination } from '@/components/ui/table/tasks/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/tasks/data-table-toolbar'
 import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
 
 export function DataTable ({
   columns,
-  data
+  data,
+  dict
 }) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -59,7 +62,7 @@ export function DataTable ({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} dict={dict} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -90,8 +93,7 @@ export function DataTable ({
                     >
                       <Sheet>
                         <SheetContent>
-                          Ver
-                          {' ' + row.original.id}
+                          <Task taskId={row.original.id} />
                         </SheetContent>
                         {row.getVisibleCells().map((cell) => (
                           <TableCell key={cell.id}>
@@ -122,7 +124,7 @@ export function DataTable ({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {dict.tasks.noResults}
                 </TableCell>
               </TableRow>
                 )}
@@ -139,7 +141,7 @@ export function DataTable ({
                 >
                   <div className='w-full h-full'>
                     <SheetTrigger className='w-full h-full text-start'>
-                      + Add task
+                      <p className='pl-1'>+ Add task</p>
                     </SheetTrigger>
                   </div>
                 </TableCell>
@@ -148,7 +150,7 @@ export function DataTable ({
           </TableFooter>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} dict={dict} />
     </div>
   )
 }

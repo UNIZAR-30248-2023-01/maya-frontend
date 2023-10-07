@@ -15,7 +15,8 @@ import {
 } from '@/components/ui/select'
 
 export function DataTablePagination ({
-  table
+  table,
+  dict
 }) {
   return (
     <div className="flex items-center justify-between px-2">
@@ -23,7 +24,7 @@ export function DataTablePagination ({
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
+          <p className="text-sm font-medium">{dict.tasks.rowsPage}</p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -43,7 +44,7 @@ export function DataTablePagination ({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{' '}
+          {dict.tasks.page} {table.getState().pagination.pageIndex + 1} {dict.tasks.of}{' '}
           {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">

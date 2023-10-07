@@ -1,6 +1,29 @@
 import { LuArrowUp, LuArrowDown, LuArrowRight, LuCircleDashed, LuCircleSlash, LuCheckCircle2, LuTimer } from 'react-icons/lu'
 
-export const statuses = [
+export const spanishStatuses = [
+  {
+    value: 'Not started',
+    label: 'Sin comenzar',
+    icon: LuCircleDashed
+  },
+  {
+    value: 'In progress',
+    label: 'En proceso',
+    icon: LuTimer
+  },
+  {
+    value: 'Finished',
+    label: 'Terminado',
+    icon: LuCheckCircle2
+  },
+  {
+    value: 'Bloqued',
+    label: 'Bloqueado',
+    icon: LuCircleSlash
+  }
+]
+
+export const englishStatuses = [
   {
     value: 'Not started',
     label: 'Not started',
@@ -8,7 +31,7 @@ export const statuses = [
   },
   {
     value: 'In progress',
-    label: 'In Progress',
+    label: 'In progress',
     icon: LuTimer
   },
   {
@@ -23,7 +46,25 @@ export const statuses = [
   }
 ]
 
-export const priorities = [
+export const spanishPriorities = [
+  {
+    label: 'Baja',
+    value: 'Low',
+    icon: LuArrowDown
+  },
+  {
+    label: 'Media',
+    value: 'Medium',
+    icon: LuArrowRight
+  },
+  {
+    label: 'Alta',
+    value: 'High',
+    icon: LuArrowUp
+  }
+]
+
+export const englishPriorities = [
   {
     label: 'Low',
     value: 'Low',
