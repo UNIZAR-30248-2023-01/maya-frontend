@@ -22,7 +22,7 @@ const englishDict = {
   cancel: 'Cancel'
 }
 
-export function DeletePopUp () {
+export function DeleteTask ({ taskId }) {
   const lang = usePathname().split('/').at(1)
 
   const dict = lang === 'es' ? spanishDict : englishDict

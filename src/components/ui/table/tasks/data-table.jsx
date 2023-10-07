@@ -27,6 +27,7 @@ import { Task } from '@/components/task/Task'
 import { DataTablePagination } from '@/components/ui/table/tasks/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/tasks/data-table-toolbar'
 import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
+import { AddTask } from '@/components/task/AddTask'
 
 export function DataTable ({
   columns,
@@ -132,7 +133,7 @@ export function DataTable ({
           <TableFooter>
             <Sheet>
               <SheetContent>
-                Añadir
+                <AddTask />
               </SheetContent>
               <TableRow>
                 <TableCell
@@ -141,7 +142,7 @@ export function DataTable ({
                 >
                   <div className='w-full h-full'>
                     <SheetTrigger className='w-full h-full text-start'>
-                      <p className='pl-1'>+ Add task</p>
+                      <p className='pl-1'>{'+ ' + dict.tasks.add}</p>
                     </SheetTrigger>
                   </div>
                 </TableCell>

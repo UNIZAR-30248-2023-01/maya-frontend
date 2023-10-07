@@ -9,7 +9,8 @@ import {
   AlertDialogContent,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { DeletePopUp } from '@/components/task/delete-popup'
+import { DeleteTask } from '@/components/task/DeleteTask'
+import { EditTask } from '@/components/task/EditTask'
 
 export function DataTableRowActions ({
   row
@@ -17,8 +18,7 @@ export function DataTableRowActions ({
   return (
     <Sheet>
       <SheetContent>
-        Editar
-        {' ' + row.original.id}
+        <EditTask taskId={row.original.id} />
       </SheetContent>
       <div className="flex flex-row justify-end">
         <SheetTrigger asChild>
@@ -35,7 +35,7 @@ export function DataTableRowActions ({
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
-            <DeletePopUp/>
+            <DeleteTask taskId={row.original.id} />
           </AlertDialogContent>
         </AlertDialog>
       </div>
