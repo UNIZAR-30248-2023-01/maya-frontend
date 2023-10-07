@@ -48,5 +48,24 @@
         "action": "Set Reminder",
         "description": "You will be notified when the event starts",
         "title": "Monday, January 3rd at 6:00pm"
+    },
+    "edit": {
+        "title": "Edit project",
+        "slogan": "A project contains all tasks, including the members.",
+        "name": "Name",
+        "owner": "Owner",
+        "status": "Status",
+        "participants": "Participants",
+        "description": "Description",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "aresure": "Are you absolutely sure?",
+        "yesdelete": "Yes, delete project",
+        "yesmodify": "Yes, modify project",
+        "deletetext": "This action cannot be undone. This will permanently delete your project and remove your data from our servers.",
+        "confirmtext": "This will permanently modify your project and change your data from our servers.",
+        "select": "Select participants"
+
     }
 }

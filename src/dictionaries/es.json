@@ -47,5 +47,24 @@
         "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",
         "title": "Lunes 3 de enero a las 18:00"
+    },
+    "edit": {
+        "title": "Editar proyecto",
+        "slogan": "Un proyecto incluye tadas las tareas, incluidos los miembros",
+        "name": "Nombre",
+        "owner": "Propietario",
+        "status": "Estado",
+        "participant": "Participantes",
+        "description": "Descripción",
+        "delete":"Eliminar",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "aresure": "¿Estás seguro?",
+        "yesdelete": "Sí, elimina el proyecto",
+        "yesmodify": "Sí, modifica el proyecto",
+        "deletetext": "Esta acción no se puede deshacer. El proyecto se eliminara permanentemente.",
+        "confirmtext": "Esta acción modificará permanentemente el proyecto.",
+        "select": "Selecciona los participantes"
+
     }
 }
