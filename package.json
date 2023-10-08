@@ -29,6 +29,7 @@
     "classnames": "^2.3.2",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "color-calendar": "^1.0.7",
     "date-fns": "^2.30.0",
     "negotiator": "^0.6.3",
     "next": "13.4.2",

@@ -25,7 +25,8 @@
         "members": "Members",
         "calendar": "Calendar",
         "archive": "Archive",
-        "unarchive": "Unarchive"
+        "unarchive": "Unarchive",
+        "end": "Deadline priject::"
 
     },
     "tasks": {

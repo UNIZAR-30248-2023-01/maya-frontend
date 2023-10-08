@@ -15,33 +15,33 @@ function Calendar ({
   return (
     (<DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn('p-3', className)}
+      className={cn('p-9', className)} // Redimensionamos el padding
       classNames={{
-        months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
-        month: 'space-y-4',
-        caption: 'flex justify-center pt-1 relative items-center',
-        caption_label: 'text-sm font-medium',
-        nav: 'space-x-1 flex items-center',
+        months: 'flex flex-col sm:flex-row space-y-12 sm:space-x-12 sm:space-y-0', // Redimensionamos los espacios
+        month: 'space-y-12', // Redimensionamos el espacio
+        caption: 'flex justify-center pt-3 relative items-center', // Redimensionamos el padding
+        caption_label: 'text-lg font-medium', // Redimensionamos el tamaño de la fuente
+        nav: 'space-x-3 flex items-center', // Redimensionamos los espacios
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
-          'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+          'h-21 w-21 bg-transparent p-0 opacity-50 hover:opacity-100' // Redimensionamos el tamaño
         ),
-        nav_button_previous: 'absolute left-1',
-        nav_button_next: 'absolute right-1',
-        table: 'w-full border-collapse space-y-1',
-        head_row: 'flex',
+        nav_button_previous: 'absolute left-3', // Redimensionamos la posición
+        nav_button_next: 'absolute right-3', // Redimensionamos la posición
+        table: 'w-full border-collapse space-y-3', // Redimensionamos los espacios
+        head_row: 'flex', // Redimensionamos el espacio
         head_cell:
-          'text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]',
-        row: 'flex w-full mt-2',
+          'text-muted-foreground rounded-md w-24 font-normal text-lg', // Redimensionamos el tamaño de la fuente
+        row: 'flex w-full mt-6', // Redimensionamos el espacio
         cell: cn(
-          'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent',
+          'relative p-0 text-center text-lg focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent',
           props.mode === 'range'
             ? '[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md'
             : '[&:has([aria-selected])]:rounded-md'
         ),
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'h-8 w-8 p-0 font-normal aria-selected:opacity-100'
+          'h-24 w-24 p-0 font-normal aria-selected:opacity-100' // Redimensionamos el tamaño
         ),
         day_range_start: 'day-range-start',
         day_range_end: 'day-range-end',
@@ -56,8 +56,8 @@ function Calendar ({
         ...classNames
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />
+        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-12 w-12" />, // Redimensionamos el tamaño
+        IconRight: ({ ...props }) => <ChevronRightIcon className="h-12 w-12" /> // Redimensionamos el tamaño
       }}
       {...props} />)
   )

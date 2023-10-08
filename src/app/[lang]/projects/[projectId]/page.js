@@ -14,6 +14,7 @@ import { getServerProjectById } from '@/services/projects'
 import { ProjectInfo } from '@/components/project/ProjectInfo'
 import { ProjectTasks } from '@/components/project/ProjectTasks'
 import { redirect } from 'next/navigation'
+import { CalendarDemo } from '@/components/project/ProjectCalendar'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
 
@@ -74,11 +75,9 @@ export default async function Page ({ params: { lang, projectId } }) {
           </Card>
         </TabsContent>
         <TabsContent value="calendar">
-          <Card>
-            <CardContent>
-              <p>CALENDAR</p>
-            </CardContent>
-          </Card>
+          <CardHeader className="flex justify-center items-center h-full">
+            <CalendarDemo project={project} dict={dict} />
+          </CardHeader>
         </TabsContent>
       </Tabs>
     </>

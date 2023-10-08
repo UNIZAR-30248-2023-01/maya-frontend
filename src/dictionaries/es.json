@@ -25,7 +25,8 @@
         "members": "Miembros",
         "calendar": "Calendario",
         "archive": "Archivar",
-        "unarchive": "Desarchivar"
+        "unarchive": "Desarchivar",
+        "end": "Fin Del Proyecto:"
     },
     "tasks": {
         "name": "Nombre",

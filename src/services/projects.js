@@ -57,3 +57,18 @@ export const getClientProjectById = async ({ id }) => {
     return projects[0]
   }
 }
+
+export const getClientProjectDateById = async ({ id }) => {
+  const supabase = createClientComponentClient()
+
+  const { data: projects, error } = await supabase
+    .from('projects')
+    .select('deadline')
+    .eq('id', id)
+
+  if (error != null) {
+    return null
+  } else {
+    return projects
+  }
+}
