@@ -64,7 +64,8 @@
         "yesmodify": "Sí, modifica el proyecto",
         "deletetext": "Esta acción no se puede deshacer. El proyecto se eliminara permanentemente.",
         "confirmtext": "Esta acción modificará permanentemente el proyecto.",
-        "select": "Selecciona los participantes"
+        "select": "Selecciona los participantes",
+        "search": "Buscar participantes..."
 
     }
 }

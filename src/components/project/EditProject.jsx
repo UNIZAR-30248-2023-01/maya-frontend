@@ -30,8 +30,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
+import { updateClientProject } from '@/services/projects'
 
 export function EditProject ({ user, project, dict }) {
+  const [searchTerm, setSearchTerm] = useState('')
   const [selectedParticipants, setSelectedParticipants] = useState([
     // Inicializa aquí el array de participantes seleccionados
     { id: 1, name: 'Participant 1' },
@@ -75,11 +77,23 @@ export function EditProject ({ user, project, dict }) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
     // Aquí puedes enviar formData a tu servidor o realizar cualquier otra acción necesaria
     console.log('Form data:', formData)
+    // Llamar a la función de actualización del proyecto aquí
+    const { name, description, status } = formData
+    // const participants = selectedParticipants.map(participant => participant.id)
+    const result = await updateClientProject(project.id, name, description, status, project.archived, project.owner, project.deadline)
+
+    if (result === 'success') {
+      // La actualización fue exitosa, puedes hacer lo que necesites aquí, por ejemplo, redirigir al usuario a otra página
+      console.log('Proyecto actualizado correctamente.')
+      window.history.back()
+    } else {
+      // Ocurrió un error durante la actualización, puedes manejar el error aquí
+      console.error('Error al actualizar el proyecto:', result)
+    }
   }
 
   return (
@@ -93,7 +107,7 @@ export function EditProject ({ user, project, dict }) {
       <Separator className="my-4" />
       <div className='pt-5'>
         <p className="text-sm font-semibold leading-none pb-3">
-        {dict.edit.name}
+          {dict.edit.name}
         </p>
         <Input
           type="text"
@@ -120,28 +134,38 @@ export function EditProject ({ user, project, dict }) {
           <Button className="w-[223px]" variant="outline">{dict.edit.select}</Button>
         </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
+            {/* Input para buscar participantes */}
+            <Input
+              type="text"
+              placeholder={dict.edit.search}
+              className="w-full p-2 border-b mb-2"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <DropdownMenuSeparator />
             {/* Renderizar los items dinámicamente desde el array */}
-            {participantes.map((participant) => (
-              <DropdownMenuCheckboxItem
-                key={participant.id}
-                checked={selectedParticipants.some(p => p.id === participant.id)}
-                onCheckedChange={(isChecked, event) => {
-                  if (event) {
-                    event.stopPropagation()
-                  }
-                  setSelectedParticipants((prevSelectedParticipants) => {
-                    if (isChecked) {
-                      return [...prevSelectedParticipants, participant]
-                    } else {
-                      return prevSelectedParticipants.filter((p) => p.id !== participant.id)
+            {participantes
+              .filter(participant => participant.name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .map((participant) => (
+                <DropdownMenuCheckboxItem
+                  key={participant.id}
+                  checked={selectedParticipants.some(p => p.id === participant.id)}
+                  onCheckedChange={(isChecked, event) => {
+                    if (event) {
+                      event.stopPropagation()
                     }
-                  })
-                }}
-              >
-                {participant.name}
-              </DropdownMenuCheckboxItem>
-            ))}
+                    setSelectedParticipants((prevSelectedParticipants) => {
+                      if (isChecked) {
+                        return [...prevSelectedParticipants, participant]
+                      } else {
+                        return prevSelectedParticipants.filter((p) => p.id !== participant.id)
+                      }
+                    })
+                  }}
+                >
+                  {participant.name}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
         <div>
@@ -159,8 +183,8 @@ export function EditProject ({ user, project, dict }) {
           {dict.edit.status}
         </p>
         <Select name="status" onValueChange={(value) => handleInputChange({ target: { name: 'status', value } })} defaultValue={formData.status}>
-          <SelectTrigger className="w-[223px]">
-            <SelectValue className={`text-white ${formData.status === 'Finished' ? 'bg-green-500' : formData.status === 'In Progress' ? 'bg-yellow-500' : 'bg-blue-500'}`}>
+          <SelectTrigger className={`w-[223px] ${formData.status === 'Finished' ? 'bg-[#B9EFCA] text-[#00513A]' : formData.status === 'In Progress' ? 'bg-[#EFDCB9] text-[#512700]' : 'bg-[#B9C5EF] text-[#000D51]'}`}>
+            <SelectValue>
               {formData.status}
             </SelectValue>
           </SelectTrigger>
@@ -204,7 +228,7 @@ export function EditProject ({ user, project, dict }) {
         <div className="flex space-x-2">
           <button type="button" className="bg-white text-black px-4 py-2 rounded border border-gray-300">{dict.edit.cancel}</button>
           <AlertDialog>
-            <AlertDialogTrigger type="submit" className="bg-[#47433E] text-white px-4 py-2 rounded">{dict.edit.confirm}</AlertDialogTrigger>
+            <AlertDialogTrigger className="bg-[#47433E] text-white px-4 py-2 rounded">{dict.edit.confirm}</AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>{dict.edit.aresure}</AlertDialogTitle>
@@ -214,13 +238,12 @@ export function EditProject ({ user, project, dict }) {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>{dict.edit.cancel}</AlertDialogCancel>
-                <AlertDialogAction className="bg-[#16860D] text-white">{dict.edit.yesmodify}</AlertDialogAction>
+                <AlertDialogAction onClick={handleSubmit} className="bg-[#16860D] text-white">{dict.edit.yesmodify}</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
       </div>
     </form>
-
   )
 }

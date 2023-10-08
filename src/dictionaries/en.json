@@ -65,7 +65,8 @@
         "yesmodify": "Yes, modify project",
         "deletetext": "This action cannot be undone. This will permanently delete your project and remove your data from our servers.",
         "confirmtext": "This will permanently modify your project and change your data from our servers.",
-        "select": "Select participants"
+        "select": "Select participants",
+        "search": "Search participants..."
 
     }
 }
