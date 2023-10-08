@@ -27,5 +27,22 @@
         "action": "Set Reminder",
         "description": "You will be notified when the event starts",
         "title": "Monday, January 3rd at 6:00pm"
+    },
+    "table": {
+        "of": "of",
+        "row(s)": "row(s)",
+        "row": "row",
+        "rows": "rows",
+        "selected": "selected",
+        "page": "Page",
+        "per": "per",
+        "asc": "asc",
+        "desc": "desc",
+        "hide": "hide",
+        "first": "Go to first page",
+        "previous": "Go to previous page",
+        "next": "Go to next page",
+        "last": "Go to last page",
+        "no-results": "No results found"
     }
 }

@@ -1,33 +1,24 @@
-import { promises as fs } from 'fs'
-import path from 'path'
-import { z } from 'zod'
-
-import { columns } from '@/components/ui/table/projects/columns'
+import { cookies } from 'next/headers'
 import { DataTable } from '@/components/ui/table/projects/data-table'
-import { taskSchema } from '@/data/projects/schema'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { getDictionary } from '@/lib/dictionaries'
 
 export const metadata = {
   title: 'Projects',
   description: 'Here is a list of your projects'
 }
 
-// Simulate a database read for tasks.
-async function getTasks () {
-  const data = await fs.readFile(
-    path.join(process.cwd(), 'src/data/projects/sample.json')
-  )
-
-  const tasks = JSON.parse(data.toString())
-
-  return z.array(taskSchema).parse(tasks)
-}
-
-export default async function ProjetsPage () {
-  const tasks = await getTasks()
+export default async function ProjetsPage ({ params: { lang } }) {
+  const supabase = createServerComponentClient({ cookies }, {
+    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_KEY
+  })
+  const { data: projects } = await supabase.from('projects').select()
+  const dict = await getDictionary(lang)
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
-      <DataTable data={tasks} columns={columns} />
+      <DataTable data={projects} lang={lang} dict={dict} />
     </div>
   )
 }

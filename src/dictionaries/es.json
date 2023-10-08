@@ -27,5 +27,22 @@
         "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",
         "title": "Lunes 3 de enero a las 18:00"
+    },
+    "table": {
+        "of": "de",
+        "row(s)": "fila(s)",
+        "row": "fila",
+        "rows": "filas",
+        "selected": "seleccionadas",
+        "page": "página",
+        "per": "por",
+        "asc": "asc",
+        "desc": "desc",
+        "hide": "ocultar",
+        "first": "Ir a la primera página",
+        "previous": "Ir a la anterior página",
+        "next": "Ir a la siguiente página",
+        "last": "Ir a la última página",
+        "no-results": "No se encontraron resultados"
     }
 }

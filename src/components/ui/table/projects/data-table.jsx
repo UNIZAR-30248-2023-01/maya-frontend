@@ -21,24 +21,27 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { useRouter } from 'next/navigation'
-
+import { columns } from '@/components/ui/table/projects/columns'
 import { DataTablePagination } from '@/components/ui/table/projects/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/projects/data-table-toolbar'
 
 export function DataTable ({
-  columns,
-  data
+  data,
+  lang,
+  dict
 }) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState({})
   const [columnFilters, setColumnFilters] = useState([])
   const [sorting, setSorting] = useState([])
+
+  // Navigate to project page
   const router = useRouter()
-  const viewProject = (row) => router.push(`/projects/${String(row.original.title).toLowerCase().replace(/ /g, '-')}`)
+  const viewProject = (row) => router.push(`/projects/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns[lang],
     state: {
       sorting,
       columnVisibility,
@@ -60,7 +63,7 @@ export function DataTable ({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} lang={lang} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -108,14 +111,14 @@ export function DataTable ({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {dict.table['no-results']}.
                 </TableCell>
               </TableRow>
                 )}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} dict={dict} />
     </div>
   )
 }
