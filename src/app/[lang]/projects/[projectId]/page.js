@@ -18,7 +18,7 @@ import { redirect } from 'next/navigation'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
 
-export default async function Page ({ params: { lang, projectId } }) {
+export default async function Page({ params: { lang, projectId } }) {
   const dict = await getDictionary(lang)
   const project = await getServerProjectById({ cookies, id: projectId })
   const members = await getServerProjectMembersById({ cookies, id: projectId })
@@ -71,7 +71,7 @@ export default async function Page ({ params: { lang, projectId } }) {
               <pre>{JSON.stringify(members, null, 2)}</pre>
             </CardHeader>
             <CardContent>
-              <ProjectTeam user={members} dict={dict} />
+              <ProjectTeam lang={lang} user={members} dict={dict} />
             </CardContent>
           </Card>
         </TabsContent>
