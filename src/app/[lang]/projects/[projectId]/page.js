@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator'
 import { getServerProjectById, getServerProjectMembersById } from '@/services/projects'
 import { ProjectInfo } from '@/components/project/ProjectInfo'
 import { ProjectTasks } from '@/components/project/ProjectTasks'
+import { ProjectTeam } from '@/components/project/ProjectTeam'
 import { redirect } from 'next/navigation'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
@@ -70,7 +71,7 @@ export default async function Page ({ params: { lang, projectId } }) {
               <pre>{JSON.stringify(members, null, 2)}</pre>
             </CardHeader>
             <CardContent>
-              <p>TABLE</p>
+              <ProjectTeam user={members} dict={dict} />
             </CardContent>
           </Card>
         </TabsContent>
