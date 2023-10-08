@@ -16,7 +16,7 @@ import {
   Sheet,
   SheetContent
 } from '@/components/ui/sheet'
-import { Navbar } from '@/components/navbar'
+import { Navbar } from '@/components/Navbar'
 
 const navigation = [
   { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
@@ -46,7 +46,7 @@ export function Layout ({ dict, children }) {
             teams={teams}
             sheet={true}
             setSearchOpen={setOpen}
-        />
+          />
         </SheetContent>
 
         <div className="h-screen w-screen flex">
