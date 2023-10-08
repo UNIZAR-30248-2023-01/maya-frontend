@@ -1,7 +1,7 @@
 'use client'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
-import { TeamMember } from '@/components/TeamMember'
+import { TeamMember } from '@/components/team-member'
 import {
   Select,
   SelectContent,

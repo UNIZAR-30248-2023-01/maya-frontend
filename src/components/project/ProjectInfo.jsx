@@ -2,7 +2,7 @@ import {
   Card,
   CardHeader
 } from '@/components/ui/card'
-import { TeamMember } from '@/components/TeamMember'
+import { TeamMember } from '@/components/team-member'
 import { cn } from '@/lib/utils'
 import { getServerUserById } from '@/services/users'
 import { cookies } from 'next/headers'

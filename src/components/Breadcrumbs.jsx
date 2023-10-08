@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import { LuHome } from 'react-icons/lu'
+import { usePathname } from 'next/navigation'
 
-export function Breadcrumbs ({ dict, pages }) {
-  if (pages[0] === 'projects') {
-    pages = [pages[0]]
-  }
+export function Breadcrumbs ({ dict }) {
+  let pages = usePathname()
+  pages = pages.split('/').slice(2)
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="flex items-center space-x-4">
@@ -29,13 +29,13 @@ export function Breadcrumbs ({ dict, pages }) {
               >
                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
               </svg>
-              <Link
+              {/* <Link
                 href={`/${pages.slice(0, pages.indexOf(page) + 1).join('/')}`}
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
                 {dict[page] || pages[id]}
-              </Link>
+        </Link> */}
             </div>
           </li>
         ))}
