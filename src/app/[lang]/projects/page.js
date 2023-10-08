@@ -2,9 +2,9 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { z } from 'zod'
 
-import { columns } from '@/components/ui/columns'
-import { DataTable } from '@/components/ui//data-table'
-import { taskSchema } from '@/data/schema'
+import { columns } from '@/components/ui/table/projects/columns'
+import { DataTable } from '@/components/ui/table/projects/data-table'
+import { taskSchema } from '@/data/projects/schema'
 
 export const metadata = {
   title: 'Projects',
@@ -14,7 +14,7 @@ export const metadata = {
 // Simulate a database read for tasks.
 async function getTasks () {
   const data = await fs.readFile(
-    path.join(process.cwd(), 'src/data/tasks.json')
+    path.join(process.cwd(), 'src/data/projects/sample.json')
   )
 
   const tasks = JSON.parse(data.toString())
@@ -32,7 +32,7 @@ export default async function ProjetsPage () {
           <div>
             <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
             <p className="text-muted-foreground">
-              Here&apos;s a list of your tasks for this month!
+              Here&apos;s a list of your projects for this month!
             </p>
           </div>
         </div>

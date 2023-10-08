@@ -23,7 +23,7 @@ export function Breadcrumbs ({ dict }) {
             </Link>
           </div>
         </li>
-        {pages.map((page) => (
+        {pages.map((page, id) => (
           <li key={page}>
             <div className="flex items-center">
               <svg
@@ -39,7 +39,7 @@ export function Breadcrumbs ({ dict }) {
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
-                {dict[page]}
+                {dict[page] || pages[id]}
               </Link>
             </div>
           </li>
