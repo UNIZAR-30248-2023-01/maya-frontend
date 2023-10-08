@@ -2,19 +2,14 @@
 
 import Link from 'next/link'
 import { LuHome } from 'react-icons/lu'
-import { usePathname } from 'next/navigation'
 
-export function Breadcrumbs ({ dict }) {
-  let pages = usePathname()
-  pages = pages.split('/').slice(2)
-
+export function Breadcrumbs ({ dict, pages }) {
   if (pages[0] === 'projects') {
     pages = [pages[0]]
   }
-
   return (
     <nav className="flex" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
+      <ol className="flex items-center space-x-4">
         <li>
           <div>
             <Link href="/" className="text-gray-400 hover:text-gray-500">

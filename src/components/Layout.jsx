@@ -2,10 +2,8 @@
 
 import { useState } from 'react'
 import { Sidebar } from '@/components/sidebar/Sidebar'
-import { Button } from '@/components/ui/button'
 import { Search } from '@/components/sidebar/Search'
 import {
-  LuMenu,
   LuLayoutGrid,
   LuFileText,
   LuUsers,
@@ -16,10 +14,9 @@ import {
 } from 'react-icons/lu'
 import {
   Sheet,
-  SheetContent,
-  SheetTrigger
+  SheetContent
 } from '@/components/ui/sheet'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { Navbar } from '@/components/Navbar'
 
 const navigation = [
   { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
@@ -54,17 +51,7 @@ export function Layout ({ dict, children }) {
 
         <div className="h-screen w-screen flex">
           <div className='h-full flex-1'>
-            <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6">
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <span className="sr-only">Open sidebar</span>
-                  <LuMenu className="h-6 w-6" aria-hidden="true" />
-                </Button>
-              </SheetTrigger>
-
-              <Breadcrumbs dict={dict.navigation} />
-            </div>
-
+            <Navbar dict={dict.navigation}/>
             <main className="py-10">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-y-2">
                 {children}
