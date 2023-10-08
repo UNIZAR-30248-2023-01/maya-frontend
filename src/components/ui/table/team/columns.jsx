@@ -16,17 +16,16 @@ export const spanishColumns = [
     cell: ({ row }) => {
       return (
         <div className="flex">
-          <span className="max-w-[300px] truncate font-medium pl-1">
+          <span className="max-w-[300px] truncate font-medium pl-1 flex items-center gap-4">
             <Avatar>
               <AvatarImage src="/assets/avatars/memojis/4.webp" />
             </Avatar>
-            {row.getValue('name')}
+            <p>{row.original.user.name}</p>
           </span>
         </div>
       )
     }
   },
-
   {
     accessorKey: 'username',
     header: ({ column }) => (
@@ -36,7 +35,7 @@ export const spanishColumns = [
       return (
         <div className="flex">
           <span className="max-w-[300px] truncate font-medium pl-1">
-            {row.getValue('username')}
+            {row.original.user.username}
           </span>
         </div>
       )
@@ -55,7 +54,7 @@ export const spanishColumns = [
       return (
         <div className="flex">
           <span className="max-w-[300px] truncate font-medium pl-1">
-            {row.getValue('email')}
+            {row.original.user.email}
           </span>
         </div>
       )
@@ -76,11 +75,11 @@ export const englishColumns = [
     cell: ({ row }) => {
       return (
         <div className="flex">
-          <span className="max-w-[300px] truncate font-medium pl-1">
+          <span className="max-w-[300px] truncate font-medium pl-1 flex items-center gap-4">
             <Avatar>
               <AvatarImage src="/assets/avatars/memojis/4.webp" />
             </Avatar>
-            {row.getValue('name')}
+            {row.original.user.name}
           </span>
         </div>
       )
@@ -95,7 +94,7 @@ export const englishColumns = [
       return (
         <div className="flex">
           <span className="max-w-[300px] truncate font-medium pl-1">
-            {row.getValue('username')}
+            {row.original.user.username}
           </span>
         </div>
       )
@@ -114,7 +113,7 @@ export const englishColumns = [
       return (
         <div className="flex">
           <span className="max-w-[300px] truncate font-medium pl-1">
-            {row.getValue('email')}
+            {row.original.user.email}
           </span>
         </div>
       )

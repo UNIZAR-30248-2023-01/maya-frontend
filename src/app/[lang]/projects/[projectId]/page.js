@@ -66,14 +66,7 @@ export default async function Page({ params: { lang, projectId } }) {
           <ProjectTasks lang={lang} projectId={projectId} dict={dict} />
         </TabsContent>
         <TabsContent value="members">
-          <Card>
-            <CardHeader>
-              <pre>{JSON.stringify(members, null, 2)}</pre>
-            </CardHeader>
-            <CardContent>
-              <ProjectTeam lang={lang} user={members} dict={dict} />
-            </CardContent>
-          </Card>
+          <ProjectTeam lang={lang} user={members} dict={dict} />
         </TabsContent>
         <TabsContent value="calendar">
           <Card>

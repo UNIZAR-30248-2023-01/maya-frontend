@@ -25,7 +25,6 @@ import {
 
 import { DataTablePagination } from '@/components/ui/table/team/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/team/data-table-toolbar'
-import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
 
 export function DataTable({
   data,
@@ -63,12 +62,12 @@ export function DataTable({
 
     <div className="space-y-4">
 
-      <pre>{table.data.username}</pre>
+      {/* <pre>{JSON.stringify(table.getRowModel().rows[0].getVisibleCells()[0].getContext(), null, 2)}</pre> */}
 
       <DataTableToolbar table={table} dict={dict} />
       <div className="rounded-md border">
         <Table>
-          <TableCaption>A list of your team members.</TableCaption>
+          <TableCaption className='py-2 border-t mt-0'>A list of your team members.</TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -95,29 +94,14 @@ export function DataTable({
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
                   >
-                    <Sheet>
-                      <SheetContent>
-                      </SheetContent>
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {cell.getContext().column.id === 'actions'
-                            ? (
-                              flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )
-                            )
-                            : (
-                              <SheetTrigger className='w-full h-full'>
-                                {flexRender(
-                                  cell.column.columnDef.cell,
-                                  cell.getContext()
-                                )}
-                              </SheetTrigger>
-                            )}
-                        </TableCell>
-                      ))}
-                    </Sheet>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
                   </TableRow>
                 ))
               )
