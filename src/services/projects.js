@@ -64,7 +64,7 @@ export const insertClientProject = async (name, description, status, archived, o
   const { error } = await supabase
     .from('projects')
     .insert([
-      { name: name, description: description, status: status, archived: archived, owner: owner, deadline: deadline }
+      { name, description, status, archived, owner, deadline }
     ])
     .select()
 
@@ -81,7 +81,7 @@ export const insertServerProject = async (name, description, status, archived, o
   const { error } = await supabase
     .from('projects')
     .insert([
-      { name: name, description: description, status: status, archived: archived, owner: owner, deadline: deadline }
+      { name, description, status, archived, owner, deadline }
     ])
     .select()
 
@@ -97,7 +97,7 @@ export const updateClientProject = async (id, name, description, status, archive
 
   const { error } = await supabase
     .from('projects')
-    .update({ name: name, description: description, status: status, archived: archived, owner: owner, deadline: deadline })
+    .update({ name, description, status, archived, owner, deadline })
     .eq('id', id)
     .select()
 
@@ -113,7 +113,7 @@ export const updateServerProject = async (id, name, description, status, archive
 
   const { error } = await supabase
     .from('projects')
-    .update({ name: name, description: description, status: status, archived: archived, owner: owner, deadline: deadline })
+    .update({ name, description, status, archived, owner, deadline })
     .eq('id', id)
     .select()
 

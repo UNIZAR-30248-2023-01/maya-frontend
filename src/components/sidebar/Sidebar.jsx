@@ -1,6 +1,6 @@
 'use client'
 
-import { TeamMember } from '@/components/TeamMember'
+import { TeamMember } from '@/components/team-member'
 import { SidebarHeader } from '@/components/sidebar/SidebarHeader'
 import { SidebarNavigation } from '@/components/sidebar/SidebarNavigation'
 import { SidebarTeams } from '@/components/sidebar/SidebarTeams'

@@ -4,7 +4,6 @@ import {
   CaretSortIcon,
   EyeNoneIcon
 } from '@radix-ui/react-icons'
-
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,7 +14,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
-export function DataTableColumnHeader ({
+export async function DataTableColumnHeader ({
   column,
   title,
   className
@@ -35,31 +34,25 @@ export function DataTableColumnHeader ({
             >
               <span>{title}</span>
               {column.getIsSorted() === 'desc'
-                ? (
-                <ArrowDownIcon className="ml-2 h-4 w-4" />
-                  )
+                ? (<ArrowDownIcon className="ml-2 h-4 w-4" />)
                 : column.getIsSorted() === 'asc'
-                  ? (
-                <ArrowUpIcon className="ml-2 h-4 w-4" />
-                    )
-                  : (
-                <CaretSortIcon className="ml-2 h-4 w-4" />
-                    )}
+                  ? (<ArrowUpIcon className="ml-2 h-4 w-4" />)
+                  : (<CaretSortIcon className="ml-2 h-4 w-4" />)}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
             <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-              <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-              Asc
+              <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70 capitalize" />
+              {/* {dict.table.asc} */}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-              <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-              Desc
+              <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70 capitalize" />
+              {/* {dict.table.desc} */}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-              <EyeNoneIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-              Hide
+              <EyeNoneIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70 capitalize" />
+              {/* {dict.table.hide} */}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

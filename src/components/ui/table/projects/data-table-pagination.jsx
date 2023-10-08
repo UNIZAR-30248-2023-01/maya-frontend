@@ -15,17 +15,18 @@ import {
 } from '@/components/ui/select'
 
 export function DataTablePagination ({
-  table
+  table,
+  dict
 }) {
   return (
       <div className="flex items-center justify-between px-2">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} {dict.table.of}{' '}
+          {table.getFilteredRowModel().rows.length} {dict.table['row(s)']} {dict.table.selected}.
         </div>
         <div className="flex items-center space-x-6 lg:space-x-8">
           <div className="flex items-center space-x-2">
-            <p className="text-sm font-medium">Rows per page</p>
+            <p className="text-sm font-medium">{dict.table.rows.charAt(0).toUpperCase()}{dict.table.rows.slice(1)} {dict.table.per} {dict.table.page}</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value) => {
@@ -45,7 +46,7 @@ export function DataTablePagination ({
             </Select>
           </div>
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{' '}
+            {dict.table.page.charAt(0).toUpperCase()}{dict.table.page.slice(1)} {table.getState().pagination.pageIndex + 1} {dict.table.of}{' '}
             {table.getPageCount()}
           </div>
           <div className="flex items-center space-x-2">
@@ -55,7 +56,7 @@ export function DataTablePagination ({
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to first page</span>
+              <span className="sr-only">{dict.table.first}</span>
               <DoubleArrowLeftIcon className="h-4 w-4" />
             </Button>
             <Button
@@ -64,7 +65,7 @@ export function DataTablePagination ({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to previous page</span>
+              <span className="sr-only">{dict.table.previous}</span>
               <ChevronLeftIcon className="h-4 w-4" />
             </Button>
             <Button
@@ -73,7 +74,7 @@ export function DataTablePagination ({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to next page</span>
+              <span className="sr-only">{dict.table.next}</span>
               <ChevronRightIcon className="h-4 w-4" />
             </Button>
             <Button
@@ -82,7 +83,7 @@ export function DataTablePagination ({
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to last page</span>
+              <span className="sr-only">{dict.table.last}</span>
               <DoubleArrowRightIcon className="h-4 w-4" />
             </Button>
           </div>

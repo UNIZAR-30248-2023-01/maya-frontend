@@ -43,6 +43,15 @@
         "deleteTitle": "Estas seguro?",
         "deleteText": "Esta acción no se puede deshacer. La tarea se borrará de forma permanente."
     },
+    "projects": {
+        "new-project": "Nuevo proyecto",
+        "new-table": "Nueva tabla",
+        "new-table-description": "Los proyectos son una herramienta personalizable y flexible para planificar y hacer un seguimiento de su trabajo.",
+        "name": "Nombre",
+        "description": "Descripción breve",
+        "description-placeholder": "Breve descripción del proyecto.",
+        "create-action": "Crear"
+    },
     "sonner": {
         "action": "Establecer recordatorio",
         "description": "Se le notificará el inicio del acto",
@@ -66,6 +75,22 @@
         "confirmtext": "Esta acción modificará permanentemente el proyecto.",
         "select": "Selecciona los participantes",
         "search": "Buscar participantes..."
-
+    },
+    "table": {
+        "of": "de",
+        "row(s)": "fila(s)",
+        "row": "fila",
+        "rows": "filas",
+        "selected": "seleccionadas",
+        "page": "página",
+        "per": "por",
+        "asc": "asc",
+        "desc": "desc",
+        "hide": "ocultar",
+        "first": "Ir a la primera página",
+        "previous": "Ir a la anterior página",
+        "next": "Ir a la siguiente página",
+        "last": "Ir a la última página",
+        "no-results": "No se encontraron resultados"
     }
 }

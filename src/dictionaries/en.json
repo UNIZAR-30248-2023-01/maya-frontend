@@ -44,6 +44,15 @@
         "deleteTitle": "Are you absolutely sure?",
         "deleteText": "This action cannot be undone. This will permanently delete your task ."
     },
+    "projects": {
+        "new-project": "New Project",
+        "new-table": "New table",
+        "new-table-description": "Projects are a customizable, flexible tool for planning and tracking your work.",
+        "name": "Name",
+        "description": "Short description",
+        "description-placeholder": "A short description about this project.",
+        "create-action": "Create"
+    },
     "sonner": {
         "action": "Set Reminder",
         "description": "You will be notified when the event starts",
@@ -67,6 +76,22 @@
         "confirmtext": "This will permanently modify your project and change your data from our servers.",
         "select": "Select participants",
         "search": "Search participants..."
-
+    },
+    "table": {
+        "of": "of",
+        "row(s)": "row(s)",
+        "row": "row",
+        "rows": "rows",
+        "selected": "selected",
+        "page": "Page",
+        "per": "per",
+        "asc": "asc",
+        "desc": "desc",
+        "hide": "hide",
+        "first": "Go to first page",
+        "previous": "Go to previous page",
+        "next": "Go to next page",
+        "last": "Go to last page",
+        "no-results": "No results found"
     }
 }
