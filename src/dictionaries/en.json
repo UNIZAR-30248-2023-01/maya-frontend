@@ -1,4 +1,5 @@
 {
+    "cancel": "Cancel",
     "navigation": {
         "in-and-outs": "In & Outs",
         "overview": "Overview",
@@ -36,8 +37,15 @@
         "time": "Time spent",
         "add": "Add task",
         "edit": "Edit task",
-        "delete": "Delete task",
+        "delete": "Yes, delete task",
         "search": "Search...",
+        "filterTasks": "Filter tasks...",
+        "priority": "Priority",
+        "clear": "Clear filters",
+        "noResults": "No results found",
+        "rowsPage": "Rows per page",
+        "page": "Page",
+        "of": "of",
         "slogan": "Make changes to the task here. Click save when you’re done.",
         "save": "Save changes",
         "cancel": "Discard changes",

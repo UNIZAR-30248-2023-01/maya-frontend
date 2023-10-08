@@ -63,7 +63,7 @@ export default async function Page ({ params: { lang, projectId } }) {
           <ProjectInfo project={project} dict={dict} />
         </TabsContent>
         <TabsContent value="tasks">
-          <ProjectTasks projectId={projectId} dict={dict} />
+          <ProjectTasks lang={lang} projectId={projectId} dict={dict} />
         </TabsContent>
         <TabsContent value="members">
           <Card>

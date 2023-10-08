@@ -1,0 +1,157 @@
+'use client'
+
+import { useState } from 'react'
+import {
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
+} from '@tanstack/react-table'
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
+
+import { Task } from '@/components/task/Task'
+
+import { DataTablePagination } from '@/components/ui/table/tasks/data-table-pagination'
+import { DataTableToolbar } from '@/components/ui/table/tasks/data-table-toolbar'
+import { Sheet, SheetContent, SheetTrigger } from '../../sheet'
+import { AddTask } from '@/components/task/AddTask'
+
+export function DataTable ({
+  columns,
+  data,
+  dict
+}) {
+  const [rowSelection, setRowSelection] = useState({})
+  const [columnVisibility, setColumnVisibility] = useState({})
+  const [columnFilters, setColumnFilters] = useState([])
+  const [sorting, setSorting] = useState([])
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters
+    },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues()
+  })
+
+  return (
+    <div className="space-y-4">
+      <DataTableToolbar table={table} dict={dict} />
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length
+              ? (
+                  table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                    >
+                      <Sheet>
+                        <SheetContent>
+                          <Task taskId={row.original.id} />
+                        </SheetContent>
+                        {row.getVisibleCells().map((cell) => (
+                          <TableCell key={cell.id}>
+                            {cell.getContext().column.id === 'actions'
+                              ? (
+                                  flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                  )
+                                )
+                              : (
+                                <SheetTrigger className='w-full h-full'>
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext()
+                                )}
+                                </SheetTrigger>
+                                )}
+                          </TableCell>
+                        ))}
+                      </Sheet>
+                </TableRow>
+                  ))
+                )
+              : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  {dict.tasks.noResults}
+                </TableCell>
+              </TableRow>
+                )}
+          </TableBody>
+          <TableFooter>
+            <Sheet>
+              <SheetContent>
+                <AddTask />
+              </SheetContent>
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className='border-t w-full h-full'
+                >
+                  <div className='w-full h-full'>
+                    <SheetTrigger className='w-full h-full text-start'>
+                      <p className='pl-1'>{'+ ' + dict.tasks.add}</p>
+                    </SheetTrigger>
+                  </div>
+                </TableCell>
+              </TableRow>
+            </Sheet>
+          </TableFooter>
+        </Table>
+      </div>
+      <DataTablePagination table={table} dict={dict} />
+    </div>
+  )
+}

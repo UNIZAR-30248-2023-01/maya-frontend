@@ -1,71 +1,83 @@
-import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckCircledIcon,
-  CircleIcon,
-  CrossCircledIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon
-} from '@radix-ui/react-icons'
+import { LuArrowUp, LuArrowDown, LuArrowRight, LuCircleDashed, LuCircleSlash, LuCheckCircle2, LuTimer } from 'react-icons/lu'
 
-export const labels = [
+export const spanishStatuses = [
   {
-    value: 'bug',
-    label: 'Bug'
+    value: 'Not started',
+    label: 'Sin comenzar',
+    icon: LuCircleDashed
   },
   {
-    value: 'feature',
-    label: 'Feature'
+    value: 'In progress',
+    label: 'En proceso',
+    icon: LuTimer
   },
   {
-    value: 'documentation',
-    label: 'Documentation'
+    value: 'Finished',
+    label: 'Terminado',
+    icon: LuCheckCircle2
+  },
+  {
+    value: 'Bloqued',
+    label: 'Bloqueado',
+    icon: LuCircleSlash
   }
 ]
 
-export const statuses = [
+export const englishStatuses = [
   {
-    value: 'backlog',
-    label: 'Backlog',
-    icon: QuestionMarkCircledIcon
+    value: 'Not started',
+    label: 'Not started',
+    icon: LuCircleDashed
   },
   {
-    value: 'todo',
-    label: 'Todo',
-    icon: CircleIcon
+    value: 'In progress',
+    label: 'In progress',
+    icon: LuTimer
   },
   {
-    value: 'in progress',
-    label: 'In Progress',
-    icon: StopwatchIcon
+    value: 'Finished',
+    label: 'Finished',
+    icon: LuCheckCircle2
   },
   {
-    value: 'done',
-    label: 'Done',
-    icon: CheckCircledIcon
-  },
-  {
-    value: 'canceled',
-    label: 'Canceled',
-    icon: CrossCircledIcon
+    value: 'Bloqued',
+    label: 'Bloqued',
+    icon: LuCircleSlash
   }
 ]
 
-export const priorities = [
+export const spanishPriorities = [
+  {
+    label: 'Baja',
+    value: 'Low',
+    icon: LuArrowDown
+  },
+  {
+    label: 'Media',
+    value: 'Medium',
+    icon: LuArrowRight
+  },
+  {
+    label: 'Alta',
+    value: 'High',
+    icon: LuArrowUp
+  }
+]
+
+export const englishPriorities = [
   {
     label: 'Low',
-    value: 'low',
-    icon: ArrowDownIcon
+    value: 'Low',
+    icon: LuArrowDown
   },
   {
     label: 'Medium',
-    value: 'medium',
-    icon: ArrowRightIcon
+    value: 'Medium',
+    icon: LuArrowRight
   },
   {
     label: 'High',
-    value: 'high',
-    icon: ArrowUpIcon
+    value: 'High',
+    icon: LuArrowUp
   }
 ]
