@@ -1,9 +1,11 @@
+'use client'
+
 import '@/styles/globals.css'
 
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { Layout } from '@/components/layout'
-import { getDictionary } from '@/lib/dictionaries'
+import { LanguageProvider } from '@/context/language-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +14,16 @@ export const metadata = {
   themeColor: '#ffffff'
 }
 
-export default async function RootLayout ({ children, params: { lang } }) {
-  const dict = await getDictionary(lang)
-
+export default function RootLayout ({ children }) {
   return (
-    <html lang={lang ?? 'en'}>
+    <html lang='en'>
       <body className={`${inter.className} max-w-screen overflow-x-hidden`}>
-      <Toaster />
-        <Layout dict={dict}>
-          {children}
-        </Layout>
+        <Toaster />
+        <LanguageProvider>
+          <Layout>
+            {children}
+          </Layout>
+        </LanguageProvider>
       </body>
     </html>
   )

@@ -1,17 +1,15 @@
-import { Sonner } from '@/components/sonner'
-import { getDictionary } from '@/lib/dictionaries'
+'use client'
 
 export const metadata = {
-  title: 'Next PWA',
-  description: 'Next PWA example using next-pwa and app directory'
+  title: 'Home',
+  description: 'This is the home page'
 }
 
-export default async function Page ({ params: { lang } }) {
-  const dict = await getDictionary(lang)
-
+export default function page () {
   return (
-    <div className='border-2 border-dashed min-h-full flex flex-col items-start justify-start gap-8 h-fit w-full p-4'>
-      <Sonner title={dict.sonner.title} description={dict.sonner.description} action={dict.sonner.action} />
-    </div>
+    <>
+      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
+      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
+    </>
   )
 }

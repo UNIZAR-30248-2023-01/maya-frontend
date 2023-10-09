@@ -21,7 +21,7 @@ export function SidebarNavigation ({ navigation }) {
               getCurrent(item, id)
                 ? 'bg-gray-50 text-indigo-600'
                 : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-              'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium'
+              'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium capitalize'
             )}
           >
             <item.icon

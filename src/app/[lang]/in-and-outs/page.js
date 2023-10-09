@@ -1,6 +1,11 @@
-import React from 'react'
+'use client'
 
-export default function page () {
+export const metadata = {
+  title: 'InAndOuts',
+  description: 'Here is a list of your in-and-outs'
+}
+
+export default async function InAndOutsPage () {
   return (
     <>
       <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>

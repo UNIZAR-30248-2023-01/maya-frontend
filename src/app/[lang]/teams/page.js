@@ -1,6 +1,11 @@
-import React from 'react'
+'use client'
 
-export default function page () {
+export const metadata = {
+  title: 'Teams',
+  description: 'Here is a list of your teams'
+}
+
+export default async function TeamPage () {
   return (
     <>
       <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
