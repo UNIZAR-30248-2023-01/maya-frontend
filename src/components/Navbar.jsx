@@ -2,38 +2,14 @@
 
 import { SheetTrigger } from '@/components/ui/sheet'
 import { Breadcrumbs } from '@/components/breadcrumbs'
-import {
-  LuMenu,
-  LuLineChart,
-  LuPanelRightOpen,
-  LuSettings2
-
-} from 'react-icons/lu'
+import { LuMenu } from 'react-icons/lu'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ProjectNavigation } from '@/components/projects/navigation'
 import { usePathname } from 'next/navigation'
 
-export function Util ({ pages }) {
-  return pages[0] === 'projects' && pages.length > 1 && (
-    <Tabs defaultValue="complete" className="max-w-fit ml-auto">
-      <TabsList className="grid grid-cols-3">
-        <TabsTrigger value="complete">
-          <LuLineChart className='h-5 w-5 stroke-1'/>
-        </TabsTrigger>
-        <TabsTrigger value="insert">
-          <LuPanelRightOpen className='h-5 w-5 stroke-1'/>
-        </TabsTrigger>
-        <TabsTrigger value="edit">
-          <LuSettings2 className='h-5 w-5 stroke-1'/>
-        </TabsTrigger>
-      </TabsList>
-    </Tabs>
-  )
-}
-
 export function Navbar () {
-  let pages = usePathname()
-  pages = pages.split('/').slice(2)
+  const pathname = usePathname()
+  const regex = /\/projects\/.+/
 
   return (
     <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0">
@@ -44,7 +20,7 @@ export function Navbar () {
         </Button>
       </SheetTrigger>
       <Breadcrumbs />
-      <Util pages={pages}/>
+      {regex.test(pathname) && <ProjectNavigation />}
     </div>
   )
 }

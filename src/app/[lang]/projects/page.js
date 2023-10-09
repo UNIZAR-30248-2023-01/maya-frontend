@@ -1,15 +1,16 @@
 'use client'
 
+import { DataTable } from '@/components/projects/data-table'
+import { columns } from '@/components/projects/columns'
+import { mockProjectData } from '@/lib/constants'
+
 export const metadata = {
   title: 'Projects',
   description: 'Here is a list of your projects'
 }
 
-export default async function ProjetsPage () {
+export default async function ProjectsPage () {
   return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
-    </>
+    <DataTable data={mockProjectData} columns={columns}/>
   )
 }

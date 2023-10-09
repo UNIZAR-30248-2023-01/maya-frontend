@@ -3,10 +3,13 @@
 import Link from 'next/link'
 import { LuHome } from 'react-icons/lu'
 import { usePathname } from 'next/navigation'
+import { useLang } from '@/context/language-context'
 
 export function Breadcrumbs () {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
+
+  const { dictionary } = useLang()
 
   return (
     <nav className="flex" aria-label="Breadcrumb">
@@ -19,7 +22,7 @@ export function Breadcrumbs () {
             </Link>
           </div>
         </li>
-        {pages.map((page, id) => (
+        {pages.map((page) => (
           <li key={page}>
             <div className="flex items-center">
               <svg
@@ -35,7 +38,7 @@ export function Breadcrumbs () {
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
-                {page}
+                {dictionary.navigation[page] ?? page}
               </Link>
             </div>
           </li>

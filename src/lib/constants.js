@@ -28,3 +28,36 @@ export const teams = [
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
 ]
+
+export const mockProjectData = [
+  {
+    id: 'm5gr84i9',
+    description: 316,
+    status: 'success',
+    name: 'ken99@yahoo.com'
+  },
+  {
+    id: '3u1reuv4',
+    description: 242,
+    status: 'success',
+    name: 'Abe45@gmail.com'
+  },
+  {
+    id: 'derv1ws0',
+    description: 837,
+    status: 'processing',
+    name: 'Monserrat44@gmail.com'
+  },
+  {
+    id: '5kma53ae',
+    description: 874,
+    status: 'success',
+    name: 'Silas22@gmail.com'
+  },
+  {
+    id: 'bhqecj4p',
+    description: 721,
+    status: 'failed',
+    name: 'carmella@hotmail.com'
+  }
+]

@@ -1,4 +1,4 @@
-import { SidebarNav } from '@/components/sidebar-nav'
+import { SidebarNav } from '@/components/settings-sidenav'
 
 export const metadata = {
   title: 'Forms',
