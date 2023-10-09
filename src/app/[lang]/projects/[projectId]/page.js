@@ -10,17 +10,19 @@ import {
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { getServerProjectById } from '@/services/projects'
+import { getServerProjectById, getServerProjectMembersById } from '@/services/projects'
 import { ProjectInfo } from '@/components/project/ProjectInfo'
 import { ProjectTasks } from '@/components/project/ProjectTasks'
+import { ProjectTeam } from '@/components/project/ProjectTeam'
 import { redirect } from 'next/navigation'
 import { CalendarDemo } from '@/components/project/ProjectCalendar'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
 
-export default async function Page ({ params: { lang, projectId } }) {
+export default async function Page({ params: { lang, projectId } }) {
   const dict = await getDictionary(lang)
   const project = await getServerProjectById({ cookies, id: projectId })
+  const members = await getServerProjectMembersById({ cookies, id: projectId })
 
   if (project === null) {
     redirect('/' + lang)
@@ -65,14 +67,7 @@ export default async function Page ({ params: { lang, projectId } }) {
           <ProjectTasks lang={lang} projectId={projectId} dict={dict} />
         </TabsContent>
         <TabsContent value="members">
-          <Card>
-            <CardHeader>
-              <p>SEARCH</p>
-            </CardHeader>
-            <CardContent>
-              <p>TABLE</p>
-            </CardContent>
-          </Card>
+          <ProjectTeam lang={lang} user={members} dict={dict} />
         </TabsContent>
         <TabsContent value="calendar">
           <CardHeader className="flex justify-center items-center h-full">

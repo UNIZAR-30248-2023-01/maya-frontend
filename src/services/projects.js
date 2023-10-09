@@ -84,12 +84,7 @@ export const insertServerProject = async (name, description, status, archived, o
       { name, description, status, archived, owner, deadline }
     ])
     .select()
-
-  if (error != null) {
-    return error
-  } else {
-    return 'success'
-  }
+  return 'success'
 }
 
 export const updateClientProject = async (id, name, description, status, archived, owner, deadline) => {
@@ -176,7 +171,7 @@ export const selectNotArchivedServerProjects = async (userId, cookies) => {
 }
 
 export const selectNotArchivedClientProjects = async (userId) => {
-  const supabase = createServerComponentClient({ })
+  const supabase = createServerComponentClient({})
 
   const { data: projects, error } = await supabase
     .from('projects')
@@ -189,5 +184,20 @@ export const selectNotArchivedClientProjects = async (userId) => {
     return error
   } else {
     return projects
+  }
+}
+
+export const getServerProjectMembersById = async ({ cookies, id }) => {
+  const supabase = createServerComponentClient({ cookies })
+
+  const { data: members, error } = await supabase
+    .from('project_user')
+    .select('user:users(*)')
+    .eq('project_id', id)
+
+  if (error != null) {
+    return error
+  } else {
+    return members
   }
 }
