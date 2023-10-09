@@ -1,4 +1,6 @@
 {
+    "cancel": "Cancel",
+
     "navigation": {
         "in-and-outs": "Accesos",
         "overview": "Resumen",
@@ -36,8 +38,15 @@
         "time": "Tiempo dedicado",
         "add": "Añadir tarea",
         "edit": "Editar tarea",
-        "delete": "Borrar tarea",
+        "delete": "Si, borrar tarea",
         "search": "Buscar...",
+        "filterTasks": "Filtrar tareas...",
+        "priority": "Prioridad",
+        "clear": "Eliminar filtros",
+        "noResults": "No hay resultados",
+        "rowsPage": "Líneas por página",
+        "page": "Página",
+        "of": "de",
         "slogan": "Realiza los cambios en la tarea. Pulsa guardar para finalizar.",
         "save": "Guardar cambios",
         "cancel": "Descartar cambios",
