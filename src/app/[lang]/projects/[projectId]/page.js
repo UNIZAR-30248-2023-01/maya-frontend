@@ -4,8 +4,6 @@ import { getDictionary } from '@/lib/dictionaries'
 import { cookies } from 'next/headers'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
-  Card,
-  CardContent,
   CardHeader
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -19,7 +17,7 @@ import { CalendarDemo } from '@/components/project/ProjectCalendar'
 
 // to test http://localhost:3000/es/projects/c47af38c-819e-4d66-aa8e-93919a2077fd
 
-export default async function Page({ params: { lang, projectId } }) {
+export default async function Page ({ params: { lang, projectId } }) {
   const dict = await getDictionary(lang)
   const project = await getServerProjectById({ cookies, id: projectId })
   const members = await getServerProjectMembersById({ cookies, id: projectId })

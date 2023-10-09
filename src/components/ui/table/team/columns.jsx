@@ -3,7 +3,6 @@
 import { DataTableColumnHeader } from './data-table-column-header'
 import {
   Avatar,
-  AvatarFallback,
   AvatarImage
 } from '@/components/ui/avatar'
 

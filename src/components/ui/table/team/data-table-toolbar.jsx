@@ -5,9 +5,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import { usePathname } from 'next/navigation'
-
-export function DataTableToolbar({
+export function DataTableToolbar ({
   table,
   dict
 }) {

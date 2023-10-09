@@ -22,11 +22,10 @@ import {
   TableRow
 } from '@/components/ui/table'
 
-
 import { DataTablePagination } from '@/components/ui/table/team/data-table-pagination'
 import { DataTableToolbar } from '@/components/ui/table/team/data-table-toolbar'
 
-export function DataTable({
+export function DataTable ({
   data,
   columns,
   dict
@@ -89,7 +88,7 @@ export function DataTable({
           <TableBody>
             {table.getRowModel().rows?.length
               ? (
-                table.getRowModel().rows.map((row) => (
+                  table.getRowModel().rows.map((row) => (
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
@@ -103,8 +102,8 @@ export function DataTable({
                       </TableCell>
                     ))}
                   </TableRow>
-                ))
-              )
+                  ))
+                )
               : (
                 <TableRow>
                   <TableCell
@@ -114,7 +113,7 @@ export function DataTable({
                     {dict.tasks.noResults}
                   </TableCell>
                 </TableRow>
-              )}
+                )}
           </TableBody>
         </Table>
       </div>

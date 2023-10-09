@@ -1,4 +1,4 @@
-/*import {
+/* import {
   Table,
   TableBody,
   TableCaption,
@@ -10,7 +10,7 @@
 import {
   Avatar,
   AvatarImage
-} from '@/components/ui/avatar'*/
+} from '@/components/ui/avatar' */
 import {
   Card,
   CardContent
@@ -18,8 +18,7 @@ import {
 import { DataTable } from '@/components/ui/table/team/data-table'
 import { spanishColumns, englishColumns } from '@/components/ui/table/team/columns'
 
-
-export async function ProjectTeam({ lang, user, dict }) {
+export async function ProjectTeam ({ lang, user, dict }) {
   const languageColumns = lang === 'es' ? spanishColumns : englishColumns
   return (
     /* <Table>
@@ -45,7 +44,7 @@ export async function ProjectTeam({ lang, user, dict }) {
            </TableRow>
          ))}
        </TableBody>
-     </Table>*/
+     </Table> */
     <Card>
       <CardContent className='pt-6'>
         <DataTable data={user} columns={languageColumns} dict={dict} />

@@ -84,7 +84,7 @@ export const insertServerProject = async (name, description, status, archived, o
       { name, description, status, archived, owner, deadline }
     ])
     .select()
-  return 'success'
+  return error ?? 'success'
 }
 
 export const updateClientProject = async (id, name, description, status, archived, owner, deadline) => {
