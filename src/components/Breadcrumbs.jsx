@@ -7,14 +7,9 @@ import { usePathname } from 'next/navigation'
 export function Breadcrumbs ({ dict }) {
   let pages = usePathname()
   pages = pages.split('/').slice(2)
-
-  if (pages[0] === 'projects') {
-    pages = [pages[0]]
-  }
-
   return (
     <nav className="flex" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
+      <ol className="flex items-center space-x-4">
         <li>
           <div>
             <Link href="/" className="text-gray-400 hover:text-gray-500">
@@ -34,13 +29,13 @@ export function Breadcrumbs ({ dict }) {
               >
                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
               </svg>
-              <Link
+              {/* <Link
                 href={`/${pages.slice(0, pages.indexOf(page) + 1).join('/')}`}
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
                 {dict[page] || pages[id]}
-              </Link>
+        </Link> */}
             </div>
           </li>
         ))}

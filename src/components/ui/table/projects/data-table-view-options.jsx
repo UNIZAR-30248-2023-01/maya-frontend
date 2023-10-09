@@ -12,8 +12,26 @@ import {
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu'
 
+const dict = {
+  en: {
+    View: 'View',
+    toggleColumns: 'Toggle columns',
+    name: 'name',
+    description: 'description',
+    created_at: 'created'
+  },
+  es: {
+    View: 'Vista',
+    toggleColumns: 'alternar columnas',
+    name: 'nombre',
+    description: 'descripción',
+    created_at: 'fecha de creación'
+  }
+}
+
 export function DataTableViewOptions ({
-  table
+  table,
+  lang
 }) {
   return (
     <DropdownMenu>
@@ -21,14 +39,14 @@ export function DataTableViewOptions ({
         <Button
           variant="outline"
           size="sm"
-          className="ml-auto hidden h-8 lg:flex"
+          className="ml-auto hidden h-8 lg:flex capitalize"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          {dict[lang].View}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+      <DropdownMenuContent align="end" className="min-w-[150px] max-w-fit">
+        <DropdownMenuLabel className="capitalize">{dict[lang].toggleColumns}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
@@ -44,7 +62,7 @@ export function DataTableViewOptions ({
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {dict[lang][column.id] ?? column.id}
               </DropdownMenuCheckboxItem>
             )
           })}
