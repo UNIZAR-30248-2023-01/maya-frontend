@@ -11,8 +11,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import TasksPage from './project-tasks'
 import PeoplePage from './project-people'
 import TeamPage from './project-team'
-import SettingsPage from './project-settings'
 import MilestonesPage from './project-milestones'
+import SettingsPage from './project-settings'
 
 export const metadata = {
   title: 'Tasks',

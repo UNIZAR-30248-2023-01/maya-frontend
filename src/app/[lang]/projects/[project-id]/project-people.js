@@ -1,7 +1,7 @@
 'use client'
 
-import { DataTable } from '@/components/tasks/data-table'
-import { columns } from '@/components/tasks/columns'
+import { DataTable } from '@/components/people/data-table'
+import { columns } from '@/components/people/columns'
 import { mockProjectData } from '@/lib/constants'
 
 export const metadata = {
