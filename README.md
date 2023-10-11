@@ -26,6 +26,12 @@
 - `public`: Static content.
 - `styles`: Contains the styles of the application. Override or new styles in `tailwind.config.js`.
 
+## Naming convention
+
+- camelCase for variable names and object properties (e.g: SupportedLanguages)
+- PascalCase for type names and classes (e.g: ProjectsPage)
+- kebab-case for module names (e.g: language-context)
+
 ## Getting Started
 
 ### Install dependencies

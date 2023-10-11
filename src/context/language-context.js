@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useContext, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { supportedLanguages } from '@/lib/constants'
