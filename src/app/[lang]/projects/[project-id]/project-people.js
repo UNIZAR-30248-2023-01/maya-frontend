@@ -9,6 +9,6 @@ export const metadata = {
   description: 'Here is a list of your tasks'
 }
 
-export default function TeamPage () {
+export default function PeoplePage () {
   return <DataTable data={mockProjectData} columns={columns}/>
 }
