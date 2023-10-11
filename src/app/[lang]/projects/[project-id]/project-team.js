@@ -2,7 +2,7 @@
 
 import { DataTable } from '@/components/teams/data-table'
 import { columns } from '@/components/teams/columns'
-import { mockProjectData } from '@/lib/constants'
+import { mockData } from '@/lib/constants'
 
 export const metadata = {
   title: 'Tasks',
@@ -10,5 +10,5 @@ export const metadata = {
 }
 
 export default function TeamPage () {
-  return <DataTable data={mockProjectData} columns={columns}/>
+  return <DataTable data={mockData} columns={columns}/>
 }
