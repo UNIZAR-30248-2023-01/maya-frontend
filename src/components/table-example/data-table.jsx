@@ -8,12 +8,12 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { DataTableToolbar } from '@/components/projects/data-table-toolbar'
+import { DataTableToolbar } from '@/components/table-example/data-table-toolbar'
 
 import { Table } from '@/components/ui/table'
-import { DataTablePagination } from '@/components/projects/data-table-pagination'
-import { DataTableHeader } from '@/components/projects/data-table-header'
-import { DataTableBody } from '@/components/projects/data-table-body'
+import { DataTablePagination } from '@/components/table-example/data-table-pagination'
+import { DataTableHeader } from '@/components/table-example/data-table-header'
+import { DataTableBody } from '@/components/table-example/data-table-body'
 // columns.length
 
 export function DataTable ({ data, columns }) {
