@@ -40,6 +40,29 @@ export const teams = [
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
 ]
 
+export const profileNavItems = [
+  {
+    title: 'profile',
+    href: '/settings'
+  },
+  {
+    title: 'account',
+    href: '/settings/account'
+  },
+  {
+    title: 'appearance',
+    href: '/settings/appearance'
+  },
+  {
+    title: 'notifications',
+    href: '/settings/notifications'
+  },
+  {
+    title: 'display',
+    href: '/settings/display'
+  }
+]
+
 export const labels = [
   {
     value: 'bug',

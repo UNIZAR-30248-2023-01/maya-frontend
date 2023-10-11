@@ -6,7 +6,7 @@ import { mockData } from '@/lib/constants'
 
 export const metadata = {
   title: 'Tasks',
-  description: 'Here is a list of your tasks'
+  description: 'Here is a list of the tasks that you have in your project.'
 }
 
 export default function TasksPage () {

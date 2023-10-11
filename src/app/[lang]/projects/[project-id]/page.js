@@ -15,17 +15,8 @@ import MilestonesPage from './project-milestones'
 import SettingsPage from './project-settings'
 
 export const metadata = {
-  title: 'Tasks',
-  description: 'Here is a list of your tasks'
-}
-
-export function Example () {
-  return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
-    </>
-  )
+  title: 'Project',
+  description: 'Here you can manage your project.'
 }
 
 export default async function ProjectPage () {

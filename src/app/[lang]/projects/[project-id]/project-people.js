@@ -5,8 +5,8 @@ import { columns } from '@/components/people/columns'
 import { mockData } from '@/lib/constants'
 
 export const metadata = {
-  title: 'Tasks',
-  description: 'Here is a list of your tasks'
+  title: 'People',
+  description: 'Here is a list of the people in your project.'
 }
 
 export default function PeoplePage () {

@@ -1,8 +1,8 @@
 'use client'
 
 export const metadata = {
-  title: 'Tasks',
-  description: 'Here is a list of your tasks'
+  title: 'Milestones',
+  description: 'Here you will be able to access and manage your milestones.'
 }
 
 export default function MilestonesPage () {
