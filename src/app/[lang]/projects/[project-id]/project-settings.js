@@ -1,9 +1,8 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export const metadata = {
   title: 'Project Settings',
@@ -12,58 +11,58 @@ export const metadata = {
 
 const projectNavItems = [
   {
-    title: 'project settings',
-    href: '/settings'
+    title: 'project settings'
   },
   {
-    title: 'manage access',
-    href: '/settings/members'
+    title: 'manage access'
   }
 ]
 
 export function SidebarNav ({ className, items, ...props }) {
-  let pathname = usePathname()
-  pathname = '/' + pathname.split('/').slice(2).join('/')
-
   return (
-    <nav
+    <TabsList
       className={cn(
-        'flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1',
+        'flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1 bg-transparent',
         className
       )}
       {...props}
     >
       {items.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
+        <TabsTrigger
+          key={item.title}
+          value={item.title}
           className={cn(
             buttonVariants({ variant: 'ghost' }),
-            pathname === item.href
-              ? 'bg-muted hover:bg-muted'
-              : 'hover:bg-transparent hover:underline',
-            'justify-start'
+            'justify-start hover:bg-transparent hover:underline'
           )}
         >
           {item.title}
-        </Link>
+        </TabsTrigger>
       ))}
-    </nav>
+    </TabsList>
   )
 }
 
 export default function SettingsPage () {
   return (
     <div className="hidden space-y-6 p-10 pb-16 md:block">
-      <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+      <Tabs defaultValue="project settings" className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0" orientation='vertical'>
         <aside className="-mx-4 lg:w-1/5">
-        <SidebarNav items={projectNavItems} />
+          <SidebarNav items={projectNavItems} />
         </aside>
         <div className="flex-1 lg:max-w-2xl">
-          <h1 className="text-2xl font-bold">{metadata.title}</h1>
-          <p className="text-gray-500">{metadata.description}</p>
+          <TabsContent value="project settings">
+            <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'>
+              <h1 className='text-2xl font-bold'>Project Settings</h1>
+            </div>
+          </TabsContent>
+          <TabsContent value="manage access">
+            <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'>
+              <h1 className='text-2xl font-bold'>manage access</h1>
+            </div>
+          </TabsContent>
         </div>
-      </div>
+      </Tabs>
     </div>
   )
 }
