@@ -19,7 +19,7 @@ export const metadata = {
   description: 'Here you can manage your project.'
 }
 
-export default async function ProjectPage () {
+export default function ProjectPage () {
   return (
     <>
       <Tabs defaultValue="tasks" className="w-full">

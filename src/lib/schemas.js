@@ -5,7 +5,7 @@ import { z } from 'zod'
 export const projectSchema = z.object({
   id: z.string(),
   title: z.string(),
+  description: z.string(),
   status: z.string(),
-  label: z.string(),
-  priority: z.string()
+  label: z.string()
 })

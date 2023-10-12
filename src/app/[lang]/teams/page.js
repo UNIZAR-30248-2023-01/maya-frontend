@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Here is a list of your teams'
 }
 
-export default async function TeamPage () {
+export default function TeamPage () {
   return (
     <>
       <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>

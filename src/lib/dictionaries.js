@@ -62,7 +62,10 @@ export const projects = {
     'new-table-name': 'Nombre',
     'new-table-desc': 'Descripción',
     'new-table-desc-placeholder': 'Una breve descripción sobre tu proyecto.',
-    'new-table-create': 'Crear'
+    'new-table-create': 'Crear',
+    'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
+    'toast-success': 'Tu proyecto se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'title-column': 'Title',
@@ -79,7 +82,10 @@ export const projects = {
     'new-table-name': 'Name',
     'new-table-desc': 'Short description',
     'new-table-desc-placeholder': 'A short description about this project.',
-    'new-table-create': 'Create'
+    'new-table-create': 'Create',
+    'toast-loading': 'We are creating your project. Please wait a moment.',
+    'toast-success': 'Your project has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
 

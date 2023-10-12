@@ -15,8 +15,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useLang } from '@/context/language-context'
-// import { supabaseClient } from '@/lib/supabase'
 import { toast } from 'sonner'
+import { supabase } from '@/lib/utils'
 
 export function DataTableCreateAction () {
   const { dictionary } = useLang()
@@ -24,19 +24,25 @@ export function DataTableCreateAction () {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // const { name, description } = event.target
 
-    // if (!name.value || !description) return
+    const { name, description } = event.target
 
-    // const { error } = await supabaseClient.from('projects').insert([{
-    //   name: name.value,
-    //   description: description.value
-    // }])
+    const createProject = (name, description) => {
+      return new Promise((resolve, reject) => {
+        supabase.from('projects').insert([{ name, description }])
+          .then(() => resolve())
+          .catch((error) => reject(error))
+      })
+    }
 
-    // if (error) toast.message('Error', { message: JSON.stringify(error) })
-    // else toast.success('Success', { message: 'Project created successfully' })
-    toast.message('Success', { description: 'Project created successfully' })
-    setOpen(false)
+    toast.promise(createProject(name.value, description.value), {
+      loading: dictionary.projects['toast-loading'],
+      success: () => {
+        setOpen(false) // Cerrar el diálogo después de un éxito
+        return dictionary.projects['toast-success']
+      },
+      error: () => dictionary.projects['toast-error']
+    })
   }
 
   return (

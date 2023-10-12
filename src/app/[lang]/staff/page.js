@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Here is a list of your staff'
 }
 
-export default async function StaffPage () {
+export default function StaffPage () {
   return (
     <>
       <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>

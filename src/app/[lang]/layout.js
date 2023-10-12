@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { Layout } from '@/components/layout'
 import { LanguageProvider } from '@/context/language-context'
+import { SWRProvider } from '@/context/swr-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +19,11 @@ export default function RootLayout ({ children }) {
       <body className={`${inter.className} max-w-screen overflow-x-hidden`}>
         <Toaster />
         <LanguageProvider>
-          <Layout>
-            {children}
-          </Layout>
+          <SWRProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </SWRProvider>
         </LanguageProvider>
       </body>
     </html>
