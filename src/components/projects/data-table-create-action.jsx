@@ -29,7 +29,10 @@ export function DataTableCreateAction () {
 
     const createProject = (name, description) => {
       return new Promise((resolve, reject) => {
-        supabase.from('projects').insert([{ name, description }])
+        supabase.from('projects').insert([{
+          name,
+          description
+        }])
           .then(() => resolve())
           .catch((error) => reject(error))
       })

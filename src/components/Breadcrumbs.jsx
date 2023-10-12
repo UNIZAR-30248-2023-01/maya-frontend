@@ -38,7 +38,7 @@ export function Breadcrumbs () {
                 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
-                {dictionary.navigation[page] ?? page}
+                {dictionary.navigation[page] ?? page.toLowerCase().replace(/-/g, ' ')}
               </Link>
             </div>
           </li>

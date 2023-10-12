@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { labels, statuses } from '@/lib/constants'
 import { DataTableColumnHeader } from '@/components/projects/data-table-column-header'
 import { LuTable2, LuArchive } from 'react-icons/lu'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export const columns = [
   {
@@ -14,6 +15,18 @@ export const columns = [
     cell: ({ row, dictionary }) => {
       const label = labels.find((label) => label.value === row.original.label)
       const status = statuses.find((status) => status.value === row.getValue('status'))
+
+      if (!status && !label) {
+        return (
+          <div className="flex items-start space-x-2">
+            <Skeleton className='w-5 h-5'/>
+            <div className='max-w-[150px] flex flex-col gap-y-1'>
+              <Skeleton className='w-44 h-4'/>
+              <Skeleton className='w-24 h-4'/>
+            </div>
+          </div>
+        )
+      }
 
       return (
         <div className="flex items-start space-x-2">
@@ -35,6 +48,14 @@ export const columns = [
       <DataTableColumnHeader column={column} title={dictionary['description-column']} />
     ),
     cell: ({ row }) => {
+      if (!row.getValue('description')) {
+        return (
+          <div className="flex space-x-2">
+            <Skeleton className='w-72 h-4'/>
+          </div>
+        )
+      }
+
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">

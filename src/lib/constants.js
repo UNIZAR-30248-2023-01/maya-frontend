@@ -77,6 +77,52 @@ export const statuses = [
   }
 ]
 
+export const loadingProjects = [
+  {
+    id: 0,
+    title: null,
+    description: null,
+    status: null,
+    label: null,
+    createdAt: null,
+    updatedAt: null
+  },
+  {
+    id: 1,
+    title: null,
+    description: null,
+    status: null,
+    label: null,
+    createdAt: null,
+    updatedAt: null
+  },
+  {
+    id: 2,
+    title: null,
+    description: null,
+    status: null,
+    label: null,
+    createdAt: null,
+    updatedAt: null
+  }, {
+    id: 3,
+    title: null,
+    description: null,
+    status: null,
+    label: null,
+    createdAt: null,
+    updatedAt: null
+  }, {
+    id: 4,
+    title: null,
+    description: null,
+    status: null,
+    label: null,
+    createdAt: null,
+    updatedAt: null
+  }
+]
+
 export const mockData = [
   {
     id: 'm5gr84i9',
