@@ -18,6 +18,7 @@ export function DataTableToolbar ({ table }) {
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
+          id="filter-project"
           placeholder={`${dictionary.projects.filter}...`}
           value={(table.getColumn('title')?.getFilterValue()) ?? ''}
           onChange={(event) =>

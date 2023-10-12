@@ -30,7 +30,7 @@ export function DataTableCreateAction () {
     const createProject = (name, description) => {
       return new Promise((resolve, reject) => {
         supabase.from('projects').insert([{
-          name,
+          title: name,
           description
         }])
           .then(() => resolve())
@@ -49,38 +49,38 @@ export function DataTableCreateAction () {
   }
 
   return (
-      <Dialog open={open}>
-        <DialogTrigger asChild>
-          <Button className="capitalize">{dictionary.projects['new-project']}</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <DialogHeader>
-              <DialogTitle className="capitalize">{dictionary.projects['new-table']}</DialogTitle>
-              <DialogDescription>
-                {dictionary.projects['new-table-description']}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid w-full max-w-sm items-center gap-1.5">
-                <Label htmlFor="name" className="capitalize">{dictionary.projects['new-table-name']}</Label>
-                <Input type="name" id="name" required={true} />
-              </div>
-              <div className="grid w-full gap-1.5">
-                <Label htmlFor="description">{dictionary.projects['new-table-desc']}</Label>
-                <Textarea placeholder={dictionary.projects['new-table-desc-placeholder']} id="description" maxLength="150" required={true} />
-              </div>
+    <Dialog open={open}>
+      <DialogTrigger asChild>
+        <Button id='new-project' className="capitalize">{dictionary.projects['new-project']}</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <DialogHeader>
+            <DialogTitle className="capitalize">{dictionary.projects['new-table']}</DialogTitle>
+            <DialogDescription>
+              {dictionary.projects['new-table-description']}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="name" className="capitalize">{dictionary.projects['new-table-name']}</Label>
+              <Input type="name" id="name" required={true} />
             </div>
-            <DialogFooter>
-              <Button
-                type="submit"
-                className="w-full"
-              >
-                {dictionary.projects['new-table-create']}
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+            <div className="grid w-full gap-1.5">
+              <Label htmlFor="description">{dictionary.projects['new-table-desc']}</Label>
+              <Textarea placeholder={dictionary.projects['new-table-desc-placeholder']} id="description" maxLength="150" required={true} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              type="submit"
+              className="w-full"
+            >
+              {dictionary.projects['new-table-create']}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }
