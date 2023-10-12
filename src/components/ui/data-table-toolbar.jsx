@@ -4,10 +4,10 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { DataTableViewOptions } from '@/components/table-example/data-table-view-options'
+import { DataTableViewOptions } from '@/components/ui/data-table-view-options'
 
 import { priorities, statuses } from '@/lib/constants'
-import { DataTableFacetedFilter } from '@/components/table-example/data-table-faceted-filter'
+import { DataTableFacetedFilter } from '@/components/ui/data-table-faceted-filter'
 
 export function DataTableToolbar ({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0

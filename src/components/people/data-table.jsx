@@ -11,7 +11,7 @@ import {
 import { DataTableToolbar } from '@/components/people/data-table-toolbar'
 
 import { Table } from '@/components/ui/table'
-import { DataTablePagination } from '@/components/people/data-table-pagination'
+import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
 

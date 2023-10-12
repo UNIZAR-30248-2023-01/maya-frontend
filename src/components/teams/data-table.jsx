@@ -11,7 +11,7 @@ import {
 import { DataTableToolbar } from '@/components/teams/data-table-toolbar'
 
 import { Table } from '@/components/ui/table'
-import { DataTablePagination } from '@/components/teams/data-table-pagination'
+import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/teams/data-table-header'
 import { DataTableBody } from '@/components/teams/data-table-body'
 

@@ -5,22 +5,26 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { useLang } from '@/context/language-context'
 import { flexRender } from '@tanstack/react-table'
 
 export function DataTableHeader ({ table }) {
+  const { dictionary } = useLang()
+
   return (
     <TableHeader>
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
+            // console.log(header.column.columnDef.header(user))
             return (
               <TableHead key={header.id}>
                 {header.isPlaceholder
                   ? null
-                  : flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+                  : flexRender(header.column.columnDef.header, {
+                    ...header.getContext(),
+                    dictionary: dictionary.projects
+                  })}
               </TableHead>
             )
           })}

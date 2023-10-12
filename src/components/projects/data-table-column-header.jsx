@@ -1,8 +1,7 @@
 import {
   ArrowDownIcon,
   ArrowUpIcon,
-  CaretSortIcon,
-  EyeNoneIcon
+  CaretSortIcon
 } from '@radix-ui/react-icons'
 
 import { cn } from '@/lib/utils'
@@ -11,7 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
@@ -31,16 +29,10 @@ export function DataTableColumnHeader ({ column, title, className }) {
             >
               <span>{title}</span>
               {column.getIsSorted() === 'desc'
-                ? (
-                <ArrowDownIcon className="ml-2 h-4 w-4" />
-                  )
+                ? (<ArrowDownIcon className="ml-2 h-4 w-4" />)
                 : column.getIsSorted() === 'asc'
-                  ? (
-                <ArrowUpIcon className="ml-2 h-4 w-4" />
-                    )
-                  : (
-                <CaretSortIcon className="ml-2 h-4 w-4" />
-                    )}
+                  ? (<ArrowUpIcon className="ml-2 h-4 w-4" />)
+                  : (<CaretSortIcon className="ml-2 h-4 w-4" />)}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
@@ -51,11 +43,6 @@ export function DataTableColumnHeader ({ column, title, className }) {
             <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
               <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Desc
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-              <EyeNoneIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-              Hide
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

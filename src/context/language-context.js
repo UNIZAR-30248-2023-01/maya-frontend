@@ -3,7 +3,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { supportedLanguages } from '@/lib/constants'
-import { navigation } from '@/lib/dictionaries'
+import * as dictionaries from '@/lib/dictionaries'
 
 const LanguageContext = React.createContext()
 
@@ -16,7 +16,10 @@ export function LanguageProvider ({ children }) {
 
   const [lang, setLang] = useState('en')
   const [dictionary, translate] = useState({
-    navigation: { ...navigation[lang] }
+    // add more dictionaries here and in the useEffect below
+    navigation: { ...dictionaries.navigation[lang] },
+    table: { ...dictionaries.table[lang] },
+    projects: { ...dictionaries.projects[lang] }
   })
 
   useEffect(() => {
@@ -26,7 +29,10 @@ export function LanguageProvider ({ children }) {
 
     // dictionary update with lang
     translate({
-      navigation: { ...navigation[lang] }
+      // add more dictionaries here and in the state above
+      navigation: { ...dictionaries.navigation[lang] },
+      table: { ...dictionaries.table[lang] },
+      projects: { ...dictionaries.projects[lang] }
     })
   }, [lang, path])
 

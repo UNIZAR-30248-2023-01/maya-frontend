@@ -20,6 +20,7 @@ export function DataTableBody ({ table }) {
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
             onClick={() => goTo(row)}
+            className="cursor-pointer"
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>
