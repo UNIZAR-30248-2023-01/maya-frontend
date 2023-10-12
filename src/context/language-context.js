@@ -11,16 +11,19 @@ export function useLang () {
   return useContext(LanguageContext)
 }
 
+const translate = (dictionary, lang) => {
+  const translated = {}
+  for (const key in dictionary) {
+    translated[key] = dictionary[key][lang]
+  }
+  return translated
+}
+
 export function LanguageProvider ({ children }) {
   const path = usePathname()
 
   const [lang, setLang] = useState('en')
-  const [dictionary, translate] = useState({
-    // add more dictionaries here and in the useEffect below
-    navigation: { ...dictionaries.navigation[lang] },
-    table: { ...dictionaries.table[lang] },
-    projects: { ...dictionaries.projects[lang] }
-  })
+  const [dictionary, updateDictionary] = useState(translate(dictionaries, lang))
 
   useEffect(() => {
     // lang update with path prefix (if supported)
@@ -28,12 +31,7 @@ export function LanguageProvider ({ children }) {
     setLang(supportedLanguages.includes(langPrefix) ? langPrefix : 'en')
 
     // dictionary update with lang
-    translate({
-      // add more dictionaries here and in the state above
-      navigation: { ...dictionaries.navigation[lang] },
-      table: { ...dictionaries.table[lang] },
-      projects: { ...dictionaries.projects[lang] }
-    })
+    updateDictionary(translate(dictionaries, lang))
   }, [lang, path])
 
   return (

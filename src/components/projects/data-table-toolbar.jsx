@@ -18,7 +18,7 @@ export function DataTableToolbar ({ table }) {
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter projects..."
+          placeholder={`${dictionary.projects.filter}...`}
           value={(table.getColumn('title')?.getFilterValue()) ?? ''}
           onChange={(event) =>
             table.getColumn('title')?.setFilterValue(event.target.value)
@@ -29,7 +29,7 @@ export function DataTableToolbar ({ table }) {
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title={dictionary.projects.status}
-            options={statuses}
+            options={statuses.map(status => ({ ...status, label: dictionary.projects[status.value] }))}
           />
         )}
         {isFiltered && (

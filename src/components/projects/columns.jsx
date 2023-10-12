@@ -11,7 +11,7 @@ export const columns = [
     header: ({ column, dictionary }) => {
       return <DataTableColumnHeader column={column} title={dictionary['title-column']} />
     },
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const label = labels.find((label) => label.value === row.original.label)
       const status = statuses.find((status) => status.value === row.getValue('status'))
 
@@ -23,7 +23,7 @@ export const columns = [
             <span className="max-w-full truncate font-medium">
               {row.getValue('title')}
             </span>
-            {label && <Badge variant="outline" className='max-w-fit'>{label.label}</Badge>}
+            {label && <Badge variant="outline" className='max-w-fit'>{dictionary[label.value]}</Badge>}
           </div>
         </div>
       )

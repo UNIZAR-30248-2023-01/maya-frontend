@@ -50,12 +50,36 @@ export const projects = {
   es: {
     'title-column': 'Título',
     'description-column': 'Descripción',
-    status: 'Estado'
+    status: 'Estado',
+    open: 'Abierto',
+    closed: 'Cerrado',
+    public: 'público',
+    private: 'privado',
+    filter: 'Filtrar proyectos',
+    'new-project': 'nuevo proyecto',
+    'new-table': 'nueva tabla',
+    'new-table-description': 'Los proyectos son una herramienta personalizable y flexible para planificar y realizar un seguimiento de su trabajo.',
+    'new-table-name': 'Nombre',
+    'new-table-desc': 'Descripción',
+    'new-table-desc-placeholder': 'Una breve descripción sobre tu proyecto.',
+    'new-table-create': 'Crear'
   },
   en: {
     'title-column': 'Title',
     'description-column': 'Description',
-    status: 'Status'
+    status: 'Status',
+    open: 'Open',
+    closed: 'Close',
+    public: 'public',
+    private: 'private',
+    filter: 'Filter projects',
+    'new-project': 'new project',
+    'new-table': 'new table',
+    'new-table-description': 'Projects are a customizable, flexible tool for planning and tracking your work.',
+    'new-table-name': 'Name',
+    'new-table-desc': 'Short description',
+    'new-table-desc-placeholder': 'A short description about this project.',
+    'new-table-create': 'Create'
   }
 }
 

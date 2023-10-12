@@ -7,8 +7,10 @@ import {
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
 import { useRouter } from 'next/navigation'
+import { useLang } from '@/context/language-context'
 
 export function DataTableBody ({ table }) {
+  const { dictionary } = useLang()
   const router = useRouter()
   const goTo = (row) => router.push(`/projects/${String(row.original.id).toLowerCase().replace(/ /g, '-')}`)
 
@@ -26,7 +28,10 @@ export function DataTableBody ({ table }) {
               <TableCell key={cell.id}>
                 {flexRender(
                   cell.column.columnDef.cell,
-                  cell.getContext()
+                  {
+                    ...cell.getContext(),
+                    dictionary: dictionary.projects
+                  }
                 )}
               </TableCell>
             ))}
