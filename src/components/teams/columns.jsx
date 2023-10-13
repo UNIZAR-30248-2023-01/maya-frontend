@@ -11,13 +11,11 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['team-column']} />
     },
     cell: ({ row, dictionary }) => {
-      const { name } = row.original
-
-      if (!name) return <Skeleton className='w-44 h-4'/>
+      if (!row.getValue('name')) return <Skeleton className='w-44 h-4'/>
 
       return (
         <div className="max-w-[150px] truncate font-medium capitalize">
-          {name}
+          {row.getValue('name')}
         </div>
       )
     },

@@ -11,7 +11,7 @@ export const metadata = {
 }
 
 export default function TeamPage () {
-  const { data: teams } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+  const { data: teams } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
 
   return <DataTable data={teams || loadingTeam} columns={columns}/>
 }

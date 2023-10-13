@@ -15,7 +15,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/tasks/data-table-header'
 import { DataTableBody } from '@/components/tasks/data-table-body'
 
-export function DataTable ({ data, columns }) {
+export function DataTable ({ data, columns, people }) {
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
@@ -41,19 +41,15 @@ export function DataTable ({ data, columns }) {
   })
 
   return (
-      <div className="w-full">
-        <div className="flex items-center py-4">
-          <DataTableToolbar table={table}/>
-        </div>
-        <div className="rounded-md border">
-          <Table>
-            <DataTableHeader table={table}/>
-            <DataTableBody table={table}/>
-          </Table>
-        </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
-          <DataTablePagination table={table}/>
-        </div>
+    <div className="space-y-4">
+      <DataTableToolbar table={table} people={people} />
+      <div className="rounded-md border">
+        <Table>
+          <DataTableHeader table={table}/>
+          <DataTableBody table={table}/>
+        </Table>
       </div>
+      <DataTablePagination table={table} />
+    </div>
   )
 }

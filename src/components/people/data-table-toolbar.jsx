@@ -4,6 +4,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLang } from '@/context/language-context'
+import { DataTableFacetedFilter } from '@/components/people/data-table-faceted-filter'
 
 export function DataTableToolbar ({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0
@@ -21,6 +22,13 @@ export function DataTableToolbar ({ table }) {
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        {table.getColumn('role') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('role')}
+            title={dictionary.people.role}
+            options={[]}
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"

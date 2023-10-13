@@ -1,15 +1,17 @@
 'use client'
 
+import { DataTable } from '@/components/teams/data-table'
+import { columns } from '@/components/teams/columns'
+import { loadingTeam } from '@/lib/constants'
+import useSWR from 'swr'
+
 export const metadata = {
   title: 'Teams',
   description: 'Here is a list of your teams'
 }
 
-export default function TeamPage () {
-  return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
-    </>
-  )
+export default function TeamsPage () {
+  const { data: teams } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
+
+  return <DataTable data={teams || loadingTeam} columns={columns}/>
 }

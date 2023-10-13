@@ -7,7 +7,9 @@ import {
   LuCalendar,
   LuTicket,
   LuTable2,
-  LuArchive
+  LuArchive,
+  LuUnlock,
+  LuLock
 } from 'react-icons/lu'
 
 export const supportedLanguages = [
@@ -54,33 +56,51 @@ export const profileNavItems = [
   }
 ]
 
-export const labels = [
+export const visibility = [
   {
     value: 'public',
-    label: 'Public'
+    icon: LuUnlock
   },
   {
     value: 'private',
-    label: 'Private'
+    icon: LuLock
   }
 ]
 
-export const statuses = [
+export const projectStatuses = [
   {
     value: 'open',
-    label: 'Open',
     icon: LuTable2
   }, {
     value: 'closed',
-    label: 'Closed',
     icon: LuArchive
+  }
+]
+
+export const tasksStatuses = [
+  {
+    value: 'new',
+    style: 'border-blue-500 text-blue-500 bg-blue-50',
+    icon: <>🆕</>
+  }, {
+    value: 'block',
+    style: 'border-red-500 text-red-500 bg-red-50',
+    icon: <>⛔️</>
+  }, {
+    value: 'in progress',
+    style: 'border-yellow-500 text-yellow-500 bg-yellow-50',
+    icon: <>🏗</>
+  }, {
+    value: 'done',
+    style: 'border-green-500 text-green-500 bg-green-50',
+    icon: <>✅</>
   }
 ]
 
 export const loadingProjects = [
   {
-    id: 0,
-    title: null,
+    id: null,
+    name: null,
     description: null,
     status: null,
     label: null,
@@ -88,8 +108,8 @@ export const loadingProjects = [
     updatedAt: null
   },
   {
-    id: 1,
-    title: null,
+    id: null,
+    name: null,
     description: null,
     status: null,
     label: null,
@@ -97,24 +117,24 @@ export const loadingProjects = [
     updatedAt: null
   },
   {
-    id: 2,
-    title: null,
+    id: null,
+    name: null,
     description: null,
     status: null,
     label: null,
     createdAt: null,
     updatedAt: null
   }, {
-    id: 3,
-    title: null,
+    id: null,
+    name: null,
     description: null,
     status: null,
     label: null,
     createdAt: null,
     updatedAt: null
   }, {
-    id: 4,
-    title: null,
+    id: null,
+    name: null,
     description: null,
     status: null,
     label: null,
@@ -125,7 +145,7 @@ export const loadingProjects = [
 
 export const loadingPeople = [
   {
-    id: 0,
+    id: null,
     avatar: null,
     firstname: null,
     lastname: null,
@@ -134,7 +154,7 @@ export const loadingPeople = [
     role: null
   },
   {
-    id: 1,
+    id: null,
     avatar: null,
     firstname: null,
     lastname: null,
@@ -143,7 +163,7 @@ export const loadingPeople = [
     role: null
   },
   {
-    id: 2,
+    id: null,
     avatar: null,
     firstname: null,
     lastname: null,
@@ -151,7 +171,7 @@ export const loadingPeople = [
     email: null,
     role: null
   }, {
-    id: 3,
+    id: null,
     avatar: null,
     firstname: null,
     lastname: null,
@@ -159,7 +179,7 @@ export const loadingPeople = [
     email: null,
     role: null
   }, {
-    id: 4,
+    id: null,
     avatar: null,
     firstname: null,
     lastname: null,
@@ -171,7 +191,7 @@ export const loadingPeople = [
 
 export const loadingTeam = [
   {
-    id: 0,
+    id: null,
     name: null,
     people: [
       null,
@@ -181,7 +201,7 @@ export const loadingTeam = [
     ]
   },
   {
-    id: 1,
+    id: null,
     name: null,
     people: [
       null,
@@ -189,7 +209,7 @@ export const loadingTeam = [
     ]
   },
   {
-    id: 2,
+    id: null,
     name: null,
     people: [
       null,
@@ -197,13 +217,13 @@ export const loadingTeam = [
       null
     ]
   }, {
-    id: 3,
+    id: null,
     name: null,
     people: [
       null
     ]
   }, {
-    id: 4,
+    id: null,
     name: null,
     people: [
       null,
@@ -217,36 +237,113 @@ export const loadingTeam = [
   }
 ]
 
-export const mockData = [
+export const loadingTasks = [
   {
-    id: 'm5gr84i9',
-    description: 316,
-    status: 'success',
-    name: 'ken99@yahoo.com'
+    id: null,
+    title: null,
+    people: [
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }
+    ],
+    label: null,
+    status: null,
+    estimated: null,
+    end_date: null
   },
   {
-    id: '3u1reuv4',
-    description: 242,
-    status: 'success',
-    name: 'Abe45@gmail.com'
+    id: null,
+    title: null,
+    people: [
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      },
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      },
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }
+    ],
+    label: null,
+    status: null,
+    estimated: null,
+    end_date: null
   },
   {
-    id: 'derv1ws0',
-    description: '',
-    status: 'processing',
-    name: 'Monserrat44@gmail.com'
+    id: null,
+    title: null,
+    people: [
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }, {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }
+    ],
+    label: null,
+    status: null,
+    estimated: null,
+    end_date: null
   },
   {
-    id: '5kma53ae',
-    description: 874,
-    status: 'success',
-    name: 'Silas22@gmail.com'
+    id: null,
+    title: null,
+    people: [
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }, {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }, {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }
+    ],
+    label: null,
+    status: null,
+    estimated: null,
+    end_date: null
   },
   {
-    id: 'bhqecj4p',
-    description: 721,
-    status: 'failed',
-    name: 'carmella@hotmail.com'
+    id: null,
+    title: null,
+    people: [
+      {
+        avatar: null,
+        username: null,
+        firstname: null,
+        lastname: null
+      }
+    ],
+    label: null,
+    status: null,
+    estimated: null,
+    end_date: null
   }
 ]
 

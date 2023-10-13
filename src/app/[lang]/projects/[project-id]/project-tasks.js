@@ -2,7 +2,8 @@
 
 import { DataTable } from '@/components/tasks/data-table'
 import { columns } from '@/components/tasks/columns'
-import { mockData } from '@/lib/constants'
+import { loadingTasks } from '@/lib/constants'
+import useSWR from 'swr'
 
 export const metadata = {
   title: 'Tasks',
@@ -10,5 +11,8 @@ export const metadata = {
 }
 
 export default function TasksPage () {
-  return <DataTable data={mockData} columns={columns}/>
+  const { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people(*)`)
+  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?select=*`)
+
+  return <DataTable data={tasks || loadingTasks} columns={columns} people={people || []}/>
 }

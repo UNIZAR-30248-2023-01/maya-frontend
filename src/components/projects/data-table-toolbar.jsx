@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableCreateAction } from '@/components/projects/data-table-create-action'
 
-import { statuses } from '@/lib/constants'
+import { projectStatuses, visibility } from '@/lib/constants'
 import { DataTableFacetedFilter } from '@/components/projects/data-table-faceted-filter'
 import { useLang } from '@/context/language-context'
 
@@ -20,9 +20,9 @@ export function DataTableToolbar ({ table }) {
         <Input
           id="filter-project"
           placeholder={`${dictionary.projects.filter}...`}
-          value={(table.getColumn('title')?.getFilterValue()) ?? ''}
+          value={(table.getColumn('name')?.getFilterValue()) ?? ''}
           onChange={(event) =>
-            table.getColumn('title')?.setFilterValue(event.target.value)
+            table.getColumn('name')?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
@@ -30,7 +30,14 @@ export function DataTableToolbar ({ table }) {
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title={dictionary.projects.status}
-            options={statuses.map(status => ({ ...status, label: dictionary.projects[status.value] }))}
+            options={projectStatuses.map(status => ({ ...status, value: dictionary.projects[status.value] }))}
+          />
+        )}
+        {table.getColumn('visibility') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('visibility')}
+            title={dictionary.projects.visibility}
+            options={visibility.map(v => ({ ...v, value: dictionary.projects[v.value] }))}
           />
         )}
         {isFiltered && (

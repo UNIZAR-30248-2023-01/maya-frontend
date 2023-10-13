@@ -5,9 +5,12 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { useLang } from '@/context/language-context'
 import { flexRender } from '@tanstack/react-table'
 
 export function DataTableHeader ({ table }) {
+  const { dictionary } = useLang()
+
   return (
     <TableHeader>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -17,10 +20,10 @@ export function DataTableHeader ({ table }) {
               <TableHead key={header.id}>
                 {header.isPlaceholder
                   ? null
-                  : flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+                  : flexRender(header.column.columnDef.header, {
+                    ...header.getContext(),
+                    dictionary: dictionary.tasks
+                  })}
               </TableHead>
             )
           })}

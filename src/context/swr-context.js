@@ -5,7 +5,7 @@ import { SWRConfig } from 'swr'
 export const SWRProvider = ({ children }) => {
   return (
     <SWRConfig value={{
-      refreshInterval: 5000,
+      refreshInterval: 30000,
       fetcher: (url) => fetch(url, {
         headers: {
           apikey: process.env.NEXT_PUBLIC_SUPABASE_KEY,

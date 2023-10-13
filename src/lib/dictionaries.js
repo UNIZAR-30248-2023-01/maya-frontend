@@ -48,9 +48,10 @@ export const table = {
 
 export const projects = {
   es: {
-    'title-column': 'Título',
+    'name-column': 'Nombre',
     'description-column': 'Descripción',
     status: 'Estado',
+    visibility: 'Visibilidad',
     open: 'Abierto',
     closed: 'Cerrado',
     public: 'público',
@@ -68,9 +69,10 @@ export const projects = {
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
-    'title-column': 'Title',
+    'name-column': 'Name',
     'description-column': 'Description',
     status: 'Status',
+    visibility: 'Visibility',
     open: 'Open',
     closed: 'Close',
     public: 'public',
@@ -89,14 +91,52 @@ export const projects = {
   }
 }
 
+export const tasks = {
+  es: {
+    'tasks-column': 'Tarea',
+    'assignees-column': 'Asignados',
+    'label-column': 'Etiqueta',
+    'status-column': 'Estado',
+    'estimated-column': 'Estimado',
+    'end-date-column': 'Fecha de finalización',
+    filter: 'Filtrar por tarea',
+    assignees: 'Asignados',
+    label: 'Etiqueta',
+    status: 'Estado',
+    new: 'nueva',
+    block: 'bloqueada',
+    done: 'completada',
+    'in progress': 'en progreso'
+
+  },
+  en: {
+    'tasks-column': 'Tasks',
+    'assignees-column': 'Assignees',
+    'label-column': 'Label',
+    'status-column': 'Status',
+    'estimated-column': 'Estimated',
+    'end-date-column': 'End date',
+    filter: 'Filter by task',
+    assignees: 'Assignees',
+    label: 'Label',
+    status: 'Status',
+    new: 'new',
+    block: 'block',
+    done: 'done',
+    'in progress': 'in progress'
+  }
+}
+
 export const people = {
   es: {
     'member-column': 'Miembros',
-    filter: 'Filtrar por nombre de usuario'
+    filter: 'Filtrar por nombre de usuario',
+    role: 'Roles'
   },
   en: {
     'member-column': 'Members',
-    filter: 'Filter people by username'
+    filter: 'Filter people by username',
+    role: 'Roles'
   }
 }
 
