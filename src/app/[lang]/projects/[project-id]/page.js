@@ -22,7 +22,7 @@ export const metadata = {
 export default function ProjectPage () {
   return (
     <>
-      <Tabs defaultValue="people" className="w-full">
+      <Tabs defaultValue="tasks" className="w-full">
         <TabsList>
           <TabsTrigger value="tasks" className="flex items-center gap-x-1.5 capitalize">
             <LuBoxes className="w-3.5 h-3.5"/>

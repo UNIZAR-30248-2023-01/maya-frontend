@@ -14,7 +14,6 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/projects/data-table-header'
 import { DataTableBody } from '@/components/projects/data-table-body'
-// columns.length
 
 export function DataTable ({ data, columns }) {
   const [sorting, setSorting] = React.useState([])

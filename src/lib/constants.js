@@ -169,6 +169,54 @@ export const loadingPeople = [
   }
 ]
 
+export const loadingTeam = [
+  {
+    id: 0,
+    name: null,
+    people: [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    id: 1,
+    name: null,
+    people: [
+      null,
+      null
+    ]
+  },
+  {
+    id: 2,
+    name: null,
+    people: [
+      null,
+      null,
+      null
+    ]
+  }, {
+    id: 3,
+    name: null,
+    people: [
+      null
+    ]
+  }, {
+    id: 4,
+    name: null,
+    people: [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+]
+
 export const mockData = [
   {
     id: 'm5gr84i9',
