@@ -123,6 +123,52 @@ export const loadingProjects = [
   }
 ]
 
+export const loadingPeople = [
+  {
+    id: 0,
+    avatar: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    email: null,
+    role: null
+  },
+  {
+    id: 1,
+    avatar: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    email: null,
+    role: null
+  },
+  {
+    id: 2,
+    avatar: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    email: null,
+    role: null
+  }, {
+    id: 3,
+    avatar: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    email: null,
+    role: null
+  }, {
+    id: 4,
+    avatar: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    email: null,
+    role: null
+  }
+]
+
 export const mockData = [
   {
     id: 'm5gr84i9',

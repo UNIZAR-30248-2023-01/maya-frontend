@@ -16,7 +16,6 @@ export function DataTableHeader ({ table }) {
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
-            // console.log(header.column.columnDef.header(user))
             return (
               <TableHead key={header.id}>
                 {header.isPlaceholder

@@ -9,3 +9,12 @@ export const projectSchema = z.object({
   status: z.string(),
   label: z.string()
 })
+
+export const peopleSchema = z.object({
+  id: z.string(),
+  avatar: z.string(),
+  firstname: z.string(),
+  lastname: z.string(),
+  username: z.string(),
+  email: z.string()
+})

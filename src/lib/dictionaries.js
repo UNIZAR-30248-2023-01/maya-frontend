@@ -89,6 +89,17 @@ export const projects = {
   }
 }
 
+export const people = {
+  es: {
+    'member-column': 'Miembros',
+    filter: 'Filtrar por nombre de usuario'
+  },
+  en: {
+    'member-column': 'Members',
+    filter: 'Filter people by username'
+  }
+}
+
 export const teams = {
   es: {},
   en: {}
