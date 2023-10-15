@@ -2,6 +2,14 @@ import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { createClient } from '@supabase/supabase-js'
 
+export function normalize (str) {
+  try {
+    return str.replace(/[-_]/gi, ' ').toLowerCase()
+  } catch (e) {
+    return str
+  }
+}
+
 export function cn (...inputs) {
   return twMerge(clsx(inputs))
 }
