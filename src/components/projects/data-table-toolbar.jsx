@@ -1,14 +1,12 @@
 'use client'
 
-import { Cross2Icon } from '@radix-ui/react-icons'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableCreateAction } from '@/components/projects/data-table-create-action'
-
-import { projectStatuses, visibility } from '@/lib/constants'
 import { DataTableFacetedFilter } from '@/components/projects/data-table-faceted-filter'
+import { projectStatuses, visibility } from '@/lib/constants'
 import { useLang } from '@/context/language-context'
+import { Cross2Icon } from '@radix-ui/react-icons'
 
 export function DataTableToolbar ({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0

@@ -35,8 +35,7 @@ export function DataTableBody ({ table }) {
         : (
           <TableRow>
             <TableCell
-              // colSpan={columns.length}
-              colSpan={2}
+              colSpan={table.getAllColumns().length}
               className="h-24 text-center"
             >
               No results.

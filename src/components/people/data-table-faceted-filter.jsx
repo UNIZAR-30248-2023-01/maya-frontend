@@ -53,13 +53,13 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                       options
                         .filter((option) => selectedValues.has(option.value))
                         .map((option) => (
-                      <Badge
-                        variant="secondary"
-                        key={option.value}
-                        className="rounded-sm px-1 font-normal"
-                      >
-                        {option.label}
-                      </Badge>
+                          <Badge
+                            variant="secondary"
+                            key={option.value}
+                            className="rounded-sm px-1 font-normal"
+                          >
+                            {option.label}
+                          </Badge>
                         ))
                     )}
               </div>

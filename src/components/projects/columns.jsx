@@ -70,17 +70,11 @@ export const columns = [
   {
     accessorKey: 'status',
     header: null,
-    cell: null,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    }
+    cell: null
   },
   {
     accessorKey: 'visibility',
     header: null,
-    cell: null,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    }
+    cell: null
   }
 ]

@@ -347,6 +347,16 @@ export const loadingTasks = [
   }
 ]
 
+export const mockRoles = [
+  {
+    id: 1,
+    value: 'owner'
+  }, {
+    id: 2,
+    value: 'member'
+  }
+]
+
 export const mockProjectData = [
   {
     id: 'm5gr84i9',

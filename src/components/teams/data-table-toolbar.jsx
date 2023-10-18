@@ -4,8 +4,9 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLang } from '@/context/language-context'
+import { DataTableFacetedFilter } from '@/components/teams/data-table-faceted-filter'
 
-export function DataTableToolbar ({ table }) {
+export function DataTableToolbar ({ table, people }) {
   const isFiltered = table.getState().columnFilters.length > 0
   const { dictionary } = useLang()
 
@@ -16,11 +17,16 @@ export function DataTableToolbar ({ table }) {
           id="filter-teams"
           placeholder={`${dictionary.teams.filter}...`}
           value={(table.getColumn('name')?.getFilterValue()) ?? ''}
-          onChange={(event) =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        {table.getColumn('people') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('people')}
+            title={dictionary.tasks.assignees}
+            options={people.map((person) => ({ value: person.username }))}
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"

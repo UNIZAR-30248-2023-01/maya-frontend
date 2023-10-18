@@ -67,9 +67,6 @@ export const columns = [
       if (!id) return <Skeleton className='w-24 h-4'/>
 
       return row.getValue('label') && <Badge variant="outline" className='max-w-fit'>{row.getValue('label')}</Badge>
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     }
   },
   {
@@ -89,9 +86,6 @@ export const columns = [
           <span className='capitalize'>{dictionary[status.value]}</span>
         </Badge>
       )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     }
   },
   {
@@ -108,9 +102,6 @@ export const columns = [
           <span>{row.getValue('estimated')}</span>
         </div>
       )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     }
   },
   {
@@ -129,9 +120,6 @@ export const columns = [
           <span>{new Date(row.getValue('end_date')).toLocaleDateString(undefined, options)}</span>
         </div>
       )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
     }
   }
 ]

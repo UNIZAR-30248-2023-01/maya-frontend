@@ -19,8 +19,8 @@ export function SidePanel ({
   schema,
   create = true
 }) {
-  const properties = Object.keys(schema.shape)
-    .filter((key) => !(create && ['id', 'created_at', 'updated_at'].includes(key)))
+  // const properties = Object.keys(schema.shape)
+  //   .filter((key) => !(create && ['id', 'created_at', 'updated_at'].includes(key)))
 
   // console.log(schema.shape.title?._def?.checks[0]?.kind)
   // console.log(schema.shape.title)

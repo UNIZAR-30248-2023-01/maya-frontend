@@ -45,7 +45,7 @@ export function DataTableToolbar ({ table, people }) {
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title={dictionary.tasks.status}
-            options={tasksStatuses.map(status => ({ value: dictionary.tasks[status.value] }))}
+            options={tasksStatuses.map(status => ({ value: status.value }))}
           />
         )}
         {isFiltered && (

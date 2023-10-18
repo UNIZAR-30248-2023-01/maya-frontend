@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
+'use client'
 
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
@@ -19,10 +18,13 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
+import { useLang } from '@/context/language-context'
 
 export function DataTableFacetedFilter ({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
+  const { dictionary } = useLang()
 
   return (
     <Popover>
@@ -58,7 +60,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                         key={option.value}
                         className="rounded-sm px-1 font-normal capitalize"
                       >
-                        {option.value}
+                        {dictionary.tasks[option.value]}
                       </Badge>
                         ))
                     )}

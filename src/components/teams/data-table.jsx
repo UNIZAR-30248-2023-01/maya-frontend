@@ -14,7 +14,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/teams/data-table-header'
 import { DataTableBody } from '@/components/teams/data-table-body'
 
-export function DataTable ({ data, columns }) {
+export function DataTable ({ data, columns, people }) {
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
@@ -41,7 +41,7 @@ export function DataTable ({ data, columns }) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} people={people} />
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>
