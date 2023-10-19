@@ -41,6 +41,9 @@ export const columns = [
           </div>
         </div>
       )
+    },
+    filterFn: (row, id, value) => {
+      return row.getValue(id).includes(value)
     }
   },
   {
@@ -65,16 +68,25 @@ export const columns = [
           </span>
         </div>
       )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     }
   },
   {
     accessorKey: 'status',
     header: null,
-    cell: null
+    cell: null,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    }
   },
   {
     accessorKey: 'visibility',
     header: null,
-    cell: null
+    cell: null,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    }
   }
 ]

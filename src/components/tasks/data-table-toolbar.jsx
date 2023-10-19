@@ -21,9 +21,9 @@ export function DataTableToolbar ({ table, people }) {
         <Input
           id="filter-tasks"
           placeholder={`${dictionary.tasks.filter}...`}
-          value={(table.getColumn('title')?.getFilterValue()) ?? ''}
+          value={(table.getColumn('name')?.getFilterValue()) ?? ''}
           onChange={(event) =>
-            table.getColumn('title')?.setFilterValue(event.target.value)
+            table.getColumn('name')?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
@@ -45,7 +45,7 @@ export function DataTableToolbar ({ table, people }) {
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title={dictionary.tasks.status}
-            options={tasksStatuses.map(status => ({ value: status.value }))}
+            options={tasksStatuses.map((status) => ({ value: status.value }))}
           />
         )}
         {isFiltered && (

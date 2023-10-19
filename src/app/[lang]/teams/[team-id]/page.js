@@ -12,5 +12,6 @@ export const metadata = {
 
 export default function TeamPage () {
   const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+
   return <DataTable data={people || loadingPeople} columns={columns}/>
 }

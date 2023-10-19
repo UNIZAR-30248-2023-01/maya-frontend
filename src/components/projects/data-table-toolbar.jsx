@@ -28,14 +28,14 @@ export function DataTableToolbar ({ table }) {
           <DataTableFacetedFilter
             column={table.getColumn('status')}
             title={dictionary.projects.status}
-            options={projectStatuses.map(status => ({ ...status, value: dictionary.projects[status.value] }))}
+            options={projectStatuses.map(status => ({ ...status, value: status.value }))}
           />
         )}
         {table.getColumn('visibility') && (
           <DataTableFacetedFilter
             column={table.getColumn('visibility')}
             title={dictionary.projects.visibility}
-            options={visibility.map(v => ({ ...v, value: dictionary.projects[v.value] }))}
+            options={visibility.map(v => ({ ...v, value: v.value }))}
           />
         )}
         {isFiltered && (

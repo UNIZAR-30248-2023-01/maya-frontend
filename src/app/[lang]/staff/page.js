@@ -11,7 +11,15 @@ export const metadata = {
 }
 
 export default function StaffPage () {
-  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?select=*,people(*)`)
+  people = people?.map(row => {
+    const { people: person, ...rest } = row
+    return {
+      ...person,
+      role: rest.role,
+      organization: rest.organization
+    }
+  }).filter(row => row.organization === 'hec7orci7o')
 
   return <DataTable data={people || loadingPeople} columns={columns}/>
 }

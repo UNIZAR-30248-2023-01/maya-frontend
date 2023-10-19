@@ -19,10 +19,12 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { useLang } from '@/context/language-context'
 
 export function DataTableFacetedFilter ({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
+  const { dictionary } = useLang()
 
   return (
     <Popover>
@@ -58,7 +60,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                         key={option.value}
                         className="rounded-sm px-1 font-normal capitalize"
                       >
-                        {option.value}
+                        {dictionary.projects[option.value] ?? option.value}
                       </Badge>
                         ))
                     )}
@@ -103,7 +105,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                     )}
-                    <span className='capitalize'>{option.value}</span>
+                    <span className='capitalize'>{dictionary.projects[option.value] ?? option.value}</span>
                     {facets?.get(option.value) && (
                       <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
                         {facets.get(option.value)}

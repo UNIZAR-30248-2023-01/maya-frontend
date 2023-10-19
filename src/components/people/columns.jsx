@@ -45,6 +45,9 @@ export const columns = [
           </div>
         </div>
       )
+    },
+    filterFn: (row, id, value) => {
+      return row.getValue(id).includes(value)
     }
   }, {
     accessorKey: 'role',
@@ -71,6 +74,9 @@ export const columns = [
       if (!username) return null
 
       return <DataTableRowActions row={row} />
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     }
   }
 ]

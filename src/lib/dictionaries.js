@@ -143,10 +143,12 @@ export const people = {
 export const teams = {
   es: {
     'team-column': 'Equipos',
+    'member-column': 'Miembros',
     filter: 'Filtrar por nombre de equipo'
   },
   en: {
     'team-column': 'Teams',
+    'member-column': 'Members',
     filter: 'Filter by team name'
   }
 }
