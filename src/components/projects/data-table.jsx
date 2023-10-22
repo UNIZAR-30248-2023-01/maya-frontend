@@ -13,9 +13,13 @@ import { Table } from '@/components/ui/table'
 import { DataTableToolbar } from '@/components/projects/data-table-toolbar'
 import { DataTableHeader } from '@/components/projects/data-table-header'
 import { DataTableBody } from '@/components/projects/data-table-body'
+import { SidePanel } from '@/components/side-panel'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
+import { useLang } from '@/context/language-context'
+import { projectSchema } from '@/lib/schemas'
 
 export function DataTable ({ data, columns }) {
+  const { dictionary } = useLang()
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
@@ -42,7 +46,17 @@ export function DataTable ({ data, columns }) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <div className="flex items-center justify-between">
+        <DataTableToolbar table={table} />
+        <SidePanel
+          title={dictionary.projects['new-table']}
+          description={dictionary.projects['new-table-description']}
+          triggerBtn={dictionary.projects['new-project']}
+          actionBtn={dictionary.projects['new-table-create']}
+          schema={projectSchema}
+          dictionary={dictionary}
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>

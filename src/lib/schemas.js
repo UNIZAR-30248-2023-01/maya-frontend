@@ -3,10 +3,10 @@ import { z } from 'zod'
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const projectSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  status: z.string(),
-  visibility: z.string(),
+  name: z.string().min(1).max(30),
+  description: z.string().max(150),
+  status: z.enum(['open', 'closed']).default('open'),
+  visibility: z.enum(['public', 'private']).default('private'),
   created_at: z.string().datetime(),
   updated_at: z.string().datetime()
 })
