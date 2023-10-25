@@ -2,6 +2,17 @@ import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { createClient } from '@supabase/supabase-js'
 
+export function getForm (zodShape) {
+  const entries = Object.keys(zodShape).map((key) => {
+    const localSchema = zodShape[key]._def
+    if (localSchema.typeName === 'ZodDefault') {
+      return [key, localSchema.defaultValue()]
+    }
+    return [key, null]
+  })
+  return Object.fromEntries(entries)
+}
+
 export function normalize (str) {
   try {
     return str.replace(/[-_]/gi, ' ').toLowerCase()

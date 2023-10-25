@@ -12,6 +12,12 @@ import {
   LuLock
 } from 'react-icons/lu'
 
+export const avatars = [
+  ...new Array(50).fill(0).map((_, i) => `/assets/avatars/animals/${i + 1}.webp`),
+  ...new Array(24).fill(0).map((_, i) => `/assets/avatars/humans/${i + 1}.webp`),
+  ...new Array(28).fill(0).map((_, i) => `/assets/avatars/memojis/${i + 1}.webp`)
+]
+
 export const supportedLanguages = [
   'es',
   'en'

@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { useState } from 'react'
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,12 +14,16 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/tasks/data-table-header'
 import { DataTableBody } from '@/components/tasks/data-table-body'
+import { SidePanel } from '@/components/projects/side-panel'
+import { useLang } from '@/context/language-context'
+import { tasksSchema } from '@/lib/schemas'
 
 export function DataTable ({ data, columns, people }) {
-  const [sorting, setSorting] = React.useState([])
-  const [columnFilters, setColumnFilters] = React.useState([])
-  const [columnVisibility, setColumnVisibility] = React.useState({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const { dictionary } = useLang()
+  const [sorting, setSorting] = useState([])
+  const [columnFilters, setColumnFilters] = useState([])
+  const [columnVisibility, setColumnVisibility] = useState({})
+  const [rowSelection, setRowSelection] = useState({})
 
   const table = useReactTable({
     data,
@@ -42,7 +46,16 @@ export function DataTable ({ data, columns, people }) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} people={people} />
+      <div className="flex items-center justify-between">
+        <DataTableToolbar table={table} people={people} />
+        <SidePanel
+          title={dictionary.tasks['new-task']}
+          description={dictionary.tasks['new-table-description']}
+          triggerBtn={dictionary.tasks['new-task']}
+          actionBtn={dictionary.tasks['new-task-create']}
+          schema={tasksSchema}
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>

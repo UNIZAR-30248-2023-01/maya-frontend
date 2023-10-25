@@ -11,8 +11,17 @@ export const metadata = {
 }
 
 export default function TasksPage () {
-  const { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people(*)`)
-  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?select=*`)
+  let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
+  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
 
-  return <DataTable data={tasks || loadingTasks} columns={columns} people={people || []}/>
+  if (!tasks || !people) return <DataTable data={loadingTasks} columns={columns} people={[]}/>
+
+  tasks = tasks?.map(item => {
+    return {
+      ...item,
+      people: item['people-tasks'].map(person => people?.find(p => p.username === person.username))
+    }
+  })
+
+  return <DataTable data={tasks} columns={columns} people={people}/>
 }

@@ -15,16 +15,18 @@ describe('Project Resource', () => {
 
     cy.get('input#name').type(project.title)
     cy.get('textarea#description').type(project.description)
+    cy.get('button#visibility').click()
 
     cy.get('form').submit()
-    cy.wait(3000)
-
-    cy.get('input#filter-project').type('New Project')
+    cy.get('input#filter-project').type('New Project', { force: true })
     cy.get('table tbody tr').should('have.length', 1)
+    cy.get('table tbody tr:first-child')
+      .find('div')
+      .should('contain.text', project.title)
   })
 
   after(() => {
-    fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?title=eq.${project.title}`, {
+    fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.title}`, {
       method: 'DELETE',
       headers: {
         apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),

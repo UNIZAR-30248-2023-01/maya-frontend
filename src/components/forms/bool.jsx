@@ -2,12 +2,13 @@
 
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
+import { normalize } from '@/lib/utils'
 
-export function Bool ({ label, value, ...props }) {
+export function Bool ({ id, label, checked, onChange }) {
   return (
     <div className="flex items-center space-x-2">
-      <Switch id={label} checked={props.checked} onCheckedChange={props.onCheckedChange} />
-      <Label htmlFor={label} className='capitalize'>{value}</Label>
+      <Switch id={id} checked={checked} onCheckedChange={onChange} />
+      <Label htmlFor={id} className='capitalize'>{normalize(label)}</Label>
     </div>
   )
 }

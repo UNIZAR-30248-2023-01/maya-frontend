@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { useState } from 'react'
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -15,10 +15,10 @@ import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
 
 export function DataTable ({ data, columns }) {
-  const [sorting, setSorting] = React.useState([])
-  const [columnFilters, setColumnFilters] = React.useState([])
-  const [columnVisibility, setColumnVisibility] = React.useState({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [sorting, setSorting] = useState([])
+  const [columnFilters, setColumnFilters] = useState([])
+  const [columnVisibility, setColumnVisibility] = useState({})
+  const [rowSelection, setRowSelection] = useState({})
 
   const table = useReactTable({
     data,
@@ -41,7 +41,9 @@ export function DataTable ({ data, columns }) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <div className="flex items-center justify-between">
+        <DataTableToolbar table={table} />
+      </div>
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>
