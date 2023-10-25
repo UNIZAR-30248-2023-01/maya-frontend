@@ -1,8 +1,14 @@
+'use client'
+
+import { DataTable } from '@/components/in-and-outs/data-table'
+import { columns } from '@/components/in-and-outs/columns'
+//import { loadingProjects } from '@/lib/constants'
+import useSWR from 'swr'
+
 export default function InAndOutsPage () {
-  return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
-    </> 
-  )
+  //const { data: projects } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?select=*`)
+  //return <DataTable data={projects || loadingProjects} columns={columns}/>
+  return <DataTable data={[]} columns={columns}/>
 }
+
+

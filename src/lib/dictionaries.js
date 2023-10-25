@@ -93,6 +93,53 @@ export const projects = {
   }
 }
 
+
+// Tabla in and out
+export const inandouts = {
+  es: {
+    'day-column': 'Fecha',
+    'in-column': 'Entrada',
+    'out-column': 'Salida',
+    'total-column': 'Total',
+    filter: 'Filtrar horas',
+    'new-date': 'Fichaje manual',
+    'new-check-in': 'Fichar entrada',
+    'new-check-out': 'Fichar salida',
+    
+    'new-table-description': 'Los proyectos son una herramienta personalizable y flexible para planificar y realizar un seguimiento de su trabajo.',
+    'new-table-name': 'Nombre',
+    'new-table-desc': 'Descripción',
+    'new-table-name-placeholder': 'El proyecto de John Doe',
+    'new-table-desc-placeholder': 'Una breve descripción sobre tu proyecto.',
+    'new-table-create': 'Crear',
+    'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
+    'toast-success': 'Tu proyecto se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'day-column': 'Date',
+    'in-column': 'In',
+    'out-column': 'Out',
+    'total-column': 'Total',
+    filter: 'Filter hours',
+    'new-date': 'Manual check-in',
+    'new-check-in': 'Check-in',
+    'new-check-out': 'Check-out',
+
+    
+    'new-table-description': 'Projects are a customizable, flexible tool for planning and tracking your work.',
+    'new-table-name': 'Name',
+    'new-table-desc': 'Short description',
+    'new-table-name-placeholder': 'John Doe&apos; project',
+    'new-table-desc-placeholder': 'A short description about this project.',
+    'new-table-create': 'Create',
+    'toast-loading': 'We are creating your project. Please wait a moment.',
+    'toast-success': 'Your project has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
+
 export const tasks = {
   es: {
     'tasks-column': 'Tarea',
