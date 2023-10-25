@@ -62,6 +62,7 @@ export const projects = {
     'new-table-description': 'Los proyectos son una herramienta personalizable y flexible para planificar y realizar un seguimiento de su trabajo.',
     'new-table-name': 'Nombre',
     'new-table-desc': 'Descripción',
+    'new-table-name-placeholder': 'El proyecto de John Doe',
     'new-table-desc-placeholder': 'Una breve descripción sobre tu proyecto.',
     'new-table-create': 'Crear',
     'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
@@ -83,6 +84,7 @@ export const projects = {
     'new-table-description': 'Projects are a customizable, flexible tool for planning and tracking your work.',
     'new-table-name': 'Name',
     'new-table-desc': 'Short description',
+    'new-table-name-placeholder': 'John Doe&apos; project',
     'new-table-desc-placeholder': 'A short description about this project.',
     'new-table-create': 'Create',
     'toast-loading': 'We are creating your project. Please wait a moment.',
@@ -106,8 +108,10 @@ export const tasks = {
     new: 'nueva',
     block: 'bloqueada',
     done: 'completada',
-    'in progress': 'en progreso'
-
+    'in progress': 'en progreso',
+    'new-task': 'nueva tarea',
+    'new-table-description': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
+    'new-task-create': 'Crear'
   },
   en: {
     'tasks-column': 'Tasks',
@@ -123,7 +127,10 @@ export const tasks = {
     new: 'new',
     block: 'block',
     done: 'done',
-    'in progress': 'in progress'
+    'in progress': 'in progress',
+    'new-task': 'new task',
+    'new-table-description': 'Tasks are a way of communicating what you are going to do to the rest of your team.',
+    'new-task-create': 'Create'
   }
 }
 
@@ -131,12 +138,18 @@ export const people = {
   es: {
     'member-column': 'Miembros',
     filter: 'Filtrar por nombre de usuario',
-    role: 'Roles'
+    role: 'Roles',
+    'new-person': 'reclutar',
+    'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
+    'new-person-create': 'invitar'
   },
   en: {
     'member-column': 'Members',
     filter: 'Filter people by username',
-    role: 'Roles'
+    role: 'Roles',
+    'new-person': 'recruit',
+    'new-table-description': 'Add people to your project to improve your team.',
+    'new-person-create': 'invite'
   }
 }
 
@@ -144,11 +157,17 @@ export const teams = {
   es: {
     'team-column': 'Equipos',
     'member-column': 'Miembros',
-    filter: 'Filtrar por nombre de equipo'
+    filter: 'Filtrar por nombre de equipo',
+    'new-team': 'nuevo equipo',
+    'new-table-description': 'Los equipos son una forma de organizar a las personas que trabajan en tu proyecto.',
+    'new-team-create': 'Crear'
   },
   en: {
     'team-column': 'Teams',
     'member-column': 'Members',
-    filter: 'Filter by team name'
+    filter: 'Filter by team name',
+    'new-team': 'new team',
+    'new-table-description': 'Teams are a way of organizing the people working on your project.',
+    'new-team-create': 'Create'
   }
 }

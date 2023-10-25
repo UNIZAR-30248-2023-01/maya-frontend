@@ -4,11 +4,6 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-export const metadata = {
-  title: 'Project Settings',
-  description: 'Here you will be able to access and manage the settings of your project.'
-}
-
 const projectNavItems = [
   {
     title: 'project settings'

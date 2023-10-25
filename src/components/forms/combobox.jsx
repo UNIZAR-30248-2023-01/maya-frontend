@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { useState } from 'react'
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 
 import { cn } from '@/lib/utils'
@@ -18,35 +18,12 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-const frameworks = [
-  {
-    value: 'next.js',
-    label: 'Next.js'
-  },
-  {
-    value: 'sveltekit',
-    label: 'SvelteKit'
-  },
-  {
-    value: 'nuxt.js',
-    label: 'Nuxt.js'
-  },
-  {
-    value: 'remix',
-    label: 'Remix'
-  },
-  {
-    value: 'astro',
-    label: 'Astro'
-  }
-]
-
-export function Combobox () {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState('')
+export function ComboboxEnum ({ id, label, list }) {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover id={id} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -55,29 +32,83 @@ export function Combobox () {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : 'Select framework...'}
+            ? list.find((item) => item.value === value)?.label
+            : label}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." className="h-9" />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder={`Search ${label}...`} className="h-9" />
+          <CommandEmpty>No {label} found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {list.map((item) => (
               <CommandItem
-                key={framework.value}
+                key={item.value}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? '' : currentValue)
                   setOpen(false)
                 }}
               >
-                {framework.label}
+                {item.label}
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
-                    value === framework.value ? 'opacity-100' : 'opacity-0'
+                    value === item.value ? 'opacity-100' : 'opacity-0'
+                  )}
+                />
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+export function ComboboxArray ({ id, label, list }) {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState([])
+
+  const removeItem = (item) => {
+    setValue(value.filter((i) => i !== item))
+  }
+
+  return (
+    <Popover id={id} open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {value.length > 0
+            ? value.map((item) => list.find((i) => i.value === item)?.label)
+            : label}
+          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder={`Search ${label}...`} className="h-9" />
+          <CommandEmpty>No {label} found.</CommandEmpty>
+          <CommandGroup>
+            {list.map((item) => (
+              <CommandItem
+                key={item.value}
+                onSelect={(currentValue) => {
+                  setValue(currentValue === value
+                    ? removeItem(currentValue)
+                    : setValue([...value, currentValue]))
+                  setOpen(false)
+                }}
+              >
+                {item.label}
+                <CheckIcon
+                  className={cn(
+                    'ml-auto h-4 w-4',
+                    value.includes(item.value) ? 'opacity-100' : 'opacity-0'
                   )}
                 />
               </CommandItem>
