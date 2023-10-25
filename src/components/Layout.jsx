@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Sidebar } from '@/components/sidebar/sidebar'
-import { Search } from '@/components/sidebar/search'
+import { Sidebar } from '@/components/sidebar/Sidebar'
+import { Search } from '@/components/sidebar/Search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { Navbar } from '@/components/navbar'
+import { Navbar } from '@/components/Navbar'
 import { navigation, teams } from '@/lib/constants'
 
 export function Layout ({ children }) {
