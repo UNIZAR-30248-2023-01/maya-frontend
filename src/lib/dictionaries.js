@@ -122,9 +122,9 @@ export const inandouts = {
     'out-column': 'Out',
     'total-column': 'Total',
     filter: 'Filter hours',
-    'new-date': 'Manual check-in',
-    'new-check-in': 'Check-in',
-    'new-check-out': 'Check-out',
+    'new-date': 'Manual clock-in',
+    'new-check-in': 'Clock-in',
+    'new-check-out': 'Clock-out',
 
     
     'new-table-description': 'Projects are a customizable, flexible tool for planning and tracking your work.',

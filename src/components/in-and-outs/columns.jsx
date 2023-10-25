@@ -17,7 +17,7 @@ export const columns = [
     cell: ({ row, dictionary }) => {
       
 
-      {/*
+      {/* row.original tiene la respuesta de la base de datos de una fila especifica
       const { name } = row.original
       if (!name) {
         return (
