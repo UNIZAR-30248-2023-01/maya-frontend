@@ -5,9 +5,9 @@ import { columns } from '@/components/tasks/columns'
 import { loadingTasks } from '@/lib/constants'
 import useSWR from 'swr'
 
-export default function TasksPage () {
-  let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
-  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
+export default function TasksPage ({ projectName }) {
+  let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?project=eq.${projectName}&select=*,people-tasks(username)`)
+  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
 
   if (!tasks || !people) return <DataTable data={loadingTasks} columns={columns} people={[]}/>
 

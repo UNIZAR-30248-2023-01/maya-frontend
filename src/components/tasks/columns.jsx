@@ -62,7 +62,8 @@ export const columns = [
     filterFn: (row, id, value) => {
       const usernames = row.getValue(id).map(person => person.username)
       return value.some(username => usernames.includes(username))
-    }
+    },
+    enableSorting: false
   },
   {
     accessorKey: 'label',

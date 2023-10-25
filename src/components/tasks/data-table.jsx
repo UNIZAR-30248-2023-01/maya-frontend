@@ -14,7 +14,7 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/tasks/data-table-header'
 import { DataTableBody } from '@/components/tasks/data-table-body'
-import { SidePanel } from '@/components/projects/side-panel'
+import { SidePanel } from '@/components/tasks/side-panel'
 import { useLang } from '@/context/language-context'
 import { tasksSchema } from '@/lib/schemas'
 
@@ -45,8 +45,8 @@ export function DataTable ({ data, columns, people }) {
   })
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className='space-y-4'>
+      <div className='flex items-center justify-between'>
         <DataTableToolbar table={table} people={people} />
         <SidePanel
           title={dictionary.tasks['new-task']}
@@ -56,7 +56,7 @@ export function DataTable ({ data, columns, people }) {
           schema={tasksSchema}
         />
       </div>
-      <div className="rounded-md border">
+      <div className='rounded-md border'>
         <Table>
           <DataTableHeader table={table}/>
           <DataTableBody table={table}/>

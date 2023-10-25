@@ -13,12 +13,10 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
-      const { avatar, firstname, lastname, username } = row.original
-
-      if (!username) {
+      if (!row.original.people?.username) {
         return (
-          <div className="flex items-start space-x-2">
-            <Skeleton className="rounded-full">
+          <div className='flex items-start space-x-2'>
+            <Skeleton className='rounded-full'>
               <Avatar>
                 <AvatarImage />
               </Avatar>
@@ -32,16 +30,16 @@ export const columns = [
       }
 
       return (
-        <div className="flex items-start space-x-2">
+        <div className='flex items-start space-x-2'>
           <Avatar>
-            <AvatarImage src={avatar} />
-            <AvatarFallback className="uppercase">{String(firstname)[0] + String(lastname)[0]}</AvatarFallback>
+            <AvatarImage src={row.original.people?.avatar} />
+            <AvatarFallback className='uppercase'>{String(row.original.people?.firstname)[0] + String(row.original.people?.lastname)[0]}</AvatarFallback>
           </Avatar>
           <div className='max-w-[150px] flex flex-col gap-y-1'>
-            <span className="max-w-full truncate font-medium capitalize">
-              {firstname + ' ' + lastname}
+            <span className='max-w-full truncate font-medium capitalize'>
+              {row.original.people?.firstname + ' ' + row.original.people?.lastname}
             </span>
-            <Badge variant="outline" className='max-w-fit'>{username}</Badge>
+            <Badge variant='outline' className='max-w-fit'>{row.original.people?.username}</Badge>
           </div>
         </div>
       )
@@ -51,17 +49,19 @@ export const columns = [
     }
   }, {
     accessorKey: 'role',
-    header: null,
+    header: ({ column, dictionary }) => {
+      return <DataTableColumnHeader column={column} title={dictionary.role} />
+    },
     cell: ({ row }) => {
       const { username } = row.original
       if (!username) {
-        return <Skeleton variant="outline" className='w-24 h-4'/>
+        return <Skeleton variant='outline' className='w-24 h-4'/>
       }
 
       return (
         row.getValue('role')
-          ? <Badge variant="outline" className='max-w-fit'>{row.getValue('role')}</Badge>
-          : <Badge variant="outline" className='max-w-fit'>member</Badge>
+          ? <Badge variant='outline' className='max-w-fit'>{row.getValue('role')}</Badge>
+          : <Badge variant='outline' className='max-w-fit'>member</Badge>
       )
     },
     filterFn: (row, id, value) => {
@@ -73,7 +73,7 @@ export const columns = [
       const { username } = row.original
       if (!username) return null
 
-      return <DataTableRowActions row={row} />
+      return <div className='flex justify-end pr-4'><DataTableRowActions row={row} /></div>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))

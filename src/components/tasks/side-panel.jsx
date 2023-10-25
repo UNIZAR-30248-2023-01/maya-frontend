@@ -25,24 +25,32 @@ export function SidePanel ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button variant='outline' className='capitalize'>{triggerBtn}</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className='min-w-[800px]'>
         <SheetHeader>
-          <SheetTitle className="capitalize">{title}</SheetTitle>
+          <SheetTitle className='capitalize'>{title}</SheetTitle>
           <SheetDescription>
             {description}
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
+        {
+          //  Nombre
+          //  Descripción
+          //  Label
+          //  Status
+          //  Estimación
+          //  Deadline
+        }
+        <div className='grid gap-4 py-4'>
           <Field.Text id={dictionary.projects['name-column']} label={dictionary.projects['name-column']} placeholder={''} onChange={''}/>
           <Field.TextArea id={dictionary.projects['description-column']} label={dictionary.projects['description-column']} placeholder={''} onChange={''}/>
           <Field.Bool id={''} label={''} checked={''} onChange={''}/>
         </div>
-        <SheetFooter className="">
+        <SheetFooter className=''>
           <SheetClose asChild>
             <Button
-              type="submit"
+              type='submit'
             >
               {actionBtn}
             </Button>
