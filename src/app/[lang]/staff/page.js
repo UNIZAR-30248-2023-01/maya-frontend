@@ -5,11 +5,6 @@ import { columns } from '@/components/people/columns'
 import { loadingPeople } from '@/lib/constants'
 import useSWR from 'swr'
 
-export const metadata = {
-  title: 'Staff',
-  description: 'Here is a list of your staff'
-}
-
 export default function StaffPage () {
   let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?select=*,people(*)`)
   people = people?.map(row => {
