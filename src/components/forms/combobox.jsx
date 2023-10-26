@@ -17,8 +17,10 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover'
+import { useLang } from '@/context/language-context'
 
 export function ComboboxEnum ({ id, label, list }) {
+  const { dictionary } = useLang()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
 
@@ -29,7 +31,7 @@ export function ComboboxEnum ({ id, label, list }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {value
             ? list.find((item) => item.value === value)?.label
@@ -37,16 +39,16 @@ export function ComboboxEnum ({ id, label, list }) {
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className='w-full p-0'>
         <Command>
-          <CommandInput placeholder={`Search ${label}...`} className="h-9" />
-          <CommandEmpty>No {label} found.</CommandEmpty>
+          <CommandInput placeholder={dictionary.search['search-placeholder']} className="h-9" />
+          <CommandEmpty>{dictionary.search['not-found']}</CommandEmpty>
           <CommandGroup>
             {list.map((item) => (
               <CommandItem
                 key={item.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue)
+                onSelect={() => {
+                  setValue(item.value === value ? '' : item.value)
                   setOpen(false)
                 }}
               >

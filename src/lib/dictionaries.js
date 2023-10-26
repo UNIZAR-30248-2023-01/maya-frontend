@@ -21,6 +21,17 @@ export const navigation = {
   }
 }
 
+export const search = {
+  es: {
+    'not-found': 'No hay resultados',
+    'search-placeholder': 'Buscar...'
+  },
+  en: {
+    'not-found': 'No results',
+    'search-placeholder': 'Search...'
+  }
+}
+
 export const table = {
   es: {
     'selected-rows': (selected, total) => `${selected} de ${total} fila(s) seleccionadas.`,
@@ -97,10 +108,6 @@ export const tasks = {
   es: {
     'tasks-column': 'Tarea',
     'assignees-column': 'Asignados',
-    'label-column': 'Etiqueta',
-    'status-column': 'Estado',
-    'estimated-column': 'Estimado',
-    'end-date-column': 'Fecha de finalización',
     filter: 'Filtrar por tarea',
     assignees: 'Asignados',
     label: 'Etiqueta',
@@ -109,17 +116,31 @@ export const tasks = {
     block: 'bloqueada',
     done: 'completada',
     'in progress': 'en progreso',
+    enhancement: 'mejora',
+    'data model': 'modelo de datos',
+    documentation: 'documentación',
+    bug: 'error',
+    testing: 'test',
+    ui: 'UI',
     'new-task': 'nueva tarea',
-    'new-table-description': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
-    'new-task-create': 'Crear'
+    'new-table-description':
+      'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
+    'new-task-create': 'Crear',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'label-column': 'Etiqueta',
+    'status-column': 'Estado',
+    'estimated-column': 'Estimado',
+    'end-date-column': 'Fecha de finalización',
+    'new-task-name-placeholder': 'Tarea inicial',
+    'new-task-description-placeholder': 'Introduce la descripción de tu tarea',
+    'new-task-label-placeholder': '---',
+    'new-task-status-placeholder': '---',
+    'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas'
   },
   en: {
     'tasks-column': 'Tasks',
     'assignees-column': 'Assignees',
-    'label-column': 'Label',
-    'status-column': 'Status',
-    'estimated-column': 'Estimated',
-    'end-date-column': 'End date',
     filter: 'Filter by task',
     assignees: 'Assignees',
     label: 'Label',
@@ -128,9 +149,27 @@ export const tasks = {
     block: 'block',
     done: 'done',
     'in progress': 'in progress',
+    enhancement: 'enhancement',
+    'data model': 'data model',
+    documentation: 'vdocumentation',
+    bug: 'bug',
+    testing: 'testing',
+    ui: 'UI',
     'new-task': 'new task',
-    'new-table-description': 'Tasks are a way of communicating what you are going to do to the rest of your team.',
-    'new-task-create': 'Create'
+    'new-table-description':
+      'Tasks are a way of communicating what you are going to do to the rest of your team.',
+    'new-task-create': 'Create',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'label-column': 'Label',
+    'status-column': 'Status',
+    'estimated-column': 'Estimated time',
+    'end-date-column': 'Deadline',
+    'new-task-name-placeholder': 'Initial task',
+    'new-task-description-placeholder': 'Type the description of your task',
+    'new-task-label-placeholder': '---',
+    'new-task-status-placeholder': '---',
+    'new-task-estimated-placeholder': 'Estimate time in hours'
   }
 }
 

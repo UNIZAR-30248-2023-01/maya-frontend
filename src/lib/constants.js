@@ -103,6 +103,33 @@ export const tasksStatuses = [
   }
 ]
 
+export const tasksLabels = [
+  {
+    value: 'enhancement',
+    style: 'dark:border-[#C1B8FF] dark:text-[#C1B8FF] dark:bg-[#7057FF2E] border-[#7057FF] text-[#7057FF]'
+  },
+  {
+    value: 'data model',
+    style: 'dark:border-[#E79913] dark:text-[#E79913] dark:bg-[#E99D122E] border-[#E99D12] text-[#E99D12]'
+  },
+  {
+    value: 'documentation',
+    style: 'dark:border-[#35ABFF] dark:text-[#35ABFF] dark:bg-[#0075CA2E] border-[#0075CA] text-[#0075CA]'
+  },
+  {
+    value: 'bug',
+    style: 'dark:border-[#EB9CA6] dark:text-[#EB9CA6] dark:bg-[#D73A4A2E] border-[#D73A4A] text-[#D73A4A]'
+  },
+  {
+    value: 'testing',
+    style: 'dark:border-[#00E6C4] dark:text-[#00E6C4] dark:bg-[#0086722E] border-[#008672] text-[#008672]'
+  },
+  {
+    value: 'ui',
+    style: 'dark:border-[#D97EE5] dark:text-[#D97EE5] dark:bg-[#D876E32E] border-[#D876E3] text-[#D876E3]'
+  }
+]
+
 export const loadingProjects = [
   {
     id: null,

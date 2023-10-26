@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
+import * as Field from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { projectSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'

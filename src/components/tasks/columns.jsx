@@ -5,7 +5,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Badge } from '@/components/ui/badge'
-import { tasksStatuses } from '@/lib/constants'
+import { tasksLabels, tasksStatuses } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
 export const columns = [
   {
@@ -70,11 +71,13 @@ export const columns = [
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['label-column']} />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-24 h-4'/>
+      if (!id) return <Skeleton className='w-24 h-4' />
 
-      return row.getValue('label') && <Badge variant="outline" className='max-w-fit'>{row.getValue('label')}</Badge>
+      const label = tasksLabels.find(label => label.value === row.getValue('label'))
+
+      return row.getValue('label') && <Badge variant="outline" className={cn('max-w-fit', label.style)}>{dictionary[label.value]}</Badge>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
@@ -92,7 +95,7 @@ export const columns = [
       const status = tasksStatuses.find(status => status.value === row.getValue('status'))
 
       return (
-        <Badge variant="outline" className={`flex w-fit items-center gap-x-1 ${status.style}`}>
+        <Badge variant="outline" className={cn('flex w-fit items-center gap-x-1', status.style)}>
           {status.icon && <span>{status.icon}</span>}
           <span className='capitalize'>{dictionary[status.value]}</span>
         </Badge>

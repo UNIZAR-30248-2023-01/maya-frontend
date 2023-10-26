@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
+import * as Field from '@/components/forms'
 import { useLang } from '@/context/language-context'
 
 export function SidePanel ({
