@@ -13,6 +13,7 @@ export function DataTableToolbar ({ table }) {
 
   return (
     <div className="flex flex-1 items-center space-x-2">
+      {/*
       <Input
         id="filter-project"
         placeholder={`${dictionary.inandouts.filter}...`}
@@ -35,7 +36,7 @@ export function DataTableToolbar ({ table }) {
           title={dictionary.inandouts.out_date}
           options={out_date.map(v => ({ ...v, value: v.value }))}
         />
-      )}
+      )}*/}
       {isFiltered && (
         <Button
           variant="ghost"

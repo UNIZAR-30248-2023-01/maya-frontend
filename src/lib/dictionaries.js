@@ -106,12 +106,17 @@ export const inandouts = {
     'new-check-in': 'Fichar entrada',
     'new-check-out': 'Fichar salida',
     
-    'new-table-description': 'Los proyectos son una herramienta personalizable y flexible para planificar y realizar un seguimiento de su trabajo.',
+    'new-table-description': 'Selecciona la fecha de entrada y salida para registrar tus horas.',
+    'new-table-description-in': 'Selecciona la fecha y la hora de entrada.',
+    'new-table-description-out': 'Selecciona la fecha y la hora de salida.',
     'new-table-name': 'Nombre',
     'new-table-desc': 'Descripción',
-    'new-table-name-placeholder': 'El proyecto de John Doe',
-    'new-table-desc-placeholder': 'Una breve descripción sobre tu proyecto.',
-    'new-table-create': 'Crear',
+
+    'new-table-in-placeholder': 'Fecha de entrada',
+    'new-table-out-placeholder': 'Fecha de salida',
+    'new-table-hour-placeholder': '00:00',
+
+    'new-table-create': 'Fichar',
     'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
     'toast-success': 'Tu proyecto se ha creado correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
@@ -126,14 +131,18 @@ export const inandouts = {
     'new-date': 'Manual clock-in',
     'new-check-in': 'Clock-in',
     'new-check-out': 'Clock-out',
-
     
-    'new-table-description': 'Projects are a customizable, flexible tool for planning and tracking your work.',
+    'new-table-description': 'Select your clock-in and clock-out date to register your hours.',
+    'new-table-description-in': 'Select your clock-in date and hour.',
+    'new-table-description-out': 'Select your clock-out date and hour',
     'new-table-name': 'Name',
     'new-table-desc': 'Short description',
-    'new-table-name-placeholder': 'John Doe&apos; project',
-    'new-table-desc-placeholder': 'A short description about this project.',
-    'new-table-create': 'Create',
+
+    'new-table-in-placeholder': 'Clock-in date',
+    'new-table-out-placeholder': 'Clock-out date',
+    'new-table-hour-placeholder': '00:00',
+    
+    'new-table-create': 'Clock',
     'toast-loading': 'We are creating your project. Please wait a moment.',
     'toast-success': 'Your project has been created successfully.',
     'toast-error': 'Something went wrong. Please try again.'

@@ -10,6 +10,13 @@ export const projectSchema = z.object({
   organization: z.string()
 })
 
+// BORRAR: probablemente falta id
+export const inAndOutsSchema = z.object({
+  fechaEntrada: z.date().nullable(),
+  fechaSalida: z.date().nullable(),
+  total: z.number().nullable(),
+})
+
 export const tasksSchema = z.object({
   name: z.string().min(1).max(30),
   assignees: z.array(z.string()).optional(),

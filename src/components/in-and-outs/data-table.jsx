@@ -16,7 +16,7 @@ import { DataTableBody } from '@/components/in-and-outs/data-table-body'
 import { SidePanel } from '@/components/in-and-outs/side-panel'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { useLang } from '@/context/language-context'
-import { projectSchema } from '@/lib/schemas'
+import { inAndOutsSchema } from '@/lib/schemas'
 
 export function DataTable ({ data, columns }) {
   const { dictionary } = useLang()
@@ -49,11 +49,13 @@ export function DataTable ({ data, columns }) {
       <div className="flex items-center justify-between">
         {/*<DataTableToolbar table={table} />*/}
         <SidePanel
-          title={dictionary.inandouts['new-table']}
-          description={dictionary.inandouts['new-table-description']}
-          triggerBtn={dictionary.inandouts['new-project']}
-          actionBtn={dictionary.inandouts['new-table-create']}
-          schema={projectSchema}
+          title={dictionary.inandouts['new-date']}
+          description={dictionary.inandouts['new-table-description']} // Descripcion del panel
+          descriptionIn={dictionary.inandouts['new-table-description-in']}
+          descriptionOut={dictionary.inandouts['new-table-description-out']}
+          triggerBtn={dictionary.inandouts['new-date']} // Nombre del boton
+          actionBtn={dictionary.inandouts['new-table-create']} 
+          schema={inAndOutsSchema}
           dictionary={dictionary}
         />
       </div>
