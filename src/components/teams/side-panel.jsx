@@ -35,9 +35,24 @@ export function SidePanel ({
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
-          <Field.Text id={dictionary.projects['name-column']} label={dictionary.projects['name-column']} placeholder={''} onChange={''}/>
-          <Field.TextArea id={dictionary.projects['description-column']} label={dictionary.projects['description-column']} placeholder={''} onChange={''}/>
-          <Field.Bool id={''} label={''} checked={''} onChange={''}/>
+          <Field.Text
+            id={dictionary.projects['name-column']}
+            label={dictionary.projects['name-column']}
+            placeholder={''}
+            onChange={''}
+          />
+          <Field.TextArea
+            id={dictionary.projects['description-column']}
+            label={dictionary.projects['description-column']}
+            placeholder={''}
+            onChange={''}
+          />
+          <Field.Bool
+            id={''}
+            label={''}
+            checked={''}
+            onChange={''}
+          />
         </div>
         <SheetFooter className="">
           <SheetClose asChild>

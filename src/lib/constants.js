@@ -83,6 +83,40 @@ export const projectStatuses = [
   }
 ]
 
+export const tasksLabels = [
+  {
+    value: 'enhancement',
+    style: ''
+  }, {
+    value: 'bug',
+    style: ''
+  }, {
+    value: 'documentation',
+    style: ''
+  }, {
+    value: 'duplicate',
+    style: ''
+  }, {
+    value: 'good first issue',
+    style: ''
+  }, {
+    value: 'help wanted',
+    style: ''
+  }, {
+    value: 'invalid',
+    style: ''
+  }, {
+    value: 'question',
+    style: ''
+  }, {
+    value: 'testing',
+    style: ''
+  }, {
+    value: 'wontfix',
+    style: ''
+  }
+]
+
 export const tasksStatuses = [
   {
     value: 'new',

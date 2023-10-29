@@ -6,14 +6,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLang } from '@/context/language-context'
 import { DataTableFacetedFilter } from '@/components/tasks/data-table-faceted-filter'
-import { tasksStatuses } from '@/lib/constants'
+import { tasksLabels, tasksStatuses } from '@/lib/constants'
 
 export function DataTableToolbar ({ table, people }) {
   const isFiltered = table.getState().columnFilters.length > 0
   const { dictionary } = useLang()
-  const labels = table.options.data
-    .map((task) => task.label).flat()
-    .filter((label) => label !== undefined && label !== null)
 
   return (
     <div className="flex items-center justify-between">
@@ -38,7 +35,7 @@ export function DataTableToolbar ({ table, people }) {
           <DataTableFacetedFilter
             column={table.getColumn('label')}
             title={dictionary.tasks.label}
-            options={labels.map((label) => ({ value: label }))}
+            options={tasksLabels.map((item) => ({ value: item.value }))}
           />
         )}
         {table.getColumn('status') && (

@@ -30,7 +30,8 @@ export const table = {
     'last-page': 'Ir a la última página',
     'next-page': 'Ir a la página siguiente',
     'previous-page': 'Ir a la página anterior',
-    'clear-filters': 'Limpiar'
+    'clear-filters': 'Limpiar',
+    'no-results': 'No se han encontrado resultados'
   },
   en: {
     'selected-rows': (selected, total) => `${selected} of ${total} row(s) selected.`,
@@ -40,7 +41,8 @@ export const table = {
     'last-page': 'Go to last page',
     'next-page': 'Go to next page',
     'previous-page': 'Go to previous page',
-    'clear-filters': 'Clear'
+    'clear-filters': 'Clear',
+    'no-results': 'No results found'
   }
 }
 
@@ -111,7 +113,12 @@ export const tasks = {
     'in progress': 'en progreso',
     'new-task': 'nueva tarea',
     'new-table-description': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
-    'new-task-create': 'Crear'
+    'new-task-create': 'Crear',
+    'new-table-name-placeholder': 'Comprar leche',
+    'end-date-placeholder': 'Fecha de finalización',
+    'toast-loading': 'Estamos creando tu tarea. Por favor, espera un momento.',
+    'toast-success': 'Tu tarea se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'tasks-column': 'Tasks',
@@ -130,7 +137,12 @@ export const tasks = {
     'in progress': 'in progress',
     'new-task': 'new task',
     'new-table-description': 'Tasks are a way of communicating what you are going to do to the rest of your team.',
-    'new-task-create': 'Create'
+    'new-task-create': 'Create',
+    'new-table-name-placeholder': 'Buy milk',
+    'end-date-placeholder': 'End date',
+    'toast-loading': 'We are creating your tasks. Please wait a moment.',
+    'toast-success': 'Your tasks has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
 
@@ -169,5 +181,47 @@ export const teams = {
     'new-team': 'new team',
     'new-table-description': 'Teams are a way of organizing the people working on your project.',
     'new-team-create': 'Create'
+  }
+}
+
+export const labels = {
+  es: {
+    enhancement: 'mejora',
+    bug: 'error',
+    documentation: 'documentación',
+    duplicate: 'duplicado',
+    'good first issue': 'buen primer problema',
+    'help wanted': 'se necesita ayuda',
+    invalid: 'inválido',
+    question: 'pregunta',
+    testing: 'pruebas',
+    wontfix: 'no se arreglará'
+  },
+  en: {
+    enhancement: 'enhancement',
+    bug: 'bug',
+    documentation: 'documentation',
+    duplicate: 'duplicate',
+    'good first issue': 'good first issue',
+    'help wanted': 'help wanted',
+    invalid: 'invalid',
+    question: 'question',
+    testing: 'testing',
+    wontfix: 'wontfix'
+  }
+}
+
+export const status = {
+  es: {
+    new: 'nueva',
+    block: 'bloqueada',
+    done: 'completada',
+    'in progress': 'en progreso'
+  },
+  en: {
+    new: 'new',
+    block: 'block',
+    done: 'done',
+    'in progress': 'in progress'
   }
 }

@@ -37,7 +37,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
               <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge
                 variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
+                className="rounded-sm px-1 font-normal lg:hidden truncate"
               >
                 {selectedValues.size}
               </Badge>
@@ -55,13 +55,13 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                       options
                         .filter((option) => selectedValues.has(option.value))
                         .map((option) => (
-                      <Badge
-                        variant="secondary"
-                        key={option.value}
-                        className="rounded-sm px-1 font-normal capitalize"
-                      >
-                        {dictionary.tasks[option.value] ?? option.value}
-                      </Badge>
+                          <Badge
+                            variant="secondary"
+                            key={option.value}
+                            className="rounded-sm px-1 font-normal capitalize truncate"
+                          >
+                            {dictionary.tasks[option.value] ?? dictionary.labels[option.value] ?? option.value}
+                          </Badge>
                         ))
                     )}
               </div>
@@ -73,7 +73,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
@@ -105,7 +105,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                     )}
-                    <span className='capitalize'>{dictionary.tasks[option.value] ?? option.value}</span>
+                    <span className='capitalize truncate'>{dictionary.tasks[option.value] ?? dictionary.labels[option.value] ?? option.value}</span>
                     {facets?.get(option.value) && (
                       <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
                         {facets.get(option.value)}
@@ -123,7 +123,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    {dictionary.table['clear-filters']}
                   </CommandItem>
                 </CommandGroup>
               </>

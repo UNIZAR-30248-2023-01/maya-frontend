@@ -69,11 +69,11 @@ export const columns = [
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['label-column']} />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { id } = row.original
       if (!id) return <Skeleton className='w-24 h-4'/>
 
-      return row.getValue('label') && <Badge variant="outline" className='max-w-fit'>{row.getValue('label')}</Badge>
+      return row.getValue('label') && <Badge variant="outline" className='max-w-fit'>{dictionary[row.getValue('label')]}</Badge>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
@@ -89,6 +89,7 @@ export const columns = [
       if (!id) return <Skeleton className='w-24 h-4'/>
 
       const status = tasksStatuses.find(status => status.value === row.getValue('status'))
+      if (!status) return null
 
       return (
         <Badge variant="outline" className={`flex w-fit items-center gap-x-1 ${status.style}`}>
@@ -129,7 +130,7 @@ export const columns = [
       const { id } = row.original
       if (!id) return <Skeleton className='w-24 h-4'/>
 
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }
+      const options = { year: 'numeric', month: 'short', day: 'numeric' }
 
       return (
         <div className="flex w-fit items-center">

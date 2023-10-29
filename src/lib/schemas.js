@@ -15,7 +15,7 @@ export const tasksSchema = z.object({
   assignees: z.array(z.string()).optional(),
   label: z.enum(['dependencies', 'bug', 'documentation', 'duplicate', 'enhancement', 'good first issue', 'help wanted', 'invalid', 'question', 'wontfix']).optional(),
   status: z.enum(['new', 'block', 'in progress', 'done']).optional(),
-  estimated: z.number().optional(),
+  estimated: z.number().min(0).optional(),
   end_date: z.string().datetime().optional()
 })
 
