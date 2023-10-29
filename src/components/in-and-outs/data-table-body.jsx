@@ -12,11 +12,12 @@ import { useLang } from '@/context/language-context'
 export function DataTableBody ({ table }) {
   const { dictionary } = useLang()
   const router = useRouter()
-  const goTo = (row) => router.push(`/in-and-outs/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
+  // Enruta la pagina a una URL especifica que lleva el nombre del proyecto
+  const goTo = (row) => router.push(`/in-and-outs/${String(row.original.id).toLowerCase().replace(/ /g, '-')}`)
 
   return (
     <TableBody>
-      {table.getRowModel().rows?.length
+      {table.getRowModel().rows?.length // Comprueba si hay filas condiciones ? true : false
         ? (table.getRowModel().rows.map((row) => (
           <TableRow
             key={row.id}

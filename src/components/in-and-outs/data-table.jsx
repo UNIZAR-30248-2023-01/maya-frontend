@@ -47,7 +47,7 @@ export function DataTable ({ data, columns }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <DataTableToolbar table={table} />
+        {/*<DataTableToolbar table={table} />*/}
         <SidePanel
           title={dictionary.inandouts['new-table']}
           description={dictionary.inandouts['new-table-description']}

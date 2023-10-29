@@ -97,7 +97,7 @@ export const projects = {
 // Tabla in and out
 export const inandouts = {
   es: {
-    'day-column': 'Fecha',
+    'language' : 'es-ES',
     'in-column': 'Entrada',
     'out-column': 'Salida',
     'total-column': 'Total',
@@ -117,6 +117,7 @@ export const inandouts = {
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
+    'language' : 'en-US',
     'day-column': 'Date',
     'in-column': 'In',
     'out-column': 'Out',

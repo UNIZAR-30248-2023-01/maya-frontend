@@ -1,56 +1,40 @@
 'use client'
 
 import { Badge } from '@/components/ui/badge'
-import { visibility, projectStatuses } from '@/lib/constants'
 import { DataTableColumnHeader } from '@/components/in-and-outs/data-table-column-header'
 import { LuTable2, LuArchive } from 'react-icons/lu'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useLang } from '@/context/language-context'
+
+// Funcion para formatear la fecha
+function formatDate(timestamp) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const { dictionary } = useLang()
+  console.log('dictionary', dictionary)
+  return new Date(timestamp).toLocaleDateString(dictionary.inandouts.language, options);
+}
+
+// Funcion para formatear el tiempo total siendo el parametro de entrada un int4 
+
+function formatTime(total) {  
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  return `${hours}h ${minutes}m`;
+}
 
 
 {/* Fichero encargador de nombrar las columnas */}
 export const columns = [
   {
-    accessorKey: 'day',
-    header: ({ column, dictionary }) => {
-      return <DataTableColumnHeader column={column} title={dictionary['day-column']} />
-    },
-    cell: ({ row, dictionary }) => {
-      
-
-      {/* row.original tiene la respuesta de la base de datos de una fila especifica
-      const { name } = row.original
-      if (!name) {
-        return (
-          <div className="flex items-start space-x-2">
-            <Skeleton className='w-5 h-5'/>
-          </div>
-        )
-      }*/}
-
-      return (
-        <div className="flex items-start space-x-2">
-          <div className='max-w-[150px] flex flex-col gap-y-1'>
-            <span className="max-w-full truncate font-medium">
-              {row.getValue('day')}
-            </span>
-          </div>
-        </div>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
-    }
-  },
-  {
-    accessorKey: 'in',
+    accessorKey: 'in_date',
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['in-column']} />
     ),
     cell: ({ row }) => {
-      const { name } = row.original
-      if (!name) {
+      const { id } = row.original
+      if (!id) {
         return (
-          <div className="flex space-x-2">
+          <div classid="flex space-x-2">
             <Skeleton className='w-72 h-4'/>
           </div>
         )
@@ -59,9 +43,10 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">
-            {row.getValue('in')}
+            {formatDate(row.getValue('in_date'))}
           </span>
         </div>
+
       )
     },
     filterFn: (row, id, value) => {
@@ -70,13 +55,14 @@ export const columns = [
   }
   ,
   {
-    accessorKey: 'out',
+    accessorKey: 'out_date',
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['out-column']} />
     ),
     cell: ({ row }) => {
-      const { name } = row.original
-      if (!name) {
+      console.log('row', row)
+      const { id } = row.original
+      if (!id) {
         return (
           <div className="flex space-x-2">
             <Skeleton className='w-72 h-4'/>
@@ -87,7 +73,7 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">
-            {row.getValue('out')}
+            {formatDate(row.getValue('out_date'))}
           </span>
         </div>
       )
@@ -102,8 +88,8 @@ export const columns = [
       <DataTableColumnHeader column={column} title={dictionary['total-column']} />
     ),
     cell: ({ row }) => {
-      const { name } = row.original
-      if (!name) {
+      const { id } = row.original
+      if (!id) {
         return (
           <div className="flex space-x-2">
             <Skeleton className='w-72 h-4'/>
@@ -114,7 +100,7 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">
-            {row.getValue('total')}
+            {formatTime(row.getValue('total'))}
           </span>
         </div>
       )
@@ -124,3 +110,5 @@ export const columns = [
     }
   }
 ]
+
+

@@ -16,24 +16,24 @@ export function DataTableToolbar ({ table }) {
       <Input
         id="filter-project"
         placeholder={`${dictionary.inandouts.filter}...`}
-        value={(table.getColumn('name')?.getFilterValue()) ?? ''}
+        value={(table.getColumn('id')?.getFilterValue()) ?? ''}
         onChange={(event) =>
-          table.getColumn('name')?.setFilterValue(event.target.value)
+          table.getColumn('id')?.setFilterValue(event.target.value)
         }
         className="h-8 w-[150px] lg:w-[250px]"
       />
-      {table.getColumn('status') && (
+      {table.getColumn('in_date') && (
         <DataTableFacetedFilter
-          column={table.getColumn('status')}
-          title={dictionary.inandouts.status}
-          options={projectStatuses.map(status => ({ ...status, value: status.value }))}
+          column={table.getColumn('in_date')}
+          title={dictionary.inandouts.in_date}
+          options={in_date.map(status => ({ ...status, value: status.value }))}
         />
       )}
-      {table.getColumn('visibility') && (
+      {table.getColumn('out_date') && (
         <DataTableFacetedFilter
-          column={table.getColumn('visibility')}
-          title={dictionary.inandouts.visibility}
-          options={visibility.map(v => ({ ...v, value: v.value }))}
+          column={table.getColumn('out_date')}
+          title={dictionary.inandouts.out_date}
+          options={out_date.map(v => ({ ...v, value: v.value }))}
         />
       )}
       {isFiltered && (
