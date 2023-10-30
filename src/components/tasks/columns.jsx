@@ -129,6 +129,7 @@ export const columns = [
     cell: ({ row }) => {
       const { id } = row.original
       if (!id) return <Skeleton className='w-24 h-4'/>
+      if (!row.getValue('end_date')) return null
 
       const options = { year: 'numeric', month: 'short', day: 'numeric' }
 

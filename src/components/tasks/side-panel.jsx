@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -30,6 +30,10 @@ export function SidePanel ({
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(tasksSchema._def.shape()))
 
+  useEffect(() => {
+    console.log(form)
+  }, [form])
+
   const setter = ({ key, value }) => {
     return setForm({ ...form, [key]: value })
   }
@@ -46,20 +50,23 @@ export function SidePanel ({
           (async () => {
           // Primera inserción en la tabla 'tasks'
             await supabase.from('tasks').insert([{ ...task, project: 'reign-frontend' }]).select()
-              .then((res) => {
+              .then(async (res) => {
                 if (res.error !== null) return
-
                 // Segunda inserción en la tabla 'people-tasks'
-                supabase.from('people-tasks').insert(assignees.map((assignee) => ({
-                  tasks: res.data[0].id,
-                  username: assignee
-                })))
-                  .then(() => {
-                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
-                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
-                    resolve()
-                  }).catch((error) => reject(error))
-              }).catch((error) => reject(error))
+                if (assignees && assignees.length > 0) {
+                  await supabase.from('people-tasks').insert(assignees.map((assignee) => ({
+                    tasks: res.data[0].id,
+                    username: assignee
+                  })))
+                }
+                // Actualización de los datos en la interfaz
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
+                resolve()
+              }).catch((error) => {
+                console.error(error)
+                reject(error)
+              })
           })()
         })
       }
@@ -112,16 +119,24 @@ export function SidePanel ({
             <Field.ComboboxEnum
               id="label"
               label={dictionary.tasks['label-column']}
-              list={tasksLabels.map(item => ({ ...item, value: dictionary.labels[item.value] }))}
-              value={form.label}
-              onChange={(e) => setter({ key: 'label', value: e === form.label ? null : e })}
+              list={tasksLabels}
+              value={dictionary.labels[form.label]}
+              dictionary={dictionary.labels}
+              onChange={(e) => {
+                const original = Object.keys(dictionary.labels).find(key => dictionary.labels[key] === e)
+                setter({ key: 'label', value: original === form.label ? null : original })
+              }}
             />
             <Field.ComboboxEnum
               id="status"
               label={dictionary.tasks['status-column']}
-              list={tasksStatuses.map(item => ({ ...item, value: dictionary.status[item.value] }))}
-              value={form.status}
-              onChange={(e) => setter({ key: 'status', value: e === form.status ? null : e })}
+              list={tasksStatuses}
+              value={dictionary.labels[form.status]}
+              dictionary={dictionary.status}
+              onChange={(e) => {
+                const original = Object.keys(dictionary.status).find(key => dictionary.status[key] === e)
+                setter({ key: 'status', value: original === form.status ? null : original })
+              }}
             />
             <Field.Number
               id="estimated"
@@ -133,7 +148,7 @@ export function SidePanel ({
               label={dictionary.tasks['end-date-column']}
               value={form.end_date}
               placeholder={dictionary.tasks['end-date-placeholder']}
-              onChange={(e) => setter({ key: 'end_date', value: e })}
+              onChange={(e) => setter({ key: 'end_date', value: e || null })}
             />
           </div>
           <SheetFooter className="">

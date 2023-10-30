@@ -19,7 +19,7 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, onChange }) {
+export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) {
   return (
     <Popover id={id}>
       <Label className='capitalize'>{normalize(label)}</Label>
@@ -45,11 +45,11 @@ export function ComboboxEnum ({ id, label, value, list, onChange }) {
                 onSelect={onChange}
                 className='capitalize'
               >
-                {item.value}
+                {dictionary[item.value]}
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
-                    value === item.value ? 'opacity-100' : 'opacity-0'
+                    value === dictionary[item.value] ? 'opacity-100' : 'opacity-0'
                   )}
                 />
               </CommandItem>

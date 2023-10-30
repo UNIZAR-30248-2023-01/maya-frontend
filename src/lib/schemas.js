@@ -13,10 +13,10 @@ export const projectSchema = z.object({
 export const tasksSchema = z.object({
   name: z.string().min(1).max(30),
   assignees: z.array(z.string()).optional(),
-  label: z.enum(['dependencies', 'bug', 'documentation', 'duplicate', 'enhancement', 'good first issue', 'help wanted', 'invalid', 'question', 'wontfix']).optional(),
-  status: z.enum(['new', 'block', 'in progress', 'done']).optional(),
-  estimated: z.number().min(0).optional(),
-  end_date: z.string().datetime().optional()
+  label: z.enum(['dependencies', 'bug', 'documentation', 'duplicate', 'enhancement', 'good first issue', 'help wanted', 'invalid', 'question', 'wontfix']).optional().nullable(),
+  status: z.enum(['new', 'block', 'in progress', 'done']).optional().nullable(),
+  estimated: z.number().min(0).optional().nullable(),
+  end_date: z.date().optional().nullable()
 })
 
 export const peopleSchema = z.object({
