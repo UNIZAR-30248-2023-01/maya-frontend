@@ -46,7 +46,6 @@ export function SidePanel ({
     {/* mutate : actualiza la interfaz */}
 
     try {
-      console.log('aquiiiiiiiiii', form)
       inAndOutsSchema.parse({ ...form})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
@@ -54,8 +53,10 @@ export function SidePanel ({
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
+              console.log('aquiiiiiiiiii', form)
             })
             .catch((error) => reject(error))
+            console.log('aquiiiiiiiiiinoooo', form)
         })
       }
 
@@ -70,12 +71,45 @@ export function SidePanel ({
     }
   }
 
+  const [selectedInDate, setselectedInDate] = useState(null);
+  const [selectedInHour, setselectedInHour] = useState(null);
+
   const handleDateChange = (newDate) => {
-    setSelectedDate(newDate); // Actualiza el estado con la nueva fecha seleccionada
+    const fechaSeleccionada = newDate.toISOString().split('T')[0];
+    console.log('fechaSeleccionada', fechaSeleccionada)
+    setselectedInDate(fechaSeleccionada);
+
+    if (selectedInDate !== null && selectedInHour !== null){
+      const inFullDate= createTimestamp();
+      setter({ key: 'in_date', value: inFullDate})
+    }
   };
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  console.log('selectedDate', selectedDate)
+  const handleHourChange = (newHour) => {
+    if (/^\d{2}:\d{2}$/.test(newHour)) {
+      setselectedInHour(newHour);
+      console.log('newHour', newHour)
+
+      if (selectedInDate !== null && selectedInHour !== null){
+        const inFullDate= createTimestamp();
+        setter({ key: 'in_date', value: inFullDate})
+      }
+    } else {
+      console.log('La hora no sigue el formato hh:mm');
+    }
+  };
+  
+
+  function createTimestamp() {
+    const [year, month, day] = selectedInDate.split('-');
+    const [hour, minute] = selectedInHour.split(':');
+    
+    const combinedDate = new Date(year, month - 1, day, hour, minute);
+    console.log('combinedDate', combinedDate.getTime());
+
+    return combinedDate.getTime(); // Devuelve el timestamp en milisegundos
+  }
+
 
   return (
     <Sheet>
@@ -99,9 +133,9 @@ export function SidePanel ({
               label={dictionary.inandouts['in-column']}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
               value={form.in_date}
-              onChange={(e) => console.log('e.target.value', e)}
-              //onChange={(e) => {console.log(e.target.value, 'e.target.value'); handleDateChange(e.target.value)}}
-              //onChange={(e) => {setter({ key: 'in_date', value: e.target.value }); console.log(e.target.value, 'e.target.value')}}
+              //onChange={(e) => console.log('e.target.value', e )}
+              onChange={(e) => { console.log('e.target.value', e ), handleDateChange(e)}} 
+               //onChange={(e) => {setter({ key: 'in_date', value: e.target.value }); console.log(e.target.value, 'e.target.value')}}
             />
 
 
@@ -109,7 +143,8 @@ export function SidePanel ({
               <Field.Text
                 id="in_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
-                onChange={(e) => setter({ key: 'in_hour', value: e.target.value })}
+                onChange={(e) => { handleHourChange(e.target.value )}}
+                //onChange={(e) => setter({ key: 'in_hour', value: e.target.value })}
               />
             </div>
 
@@ -121,7 +156,7 @@ export function SidePanel ({
               id="out_date"
               label={dictionary.inandouts['out-column']}
               placeholder={dictionary.inandouts['new-table-out-placeholder']}   
-              onChange={(e) => setter({ key: 'out_date', value: e.target.value })}
+              onChange={(e) => { console.log('e.target.value', e ) /*handleDateChange(e)*/}}
             />
 
             <div className="w-[65px]"> 

@@ -12,8 +12,8 @@ export const projectSchema = z.object({
 
 // BORRAR: probablemente falta id
 export const inAndOutsSchema = z.object({
-  fechaEntrada: z.date().nullable(),
-  fechaSalida: z.date().nullable(),
+  in_date: z.date().nullable(),
+  out_date: z.date().nullable(),
   total: z.number().nullable(),
 })
 
