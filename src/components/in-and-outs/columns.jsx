@@ -10,7 +10,6 @@ import { useLang } from '@/context/language-context'
 function formatDate(timestamp) {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   const { dictionary } = useLang()
-  console.log('dictionary', dictionary)
   return new Date(timestamp).toLocaleDateString(dictionary.inandouts.language, options);
 }
 
@@ -60,7 +59,6 @@ export const columns = [
       <DataTableColumnHeader column={column} title={dictionary['out-column']} />
     ),
     cell: ({ row }) => {
-      console.log('row', row)
       const { id } = row.original
       if (!id) {
         return (

@@ -37,25 +37,29 @@ export function SidePanel ({
       return setForm({ ...form, [key]: values[Number(!value)] })
     }
     return setForm({ ...form, [key]: value })
-  }
+  } 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    {/* mutate : actualiza la interfaz */}
+
     try {
-      inAndOutsSchema.parse({ ...form, organization: 'reign' })
-      const createProject = () => {
+      console.log('aquiiiiiiiiii', form)
+      inAndOutsSchema.parse({ ...form})
+      const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('projects').insert([{ ...form, organization: 'reign' }])
+          supabase.from('in-and-outs').insert([{ ...form }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
             })
             .catch((error) => reject(error))
         })
       }
 
-      toast.promise(createProject, {
+      toast.promise(createManualClockin, {
         loading: dictionary.inandouts['toast-loading'],
         success: () => dictionary.inandouts['toast-success'],
         error: () => dictionary.inandouts['toast-error']
@@ -65,6 +69,13 @@ export function SidePanel ({
       toast.error(path[0] + ': ' + message)
     }
   }
+
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate); // Actualiza el estado con la nueva fecha seleccionada
+  };
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  console.log('selectedDate', selectedDate)
 
   return (
     <Sheet>
@@ -85,20 +96,21 @@ export function SidePanel ({
             </SheetDescription>
             
             <Field.DatePicker
-              id="in_date"
               label={dictionary.inandouts['in-column']}
-              placeholder={dictionary.inandouts['new-table-in-placeholder']}   
-              onChange={(e) => setter({ key: 'in_date', value: e.target.value })}
+              placeholder={dictionary.inandouts['new-table-in-placeholder']}
+              value={form.in_date}
+              onChange={(e) => console.log('e.target.value', e)}
+              //onChange={(e) => {console.log(e.target.value, 'e.target.value'); handleDateChange(e.target.value)}}
+              //onChange={(e) => {setter({ key: 'in_date', value: e.target.value }); console.log(e.target.value, 'e.target.value')}}
             />
 
+
             <div className="w-[65px]">
-              
               <Field.Text
                 id="in_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => setter({ key: 'in_hour', value: e.target.value })}
               />
-
             </div>
 
             <SheetDescription style={{ marginTop: '20px' }}>
@@ -112,23 +124,18 @@ export function SidePanel ({
               onChange={(e) => setter({ key: 'out_date', value: e.target.value })}
             />
 
-            <div className="w-[65px]">
-              
+            <div className="w-[65px]"> 
               <Field.Text
                 id="out_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => setter({ key: 'out_hour', value: e.target.value })}
               />
-
             </div>
-            
-            
+
           </div>
           <SheetFooter className="">
             <SheetClose asChild>
-              <Button
-                type="submit"
-              >
+              <Button type="submit">
                 {actionBtn}
               </Button>
             </SheetClose>

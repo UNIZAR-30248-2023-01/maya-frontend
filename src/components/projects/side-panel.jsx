@@ -52,8 +52,6 @@ export function SidePanel ({
         })
       }
 
-      {/* mutate : actualiza la interfaz */}
-
       toast.promise(createProject, {
         loading: dictionary.projects['toast-loading'],
         success: () => dictionary.projects['toast-success'],
