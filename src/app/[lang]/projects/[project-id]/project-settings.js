@@ -2,8 +2,9 @@
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ProjectSettings } from '@/components/projects/settings/project-settings'
+import { ManageAccess } from '@/components/projects/settings/manage-access'
 
 export const metadata = {
   title: 'Project Settings',
@@ -53,11 +54,7 @@ export default function SettingsPage () {
         </aside>
         <div className="flex-1 lg:max-w-2xl">
           <ProjectSettings value="project settings"/>
-          <TabsContent value="manage access">
-            <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'>
-              <h1 className='text-2xl font-bold'>manage access</h1>
-            </div>
-          </TabsContent>
+          <ManageAccess value="manage access"/>
         </div>
       </Tabs>
     </div>
