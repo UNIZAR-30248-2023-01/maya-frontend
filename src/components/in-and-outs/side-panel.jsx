@@ -20,6 +20,12 @@ import { toast } from 'sonner'
 import { mutate } from 'swr'
 import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
 
+const exampleDate = {
+  in_date: new Date('2023-11-01T10:10:12'),
+  out_date: new Date('2023-11-02T10:13:01'),
+  total: 59
+}
+
 export function SidePanel ({
   title,
   description,
@@ -31,10 +37,8 @@ export function SidePanel ({
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(inAndOutsSchema._def.shape()))
 
-
-
   // Funion que gestiona el setter de la fecha de salida y salida
-  const gestionarSetter = async () => {
+  const gestionarSetter = () => {
     console.log('form de gestionarSetter', form)
 
     const fechaOut = form.out_date.toLocaleDateString(dictionary.inandouts['lenguage'], { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
@@ -45,38 +49,32 @@ export function SidePanel ({
     console.log('fechas', fechaOut, fechaIn)
     
     if (fechaIn !== null && horaIn !== null && fechaOut !== null && horaOut !== null){ // añadir el out_date y out_hour
-      console.log('creamos timestamp')
-      const timestampIn =  new Date(createTimestamp(fechaIn, horaIn) )
-      const timestampOut =  new Date(createTimestamp(fechaOut, horaOut) )
+      const timestampIn =  new Date(createTimestamp(fechaIn, horaIn))
+      const timestampOut =  new Date(createTimestamp(fechaOut, horaOut))
 
-      //const { in_hour, out_hour, ...formWithoutHours} = form // eliminamos los campos in_hour y out_hour del form
+      // const { in_hour, out_hour, ...form} = form // eliminamos los campos in_hour y out_hour del form
       
       console.log('timestampIn', timestampIn)
       console.log('timestampOut', timestampOut)
       delete form.in_hour;
       delete form.out_hour;
 
+
       // DUDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       form.in_date = timestampIn;
       form.out_date = timestampOut; 
-      form.total = 20;
-      
-      setter({ key: 'in_date', value: timestampIn })
-      setter({ key: 'out_date', value: timestampOut })
-      setter({ key: 'total', value: 10 })
+
+      const tiempoEnMilisegundos = timestampOut- timestampIn;
+      const horasTotales = tiempoEnMilisegundos / (1000 * 60); // Milisegundos a horas
+      const horasRedondeadas = Math.round(horasTotales);
+      form.total = horasRedondeadas;
 
       console.log('form de gestionarSetter final ', form) 
     }
     
   }
 
-  const setter = ({ key, value, type }) => {
-    if (type === 'bool') {
-      const { values } = inAndOutsSchema._def.shape()[key]._def.innerType._def
-      return setForm({ ...form, [key]: values[Number(!value)] })
-    }
-    return setForm({ ...form, [key]: value })
-  } 
+  const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   console.log('form llamado desde global ', form)
 
@@ -84,10 +82,10 @@ export function SidePanel ({
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    await gestionarSetter();
+    gestionarSetter();
 
     // Manjear los setter
-    console.log('form de handleSubmit ', form)
+    // console.log('form de handleSubmit ', form)
     
 
     {/* mutate : actualiza la interfaz */}
@@ -96,14 +94,16 @@ export function SidePanel ({
       inAndOutsSchema.parse({ ...form})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ ...form , username: 'hec7orci7o' }])
+          supabase.from('in-and-outs').insert([{ ...exampleDate , username: 'hec7orci7o' }])
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
-              console.log('aquiiiiiiiiii', form)
+              console.log('despues del resolve', form)
             })
-            .catch((error) => {reject(error); console.log('aquiiiiiiiiiinoooo', form)})
-            
+            .catch((error) => {
+              reject(error); 
+              console.log('despues del reject', form)
+            })
         })
       }
 
@@ -167,8 +167,6 @@ export function SidePanel ({
                   if (/^\d{2}:\d{2}$/.test(inputHour)) {
                     console.log('Formato de hora válido', inputHour);
                     setter({ key: 'in_hour', value: inputHour });
-
-
                   } else {
                     console.log('Formato de hora no válido');
                   }
