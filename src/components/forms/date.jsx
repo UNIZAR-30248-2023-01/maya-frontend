@@ -14,12 +14,13 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function DatePicker ({ label, value, placeholder, onChange }) {
+export function DatePicker ({ id, label, value, placeholder, onChange }) {
   return (
     <Popover>
       <Label className='capitalize'>{normalize(label)}</Label>
       <PopoverTrigger asChild>
         <Button
+          id={id}
           variant={'outline'}
           className={cn(
             'w-[240px] justify-start text-left font-normal',

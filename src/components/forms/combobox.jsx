@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 
 import { Label } from '@/components/ui/label'
@@ -20,11 +21,13 @@ import {
 } from '@/components/ui/popover'
 
 export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) {
+  const [open, setOpen] = useState(false)
   return (
-    <Popover id={id}>
+    <Popover open={open} onOpenChange={setOpen}>
       <Label className='capitalize'>{normalize(label)}</Label>
       <PopoverTrigger asChild>
         <Button
+          id={id}
           variant="outline"
           role="combobox"
           aria-expanded={open}
@@ -38,11 +41,14 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) 
         <Command>
           <CommandInput placeholder={`Search ${label}...`} className="h-9" />
           <CommandEmpty>No {label} found.</CommandEmpty>
-          <CommandGroup>
+          <CommandGroup id={`${id}-menu`}>
             {list.map((item) => (
               <CommandItem
                 key={item.value}
-                onSelect={onChange}
+                onSelect={(e) => {
+                  onChange(e)
+                  setOpen(false)
+                }}
                 className='capitalize'
               >
                 {dictionary[item.value]}
@@ -62,11 +68,13 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) 
 }
 
 export function ComboboxArray ({ id, label, values, list, onChange }) {
+  const [open, setOpen] = useState(false)
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
         <Label className='capitalize'>{normalize(label)}</Label>
         <PopoverTrigger asChild>
           <Button
+            id={id}
             variant="outline"
             role="combobox"
             aria-expanded={open}
@@ -83,13 +91,16 @@ export function ComboboxArray ({ id, label, values, list, onChange }) {
           <CommandInput placeholder={id} />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup>
+            <CommandGroup id={`${id}-menu`}>
               {list.map((option) => {
                 const isSelected = values.includes(option.value)
                 return (
                   <CommandItem
                     key={option.value}
-                    onSelect={onChange}
+                    onSelect={(e) => {
+                      onChange(e)
+                      setOpen(false)
+                    }}
                   >
                     <div
                       className={cn(

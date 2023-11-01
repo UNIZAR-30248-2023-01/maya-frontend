@@ -1,8 +1,7 @@
 /// <reference types="cypress" />
-// import { supabase } from '../../src/lib/utils'
 
 const project = {
-  title: 'New Project',
+  name: 'New Project',
   description: 'Description of the new project'
 }
 
@@ -13,7 +12,7 @@ describe('Project Resource', () => {
     cy.wait(3000)
     cy.get('button#new-project').click()
 
-    cy.get('input#name').type(project.title)
+    cy.get('input#name').type(project.name)
     cy.get('textarea#description').type(project.description)
     cy.get('button#visibility').click()
 
@@ -22,11 +21,11 @@ describe('Project Resource', () => {
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')
-      .should('contain.text', project.title)
+      .should('contain.text', project.name)
   })
 
-  after(() => {
-    fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.title}`, {
+  after(async () => {
+    await fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.name}`, {
       method: 'DELETE',
       headers: {
         apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),

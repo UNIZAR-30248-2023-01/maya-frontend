@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -29,10 +29,6 @@ export function SidePanel ({
 }) {
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(tasksSchema._def.shape()))
-
-  useEffect(() => {
-    console.log(form)
-  }, [form])
 
   const setter = ({ key, value }) => {
     return setForm({ ...form, [key]: value })
@@ -85,7 +81,7 @@ export function SidePanel ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-project" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-task" variant="outline" className='capitalize'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
@@ -103,7 +99,7 @@ export function SidePanel ({
               onChange={(e) => setter({ key: 'name', value: e.target.value })}
             />
             <Field.ComboboxArray
-              id="name"
+              id="assignees"
               label={dictionary.tasks['assignees-column']}
               list={data.assignees.map((assignee) => ({ value: assignee.username, label: assignee.username }))}
               values={form.assignees || []}
@@ -131,7 +127,7 @@ export function SidePanel ({
               id="status"
               label={dictionary.tasks['status-column']}
               list={tasksStatuses}
-              value={dictionary.labels[form.status]}
+              value={dictionary.status[form.status]}
               dictionary={dictionary.status}
               onChange={(e) => {
                 const original = Object.keys(dictionary.status).find(key => dictionary.status[key] === e)
@@ -145,6 +141,7 @@ export function SidePanel ({
               onChange={(e) => setter({ key: 'estimated', value: Number(e.target.value) })}
             />
             <Field.DatePicker
+              id="end-date"
               label={dictionary.tasks['end-date-column']}
               value={form.end_date}
               placeholder={dictionary.tasks['end-date-placeholder']}
