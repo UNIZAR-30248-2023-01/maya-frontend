@@ -94,7 +94,7 @@ export function SidePanel ({
       inAndOutsSchema.parse({ ...form})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ ...exampleDate , username: 'hec7orci7o' }])
+          supabase.from('in-and-outs').insert([{ ...form , username: 'hec7orci7o' }])
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
