@@ -157,7 +157,12 @@ export const people = {
     role: 'Roles',
     'new-person': 'reclutar',
     'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
-    'new-person-create': 'invitar'
+    'new-person-create': 'invitar',
+    'invite-member': 'Recluta personal',
+    'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
+    invite: 'Añadir miembros',
+    search: 'Buscar miembros',
+    'invite-member-send': 'reclutar'
   },
   en: {
     'member-column': 'Members',
@@ -165,7 +170,12 @@ export const people = {
     role: 'Roles',
     'new-person': 'recruit',
     'new-table-description': 'Add people to your project to improve your team.',
-    'new-person-create': 'invite'
+    'new-person-create': 'invite',
+    'invite-member': 'Recruit people',
+    'invite-member-description': 'Add members to your project to improve your team.',
+    invite: 'Add members',
+    search: 'Search members',
+    'invite-member-send': 'recruit'
   }
 }
 

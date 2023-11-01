@@ -33,12 +33,6 @@ export const navigation = [
   { name: 'tickets', href: '/tickets', icon: LuTicket, current: false }
 ]
 
-export const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
-]
-
 export const profileNavItems = [
   {
     title: 'profile',

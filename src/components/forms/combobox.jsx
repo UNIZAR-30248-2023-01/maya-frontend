@@ -67,10 +67,10 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) 
   )
 }
 
-export function ComboboxArray ({ id, label, values, list, onChange }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover className='w-full' open={open} onOpenChange={setOpen} >
         <Label className='capitalize'>{normalize(label)}</Label>
         <PopoverTrigger asChild>
           <Button
@@ -78,17 +78,17 @@ export function ComboboxArray ({ id, label, values, list, onChange }) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between"
+            className="w-full justify-between"
           >
             {values.length > 0
               ? values.join(', ')
-              : label}
-            <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              : placeholder}
+            <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
           </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-full p-0" align="start">
         <Command>
-          <CommandInput placeholder={label} />
+          <CommandInput placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
