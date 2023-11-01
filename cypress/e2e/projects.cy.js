@@ -17,7 +17,7 @@ describe('Project Resource', () => {
     cy.get('button#visibility').click()
 
     cy.get('form').submit()
-    cy.get('input#filter-project').type('New Project', { force: true })
+    cy.get('input#filter-project').type(project.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')

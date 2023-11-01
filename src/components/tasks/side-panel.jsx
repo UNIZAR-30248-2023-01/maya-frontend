@@ -98,6 +98,12 @@ export function SidePanel ({
               placeholder={dictionary.tasks['new-table-name-placeholder']}
               onChange={(e) => setter({ key: 'name', value: e.target.value })}
             />
+            <Field.TextArea
+              id="description"
+              label={dictionary.tasks['description-column']}
+              placeholder={dictionary.tasks['new-task-desc-placeholder']}
+              onChange={(e) => setter({ key: 'description', value: e.target.value })}
+            />
             <Field.ComboboxArray
               id="assignees"
               label={dictionary.tasks['assignees-column']}

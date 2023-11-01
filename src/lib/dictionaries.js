@@ -103,6 +103,8 @@ export const tasks = {
     'status-column': 'Estado',
     'estimated-column': 'Estimado',
     'end-date-column': 'Fecha de finalización',
+    'description-column': 'Descripción',
+    'new-task-desc-placeholder': 'Ayuda a tu equipo a entender lo que quieres hacer con esta tarea.',
     filter: 'Filtrar por tarea',
     assignees: 'Asignados',
     label: 'Etiqueta',
@@ -127,6 +129,8 @@ export const tasks = {
     'status-column': 'Status',
     'estimated-column': 'Estimated',
     'end-date-column': 'End date',
+    'description-column': 'Description',
+    'new-task-desc-placeholder': 'Help your team understand what you want to do with this task.',
     filter: 'Filter by task',
     assignees: 'Assignees',
     label: 'Label',
@@ -169,18 +173,36 @@ export const teams = {
   es: {
     'team-column': 'Equipos',
     'member-column': 'Miembros',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'new-team-name-placeholder': 'Repartidores',
+    'new-team-desc-placeholder': 'Ayuda a tu equipo a entender el propósito de este equipo',
+    public: 'público',
+    private: 'privado',
     filter: 'Filtrar por nombre de equipo',
     'new-team': 'nuevo equipo',
     'new-table-description': 'Los equipos son una forma de organizar a las personas que trabajan en tu proyecto.',
-    'new-team-create': 'Crear'
+    'new-team-create': 'Crear',
+    'toast-loading': 'Estamos creando tu equipo. Por favor, espera un momento.',
+    'toast-success': 'Tu equipo se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'team-column': 'Teams',
     'member-column': 'Members',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'new-team-name-placeholder': 'Delivery',
+    'new-team-desc-placeholder': 'Help your team understand the purpose of this team',
+    public: 'public',
+    private: 'private',
     filter: 'Filter by team name',
     'new-team': 'new team',
     'new-table-description': 'Teams are a way of organizing the people working on your project.',
-    'new-team-create': 'Create'
+    'new-team-create': 'Create',
+    'toast-loading': 'We are creating your team. Please wait a moment.',
+    'toast-success': 'Your team has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
 

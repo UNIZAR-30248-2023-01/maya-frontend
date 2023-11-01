@@ -29,8 +29,9 @@ export const peopleSchema = z.object({
 })
 
 export const teamSchema = z.object({
-  id: z.string(),
   name: z.string().min(1).max(30),
-  description: z.string().max(150),
-  visibility: z.enum(['public', 'private']).default('private')
+  description: z.string().max(150).nullable(),
+  members: z.array(z.string()).optional(),
+  visibility: z.enum(['public', 'private']).default('private'),
+  organization: z.string()
 })

@@ -34,6 +34,7 @@ describe('Tasks Resource', () => {
     cy.get('button#new-task').click()
 
     cy.get('input#name').type(task.name)
+    cy.get('textarea#description').type(task.description)
 
     cy.get('button#assignees').click()
     cy.get('div#assignees-menu')
@@ -58,7 +59,7 @@ describe('Tasks Resource', () => {
       .click()
 
     cy.get('form').submit()
-    cy.get('input#filter-tasks').type('New Task', { force: true })
+    cy.get('input#filter-tasks').type(task.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')
