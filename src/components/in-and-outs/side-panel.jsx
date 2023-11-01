@@ -18,7 +18,7 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
-
+import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
 
 export function SidePanel ({
   title,
@@ -31,6 +31,45 @@ export function SidePanel ({
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(inAndOutsSchema._def.shape()))
 
+
+
+  // Funion que gestiona el setter de la fecha de salida y salida
+  const gestionarSetter = async () => {
+    console.log('form de gestionarSetter', form)
+
+    const fechaOut = form.out_date.toLocaleDateString(dictionary.inandouts['lenguage'], { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+    const fechaIn = form.in_date.toLocaleDateString(dictionary.inandouts['lenguage'], { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+    const horaOut = form.out_hour;
+    const horaIn = form.in_hour;
+
+    console.log('fechas', fechaOut, fechaIn)
+    
+    if (fechaIn !== null && horaIn !== null && fechaOut !== null && horaOut !== null){ // añadir el out_date y out_hour
+      console.log('creamos timestamp')
+      const timestampIn =  new Date(createTimestamp(fechaIn, horaIn) )
+      const timestampOut =  new Date(createTimestamp(fechaOut, horaOut) )
+
+      //const { in_hour, out_hour, ...formWithoutHours} = form // eliminamos los campos in_hour y out_hour del form
+      
+      console.log('timestampIn', timestampIn)
+      console.log('timestampOut', timestampOut)
+      delete form.in_hour;
+      delete form.out_hour;
+
+      // DUDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      form.in_date = timestampIn;
+      form.out_date = timestampOut; 
+      form.total = 20;
+      
+      setter({ key: 'in_date', value: timestampIn })
+      setter({ key: 'out_date', value: timestampOut })
+      setter({ key: 'total', value: 10 })
+
+      console.log('form de gestionarSetter final ', form) 
+    }
+    
+  }
+
   const setter = ({ key, value, type }) => {
     if (type === 'bool') {
       const { values } = inAndOutsSchema._def.shape()[key]._def.innerType._def
@@ -39,9 +78,17 @@ export function SidePanel ({
     return setForm({ ...form, [key]: value })
   } 
 
+  console.log('form llamado desde global ', form)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    await gestionarSetter();
+
+    // Manjear los setter
+    console.log('form de handleSubmit ', form)
+    
 
     {/* mutate : actualiza la interfaz */}
 
@@ -49,14 +96,14 @@ export function SidePanel ({
       inAndOutsSchema.parse({ ...form})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ ...form }])
+          supabase.from('in-and-outs').insert([{ ...form , username: 'hec7orci7o' }])
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
               console.log('aquiiiiiiiiii', form)
             })
-            .catch((error) => reject(error))
-            console.log('aquiiiiiiiiiinoooo', form)
+            .catch((error) => {reject(error); console.log('aquiiiiiiiiiinoooo', form)})
+            
         })
       }
 
@@ -71,41 +118,14 @@ export function SidePanel ({
     }
   }
 
-  const [selectedInDate, setselectedInDate] = useState(null);
-  const [selectedInHour, setselectedInHour] = useState(null);
-
-  const handleDateChange = (newDate) => {
-    const fechaSeleccionada = newDate.toISOString().split('T')[0];
-    console.log('fechaSeleccionada', fechaSeleccionada)
-    setselectedInDate(fechaSeleccionada);
-
-    if (selectedInDate !== null && selectedInHour !== null){
-      const inFullDate= createTimestamp();
-      setter({ key: 'in_date', value: inFullDate})
-    }
-  };
-
-  const handleHourChange = (newHour) => {
-    if (/^\d{2}:\d{2}$/.test(newHour)) {
-      setselectedInHour(newHour);
-      console.log('newHour', newHour)
-
-      if (selectedInDate !== null && selectedInHour !== null){
-        const inFullDate= createTimestamp();
-        setter({ key: 'in_date', value: inFullDate})
-      }
-    } else {
-      console.log('La hora no sigue el formato hh:mm');
-    }
-  };
+  // Funcion convierte la fecha y hora seleccionada en un timestamp
+  function createTimestamp(dateToTimestamp, hourToTimestamp) {
   
-
-  function createTimestamp() {
-    const [year, month, day] = selectedInDate.split('-');
-    const [hour, minute] = selectedInHour.split(':');
+    const [day, month, year] = dateToTimestamp.split('-');
+    const [hour, minute] = hourToTimestamp.split(':');
     
     const combinedDate = new Date(year, month - 1, day, hour, minute);
-    console.log('combinedDate', combinedDate.getTime());
+    console.log('combinedDate ', combinedDate.getTime());
 
     return combinedDate.getTime(); // Devuelve el timestamp en milisegundos
   }
@@ -131,11 +151,9 @@ export function SidePanel ({
             
             <Field.DatePicker
               label={dictionary.inandouts['in-column']}
-              placeholder={dictionary.inandouts['new-table-in-placeholder']}
               value={form.in_date}
-              //onChange={(e) => console.log('e.target.value', e )}
-              onChange={(e) => { console.log('e.target.value', e ), handleDateChange(e)}} 
-               //onChange={(e) => {setter({ key: 'in_date', value: e.target.value }); console.log(e.target.value, 'e.target.value')}}
+              placeholder={dictionary.inandouts['new-table-in-placeholder']}
+              onChange={(e) => {setter({ key: 'in_date', value: e });console.log('fecha de entrada ', e)}}
             />
 
 
@@ -143,27 +161,48 @@ export function SidePanel ({
               <Field.Text
                 id="in_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
-                onChange={(e) => { handleHourChange(e.target.value )}}
-                //onChange={(e) => setter({ key: 'in_hour', value: e.target.value })}
+                onChange={(e) => {
+                  const inputHour = e.target.value;
+
+                  if (/^\d{2}:\d{2}$/.test(inputHour)) {
+                    console.log('Formato de hora válido', inputHour);
+                    setter({ key: 'in_hour', value: inputHour });
+
+
+                  } else {
+                    console.log('Formato de hora no válido');
+                  }
+                }}
               />
             </div>
 
             <SheetDescription style={{ marginTop: '20px' }}>
               {descriptionOut}
             </SheetDescription>
-            
+
             <Field.DatePicker
               id="out_date"
               label={dictionary.inandouts['out-column']}
-              placeholder={dictionary.inandouts['new-table-out-placeholder']}   
-              onChange={(e) => { console.log('e.target.value', e ) /*handleDateChange(e)*/}}
+              value={form.out_date}
+              placeholder={dictionary.inandouts['new-table-out-placeholder']}
+              onChange={(e) => {setter({ key: 'out_date', value: e });console.log('fecha de salida ', e)}}
             />
 
-            <div className="w-[65px]"> 
+            <div className="w-[65px]">
               <Field.Text
                 id="out_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
-                onChange={(e) => setter({ key: 'out_hour', value: e.target.value })}
+                onChange={(e) => {
+                  const inputHour = e.target.value;
+
+                  if (/^\d{2}:\d{2}$/.test(inputHour)) {
+                    console.log('Formato de hora válido');
+                    setter({ key: 'out_hour', value: inputHour });
+                    
+                  } else {
+                    console.log('Formato de hora no válido');
+                  }
+                }}
               />
             </div>
 
