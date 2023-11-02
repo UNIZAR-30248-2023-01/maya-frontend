@@ -1,7 +1,7 @@
 'use client'
 
 import { SheetTrigger } from '@/components/ui/sheet'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 import { LuMenu } from 'react-icons/lu'
 import { Button } from '@/components/ui/button'
 
