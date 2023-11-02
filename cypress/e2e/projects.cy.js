@@ -25,9 +25,6 @@ describe('Project Resource', () => {
   })
 
   after(() => {
-    cy.log(`NEXT_PUBLIC_SUPABASE_URL: ${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}`)
-    cy.log(`NEXT_PUBLIC_SUPABASE_KEY: ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`)
-
     cy.request({
       method: 'DELETE',
       url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.name}`,
