@@ -66,15 +66,14 @@ describe('Tasks Resource', () => {
       .should('contain.text', task.name)
   })
 
-  after(async () => {
-    await fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/tasks?name=eq.${task.name}`, {
+  after(() => {
+    cy.request({
       method: 'DELETE',
+      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/tasks?name=eq.${task.name}`,
       headers: {
         apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
         Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
       }
-    }).catch((error) => {
-      console.log(error)
     })
   })
 })

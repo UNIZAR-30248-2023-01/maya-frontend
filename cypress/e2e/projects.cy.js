@@ -24,15 +24,14 @@ describe('Project Resource', () => {
       .should('contain.text', project.name)
   })
 
-  after(async () => {
-    await fetch(`${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.name}`, {
+  after(() => {
+    cy.request({
       method: 'DELETE',
+      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${project.name}`,
       headers: {
         apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
         Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
       }
-    }).catch((error) => {
-      console.log(error)
     })
   })
 })
