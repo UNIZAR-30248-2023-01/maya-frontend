@@ -1,5 +1,3 @@
-'use client'
-
 export const metadata = {
   title: 'Home',
   description: 'This is the home page'

@@ -6,11 +6,6 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ProjectSettings } from '@/components/projects/settings/project-settings'
 import { ManageAccess } from '@/components/projects/settings/manage-access'
 
-export const metadata = {
-  title: 'Project Settings',
-  description: 'Here you will be able to access and manage the settings of your project.'
-}
-
 const projectNavItems = [
   {
     title: 'project settings'

@@ -5,11 +5,6 @@ import { columns } from '@/components/tasks/columns'
 import { loadingTasks } from '@/lib/constants'
 import useSWR from 'swr'
 
-export const metadata = {
-  title: 'Tasks',
-  description: 'Here is a list of the tasks that you have in your project.'
-}
-
 export default function TasksPage () {
   let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
   const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)

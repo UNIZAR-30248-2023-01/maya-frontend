@@ -1,10 +1,3 @@
-'use client'
-
-export const metadata = {
-  title: 'InAndOuts',
-  description: 'Here is a list of your in-and-outs'
-}
-
 export default function InAndOutsPage () {
   return (
     <>

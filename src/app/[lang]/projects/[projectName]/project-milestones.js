@@ -1,10 +1,5 @@
 'use client'
 
-export const metadata = {
-  title: 'Milestones',
-  description: 'Here you will be able to access and manage your milestones.'
-}
-
 export default function MilestonesPage () {
   return (
     <>
