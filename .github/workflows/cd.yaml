@@ -11,9 +11,7 @@ on:
   pull_request:
     branches: [main, develop]
 
-env:
-  CYPRESS_NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-  CYPRESS_NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+
 
 jobs:
   install:
@@ -42,3 +40,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 30
           command: npm run cypress:test
+        env:
+          CYPRESS_NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
