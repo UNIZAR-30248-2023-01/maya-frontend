@@ -110,6 +110,7 @@ export function SidePanel ({
             <Field.ComboboxArray
               id="members"
               label={dictionary.teams['member-column']}
+              placeholder={dictionary.teams['new-team-member-placeholder']}
               list={data.members.map((member) => ({ value: member.username, label: member.username }))}
               values={form.members || []}
               onChange={(e) => {
