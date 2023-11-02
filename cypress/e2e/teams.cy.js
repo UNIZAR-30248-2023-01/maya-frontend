@@ -49,8 +49,6 @@ describe('Teams Resource', () => {
         apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
         Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
       }
-    }).catch((error) => {
-      console.error(error.message)
     })
   })
 })
