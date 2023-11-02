@@ -3,10 +3,9 @@
 import { TeamMember } from '@/components/team-member'
 import { SidebarHeader } from '@/components/sidebar/sidebar-header'
 import { SidebarNavigation } from '@/components/sidebar/sidebar-navigation'
-import { SidebarTeams } from '@/components/sidebar/sidebar-teams'
 import { useLang } from '@/context/language-context'
 
-export function Sidebar ({ navigation, teams, sheet = false, setSearchOpen }) {
+export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
   const { dictionary } = useLang()
   navigation = navigation.map((item) => ({ ...item, name: dictionary.navigation[item.name] }))
 
@@ -19,9 +18,6 @@ export function Sidebar ({ navigation, teams, sheet = false, setSearchOpen }) {
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
             <li>
               <SidebarNavigation navigation={navigation} />
-            </li>
-            <li>
-              <SidebarTeams teams={teams} />
             </li>
             <li className="mt-auto">
               <TeamMember />

@@ -14,7 +14,7 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/tasks/data-table-header'
 import { DataTableBody } from '@/components/tasks/data-table-body'
-import { SidePanel } from '@/components/projects/side-panel'
+import { SidePanel } from '@/components/tasks/side-panel'
 import { useLang } from '@/context/language-context'
 import { tasksSchema } from '@/lib/schemas'
 
@@ -54,6 +54,7 @@ export function DataTable ({ data, columns, people }) {
           triggerBtn={dictionary.tasks['new-task']}
           actionBtn={dictionary.tasks['new-task-create']}
           schema={tasksSchema}
+          data={{ assignees: people }}
         />
       </div>
       <div className="rounded-md border">

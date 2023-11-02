@@ -33,12 +33,6 @@ export const navigation = [
   { name: 'tickets', href: '/tickets', icon: LuTicket, current: false }
 ]
 
-export const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
-]
-
 export const profileNavItems = [
   {
     title: 'profile',
@@ -80,6 +74,40 @@ export const projectStatuses = [
   }, {
     value: 'closed',
     icon: LuArchive
+  }
+]
+
+export const tasksLabels = [
+  {
+    value: 'enhancement',
+    style: ''
+  }, {
+    value: 'bug',
+    style: ''
+  }, {
+    value: 'documentation',
+    style: ''
+  }, {
+    value: 'duplicate',
+    style: ''
+  }, {
+    value: 'good first issue',
+    style: ''
+  }, {
+    value: 'help wanted',
+    style: ''
+  }, {
+    value: 'invalid',
+    style: ''
+  }, {
+    value: 'question',
+    style: ''
+  }, {
+    value: 'testing',
+    style: ''
+  }, {
+    value: 'wontfix',
+    style: ''
   }
 ]
 
