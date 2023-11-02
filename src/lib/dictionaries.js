@@ -41,7 +41,8 @@ export const table = {
     'last-page': 'Ir a la última página',
     'next-page': 'Ir a la página siguiente',
     'previous-page': 'Ir a la página anterior',
-    'clear-filters': 'Limpiar'
+    'clear-filters': 'Limpiar',
+    'no-results': 'No se han encontrado resultados'
   },
   en: {
     'selected-rows': (selected, total) => `${selected} of ${total} row(s) selected.`,
@@ -51,7 +52,8 @@ export const table = {
     'last-page': 'Go to last page',
     'next-page': 'Go to next page',
     'previous-page': 'Go to previous page',
-    'clear-filters': 'Clear'
+    'clear-filters': 'Clear',
+    'no-results': 'No results found'
   }
 }
 
@@ -133,10 +135,13 @@ export const tasks = {
     'estimated-column': 'Estimado',
     'end-date-column': 'Fecha de finalización',
     'new-task-name-placeholder': 'Tarea inicial',
-    'new-task-description-placeholder': 'Introduce la descripción de tu tarea',
+    'new-task-description-placeholder': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
     'new-task-label-placeholder': '---',
     'new-task-status-placeholder': '---',
-    'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas'
+    'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas',
+    'toast-loading': 'Estamos creando tu tarea. Por favor, espera un momento.',
+    'toast-success': 'Tu tarea se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'tasks-column': 'Tasks',
@@ -166,10 +171,13 @@ export const tasks = {
     'estimated-column': 'Estimated time',
     'end-date-column': 'Deadline',
     'new-task-name-placeholder': 'Initial task',
-    'new-task-description-placeholder': 'Type the description of your task',
+    'new-task-description-placeholder': 'Help your team understand what you want to do with this task.',
     'new-task-label-placeholder': '---',
     'new-task-status-placeholder': '---',
-    'new-task-estimated-placeholder': 'Estimate time in hours'
+    'new-task-estimated-placeholder': 'Estimate time in hours',
+    'toast-loading': 'We are creating your tasks. Please wait a moment.',
+    'toast-success': 'Your tasks has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
 
@@ -180,7 +188,12 @@ export const people = {
     role: 'Roles',
     'new-person': 'reclutar',
     'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
-    'new-person-create': 'invitar'
+    'new-person-create': 'invitar',
+    'invite-member': 'Recluta personal',
+    'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
+    invite: 'Añadir miembros',
+    search: 'Buscar miembros',
+    'invite-member-send': 'reclutar'
   },
   en: {
     'member-column': 'Members',
@@ -188,7 +201,12 @@ export const people = {
     role: 'Roles',
     'new-person': 'recruit',
     'new-table-description': 'Add people to your project to improve your team.',
-    'new-person-create': 'invite'
+    'new-person-create': 'invite',
+    'invite-member': 'Recruit people',
+    'invite-member-description': 'Add members to your project to improve your team.',
+    invite: 'Add members',
+    search: 'Search members',
+    'invite-member-send': 'recruit'
   }
 }
 
@@ -196,17 +214,79 @@ export const teams = {
   es: {
     'team-column': 'Equipos',
     'member-column': 'Miembros',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'new-team-name-placeholder': 'Repartidores',
+    'new-team-desc-placeholder': 'Ayuda a tu equipo a entender el propósito de este equipo',
+    public: 'público',
+    private: 'privado',
     filter: 'Filtrar por nombre de equipo',
     'new-team': 'nuevo equipo',
+    'new-team-member-placeholder': 'Elige a tu equipo',
     'new-table-description': 'Los equipos son una forma de organizar a las personas que trabajan en tu proyecto.',
-    'new-team-create': 'Crear'
+    'new-team-create': 'Crear',
+    'toast-loading': 'Estamos creando tu equipo. Por favor, espera un momento.',
+    'toast-success': 'Tu equipo se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'team-column': 'Teams',
     'member-column': 'Members',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'new-team-name-placeholder': 'Delivery',
+    'new-team-desc-placeholder': 'Help your team understand the purpose of this team',
+    public: 'public',
+    private: 'private',
     filter: 'Filter by team name',
     'new-team': 'new team',
+    'new-team-member-placeholder': 'Choose your team',
     'new-table-description': 'Teams are a way of organizing the people working on your project.',
-    'new-team-create': 'Create'
+    'new-team-create': 'Create',
+    'toast-loading': 'We are creating your team. Please wait a moment.',
+    'toast-success': 'Your team has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
+export const labels = {
+  es: {
+    enhancement: 'mejora',
+    bug: 'error',
+    documentation: 'documentación',
+    duplicate: 'duplicado',
+    'good first issue': 'buen primer problema',
+    'help wanted': 'se necesita ayuda',
+    invalid: 'inválido',
+    question: 'pregunta',
+    testing: 'pruebas',
+    wontfix: 'no se arreglará'
+  },
+  en: {
+    enhancement: 'enhancement',
+    bug: 'bug',
+    documentation: 'documentation',
+    duplicate: 'duplicate',
+    'good first issue': 'good first issue',
+    'help wanted': 'help wanted',
+    invalid: 'invalid',
+    question: 'question',
+    testing: 'testing',
+    wontfix: 'wontfix'
+  }
+}
+
+export const status = {
+  es: {
+    new: 'nueva',
+    block: 'bloqueada',
+    done: 'completada',
+    'in progress': 'en progreso'
+  },
+  en: {
+    new: 'new',
+    block: 'block',
+    done: 'done',
+    'in progress': 'in progress'
   }
 }

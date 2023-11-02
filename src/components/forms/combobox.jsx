@@ -3,14 +3,16 @@
 import { useState } from 'react'
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 
-import { cn } from '@/lib/utils'
+import { Label } from '@/components/ui/label'
+import { normalize, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem
+  CommandItem,
+  CommandList
 } from '@/components/ui/command'
 import {
   Popover,
@@ -19,23 +21,20 @@ import {
 } from '@/components/ui/popover'
 import { useLang } from '@/context/language-context'
 
-export function ComboboxEnum ({ id, label, list }) {
-  const { dictionary } = useLang()
+export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
-
   return (
-    <Popover id={id} open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen}>
+      <Label className='capitalize'>{normalize(label)}</Label>
       <PopoverTrigger asChild>
         <Button
+          id={id}
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="w-full justify-between capitalize"
         >
-          {value
-            ? list.find((item) => item.value === value)?.label
-            : label}
+          {value || label}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -48,15 +47,16 @@ export function ComboboxEnum ({ id, label, list }) {
               <CommandItem
                 key={item.value}
                 onSelect={() => {
-                  setValue(item.value === value ? '' : item.value)
+                  onChange()
                   setOpen(false)
                 }}
+                className='capitalize'
               >
-                {item.label}
+                {dictionary[item.value]}
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
-                    value === item.value ? 'opacity-100' : 'opacity-0'
+                    value === dictionary[item.value] ? 'opacity-100' : 'opacity-0'
                   )}
                 />
               </CommandItem>
@@ -68,54 +68,57 @@ export function ComboboxEnum ({ id, label, list }) {
   )
 }
 
-export function ComboboxArray ({ id, label, list }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState([])
-
-  const removeItem = (item) => {
-    setValue(value.filter((i) => i !== item))
-  }
-
   return (
-    <Popover id={id} open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {value.length > 0
-            ? value.map((item) => list.find((i) => i.value === item)?.label)
-            : label}
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+    <Popover className='w-full' open={open} onOpenChange={setOpen} >
+        <Label className='capitalize'>{normalize(label)}</Label>
+        <PopoverTrigger asChild>
+          <Button
+            id={id}
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-full justify-between"
+          >
+            {values.length > 0
+              ? values.join(', ')
+              : placeholder}
+            <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
+          </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0" align="start">
         <Command>
-          <CommandInput placeholder={`Search ${label}...`} className="h-9" />
-          <CommandEmpty>No {label} found.</CommandEmpty>
-          <CommandGroup>
-            {list.map((item) => (
-              <CommandItem
-                key={item.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value
-                    ? removeItem(currentValue)
-                    : setValue([...value, currentValue]))
-                  setOpen(false)
-                }}
-              >
-                {item.label}
-                <CheckIcon
-                  className={cn(
-                    'ml-auto h-4 w-4',
-                    value.includes(item.value) ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandInput placeholder={placeholder} />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup id={`${id}-menu`}>
+              {list.map((option) => {
+                const isSelected = values.includes(option.value)
+                return (
+                  <CommandItem
+                    key={option.value}
+                    onSelect={(e) => {
+                      onChange(e)
+                      setOpen(false)
+                    }}
+                  >
+                    <div
+                      className={cn(
+                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        isSelected
+                          ? 'bg-primary text-primary-foreground'
+                          : 'opacity-50 [&_svg]:invisible'
+                      )}
+                    >
+                      <CheckIcon className={cn('h-4 w-4')} />
+                    </div>
+                    <span className='capitalize'>{option.label}</span>
+                  </CommandItem>
+                )
+              })}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

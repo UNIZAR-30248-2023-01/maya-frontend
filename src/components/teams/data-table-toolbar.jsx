@@ -23,7 +23,7 @@ export function DataTableToolbar ({ table, people }) {
         {table.getColumn('people') && (
           <DataTableFacetedFilter
             column={table.getColumn('people')}
-            title={dictionary.tasks.assignees}
+            title={dictionary.teams['member-column']}
             options={people.map((person) => ({ value: person.username }))}
           />
         )}

@@ -93,6 +93,7 @@ export const columns = [
       if (!id) return <Skeleton className='w-24 h-4'/>
 
       const status = tasksStatuses.find(status => status.value === row.getValue('status'))
+      if (!status) return null
 
       return (
         <Badge variant="outline" className={cn('flex w-fit items-center gap-x-1', status.style)}>
@@ -132,8 +133,9 @@ export const columns = [
     cell: ({ row }) => {
       const { id } = row.original
       if (!id) return <Skeleton className='w-24 h-4'/>
+      if (!row.getValue('end_date')) return null
 
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }
+      const options = { year: 'numeric', month: 'short', day: 'numeric' }
 
       return (
         <div className="flex w-fit items-center">

@@ -54,6 +54,7 @@ export function DataTable ({ data, columns, people }) {
           triggerBtn={dictionary.tasks['new-task']}
           actionBtn={dictionary.tasks['new-task-create']}
           schema={tasksSchema}
+          data={{ assignees: people }}
         />
       </div>
       <div className='rounded-md border'>

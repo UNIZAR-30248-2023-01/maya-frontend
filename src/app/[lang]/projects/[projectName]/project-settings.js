@@ -2,7 +2,9 @@
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ProjectSettings } from '@/components/projects/settings/project-settings'
+import { ManageAccess } from '@/components/projects/settings/manage-access'
 
 const projectNavItems = [
   {
@@ -40,22 +42,14 @@ export function SidebarNav ({ className, items, ...props }) {
 
 export default function SettingsPage () {
   return (
-    <div className="hidden space-y-6 p-10 pb-16 md:block">
+    <div className="space-y-6 p-10 pb-16">
       <Tabs defaultValue="project settings" className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0" orientation='vertical'>
-        <aside className="-mx-4 lg:w-1/5">
+        <aside className="-mx-4 lg:w-1/5 mt-6">
           <SidebarNav items={projectNavItems} />
         </aside>
         <div className="flex-1 lg:max-w-2xl">
-          <TabsContent value="project settings">
-            <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'>
-              <h1 className='text-2xl font-bold'>Project Settings</h1>
-            </div>
-          </TabsContent>
-          <TabsContent value="manage access">
-            <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'>
-              <h1 className='text-2xl font-bold'>manage access</h1>
-            </div>
-          </TabsContent>
+          <ProjectSettings value="project settings"/>
+          <ManageAccess value="manage access"/>
         </div>
       </Tabs>
     </div>

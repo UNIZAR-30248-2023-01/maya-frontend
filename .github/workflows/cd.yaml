@@ -5,8 +5,12 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  push:
+    branches: [main, develop]
+
   pull_request:
     branches: [main, develop]
+    
 jobs:
   install:
     name: Install and Test 📦 🧪
@@ -34,3 +38,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 30
           command: npm run cypress:test
+        env:
+          CYPRESS_NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          CYPRESS_NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
