@@ -35,74 +35,41 @@ export function SidePanel ({
   actionBtn
 }) {
   const { dictionary } = useLang()
-  const [form, setForm] = useState(getForm(inAndOutsSchema._def.shape()))
-
-  // Funion que gestiona el setter de la fecha de salida y salida
-  const gestionarSetter = () => {
-    console.log('form de gestionarSetter', form)
-
-    const fechaOut = form.out_date.toLocaleDateString(dictionary.inandouts['lenguage'], { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
-    const fechaIn = form.in_date.toLocaleDateString(dictionary.inandouts['lenguage'], { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
-    const horaOut = form.out_hour;
-    const horaIn = form.in_hour;
-
-    console.log('fechas', fechaOut, fechaIn)
-    
-    if (fechaIn !== null && horaIn !== null && fechaOut !== null && horaOut !== null){ // añadir el out_date y out_hour
-      const timestampIn =  new Date(createTimestamp(fechaIn, horaIn))
-      const timestampOut =  new Date(createTimestamp(fechaOut, horaOut))
-
-      // const { in_hour, out_hour, ...form} = form // eliminamos los campos in_hour y out_hour del form
-      
-      console.log('timestampIn', timestampIn)
-      console.log('timestampOut', timestampOut)
-      delete form.in_hour;
-      delete form.out_hour;
-
-
-      // DUDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      form.in_date = timestampIn;
-      form.out_date = timestampOut; 
-
-      const tiempoEnMilisegundos = timestampOut- timestampIn;
-      const horasTotales = tiempoEnMilisegundos / (1000 * 60); // Milisegundos a horas
-      const horasRedondeadas = Math.round(horasTotales);
-      form.total = horasRedondeadas;
-
-      console.log('form de gestionarSetter final ', form) 
-    }
-    
-  }
+  const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
-
-  console.log('form llamado desde global ', form)
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    gestionarSetter();
+    const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
-    // Manjear los setter
-    // console.log('form de handleSubmit ', form)
+    const timestampIn = new Date(in_date.getFullYear(), in_date.getMonth(), in_date.getDate(), in_hour.split(":")[0], in_hour.split(":")[1])
+    const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
+
+    const tiempoEnMilisegundos = timestampOut- timestampIn;
+    const horasTotales = tiempoEnMilisegundos / (1000 * 60); // Milisegundos a horas
+    const horasRedondeadas = Math.round(horasTotales);
     
 
     {/* mutate : actualiza la interfaz */}
 
     try {
-      inAndOutsSchema.parse({ ...form})
+      inAndOutsSchema.parse({ in_date, out_date, total: 0})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ ...form , username: 'hec7orci7o' }])
+          supabase.from('in-and-outs').insert([{ 
+            username: 'hec7orci7o', 
+            in_date: timestampIn,
+            out_date: timestampOut,
+            total: horasRedondeadas
+          }])
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
-              console.log('despues del resolve', form)
             })
             .catch((error) => {
               reject(error); 
-              console.log('despues del reject', form)
             })
         })
       }
@@ -117,19 +84,6 @@ export function SidePanel ({
       toast.error(path[0] + ': ' + message)
     }
   }
-
-  // Funcion convierte la fecha y hora seleccionada en un timestamp
-  function createTimestamp(dateToTimestamp, hourToTimestamp) {
-  
-    const [day, month, year] = dateToTimestamp.split('-');
-    const [hour, minute] = hourToTimestamp.split(':');
-    
-    const combinedDate = new Date(year, month - 1, day, hour, minute);
-    console.log('combinedDate ', combinedDate.getTime());
-
-    return combinedDate.getTime(); // Devuelve el timestamp en milisegundos
-  }
-
 
   return (
     <Sheet>
@@ -153,9 +107,8 @@ export function SidePanel ({
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
-              onChange={(e) => {setter({ key: 'in_date', value: e });console.log('fecha de entrada ', e)}}
+              onChange={(e) => {setter({ key: 'in_date', value: e })}}
             />
-
 
             <div className="w-[65px]">
               <Field.Text
@@ -163,9 +116,10 @@ export function SidePanel ({
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => {
                   const inputHour = e.target.value;
+                  console.log('inputHour ', inputHour)
 
-                  if (/^\d{2}:\d{2}$/.test(inputHour)) {
-                    console.log('Formato de hora válido', inputHour);
+                  if (/^\d{1,2}:\d{2}$/.test(inputHour)) {
+                    console.log('Formato de hora válido de entrada', inputHour);
                     setter({ key: 'in_hour', value: inputHour });
                   } else {
                     console.log('Formato de hora no válido');
@@ -183,7 +137,7 @@ export function SidePanel ({
               label={dictionary.inandouts['out-column']}
               value={form.out_date}
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
-              onChange={(e) => {setter({ key: 'out_date', value: e });console.log('fecha de salida ', e)}}
+              onChange={(e) => {setter({ key: 'out_date', value: e })}}
             />
 
             <div className="w-[65px]">
@@ -193,8 +147,8 @@ export function SidePanel ({
                 onChange={(e) => {
                   const inputHour = e.target.value;
 
-                  if (/^\d{2}:\d{2}$/.test(inputHour)) {
-                    console.log('Formato de hora válido');
+                  if (/^\d{1,2}:\d{2}$/.test(inputHour)) {
+                    console.log('Formato de hora válido de salida', inputHour);
                     setter({ key: 'out_hour', value: inputHour });
                     
                   } else {
