@@ -15,8 +15,7 @@ import {
 import { Text, TextArea, Number, ComboboxEnum, ComboboxArray, DatePicker } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { tasksLabels, tasksStatuses } from '@/lib/constants'
-import { Label } from '@/components/ui/label'
-import { normalize, getForm, supabase } from '@/lib/utils'
+import { getForm, supabase } from '@/lib/utils'
 import { tasksSchema } from '@/lib/schemas'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
@@ -92,13 +91,14 @@ export function SidePanel ({
           <SheetDescription>{description}</SheetDescription>
         </SheetHeader>
         <div className='flex flex-col justify-between h-full'>
-          <div className='grid gap-4 py-4'>
+          <div className='grid gap-6 py-4'>
             <Text
               id='name'
               label={dictionary.tasks['name-column']}
               placeholder={dictionary.tasks['new-task-name-placeholder']}
               onChange={(e) => setter({ key: 'name', value: e.target.value })}
             />
+
             <TextArea
               id='description'
               label={dictionary.tasks['description-column']}
@@ -113,6 +113,7 @@ export function SidePanel ({
               list={data.assignees.map((assignee) => ({ value: assignee.username, label: assignee.username }))}
               values={form.assignees || []}
               onChange={(e) => {
+                console.log(e)
                 const assigness = form.assignees || []
                 const isSelected = assigness ? assigness.includes(e) : false
                 if (isSelected) {
@@ -129,45 +130,43 @@ export function SidePanel ({
               placeholder={dictionary.tasks['new-task-estimated-placeholder']}
               onChange={(e) => setter({ key: 'estimated', value: Number(e.target.value) })}
             />
-            <div className='flex flex-col gap-1.5 w-full'>
-              <DatePicker
-              id="end-date"
+
+            <DatePicker
+            id="end-date"
               label={dictionary.tasks['end-date-column']}
-              value={form.end_date}
-              placeholder={dictionary.tasks['end-date-placeholder']}
-              onChange={(e) => setter({ key: 'end_date', value: e || null })}/>
-            </div>
+              placeholder={dictionary.tasks['new-end-date-placeholder']}
+            value={form.end_date}
+            onChange={(e) => setter({ key: 'end_date', value: e || null })}/>
 
             <div className='flex justify-between gap-4'>
-              <div className='flex flex-col gap-1.5 w-full'>
 
                   <ComboboxEnum
                     id='status'
                     label={dictionary.tasks['status-column']}
                     list={tasksStatuses}
-                    value={dictionary.status[form.status]}
+                    value={form.status}
                     dictionary={dictionary.status}
+                    searchDictionary={dictionary.search}
                     onChange={(e) => {
-                      const original = Object.keys(dictionary.status).find(key => dictionary.status[key] === e)
+                      const original = Object.keys(dictionary.status).find(key => key === e)
+                      console.log(original)
                       setter({ key: 'status', value: original === form.status ? null : original })
                     }}
                     />
-              </div>
-
-              <div className='flex flex-col gap-1.5 w-full'>
 
                   <ComboboxEnum
                     id='label'
                     label={dictionary.tasks['label-column']}
                     list={tasksLabels}
-                    value={dictionary.labels[form.label]}
+                    value={form.label}
                     dictionary={dictionary.labels}
+                    searchDictionary={dictionary.search}
                     onChange={(e) => {
-                      const original = Object.keys(dictionary.labels).find(key => dictionary.labels[key] === e)
+                      const original = Object.keys(dictionary.labels).find(key => key === e)
+                      console.log(original)
                       setter({ key: 'label', value: original === form.label ? null : original })
                     }}
                   />
-              </div>
             </div>
           </div>
           <SheetFooter className='pb-12'>

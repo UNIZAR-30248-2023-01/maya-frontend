@@ -65,7 +65,8 @@ export function ProjectSettings ({ value }) {
   }
 
   return (
-    <TabsContent value={value} className="space-y-6">
+    <div className='flex flex-col gap-4 max-w-[800px]'>
+    { /* <TabsContent value={value} className="space-y-6"> */ }
       <div>
         <h3 className="text-lg font-medium">
           Project settings
@@ -179,6 +180,7 @@ export function ProjectSettings ({ value }) {
           </div>
         </form>
       </Form>
-    </TabsContent>
+      {/* </TabsContent> */}
+      </div>
   )
 }

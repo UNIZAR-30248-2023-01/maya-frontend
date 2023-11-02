@@ -19,39 +19,46 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover'
-import { useLang } from '@/context/language-context'
 
-export function ComboboxEnum ({ id, label, value, list, onChange, dictionary }) {
+export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, searchDictionary }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <Label className='capitalize'>{normalize(label)}</Label>
-      <PopoverTrigger asChild>
-        <Button
-          id={id}
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-full justify-between capitalize"
-        >
-          {value || label}
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
+      <div className='flex flex-col gap-1.5 w-full'>
+        <Label className='capitalize'>{normalize(label)}</Label>
+        <PopoverTrigger asChild>
+          <Button
+            id={id}
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn('w-full justify-between capitalize', !value && 'text-muted-foreground font-normal')}
+          >
+            <div className='flex flex-row gap-2'>
+              {<span>{list.find(e => e.value === value)?.icon}</span>}
+              {dictionary[value] || label}
+            </div>
+
+            <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+      </div>
+
       <PopoverContent className='w-full p-0'>
         <Command>
-          <CommandInput placeholder={dictionary.search['search-placeholder']} className="h-9" />
-          <CommandEmpty>{dictionary.search['not-found']}</CommandEmpty>
+          <CommandInput placeholder={searchDictionary['search-placeholder']} className="h-9" />
+          <CommandEmpty>{searchDictionary['not-found']}</CommandEmpty>
           <CommandGroup>
             {list.map((item) => (
               <CommandItem
                 key={item.value}
                 onSelect={() => {
-                  onChange()
+                  onChange(item.value)
                   setOpen(false)
                 }}
-                className='capitalize'
+                className='capitalize flex flex-row gap-2'
               >
+                {item.icon && <span>{item.icon}</span>}
                 {dictionary[item.value]}
                 <CheckIcon
                   className={cn(
@@ -72,6 +79,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
   const [open, setOpen] = useState(false)
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
+      <div className='flex flex-col gap-1.5 w-full'>
         <Label className='capitalize'>{normalize(label)}</Label>
         <PopoverTrigger asChild>
           <Button
@@ -79,14 +87,15 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className={cn('w-full justify-between', values.length === 0 && 'text-muted-foreground font-normal')}
           >
             {values.length > 0
               ? values.join(', ')
               : placeholder}
             <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
-          </Button>
+        </Button>
       </PopoverTrigger>
+      </div>
       <PopoverContent className="w-full p-0" align="start">
         <Command>
           <CommandInput placeholder={placeholder} />

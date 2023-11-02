@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import TasksPage from './project-tasks'
 import PeoplePage from './project-people'
 import TeamPage from './project-team'
-import SettingsPage from './project-settings'
+import { ProjectSettings } from '@/components/projects/settings/project-settings'
 
 export default function ProjectPage ({ params }) {
   const { projectName } = params
@@ -26,10 +26,10 @@ export default function ProjectPage ({ params }) {
             <LuUser className="w-3.5 h-3.5"/>
             people
           </TabsTrigger>
-          <TabsTrigger value="teams" className="flex items-center gap-x-1.5 capitalize">
+          {/* <TabsTrigger value="teams" className="flex items-center gap-x-1.5 capitalize">
             <LuUsers className="w-3.5 h-3.5"/>
             teams
-          </TabsTrigger>
+          </TabsTrigger> */}
           <TabsTrigger value="settings" className="flex items-center gap-x-1.5 capitalize">
             <LuSettings2 className="w-3.5 h-3.5"/>
             settings
@@ -41,11 +41,11 @@ export default function ProjectPage ({ params }) {
         <TabsContent value="people">
           <PeoplePage projectName={projectName} />
         </TabsContent>
-        <TabsContent value="teams">
+        {/* <TabsContent value="teams">
           <TeamPage/>
-        </TabsContent>
-        <TabsContent value="settings">
-          <SettingsPage projectName={projectName} />
+        </TabsContent> */}
+        <TabsContent value="settings" className='flex justify-around'>
+          <ProjectSettings projectName={projectName} />
         </TabsContent>
       </Tabs>
     </>

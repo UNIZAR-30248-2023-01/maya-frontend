@@ -43,13 +43,17 @@ export function SidebarNav ({ className, items, ...props }) {
 export default function SettingsPage () {
   return (
     <div className="space-y-6 p-10 pb-16">
-      <Tabs defaultValue="project settings" className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0" orientation='vertical'>
+      <Tabs
+        defaultValue="project settings"
+        className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0"
+        orientation="vertical"
+      >
         <aside className="-mx-4 lg:w-1/5 mt-6">
           <SidebarNav items={projectNavItems} />
         </aside>
         <div className="flex-1 lg:max-w-2xl">
-          <ProjectSettings value="project settings"/>
-          <ManageAccess value="manage access"/>
+          <ProjectSettings value="project settings" />
+          <ManageAccess value="manage access" />
         </div>
       </Tabs>
     </div>

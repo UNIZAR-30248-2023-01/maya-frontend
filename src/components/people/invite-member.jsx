@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import * as Field from '@/components/forms/package'
+import { ComboboxArray } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { peopleSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
@@ -92,7 +92,7 @@ export function InviteMember ({
           </DialogHeader>
           <div className="flex w-full max-w-sm items-end space-x-2 mt-4">
             <div className='grid gap-4 w-full'>
-              <Field.ComboboxArray
+              <ComboboxArray
                 id="members"
                 label={dictionary.people['member-column']}
                 placeholder={dictionary.people.search}

@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms'
+import { Text, TextArea, Bool } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { projectSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
@@ -77,19 +77,19 @@ export function SidePanel ({
             </SheetDescription>
           </SheetHeader>
           <div className="grid gap-4 py-4">
-            <Field.Text
+            <Text
               id="name"
               label={dictionary.projects['name-column']}
               placeholder={dictionary.projects['new-table-name-placeholder']}
               onChange={(e) => setter({ key: 'name', value: e.target.value })}
             />
-            <Field.TextArea
+            <TextArea
               id="description"
               label={dictionary.projects['description-column']}
               placeholder={dictionary.projects['new-table-desc-placeholder']}
               onChange={(e) => setter({ key: 'description', value: e.target.value })}
             />
-            <Field.Bool
+            <Bool
               id="visibility"
               label={dictionary.projects.public}
               checked={form.visibility === 'public'}

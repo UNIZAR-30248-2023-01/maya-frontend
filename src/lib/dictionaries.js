@@ -114,16 +114,6 @@ export const tasks = {
     assignees: 'Asignados',
     label: 'Etiqueta',
     status: 'Estado',
-    new: 'nueva',
-    block: 'bloqueada',
-    done: 'completada',
-    'in progress': 'en progreso',
-    enhancement: 'mejora',
-    'data model': 'modelo de datos',
-    documentation: 'documentación',
-    bug: 'error',
-    testing: 'test',
-    ui: 'UI',
     'new-task': 'nueva tarea',
     'new-table-description':
       'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
@@ -138,6 +128,7 @@ export const tasks = {
     'new-task-description-placeholder': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
     'new-task-label-placeholder': '---',
     'new-task-status-placeholder': '---',
+    'new-end-date-placeholder': 'Fecha de finalización',
     'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas',
     'toast-loading': 'Estamos creando tu tarea. Por favor, espera un momento.',
     'toast-success': 'Tu tarea se ha creado correctamente.',
@@ -150,16 +141,6 @@ export const tasks = {
     assignees: 'Assignees',
     label: 'Label',
     status: 'Status',
-    new: 'new',
-    block: 'block',
-    done: 'done',
-    'in progress': 'in progress',
-    enhancement: 'enhancement',
-    'data model': 'data model',
-    documentation: 'vdocumentation',
-    bug: 'bug',
-    testing: 'testing',
-    ui: 'UI',
     'new-task': 'new task',
     'new-table-description':
       'Tasks are a way of communicating what you are going to do to the rest of your team.',
@@ -174,6 +155,7 @@ export const tasks = {
     'new-task-description-placeholder': 'Help your team understand what you want to do with this task.',
     'new-task-label-placeholder': '---',
     'new-task-status-placeholder': '---',
+    'new-end-date-placeholder': 'End date',
     'new-task-estimated-placeholder': 'Estimate time in hours',
     'toast-loading': 'We are creating your tasks. Please wait a moment.',
     'toast-success': 'Your tasks has been created successfully.',
@@ -252,27 +234,19 @@ export const teams = {
 export const labels = {
   es: {
     enhancement: 'mejora',
-    bug: 'error',
+    'data model': 'modelo de datos',
     documentation: 'documentación',
-    duplicate: 'duplicado',
-    'good first issue': 'buen primer problema',
-    'help wanted': 'se necesita ayuda',
-    invalid: 'inválido',
-    question: 'pregunta',
-    testing: 'pruebas',
-    wontfix: 'no se arreglará'
+    bug: 'error',
+    testing: 'test',
+    ui: 'UI'
   },
   en: {
     enhancement: 'enhancement',
+    'data model': 'data model',
+    documentation: 'vdocumentation',
     bug: 'bug',
-    documentation: 'documentation',
-    duplicate: 'duplicate',
-    'good first issue': 'good first issue',
-    'help wanted': 'help wanted',
-    invalid: 'invalid',
-    question: 'question',
     testing: 'testing',
-    wontfix: 'wontfix'
+    ui: 'UI'
   }
 }
 
