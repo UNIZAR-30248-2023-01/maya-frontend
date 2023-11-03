@@ -34,6 +34,10 @@ export function SidePanel ({
   triggerBtn,
   actionBtn
 }) {
+  const [errorOutHour, setErrorOutHour] = useState('');
+  const [errorInHour, setErrorInHour] = useState('');
+  const [invalidHour, setInvalidHour] = useState(true);
+
   const { dictionary } = useLang()
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
 
@@ -50,6 +54,12 @@ export function SidePanel ({
     const tiempoEnMilisegundos = timestampOut- timestampIn;
     const horasTotales = tiempoEnMilisegundos / (1000 * 60); // Milisegundos a horas
     const horasRedondeadas = Math.round(horasTotales);
+
+    // Comprobaciones
+    if (timestampIn > timestampOut || !isValidHour) {
+      toast.error("La hora de entrada o salida es inválida");
+      return;
+    } 
     
 
     {/* mutate : actualiza la interfaz */}
@@ -65,6 +75,7 @@ export function SidePanel ({
             total: horasRedondeadas
           }])
             .then(() => {
+              setIsSheetOpen(true)
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
             })
@@ -118,15 +129,27 @@ export function SidePanel ({
                   const inputHour = e.target.value;
                   console.log('inputHour ', inputHour)
 
-                  if (/^\d{1,2}:\d{2}$/.test(inputHour)) {
+                  const inputElement = e.target;
+
+                  if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
                     console.log('Formato de hora válido de entrada', inputHour);
+                    setErrorInHour(''); 
                     setter({ key: 'in_hour', value: inputHour });
+                    inputElement.classList.remove('border-red-500');
+
                   } else {
+                    setErrorInHour('Formato de hora no válido');
                     console.log('Formato de hora no válido');
+                    inputElement.classList.add('border-red-500');
                   }
                 }}
               />
             </div>
+
+            <SheetDescription>
+              {errorInHour && <p className="text-red-500">{errorInHour}</p>} 
+            </SheetDescription>
+
 
             <SheetDescription style={{ marginTop: '20px' }}>
               {descriptionOut}
@@ -137,31 +160,51 @@ export function SidePanel ({
               label={dictionary.inandouts['out-column']}
               value={form.out_date}
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
-              onChange={(e) => {setter({ key: 'out_date', value: e })}}
+              onChange={(e) => {
+              
+                if( form.in_date > e ) {
+                  toast.error("La fecha de salida no puede ser menor que la fecha de entrada");
+                } else {
+                  setter({ key: 'out_date', value: e })
+                }
+              }}
             />
 
             <div className="w-[65px]">
-              <Field.Text
-                id="out_hour"
-                placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
-                onChange={(e) => {
-                  const inputHour = e.target.value;
+                <Field.Text
+                  id="out_hour"
+                  placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
+                  onChange={(e) => {
+                    const inputHour = e.target.value;
+                    const inputElement = e.target;e.target.value 
 
-                  if (/^\d{1,2}:\d{2}$/.test(inputHour)) {
-                    console.log('Formato de hora válido de salida', inputHour);
-                    setter({ key: 'out_hour', value: inputHour });
+                    if( form.in_hour > inputHour ) {
+                      toast.error("La hora de salida no puede ser menor que la hora de entrada");
+                      setInvalidHour(false)
+                    } else {
+                      if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
+                        inputElement.classList.remove('border-red-500');
+                        setErrorOutHour(''); // Establece el mensaje de error como vacío
+                        setter({ key: 'out_hour', value: inputHour });
+                      } else {
+                        setErrorOutHour('Formato de hora no válido'); // Establece el mensaje de error
+                        inputElement.classList.add('border-red-500');
+                      }
+                    }
                     
-                  } else {
-                    console.log('Formato de hora no válido');
-                  }
-                }}
-              />
-            </div>
+                  }}
+                />
+              </div>
+
+            <SheetDescription>
+              {errorOutHour && <p className="text-red-500">{errorOutHour}</p>} 
+            </SheetDescription>
+            
 
           </div>
           <SheetFooter className="">
-            <SheetClose asChild>
-              <Button type="submit">
+            <SheetClose asChild >
+              <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>
