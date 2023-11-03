@@ -13,7 +13,8 @@ import { Table } from '@/components/ui/table'
 import { DataTableToolbar } from '@/components/in-and-outs/data-table-toolbar'
 import { DataTableHeader } from '@/components/in-and-outs/data-table-header'
 import { DataTableBody } from '@/components/in-and-outs/data-table-body'
-import { SidePanel } from '@/components/in-and-outs/side-panel'
+import { SidePanelManual } from '@/components/in-and-outs/side-panel-manual'
+import { SidePanelAutomatic } from '@/components/in-and-outs/side-panel-automatic'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { useLang } from '@/context/language-context'
 import { inAndOutsSchema } from '@/lib/schemas'
@@ -48,12 +49,22 @@ export function DataTable ({ data, columns }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         {/*<DataTableToolbar table={table} />*/}
-        <SidePanel
+        <SidePanelManual
           title={dictionary.inandouts['new-date']}
           description={dictionary.inandouts['new-table-description']} // Descripcion del panel
           descriptionIn={dictionary.inandouts['new-table-description-in']}
           descriptionOut={dictionary.inandouts['new-table-description-out']}
           triggerBtn={dictionary.inandouts['new-date']} // Nombre del boton
+          actionBtn={dictionary.inandouts['new-table-create']} 
+          schema={inAndOutsSchema}
+          dictionary={dictionary}
+        />
+        <SidePanelAutomatic
+          title={dictionary.inandouts['new-date-automatic']}
+          description={dictionary.inandouts['new-table-description']} // Descripcion del panel
+          descriptionIn={dictionary.inandouts['new-table-description-in']}
+          descriptionOut={dictionary.inandouts['new-table-description-out']}
+          triggerBtn={dictionary.inandouts['new-date-automatic']} // Nombre del boton
           actionBtn={dictionary.inandouts['new-table-create']} 
           schema={inAndOutsSchema}
           dictionary={dictionary}

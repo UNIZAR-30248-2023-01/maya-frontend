@@ -103,6 +103,7 @@ export const inandouts = {
     'total-column': 'Total',
     filter: 'Filtrar horas',
     'new-date': 'Fichaje manual',
+    'new-date-automatic': 'Fichaje automático',
     'new-check-in': 'Fichar entrada',
     'new-check-out': 'Fichar salida',
     
@@ -115,6 +116,10 @@ export const inandouts = {
     'new-table-in-placeholder': 'Fecha de entrada',
     'new-table-out-placeholder': 'Fecha de salida',
     'new-table-hour-placeholder': '00:00',
+
+    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada',
+    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada',
+    'error-hour': 'Formato de hora no válido',
 
     'new-table-create': 'Fichar',
     'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
@@ -129,6 +134,7 @@ export const inandouts = {
     'total-column': 'Total',
     filter: 'Filter hours',
     'new-date': 'Manual clock-in',
+    'new-date-automatic': 'Automatic clock-in',
     'new-check-in': 'Clock-in',
     'new-check-out': 'Clock-out',
     
@@ -142,7 +148,11 @@ export const inandouts = {
     'new-table-out-placeholder': 'Clock-out date',
     'new-table-hour-placeholder': '00:00',
     
-    'new-table-create': 'Clock',
+    'error-out-date': 'Clock-out date cannot be less than clock-in date',
+    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour',
+    'error-hour': 'Invalid hour format',
+    
+    'new-table-create': 'Clock in/clock out',
     'toast-loading': 'We are creating your project. Please wait a moment.',
     'toast-success': 'Your project has been created successfully.',
     'toast-error': 'Something went wrong. Please try again.'
