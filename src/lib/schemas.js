@@ -12,10 +12,11 @@ export const projectSchema = z.object({
 
 export const tasksSchema = z.object({
   name: z.string().min(1).max(30),
+  description: z.string().optional().nullable(),
   assignees: z.array(z.string()).optional(),
-  label: z.enum(['dependencies', 'bug', 'documentation', 'duplicate', 'enhancement', 'good first issue', 'help wanted', 'invalid', 'question', 'wontfix']).optional().nullable(),
-  status: z.enum(['new', 'block', 'in progress', 'done']).optional().nullable(),
-  estimated: z.number().min(0).optional().nullable(),
+  label: z.enum(['ui', 'data model', 'documentation', 'enhancement', 'testing', 'bug']),
+  status: z.enum(['new', 'block', 'in progress', 'done']),
+  estimated: z.number().min(0),
   end_date: z.date().optional().nullable()
 })
 

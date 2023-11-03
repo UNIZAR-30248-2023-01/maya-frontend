@@ -20,7 +20,7 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, searchDictionary }) {
+export function ComboboxEnum({ id, label, value, list, onChange, dictionary, searchDictionary }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -63,7 +63,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, se
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
-                    value === dictionary[item.value] ? 'opacity-100' : 'opacity-0'
+                    value === item.value ? 'opacity-100' : 'opacity-0'
                   )}
                 />
               </CommandItem>
@@ -75,7 +75,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, se
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
+export function ComboboxArray({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
@@ -93,8 +93,8 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
               ? values.join(', ')
               : placeholder}
             <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
+          </Button>
+        </PopoverTrigger>
       </div>
       <PopoverContent className="w-full p-0" align="start">
         <Command>

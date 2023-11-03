@@ -1,5 +1,22 @@
 // COMMON: Add here the dictionaries for the common components
 
+export const common = {
+  es: {
+    delete: 'Borrar',
+    cancel: 'Cancelar',
+    edit: 'Editar',
+    create: 'Crear',
+    save: 'Guardar cambios'
+  },
+  en: {
+    delete: 'Delete',
+    cancel: 'Cancel',
+    edit: 'Edit',
+    create: 'Create',
+    save: 'Save changes'
+  }
+}
+
 export const navigation = {
   es: {
     overview: 'resumen',
@@ -108,6 +125,8 @@ export const projects = {
 
 export const tasks = {
   es: {
+    'tasks-tab': 'Tareas',
+    'settings-tab': 'Configuración',
     'tasks-column': 'Tarea',
     'assignees-column': 'Asignados',
     filter: 'Filtrar por tarea',
@@ -135,6 +154,8 @@ export const tasks = {
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
+    'tasks-tab': 'Tasks',
+    'settings-tab': 'Settings',
     'tasks-column': 'Tasks',
     'assignees-column': 'Assignees',
     filter: 'Filter by task',
@@ -165,6 +186,7 @@ export const tasks = {
 
 export const people = {
   es: {
+    'members-tab': 'Miembros',
     'member-column': 'Miembros',
     filter: 'Filtrar por nombre de usuario',
     role: 'Roles',
@@ -178,6 +200,7 @@ export const people = {
     'invite-member-send': 'reclutar'
   },
   en: {
+    'members-tab': 'Members',
     'member-column': 'Members',
     filter: 'Filter people by username',
     role: 'Roles',
@@ -194,6 +217,7 @@ export const people = {
 
 export const teams = {
   es: {
+    'team-tab': 'Equipos',
     'team-column': 'Equipos',
     'member-column': 'Miembros',
     'name-column': 'Nombre',
@@ -212,6 +236,7 @@ export const teams = {
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
+    'team-tab': 'Teams',
     'team-column': 'Teams',
     'member-column': 'Members',
     'name-column': 'Name',
@@ -262,5 +287,22 @@ export const status = {
     block: 'block',
     done: 'done',
     'in progress': 'in progress'
+  }
+}
+
+export const confirmation = {
+  es: {
+    'confirmation-title': '¿Estás completamente seguro?',
+    'confirmation-desc-edit': 'Esto modificará y cambiará tus datos de nuestra base de datos',
+    'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
+    'confirmation-edit': 'Si, modificar tarea',
+    'confirmation-delete': 'Si, eliminar tarea'
+  },
+  en: {
+    'confirmation-title': 'Are you absolutely sure?',
+    'confirmation-desc-edit': 'This will modify and change your data from our servers.',
+    'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
+    'confirmation-edit': 'Yes, edit task',
+    'confirmation-delete': 'Yes, delete task'
   }
 }

@@ -18,7 +18,7 @@ import { SidePanel } from '@/components/tasks/side-panel'
 import { useLang } from '@/context/language-context'
 import { tasksSchema } from '@/lib/schemas'
 
-export function DataTable ({ data, columns, people }) {
+export function DataTable({ data, columns, people, projectName }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -51,16 +51,17 @@ export function DataTable ({ data, columns, people }) {
         <SidePanel
           title={dictionary.tasks['new-task']}
           description={dictionary.tasks['new-table-description']}
+          projectName={projectName}
           triggerBtn={dictionary.tasks['new-task']}
-          actionBtn={dictionary.tasks['new-task-create']}
+          actionBtn={dictionary.common['create']}
           schema={tasksSchema}
           data={{ assignees: people }}
         />
       </div>
       <div className='rounded-md border'>
         <Table>
-          <DataTableHeader table={table}/>
-          <DataTableBody table={table}/>
+          <DataTableHeader table={table} />
+          <DataTableBody table={table} />
         </Table>
       </div>
       <DataTablePagination table={table} />
