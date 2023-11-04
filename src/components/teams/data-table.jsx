@@ -17,7 +17,7 @@ import { SidePanel } from '@/components/teams/side-panel'
 import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 
-export function DataTable({ data, columns, people }) {
+export function DataTable ({ data, columns, people }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -51,7 +51,7 @@ export function DataTable({ data, columns, people }) {
           title={dictionary.teams['new-team']}
           description={dictionary.teams['new-table-description']}
           triggerBtn={dictionary.teams['new-team']}
-          actionBtn={dictionary.common['create']}
+          actionBtn={dictionary.common.create}
           schema={teamSchema}
           dictionary={dictionary}
           data={{ members: people }}

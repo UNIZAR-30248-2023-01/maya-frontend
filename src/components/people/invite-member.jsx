@@ -15,17 +15,21 @@ import { useLang } from '@/context/language-context'
 import { peopleSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
 
 export function InviteMember ({
   title,
   description,
   triggerBtn,
   actionBtn,
-  data
+  data,
+  projectName
 }) {
+  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username`)
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(peopleSchema._def.shape()))
+
+  people = people?.filter(e => (!data.members.find(m => m.username === e.username)))
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
@@ -36,41 +40,37 @@ export function InviteMember ({
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { assignees, ...task } = form
+    const { members } = form
 
     try {
-      peopleSchema.parse({ ...task, project: 'reign-frontend' })
-      const createTask = () => {
-        return new Promise((resolve, reject) => {
-          (async () => {
-          // Primera inserción en la tabla 'tasks'
-            await supabase.from('tasks').insert([{ ...task, project: 'reign-frontend' }]).select()
-              .then(async (res) => {
-                if (res.error !== null) return
-                // Segunda inserción en la tabla 'people-tasks'
-                if (assignees && assignees.length > 0) {
-                  await supabase.from('people-tasks').insert(assignees.map((assignee) => ({
-                    tasks: res.data[0].id,
-                    username: assignee
-                  })))
-                }
+      peopleSchema.parse({ members })
+      if (members && members.length > 0) {
+        const invitePeople = () => {
+          return new Promise((resolve, reject) => {
+            (async () => {
+              await supabase.from('people-project').insert(members.map((member) => ({
+                username: member,
+                project: projectName,
+                role: 'member'
+              }))).select()
+                .then(() => {
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
-                resolve()
-              }).catch((error) => {
-                console.error(error)
-                reject(error)
-              })
-          })()
+                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
+                  resolve()
+                }).catch((error) => {
+                  console.error(error)
+                  reject(error)
+                })
+            })()
+          })
+        }
+
+        toast.promise(invitePeople, {
+          loading: dictionary.people['toast-loading'],
+          success: () => dictionary.people['toast-success'],
+          error: () => dictionary.people['toast-error']
         })
       }
-
-      toast.promise(createTask, {
-        loading: dictionary.tasks['toast-loading'],
-        success: () => dictionary.tasks['toast-success'],
-        error: () => dictionary.tasks['toast-error']
-      })
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
@@ -80,7 +80,7 @@ export function InviteMember ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="capitalize">{triggerBtn}</Button>
+        <Button className="capitalize h-8">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>
@@ -96,7 +96,7 @@ export function InviteMember ({
                 id="members"
                 label={dictionary.people['member-column']}
                 placeholder={dictionary.people.search}
-                list={data.members.map((member) => ({ value: member.username, label: member.username }))}
+                list={people?.map((member) => ({ value: member.username, label: member.username }))}
                 values={form.members || []}
                 onChange={(e) => {
                   const members = form.members || []

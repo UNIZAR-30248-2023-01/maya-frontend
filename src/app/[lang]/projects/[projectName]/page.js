@@ -2,7 +2,6 @@
 
 import {
   LuBoxes,
-  LuUsers,
   LuUser,
   LuSettings2
 } from 'react-icons/lu'
@@ -10,10 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import TasksPage from './project-tasks'
 import PeoplePage from './project-people'
 import { useLang } from '@/context/language-context'
-import TeamPage from './project-team'
+// import TeamPage from './project-team'
 import { ProjectSettings } from '@/components/projects/settings/project-settings'
 
-export default function ProjectPage({ params }) {
+export default function ProjectPage ({ params }) {
   const { projectName } = params
   const { dictionary } = useLang()
   return (

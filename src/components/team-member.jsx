@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage
 } from '@/components/ui/avatar'
+import { Label } from './ui/label'
 
 export function TeamMember ({
   user = {
@@ -16,17 +16,15 @@ export function TeamMember ({
   }
 }) {
   return (
-    <Link href="/settings">
-      <div className="flex items-center space-x-4 group hover:cursor-pointer">
+      <div className="flex items-center space-x-4 group">
         <Avatar>
           <AvatarImage src={user.src} />
           <AvatarFallback>{user.name[0] + user.lastname[0]}</AvatarFallback>
         </Avatar>
-        <div>
-          <p className="text-sm font-medium leading-none">{user.name + ' ' + user.lastname}</p>
-          <p className="text-sm text-muted-foreground">{user?.email}</p>
+        <div className='flex flex-col gap-0.5'>
+          <Label className="text-sm font-medium leading-none capitalize">{user.name + ' ' + user.lastname}</Label>
+          <Label className="text-sm text-muted-foreground font-normal">{user?.email}</Label>
         </div>
       </div>
-    </Link>
   )
 }

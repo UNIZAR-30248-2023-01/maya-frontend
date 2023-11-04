@@ -66,7 +66,7 @@ export function SidePanel ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-project" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-project" className='capitalize h-8'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>

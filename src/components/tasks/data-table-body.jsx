@@ -9,7 +9,7 @@ import { flexRender } from '@tanstack/react-table'
 import { useLang } from '@/context/language-context'
 import { useRouter } from 'next/navigation'
 
-export function DataTableBody({ table }) {
+export function DataTableBody ({ table }) {
   const { dictionary } = useLang()
   const router = useRouter()
   const goTo = (row) => router.push(`/projects/${row.original.project}/${row.original.id}`)
@@ -19,7 +19,7 @@ export function DataTableBody({ table }) {
       {table.getRowModel().rows?.length
         ? (table.getRowModel().rows.map((row) => (
           <TableRow
-            key={row.original.id}
+            key={row.id}
             data-state={row.getIsSelected() && 'selected'}
             className='cursor-pointer'
             onClick={() => goTo(row)}
@@ -36,7 +36,7 @@ export function DataTableBody({ table }) {
               </TableCell>
             ))}
           </TableRow>
-        )))
+          )))
         : (
           <TableRow>
             <TableCell
@@ -46,7 +46,7 @@ export function DataTableBody({ table }) {
               No results.
             </TableCell>
           </TableRow>
-        )}
+          )}
     </TableBody>
   )
 }

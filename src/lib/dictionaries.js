@@ -197,7 +197,19 @@ export const people = {
     'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
     invite: 'Añadir miembros',
     search: 'Buscar miembros',
-    'invite-member-send': 'reclutar'
+    'invite-member-send': 'reclutar',
+    'manage-member-title': 'Gestionar %s',
+    'manage-member-description': 'Modifica la información de un usuario en este proyecto.',
+    'manage-member-submit': 'Cambiar rol',
+    'manage-member-delete-title': 'Eliminar del proyecto',
+    'manage-member-delete-description': 'Retira el permiso de un usuario a este proyecto.',
+    'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
+    'toast-success': 'Se han añadido los nuevos miembros correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
+    'toast-role-success': 'Se ha modificado la información correctamente.',
+    'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
   },
   en: {
     'members-tab': 'Members',
@@ -211,7 +223,19 @@ export const people = {
     'invite-member-description': 'Add members to your project to improve your team.',
     invite: 'Add members',
     search: 'Search members',
-    'invite-member-send': 'recruit'
+    'invite-member-send': 'recruit',
+    'manage-member-title': 'Manage %s',
+    'manage-member-description': 'Modify the info of a user in this project',
+    'manage-member-submit': 'Change role',
+    'manage-member-delete-title': 'Remove from this project',
+    'manage-member-delete-description': 'Remove the access of a user to this project',
+    'toast-loading': 'We are adding new members. Please wait a moment.',
+    'toast-success': 'New members added successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
+    'toast-role-success': 'Member info updated successfully.',
+    'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
+    'toast-remove-success': 'Member removed successfully.'
   }
 }
 
@@ -290,19 +314,40 @@ export const status = {
   }
 }
 
+export const roles = {
+  es: {
+    owner: 'Propietario',
+    developer: 'Desarrollador',
+    member: 'Miembro',
+    'scrum master': 'Scrum Master',
+    tester: 'QA',
+    designer: 'Diseñador'
+  },
+  en: {
+    owner: 'Owner',
+    developer: 'Developer',
+    member: 'Member',
+    'scrum master': 'Scrum Master',
+    tester: 'QA',
+    designer: 'Designer'
+  }
+}
+
 export const confirmation = {
   es: {
     'confirmation-title': '¿Estás completamente seguro?',
     'confirmation-desc-edit': 'Esto modificará y cambiará tus datos de nuestra base de datos',
     'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
-    'confirmation-edit': 'Si, modificar tarea',
-    'confirmation-delete': 'Si, eliminar tarea'
+    'confirmation-delete': 'Si, eliminar',
+    'confirmation-edit-task': 'Si, modificar tarea',
+    'confirmation-delete-task': 'Si, eliminar tarea'
   },
   en: {
     'confirmation-title': 'Are you absolutely sure?',
     'confirmation-desc-edit': 'This will modify and change your data from our servers.',
     'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
-    'confirmation-edit': 'Yes, edit task',
-    'confirmation-delete': 'Yes, delete task'
+    'confirmation-delete': 'Yes, delete',
+    'confirmation-edit-task': 'Yes, edit task',
+    'confirmation-delete-task': 'Yes, delete task'
   }
 }

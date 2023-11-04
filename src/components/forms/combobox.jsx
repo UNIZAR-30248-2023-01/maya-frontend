@@ -20,7 +20,7 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum({ id, label, value, list, onChange, dictionary, searchDictionary }) {
+export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, searchDictionary }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -75,7 +75,7 @@ export function ComboboxEnum({ id, label, value, list, onChange, dictionary, sea
   )
 }
 
-export function ComboboxArray({ id, label, placeholder, values, list, onChange }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >

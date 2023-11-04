@@ -2,9 +2,10 @@
 
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/people/data-table-column-header'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { DataTableRowActions } from '@/components/people/data-table-row-actions'
 import { Skeleton } from '@/components/ui/skeleton'
+import { TeamMember } from '../team-member'
 
 export const columns = [
   {
@@ -30,18 +31,12 @@ export const columns = [
       }
 
       return (
-        <div className='flex items-start space-x-2'>
-          <Avatar>
-            <AvatarImage src={row.original.people?.avatar} />
-            <AvatarFallback className='uppercase'>{String(row.original.people?.firstname)[0] + String(row.original.people?.lastname)[0]}</AvatarFallback>
-          </Avatar>
-          <div className='max-w-[150px] flex flex-col gap-y-1'>
-            <span className='max-w-full truncate font-medium capitalize'>
-              {row.original.people?.firstname + ' ' + row.original.people?.lastname}
-            </span>
-            <Badge variant='outline' className='max-w-fit'>{row.original.people?.username}</Badge>
-          </div>
-        </div>
+        <TeamMember user={{
+          name: row.original.people.firstname,
+          lastname: row.original.people.lastname,
+          email: row.original.people.email,
+          src: row.original.people.avatar
+        }}/>
       )
     },
     filterFn: (row, id, value) => {
@@ -52,16 +47,14 @@ export const columns = [
     header: ({ column, dictionary }) => {
       return <DataTableColumnHeader column={column} title={dictionary.role} />
     },
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { username } = row.original
       if (!username) {
         return <Skeleton variant='outline' className='w-24 h-4'/>
       }
 
       return (
-        row.getValue('role')
-          ? <Badge variant='outline' className='max-w-fit'>{row.getValue('role')}</Badge>
-          : <Badge variant='outline' className='max-w-fit'>member</Badge>
+        <Badge variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
       )
     },
     filterFn: (row, id, value) => {

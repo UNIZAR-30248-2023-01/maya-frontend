@@ -12,14 +12,14 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { ConfirmationTaskButton } from '@/components/tasks/confirmationButton'
 
-export default function TaskPage({ params }) {
+export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
   const [edit, setEdit] = useState(false)
   const assignees = [
     { email: 'ja1me@maya.com', src: '/assets/avatars/memojis/1.webp', name: 'Jaime', lastname: 'Martín' },
     { email: 'marinika@maya.com', src: '/assets/avatars/memojis/4.webp', name: 'Marina', lastname: 'Lamiel' }]
 
-  const { projectName, taskId } = params
+  // const { projectName, taskId } = params
 
   const handleCancel = () => {
     setEdit(false)
@@ -41,8 +41,8 @@ export default function TaskPage({ params }) {
           </div>
 
           <div className='flex gap-4'>
-            <Button variant='outline' onClick={() => edit ? handleCancel() : setEdit(true)}>{edit ? dictionary.common['cancel'] : dictionary.common['edit']}</Button>
-            <ConfirmationTaskButton className='bg-red-500 hover:bg-red-700' isEdit={edit} onClick={() => console.log('a')}> {dictionary.common['delete']}</ConfirmationTaskButton>
+            <Button variant='outline' onClick={() => edit ? handleCancel() : setEdit(true)}>{edit ? dictionary.common.cancel : dictionary.common.edit}</Button>
+            <ConfirmationTaskButton className='bg-red-500 hover:bg-red-700' isEdit={edit} onClick={() => console.log('a')}> {dictionary.common.delete}</ConfirmationTaskButton>
           </div>
         </div>
 
@@ -67,7 +67,7 @@ export default function TaskPage({ params }) {
               placeholder={dictionary.tasks['new-task-description-placeholder']}
               onChange={''}
             />
-          )
+            )
           : (
             <>
               <Label htmlFor={params.taskId + '-description'} className="capitalize">{normalize(dictionary.tasks['description-column'])}</Label>
@@ -78,7 +78,7 @@ export default function TaskPage({ params }) {
               </Card>
             </>
 
-          )}
+            )}
       </div>
 
       <div className='flex flex-col gap-1.5'>
@@ -99,7 +99,7 @@ export default function TaskPage({ params }) {
                 setter({ key: 'assignees', value: [...assigness, e] }) */
               }}
             />
-          )
+            )
           : (
             <>
               <Label htmlFor={params.taskId + '-description'} className="capitalize">{normalize(dictionary.tasks['assignees-column'])}</Label>
@@ -110,7 +110,7 @@ export default function TaskPage({ params }) {
               </div>
             </>
 
-          )}
+            )}
       </div>
 
       <div className='flex justify-between gap-6 pt-4'>
@@ -134,7 +134,7 @@ export default function TaskPage({ params }) {
                 placeholder={dictionary.tasks['new-task-estimated-placeholder']}
                 onChange={() => { }/* (e) => setter({ key: 'estimated', value: Number(e.target.value) }) */}
               />
-            )
+              )
             : (
               <>
                 <Label htmlFor={params.taskId + '-estimated'} className="capitalize">{normalize(dictionary.tasks['estimated-column'])}</Label>
@@ -145,7 +145,7 @@ export default function TaskPage({ params }) {
                 </Card>
               </>
 
-            )}
+              )}
         </div>
       </div>
 

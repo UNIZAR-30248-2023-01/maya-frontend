@@ -374,50 +374,24 @@ export const loadingTasks = [
   }
 ]
 
-export const mockRoles = [
+export const roles = [
   {
     id: 1,
     value: 'owner'
   }, {
     id: 2,
+    value: 'developer'
+  }, {
+    id: 3,
+    value: 'scrum master'
+  }, {
+    id: 4,
+    value: 'tester'
+  }, {
+    id: 5,
+    value: 'designer'
+  }, {
+    id: 6,
     value: 'member'
-  }
-]
-
-export const mockProjectData = [
-  {
-    id: 'm5gr84i9',
-    label: 'public',
-    title: 'reign chess',
-    description: 'A chess game made with react for the web',
-    status: 'open'
-  },
-  {
-    id: '3u1reuv4',
-    label: 'public',
-    title: 'hot asm',
-    description: 'A website to code in assembly',
-    status: 'open'
-  },
-  {
-    id: 'derv1ws0',
-    label: 'private',
-    title: 'vercel v0',
-    description: 'Customize your vercel project with this tool',
-    status: 'closed'
-  },
-  {
-    id: '5kma53ae',
-    label: 'private',
-    title: 'react v17',
-    description: 'Library to create react apps',
-    status: 'closed'
-  },
-  {
-    id: 'bhqecj4p',
-    label: 'private',
-    title: 'shopify v2',
-    description: 'An ecommerce website made with shopify',
-    status: 'closed'
   }
 ]

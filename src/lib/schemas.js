@@ -21,12 +21,11 @@ export const tasksSchema = z.object({
 })
 
 export const peopleSchema = z.object({
-  id: z.string(),
-  avatar: z.enum([]),
-  firstname: z.string().min(1).max(30),
-  lastname: z.string().min(1).max(30),
-  username: z.string().min(1).max(30),
-  email: z.string().email()
+  members: z.array(z.string().min(1).max(30))
+})
+
+export const roleSchema = z.object({
+  role: z.enum(['owner', 'developer', 'scrum master', 'tester', 'designer', 'member']).default('member')
 })
 
 export const teamSchema = z.object({

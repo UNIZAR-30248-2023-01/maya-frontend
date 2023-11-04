@@ -53,8 +53,8 @@ export const columns = [
         <div className="flex">
           {row.getValue('people').map((person, id) => (
             <Avatar key={id} className="h-8 w-8">
-              <AvatarImage src={person.avatar} />
-              <AvatarFallback className="uppercase">{String(person.firstname)[0] + String(person.lastname)[0]}</AvatarFallback>
+              <AvatarImage src={person?.avatar} />
+              <AvatarFallback className="uppercase">{String(person?.firstname)[0] + String(person?.lastname)[0]}</AvatarFallback>
             </Avatar>
           ))}
         </div>

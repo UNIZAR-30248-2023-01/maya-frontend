@@ -18,7 +18,7 @@ import { SidePanel } from '@/components/tasks/side-panel'
 import { useLang } from '@/context/language-context'
 import { tasksSchema } from '@/lib/schemas'
 
-export function DataTable({ data, columns, people, projectName }) {
+export function DataTable ({ data, columns, people, projectName }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -53,7 +53,7 @@ export function DataTable({ data, columns, people, projectName }) {
           description={dictionary.tasks['new-table-description']}
           projectName={projectName}
           triggerBtn={dictionary.tasks['new-task']}
-          actionBtn={dictionary.common['create']}
+          actionBtn={dictionary.common.create}
           schema={tasksSchema}
           data={{ assignees: people }}
         />

@@ -16,7 +16,7 @@ import { DataTableBody } from '@/components/people/data-table-body'
 import { InviteMember } from '@/components/people/invite-member'
 import { useLang } from '@/context/language-context'
 
-export function DataTable ({ data, columns }) {
+export function DataTable ({ data, columns, projectName }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -52,12 +52,13 @@ export function DataTable ({ data, columns }) {
           triggerBtn={dictionary.people.invite}
           actionBtn={dictionary.people['invite-member-send']}
           data={{ members: data }}
+          projectName={projectName}
         />
       </div>
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>
-          <DataTableBody table={table}/>
+          <DataTableBody table={table} />
         </Table>
       </div>
       <DataTablePagination table={table} />

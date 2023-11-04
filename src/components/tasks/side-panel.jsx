@@ -20,7 +20,7 @@ import { tasksSchema } from '@/lib/schemas'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
 
-export function SidePanel({
+export function SidePanel ({
   title,
   description,
   projectName,
@@ -86,7 +86,7 @@ export function SidePanel({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id='new-task' variant='outline' className='capitalize'>
+        <Button id='new-task' className='capitalize h-8'>
           {triggerBtn}
         </Button>
       </SheetTrigger>
