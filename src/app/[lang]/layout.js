@@ -20,9 +20,7 @@ export default function RootLayout ({ children }) {
         <Toaster />
         <LanguageProvider>
           <SWRProvider>
-            <Layout>
-              {children}
-            </Layout>
+            {children}
           </SWRProvider>
         </LanguageProvider>
       </body>

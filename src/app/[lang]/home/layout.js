@@ -1,0 +1,14 @@
+import { Layout } from "@/components/Layout"
+
+export const metadata = {
+  title: 'home',
+  description: 'You are in the home page'
+}
+
+export default function home ({ children }) {
+  return (
+    <Layout>
+      {children}
+    </Layout>
+  )
+}

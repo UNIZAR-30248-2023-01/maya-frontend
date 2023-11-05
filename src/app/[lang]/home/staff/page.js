@@ -3,6 +3,8 @@
 import { DataTable } from '@/components/people/data-table'
 import { columns } from '@/components/people/columns'
 import { loadingPeople } from '@/lib/constants'
+import { checkSession } from '@/lib/utils'
+
 import useSWR from 'swr'
 
 export default function StaffPage () {

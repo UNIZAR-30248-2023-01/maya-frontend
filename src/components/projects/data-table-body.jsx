@@ -12,7 +12,7 @@ import { useLang } from '@/context/language-context'
 export function DataTableBody ({ table }) {
   const { dictionary } = useLang()
   const router = useRouter()
-  const goTo = (row) => router.push(`/projects/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
+  const goTo = (row) => router.push(`/home/projects/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
 
   return (
     <TableBody>

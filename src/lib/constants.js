@@ -24,13 +24,13 @@ export const supportedLanguages = [
 ]
 
 export const navigation = [
-  { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
-  { name: 'projects', href: '/projects', icon: LuFileText, current: false },
-  { name: 'teams', href: '/teams', icon: LuUsers, current: false },
-  { name: 'staff', href: '/staff', icon: LuUser, current: false },
-  { name: 'workSpaces', href: '/workspaces', icon: LuLaptop2, current: false },
-  { name: 'in-and-outs', href: '/in-and-outs', icon: LuCalendar, current: false },
-  { name: 'tickets', href: '/tickets', icon: LuTicket, current: false }
+  { name: 'overview', href: '/home', icon: LuLayoutGrid, current: true },
+  { name: 'projects', href: '/home/projects', icon: LuFileText, current: false },
+  { name: 'teams', href: '/home/teams', icon: LuUsers, current: false },
+  { name: 'staff', href: '/home/staff', icon: LuUser, current: false },
+  { name: 'workSpaces', href: '/home/workspaces', icon: LuLaptop2, current: false },
+  { name: 'in-and-outs', href: '/home/in-and-outs', icon: LuCalendar, current: false },
+  { name: 'tickets', href: '/home/tickets', icon: LuTicket, current: false }
 ]
 
 export const teams = [
@@ -42,23 +42,23 @@ export const teams = [
 export const profileNavItems = [
   {
     title: 'profile',
-    href: '/settings'
+    href: '/home/settings'
   },
   {
     title: 'account',
-    href: '/settings/account'
+    href: '/home/settings/account'
   },
   {
     title: 'appearance',
-    href: '/settings/appearance'
+    href: '/home/settings/appearance'
   },
   {
     title: 'notifications',
-    href: '/settings/notifications'
+    href: '/home/settings/notifications'
   },
   {
     title: 'display',
-    href: '/settings/display'
+    href: '/home/settings/display'
   }
 ]
 

@@ -1,5 +1,6 @@
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
+import { verify } from "@/lib/jwt_sign_verify";
 
 const locales = ['en', 'es']
 
@@ -14,19 +15,38 @@ function getLocale (request) {
 }
 
 export function middleware (request) {
+  const jwt = request.cookies.get("OutsiteJWT");
   const { pathname } = request.nextUrl
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
 
-  if (pathnameHasLocale) return
-
-  // Redirect if there is no locale
-  const locale = getLocale(request)
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  // e.g. incoming request is /products
-  // The new URL is now /en-US/products
-  return Response.redirect(request.nextUrl)
+  if (pathname === '/es' || pathname === '/en') { //HAY QUE RIDIRIGIR A INICIO
+    const pathnameHasLocale = locales.some(
+      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    )
+    if (pathnameHasLocale) return
+  
+    // Redirect if there is no locale
+    const locale = getLocale(request)
+    request.nextUrl.pathname = `/es`
+    // e.g. incoming request is /products
+    // The new URL is now /en-US/products
+    return Response.redirect(request.nextUrl)
+  }
+  if (jwt === undefined) { //SI NO EXISTE EL TOKEN REDIRIGE INICIO
+    request.nextUrl.pathname = "/es";
+    return Response.redirect(request.nextUrl);
+  }else{  //TOKEN EXISTE
+    const pathnameHasLocale = locales.some(
+      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    )
+    if (pathnameHasLocale) return
+  
+    // Redirect if there is no locale
+    const locale = getLocale(request)
+    request.nextUrl.pathname = `/${locale}${pathname}`
+    // e.g. incoming request is /products
+    // The new URL is now /en-US/products
+    return Response.redirect(request.nextUrl)
+  }
 }
 
 export const config = {

@@ -3,6 +3,7 @@
 import { DataTable } from '@/components/projects/data-table'
 import { columns } from '@/components/projects/columns'
 import { loadingProjects } from '@/lib/constants'
+
 import useSWR from 'swr'
 
 export default function ProjectsPage () {

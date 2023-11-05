@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 
 export function DataTableBody ({ table }) {
   const router = useRouter()
-  const goTo = (row) => router.push(`/teams/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
+  const goTo = (row) => router.push(`/home/teams/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
 
   return (
     <TableBody>

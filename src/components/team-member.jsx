@@ -16,7 +16,7 @@ export function TeamMember ({
   }
 }) {
   return (
-    <Link href="/settings">
+    <Link href="/home/settings">
       <div className="flex items-center space-x-4 group hover:cursor-pointer">
         <Avatar>
           <AvatarImage src={user.src} />
