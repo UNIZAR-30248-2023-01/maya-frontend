@@ -106,7 +106,14 @@ export function SidePanelManual ({
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
-              onChange={(e) => {setter({ key: 'in_date', value: e })}}
+              onChange={(e) => {
+              
+                if( form.out_date !== null && form.out_date < e ) {
+                  toast.error(dictionary.inandouts['error-in-date']);
+                } else {
+                  setter({ key: 'in_date', value: e })
+                }
+              }}
             />
 
             <div className="w-[65px]">
@@ -163,7 +170,7 @@ export function SidePanelManual ({
                     const inputHour = e.target.value;
                     const inputElement = e.target;e.target.value 
 
-                    if( form.in_hour > inputHour ) {
+                    if( form.in_date === form.out_date && form.in_hour > inputHour ) {
                       toast.error(dictionary.inandouts['error-out-hour']);
                       setInvalidHour(false)
                     } else {

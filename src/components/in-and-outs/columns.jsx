@@ -10,6 +10,9 @@ import { useLang } from '@/context/language-context'
 function formatDate(timestamp) {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   const { dictionary } = useLang()
+  
+  if (!timestamp) return null;
+
   return new Date(timestamp).toLocaleDateString(dictionary.inandouts['language'], options);
 }
 
