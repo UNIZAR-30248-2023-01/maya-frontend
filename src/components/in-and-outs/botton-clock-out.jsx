@@ -19,10 +19,16 @@ import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
 import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
+import useSWR from 'swr'
 
-export function SidePanelAutomatic ({
-  triggerBtn
+export function ClockOut ({
+  triggerBtn,
+  setIsClockInVisible,
+  setIsClockOutVisible
 }) {
+
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)  
+  console.log("inAndOutsssssssssssssss ", inAndOuts)
 
   const { dictionary } = useLang()
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
@@ -36,8 +42,9 @@ export function SidePanelAutomatic ({
     return `${hours}:${minutes}`;
   }
 
-  form.in_date = new Date(new Date().getTime());
-  form.in_hour = getCurrentTime().toString();
+  form.out_date = new Date(new Date().getTime());
+  form.out_hour = getCurrentTime().toString();
+  
 
   console.log("form ", form)
   console.log("out_date ", typeof form.out_date)
@@ -46,24 +53,31 @@ export function SidePanelAutomatic ({
   const handleSubmit = async () => {
     //e.preventDefault()
 
+    form.in_date = inAndOuts[0].in_date;
+
     const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
-
-    let timestampOut = null;
-    let horasRedondeadas = "";
-
-    const timestampIn = new Date(in_date.getFullYear(), in_date.getMonth(), in_date.getDate(), in_hour.split(":")[0], in_hour.split(":")[1])
+    const fecha = new Date(in_date)
+    const year = fecha.getFullYear()
+    const month = fecha.getMonth()
+    const day = fecha.getDate()
+    const hour = fecha.getHours()
+    const minute = fecha.getMinutes()
     
-    if(out_hour !== "" || out_date !== null ) {
-      timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
+    const timestampIn = new Date(year, month, day, hour, minute)
+    const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
 
-      const tiempoEnMilisegundos = timestampOut- timestampIn
-      const horasTotales = tiempoEnMilisegundos / (1000 * 60)
-      horasRedondeadas = Math.round(horasTotales)
-    }
+    console.log("timestampIn aaaaaaaaaaaa ", typeof timestampIn)
+    console.log("timestampOut aaaaaaaaaaaa ", typeof timestampOut)
 
-    console.log("timestampOut ", timestampOut, typeof timestampOut)
-    console.log("timestampIn ", timestampIn, typeof timestampIn)
+    const tiempoEnMilisegundos = timestampOut- timestampIn;
+    const horasTotales = tiempoEnMilisegundos / (1000 * 60);
+    const horasRedondeadas = Math.round(horasTotales);
+
+    console.log("horasRedondeadas ", horasRedondeadas)
+
+    //setIsClockOutVisible(false)
+    //setIsClockInVisible(true)
 
 
     try {
@@ -74,7 +88,7 @@ export function SidePanelAutomatic ({
             username: 'hec7orci7o', 
             in_date: timestampIn,            
             out_date: timestampOut,
-            total: 0
+            total: horasRedondeadas
           }])
             .then(() => {
               setIsSheetOpen(true)
