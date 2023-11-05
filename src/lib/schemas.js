@@ -35,3 +35,9 @@ export const teamSchema = z.object({
   visibility: z.enum(['public', 'private']).default('private'),
   organization: z.string()
 })
+
+export const workspacesSchema = z.object({
+  name: z.string().min(1).max(30),
+  key: z.enum(['public', 'private']).default('private'),
+  secretkey: z.enum(['public', 'private']).default('private')
+})
