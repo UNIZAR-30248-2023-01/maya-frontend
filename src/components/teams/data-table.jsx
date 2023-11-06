@@ -13,7 +13,7 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/teams/data-table-header'
 import { DataTableBody } from '@/components/teams/data-table-body'
-import { SidePanel } from '@/components/projects/side-panel'
+import { SidePanel } from '@/components/teams/side-panel'
 import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 
@@ -54,6 +54,7 @@ export function DataTable ({ data, columns, people }) {
           actionBtn={dictionary.teams['new-team-create']}
           schema={teamSchema}
           dictionary={dictionary}
+          data={{ members: people }}
         />
       </div>
       <div className="rounded-md border">

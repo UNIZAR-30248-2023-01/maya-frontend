@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { Sidebar } from '@/components/sidebar/Sidebar'
-import { Search } from '@/components/sidebar/Search'
+import { Sidebar } from '@/components/sidebar/sidebar'
+import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { Navbar } from '@/components/Navbar'
-import { navigation, teams } from '@/lib/constants'
+import { Navbar } from '@/components/navbar'
+import { navigation } from '@/lib/constants'
 
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
@@ -16,7 +16,6 @@ export function Layout ({ children }) {
         <SheetContent side="left" className="p-0 w-fit">
           <Sidebar
             navigation={navigation}
-            teams={teams}
             sheet={true}
             setSearchOpen={setOpen}
           />
