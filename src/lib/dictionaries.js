@@ -340,25 +340,29 @@ export const confirmation = {
     'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
     'confirmation-visibility': '¿Estás seguro de que quieres cambiar la visibilidad de este proyecto?',
     'confirmation-desc-close': '¿Estás seguro de que quieres cerrar este proyecto?',
+    'confirmation-desc-open': '¿Estás seguro de que quieres abrir este proyecto? Al hacerlo cualquiera podrá ver su contenido.',
     'confirmation-delete': 'Si, eliminar',
     'confirmation-edit-task': 'Si, modificar tarea',
     'confirmation-delete-task': 'Si, eliminar tarea',
     'confirmation-visibility-public': 'Si, hacer público',
     'confirmation-visibility-private': 'Si, hacer privado',
     'confirmation-close': 'Si, cerrar proyecto',
+    'confirmation-open': 'Si, abrir proyecto'
   },
   en: {
     'confirmation-title': 'Are you absolutely sure?',
     'confirmation-desc-edit': 'This will modify and change your data from our servers.',
     'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
     'confirmation-visibility': 'Are you sure you want to change the visibility of this project?',
-    'confirmation-close': 'Are you sure you want to close this project?',
+    'confirmation-desc-close': 'Are you sure you want to close this project?',
+    'confirmation-desc-open': 'Are you sure you want to open this project? By doing so anyone will be able to see its content.',
     'confirmation-delete': 'Yes, delete',
     'confirmation-edit-task': 'Yes, edit task',
     'confirmation-delete-task': 'Yes, delete task',
     'confirmation-visibility-public': 'Yes, make public',
     'confirmation-visibility-private': 'Yes, make private',
-    'confirmation-close-project': 'Yes, close project',
+    'confirmation-close': 'Yes, close project',
+    'confirmation-open': 'Yes, open project'
   }
 }
 
@@ -374,8 +378,10 @@ export const projectSettings = {
     'private-visibility': 'Este proyecto actualmente es privado.',
     'public-visibility': 'Este proyecto actualmente es público.',
     'close-project': 'Cerrar proyecto',
+    'open-project': 'Abrir proyecto',
     'explain-close-project':
       'Cerrar un proyecto va a deshabilitar su flujo de trabajo y lo eliminará de la lista de proyectos abiertos.',
+    'explain-open-project': 'Abrir un proyecto va a habilitar su flujo de trabajo y lo añadirá a la lista de proyectos abiertos.',
     'delete-project': 'Eliminar proyecto',
     'explain-delete-project':
       'Una vez elimines un proyecto, no hay vuelta atrás. Por favor, asegurate.'
@@ -391,8 +397,10 @@ export const projectSettings = {
     'private-visibility': 'This project is currently private.',
     'public-visibility': 'This project is currently public.',
     'close-project': 'Close project',
+    'open-project': 'Open project',
     'explain-close-project':
       'Closing a project will disable its workflows and remove it from the list of open projects.',
+    'explain-open-project': 'Opening a project will enable its workflows and add it to the list of open projects.',
     'delete-project': 'Delete project',
     'explain-delete-project':
       'Once you delete a project, there is no going back. Please be certain.'

@@ -22,21 +22,43 @@ export function ConfirmationCloseButton({ isClose }) {
       <AlertDialogTrigger asChild>
         <Button
           variant='secondary'
-          className='text-red-600 font-medium whitespace-nowrap w-36'
+          className={
+            isClose
+              ? 'text-green-600 font-medium whitespace-nowrap w-36'
+              : 'text-red-600 font-medium whitespace-nowrap w-36'
+          }
         >
-          {dictionary.projectSettings['close-project']}
+          {isClose
+            ? dictionary.projectSettings['open-project']
+            : dictionary.projectSettings['close-project']}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{dictionary.confirmation['confirmation-title']}</AlertDialogTitle>
-          <AlertDialogDescription>{dictionary.confirmation['confirmation-desc-close']}</AlertDialogDescription>
+          <AlertDialogTitle>
+            {dictionary.confirmation['confirmation-title']}
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            {isClose
+              ? dictionary.confirmation['confirmation-desc-open']
+              : dictionary.confirmation['confirmation-desc-close']}
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
-          <AlertDialogAction className={'bg-red-500 hover:bg-red-700'}>{dictionary.confirmation['confirmation-close']}</AlertDialogAction>
+          <AlertDialogAction
+            className={
+              isClose
+                ? 'bg-green-500 hover:bg-green-700'
+                : 'bg-red-500 hover:bg-red-700'
+            }
+          >
+            {isClose
+              ? dictionary.confirmation['confirmation-open']
+              : dictionary.confirmation['confirmation-close']}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
-    </AlertDialog>
+    </AlertDialog >
   )
 }

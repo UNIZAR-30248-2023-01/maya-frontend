@@ -58,6 +58,9 @@ const defaultValues = {
 
 export function ProjectSettings({ projectName }) {
   const { data: project } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+  console.log(project)
+  const close = project.satus === 'closed'
+  const publicBool = project.visibility === 'public'
 
   const form = useForm({
     resolver: zodResolver(profileFormSchema),
@@ -131,7 +134,7 @@ export function ProjectSettings({ projectName }) {
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <ConfirmationVisibilityButton></ConfirmationVisibilityButton>
+                      <ConfirmationVisibilityButton isPublic={publicBool}></ConfirmationVisibilityButton>
                     </FormControl>
                   </FormItem>
                 )}
@@ -143,14 +146,18 @@ export function ProjectSettings({ projectName }) {
                   <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
                     <div className='space-y-0.5'>
                       <FormLabel className='text-base'>
-                        {dictionary.projectSettings['close-project']}
+                        {/*close
+                          ? dictionary.projectSettings['open-project']
+                          : */dictionary.projectSettings['close-project']}
                       </FormLabel>
                       <FormDescription>
-                        {dictionary.projectSettings['explain-close-project']}
+                        {/*close
+                          ? dictionary.projectSettings['explain-open-project']
+                          : */dictionary.projectSettings['explain-close-project']}
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <ConfirmationCloseButton></ConfirmationCloseButton>
+                      <ConfirmationCloseButton isClose={close}></ConfirmationCloseButton>
                     </FormControl>
                   </FormItem>
                 )}
