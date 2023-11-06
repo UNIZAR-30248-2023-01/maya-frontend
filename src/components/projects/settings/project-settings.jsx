@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+import useSWR from 'swr'
 // import { TabsContent } from '@/components/ui/tabs'
 
 import {
@@ -16,9 +17,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
+import { ConfirmationTaskButton } from '@/components/projects/settings/confirmationTaskButton'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { useLang } from '@/context/language-context'
 
 const profileFormSchema = z.object({
   username: z
@@ -53,7 +55,9 @@ const defaultValues = {
   ]
 }
 
-export function ProjectSettings ({ value }) {
+export function ProjectSettings ({ projectName }) {
+  const { data: project } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+
   const form = useForm({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -64,92 +68,92 @@ export function ProjectSettings ({ value }) {
     toast.message('You submitted the following values:', { description: JSON.stringify(data, null, 2) })
   }
 
+  const { dictionary } = useLang()
+
   return (
     <div className='flex flex-col gap-4 max-w-[800px]'>
-    { /* <TabsContent value={value} className="space-y-6"> */ }
-      <div>
-        <h3 className="text-lg font-medium">
-          Project settings
-        </h3>
-      </div>
+      {/* <TabsContent value={value} className='space-y-6'> */}
+
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
           <FormField
             control={form.control}
-            name="project-name"
+            name='project-name'
             render={({ field }) => (
               <FormItem>
-              <FormLabel>Project name</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormMessage />
+                <FormLabel>{dictionary.projectSettings.name}</FormLabel>
+                <FormControl>
+                  <Input placeholder='shadcn' {...field} />
+                </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="project-description"
+            name='project-description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Short description</FormLabel>
+                <FormLabel>{dictionary.projectSettings.description}</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Tell us a little bit about your project."
-                    className="resize-none"
+                    placeholder={
+                      dictionary.projectSettings['example-description']
+                    }
+                    className='resize-none'
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>
-                  Explain your user&apos;s what your project is about.
+                  {dictionary.projectSettings['explain-description']}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
           <div className='space-y-4'>
-            <h4 className="text-lg font-medium">
-              Danger zone
+            <h4 className='text-lg font-medium'>
+              {dictionary.projectSettings['danger-zone']}
             </h4>
-            <div className="rounded-lg border border-red-600 divide-y divide-red-600">
+            <div className='rounded-lg border border-red-600 divide-y divide-red-600'>
               <FormField
                 control={form.control}
-                name="marketing_emails"
+                name='marketing_emails'
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Visibility
+                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
+                    <div className='space-y-0.5'>
+                      <FormLabel className='text-base'>
+                        {dictionary.projectSettings.visibility}
                       </FormLabel>
                       <FormDescription>
-                        This project is currently private.
+                        {dictionary.projectSettings['private-visibility']}
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
+                      <ConfirmationTaskButton></ConfirmationTaskButton>
                     </FormControl>
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
-                name="marketing_emails"
+                name='marketing_emails'
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Close project
+                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
+                    <div className='space-y-0.5'>
+                      <FormLabel className='text-base'>
+                        {dictionary.projectSettings['close-project']}
                       </FormLabel>
                       <FormDescription>
-                        Closing a project will disable its workflows & remove it from the list of open projects.
+                        {dictionary.projectSettings['explain-close-project']}
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <Button variant="secondary" className="text-red-600 font-medium w-fit whitespace-nowrap">
-                        Close this project
+                      <Button
+                        variant='secondary'
+                        className='text-red-600 font-medium whitespace-nowrap w-36'
+                      >
+                        {dictionary.projectSettings['close-project']}
                       </Button>
                     </FormControl>
                   </FormItem>
@@ -157,20 +161,23 @@ export function ProjectSettings ({ value }) {
               />
               <FormField
                 control={form.control}
-                name="marketing_emails"
+                name='marketing_emails'
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
-                        Delete project
+                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
+                    <div className='space-y-0.5'>
+                      <FormLabel className='text-base'>
+                        {dictionary.projectSettings['delete-project']}
                       </FormLabel>
                       <FormDescription>
-                        Once you delete a project, there is no going back. Please be certain.
+                        {dictionary.projectSettings['explain-delete-project']}
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <Button variant="secondary" className="text-red-600 font-medium w-fit whitespace-nowrap">
-                        Delete this project
+                      <Button
+                        variant='secondary'
+                        className='text-red-600 font-medium whitespace-nowrap w-36'
+                      >
+                        {dictionary.projectSettings['delete-project']}
                       </Button>
                     </FormControl>
                   </FormItem>
@@ -181,6 +188,6 @@ export function ProjectSettings ({ value }) {
         </form>
       </Form>
       {/* </TabsContent> */}
-      </div>
+    </div>
   )
 }

@@ -16,6 +16,7 @@ import { peopleSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
+import { DialogClose } from '@radix-ui/react-dialog'
 
 export function InviteMember ({
   title,
@@ -70,6 +71,7 @@ export function InviteMember ({
           success: () => dictionary.people['toast-success'],
           error: () => dictionary.people['toast-error']
         })
+        setter({ key: 'members', value: [] })
       }
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
@@ -98,6 +100,7 @@ export function InviteMember ({
                 placeholder={dictionary.people.search}
                 list={people?.map((member) => ({ value: member.username, label: member.username }))}
                 values={form.members || []}
+                dictionary={dictionary}
                 onChange={(e) => {
                   const members = form.members || []
                   const isSelected = members ? members.includes(e) : false
@@ -108,7 +111,9 @@ export function InviteMember ({
                 }}
               />
             </div>
-            <Button type="submit" className="capitalize">{actionBtn}</Button>
+            <DialogClose asChild>
+              <Button type="submit" className="capitalize">{actionBtn}</Button>
+            </DialogClose>
           </div>
         </form>
       </DialogContent>

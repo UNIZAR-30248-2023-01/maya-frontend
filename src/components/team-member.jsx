@@ -12,7 +12,7 @@ export function TeamMember ({
     src: '/assets/avatars/memojis/4.webp',
     name: 'Sofia',
     lastname: 'Davis',
-    email: 'm@example.com'
+    username: 'm@example.com'
   }
 }) {
   return (
@@ -23,7 +23,7 @@ export function TeamMember ({
         </Avatar>
         <div className='flex flex-col gap-0.5'>
           <Label className="text-sm font-medium leading-none capitalize">{user.name + ' ' + user.lastname}</Label>
-          <Label className="text-sm text-muted-foreground font-normal">{user?.email}</Label>
+          <Label className="text-sm text-muted-foreground font-normal">{user?.username}</Label>
         </div>
       </div>
   )

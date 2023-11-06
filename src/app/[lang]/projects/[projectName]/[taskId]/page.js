@@ -16,8 +16,8 @@ export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
   const [edit, setEdit] = useState(false)
   const assignees = [
-    { email: 'ja1me@maya.com', src: '/assets/avatars/memojis/1.webp', name: 'Jaime', lastname: 'Martín' },
-    { email: 'marinika@maya.com', src: '/assets/avatars/memojis/4.webp', name: 'Marina', lastname: 'Lamiel' }]
+    { username: 'ja1me', src: '/assets/avatars/memojis/1.webp', name: 'Jaime', lastname: 'Martín' },
+    { username: 'marinika', src: '/assets/avatars/memojis/4.webp', name: 'Marina', lastname: 'Lamiel' }]
 
   // const { projectName, taskId } = params
 

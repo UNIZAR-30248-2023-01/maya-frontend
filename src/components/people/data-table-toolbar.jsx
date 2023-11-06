@@ -27,7 +27,7 @@ export function DataTableToolbar ({ table }) {
           <DataTableFacetedFilter
             column={table.getColumn('role')}
             title={dictionary.people.role}
-            options={roles.map(role => ({ value: dictionary.roles[role.value] }))}
+            options={roles.map(role => ({ value: role.value }))}
           />
         )}
         {isFiltered && (

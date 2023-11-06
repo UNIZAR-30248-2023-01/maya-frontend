@@ -34,7 +34,7 @@ export const columns = [
         <TeamMember user={{
           name: row.original.people.firstname,
           lastname: row.original.people.lastname,
-          email: row.original.people.email,
+          username: row.original.username,
           src: row.original.people.avatar
         }}/>
       )

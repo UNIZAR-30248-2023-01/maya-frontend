@@ -40,7 +40,7 @@ export function SidebarNav ({ className, items, ...props }) {
   )
 }
 
-export default function SettingsPage () {
+export default function SettingsPage ({ projectName }) {
   return (
     <div className="space-y-6 p-10 pb-16">
       <Tabs

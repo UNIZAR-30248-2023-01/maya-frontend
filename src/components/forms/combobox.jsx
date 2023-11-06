@@ -75,7 +75,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, se
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange, dictionary }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
@@ -100,7 +100,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
         <Command>
           <CommandInput placeholder={placeholder} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
               {list.map((option) => {
                 const isSelected = values.includes(option.value)

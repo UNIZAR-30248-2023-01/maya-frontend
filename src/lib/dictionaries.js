@@ -351,3 +351,40 @@ export const confirmation = {
     'confirmation-delete-task': 'Yes, delete task'
   }
 }
+
+export const projectSettings = {
+  es: {
+    name: 'Nombre del proyecto',
+    description: 'Breve descripción',
+    'example-description': 'Cuentanos un poco sobre tu proyecto',
+    'explain-description': 'Explica a los usuarios sobre que va tu proyecto.',
+    'danger-zone': 'Zona peligrosa',
+    visibility: 'Visibilidad',
+    'change-visibility': 'Cambiar visibilidad',
+    'private-visibility': 'Este proyecto actualmente es privado.',
+    'public-visibility': 'Este proyecto actualmente es público.',
+    'close-project': 'Cerrar proyecto',
+    'explain-close-project':
+      'Cerrar un proyecto va a deshabilitar su flujo de trabajo y lo eliminará de la lista de proyectos abiertos.',
+    'delete-project': 'Eliminar proyecto',
+    'explain-delete-project':
+      'Una vez elimines un proyecto, no hay vuelta atrás. Por favor, asegurate.'
+  },
+  en: {
+    name: 'Project name',
+    description: 'Short description',
+    'example-description': 'Tell us a little bit about your project.',
+    'explain-description': "Explain your user's what your project is about.",
+    'danger-zone': 'Danger zone',
+    visibility: 'Visibility',
+    'change-visibility': 'Change visibility',
+    'private-visibility': 'This project is currently private.',
+    'public-visibility': 'This project is currently public.',
+    'close-project': 'Close project',
+    'explain-close-project':
+      'Closing a project will disable its workflows and remove it from the list of open projects.',
+    'delete-project': 'Delete project',
+    'explain-delete-project':
+      'Once you delete a project, there is no going back. Please be certain.'
+  }
+}

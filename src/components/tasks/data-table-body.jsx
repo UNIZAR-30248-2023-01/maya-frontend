@@ -17,35 +17,38 @@ export function DataTableBody ({ table }) {
   return (
     <TableBody>
       {table.getRowModel().rows?.length
-        ? (table.getRowModel().rows.map((row) => (
+        ? (
+            table.getRowModel().rows.map((row) => (
           <TableRow
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
-            className='cursor-pointer'
+            className="cursor-pointer"
             onClick={() => goTo(row)}
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>
-                {flexRender(
-                  cell.column.columnDef.cell,
-                  {
-                    ...cell.getContext(),
-                    dictionary: { ...dictionary.tasks, ...dictionary.labels, ...dictionary.status }
+                {flexRender(cell.column.columnDef.cell, {
+                  ...cell.getContext(),
+                  dictionary: {
+                    ...dictionary.tasks,
+                    ...dictionary.labels,
+                    ...dictionary.status
                   }
-                )}
+                })}
               </TableCell>
             ))}
           </TableRow>
-          )))
+            ))
+          )
         : (
-          <TableRow>
-            <TableCell
-              colSpan={table.getAllColumns().length}
-              className="h-24 text-center"
-            >
-              No results.
-            </TableCell>
-          </TableRow>
+        <TableRow>
+          <TableCell
+            colSpan={table.getAllColumns().length}
+            className="h-24 text-center"
+          >
+            {dictionary.search['not-found']}
+          </TableCell>
+        </TableRow>
           )}
     </TableBody>
   )
