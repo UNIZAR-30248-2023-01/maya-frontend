@@ -14,8 +14,8 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 
-export function ConfirmationTaskButton ({
-  isEdit
+export function ConfirmationVisibilityButton({
+  isPublic
 }) {
   const { dictionary } = useLang()
 
@@ -35,23 +35,21 @@ export function ConfirmationTaskButton ({
             {dictionary.confirmation['confirmation-title']}
           </AlertDialogTitle>
           <AlertDialogDescription>
-            {isEdit
-              ? dictionary.confirmation['confirmation-desc-edit']
-              : dictionary.confirmation['confirmation-desc-delete']}
+            {dictionary.confirmation['confirmation-visibility']}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <AlertDialogAction
             className={
-              isEdit
+              isPublic
                 ? 'bg-green-500 hover:bg-green-700'
                 : 'bg-red-500 hover:bg-red-700'
             }
           >
-            {isEdit
-              ? dictionary.confirmation['confirmation-edit-task']
-              : dictionary.confirmation['confirmation-delete-task']}
+            {isPublic
+              ? dictionary.confirmation['confirmation-visibility-public']
+              : dictionary.confirmation['confirmation-visibility-private']}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

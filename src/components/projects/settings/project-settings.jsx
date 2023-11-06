@@ -17,9 +17,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { ConfirmationTaskButton } from '@/components/projects/settings/confirmationTaskButton'
+import { ConfirmationVisibilityButton } from '@/components/projects/settings/confirmationVisibilityButton'
+import { ConfirmationDeleteButton } from '@/components/projects/settings/confirmationDeleteButton'
+import { ConfirmationCloseButton } from '@/components/projects/settings/confirmationCloseButton'
 import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
 import { useLang } from '@/context/language-context'
 
 const profileFormSchema = z.object({
@@ -55,7 +56,7 @@ const defaultValues = {
   ]
 }
 
-export function ProjectSettings ({ projectName }) {
+export function ProjectSettings({ projectName }) {
   const { data: project } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
 
   const form = useForm({
@@ -64,7 +65,7 @@ export function ProjectSettings ({ projectName }) {
     mode: 'onChange'
   })
 
-  function onSubmit (data) {
+  function onSubmit(data) {
     toast.message('You submitted the following values:', { description: JSON.stringify(data, null, 2) })
   }
 
@@ -130,7 +131,7 @@ export function ProjectSettings ({ projectName }) {
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <ConfirmationTaskButton></ConfirmationTaskButton>
+                      <ConfirmationVisibilityButton></ConfirmationVisibilityButton>
                     </FormControl>
                   </FormItem>
                 )}
@@ -149,12 +150,7 @@ export function ProjectSettings ({ projectName }) {
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <Button
-                        variant='secondary'
-                        className='text-red-600 font-medium whitespace-nowrap w-36'
-                      >
-                        {dictionary.projectSettings['close-project']}
-                      </Button>
+                      <ConfirmationCloseButton></ConfirmationCloseButton>
                     </FormControl>
                   </FormItem>
                 )}
@@ -173,12 +169,7 @@ export function ProjectSettings ({ projectName }) {
                       </FormDescription>
                     </div>
                     <FormControl>
-                      <Button
-                        variant='secondary'
-                        className='text-red-600 font-medium whitespace-nowrap w-36'
-                      >
-                        {dictionary.projectSettings['delete-project']}
-                      </Button>
+                      <ConfirmationDeleteButton></ConfirmationDeleteButton>
                     </FormControl>
                   </FormItem>
                 )}

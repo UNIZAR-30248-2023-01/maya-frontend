@@ -338,17 +338,27 @@ export const confirmation = {
     'confirmation-title': '¿Estás completamente seguro?',
     'confirmation-desc-edit': 'Esto modificará y cambiará tus datos de nuestra base de datos',
     'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
+    'confirmation-visibility': '¿Estás seguro de que quieres cambiar la visibilidad de este proyecto?',
+    'confirmation-desc-close': '¿Estás seguro de que quieres cerrar este proyecto?',
     'confirmation-delete': 'Si, eliminar',
     'confirmation-edit-task': 'Si, modificar tarea',
-    'confirmation-delete-task': 'Si, eliminar tarea'
+    'confirmation-delete-task': 'Si, eliminar tarea',
+    'confirmation-visibility-public': 'Si, hacer público',
+    'confirmation-visibility-private': 'Si, hacer privado',
+    'confirmation-close': 'Si, cerrar proyecto',
   },
   en: {
     'confirmation-title': 'Are you absolutely sure?',
     'confirmation-desc-edit': 'This will modify and change your data from our servers.',
     'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
+    'confirmation-visibility': 'Are you sure you want to change the visibility of this project?',
+    'confirmation-close': 'Are you sure you want to close this project?',
     'confirmation-delete': 'Yes, delete',
     'confirmation-edit-task': 'Yes, edit task',
-    'confirmation-delete-task': 'Yes, delete task'
+    'confirmation-delete-task': 'Yes, delete task',
+    'confirmation-visibility-public': 'Yes, make public',
+    'confirmation-visibility-private': 'Yes, make private',
+    'confirmation-close-project': 'Yes, close project',
   }
 }
 
@@ -388,3 +398,4 @@ export const projectSettings = {
       'Once you delete a project, there is no going back. Please be certain.'
   }
 }
+
