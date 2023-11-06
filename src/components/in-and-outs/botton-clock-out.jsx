@@ -46,18 +46,12 @@ export function ClockOut ({
   form.out_hour = getCurrentTime().toString();
   
 
-  console.log("form ", form)
-  console.log("out_date ", typeof form.out_date)
-  console.log("out_hour ", typeof form.out_hour)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-  const handleSubmit = async () => {
-    //e.preventDefault()
+    const { in_hour, out_hour, in_date, out_date, total, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
-    form.in_date = inAndOuts[0].in_date;
-
-    const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
-
-    const fecha = new Date(in_date)
+    const fecha = new Date(inAndOuts[0].in_date)
     const year = fecha.getFullYear()
     const month = fecha.getMonth()
     const day = fecha.getDate()
@@ -67,14 +61,15 @@ export function ClockOut ({
     const timestampIn = new Date(year, month, day, hour, minute)
     const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
 
-    console.log("timestampIn aaaaaaaaaaaa ", typeof timestampIn)
-    console.log("timestampOut aaaaaaaaaaaa ", typeof timestampOut)
+
+    console.log("timestampIn aaaaaaaaaaaa ", typeof timestampIn, timestampIn)
+    console.log("timestampOut aaaaaaaaaaaa ", typeof timestampOut, timestampOut)
 
     const tiempoEnMilisegundos = timestampOut- timestampIn;
     const horasTotales = tiempoEnMilisegundos / (1000 * 60);
-    const horasRedondeadas = Math.round(horasTotales);
+    const minutosTotales = Math.round(horasTotales);
 
-    console.log("horasRedondeadas ", horasRedondeadas)
+    console.log("minutosTotales ", minutosTotales)
 
     //setIsClockOutVisible(false)
     //setIsClockInVisible(true)
@@ -82,32 +77,31 @@ export function ClockOut ({
 
     try {
       inAndOutsSchema.parse({ in_date, out_date, total: 0})
-      const createManualClockin = () => {
+      
+      const createClockOut = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ 
-            username: 'hec7orci7o', 
-            in_date: timestampIn,            
-            out_date: timestampOut,
-            total: horasRedondeadas
-          }])
-            .then(() => {
-              setIsSheetOpen(true)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
-              resolve()
-            })
-            .catch((error) => {
-              reject(error); 
-            })
+          (async () => {
+            await supabase.from('in-and-outs')
+            .update({out_date: timestampOut, total: minutosTotales})
+            .eq('id', inAndOuts[0].id)
+              .then(() => {
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+                resolve()
+              })
+              .catch((error) => reject(error))
+          })()
         })
       }
 
-      toast.promise(createManualClockin, {
+      toast.promise(createClockOut, {
         loading: dictionary.inandouts['toast-loading'],
         success: () => dictionary.inandouts['toast-success'],
         error: () => dictionary.inandouts['toast-error']
       })
     } catch (error) { 
       const { path, message } = JSON.parse(error.message)[0]
+      console.log("erroooooor ", error)
       toast.error(path[0] + ': ' + message)
     }
   }

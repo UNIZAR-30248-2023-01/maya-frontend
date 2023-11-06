@@ -125,8 +125,8 @@ export const inandouts = {
     'error-hour': 'Formato de hora no válido',
 
     'new-table-create': 'Fichar',
-    'toast-loading': 'Estamos creando tu proyecto. Por favor, espera un momento.',
-    'toast-success': 'Tu proyecto se ha creado correctamente.',
+    'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
+    'toast-success': 'Tu fichaje se ha almacenado correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
@@ -159,8 +159,8 @@ export const inandouts = {
     'error-hour': 'Invalid hour format',
     
     'new-table-create': 'Clock in/clock out',
-    'toast-loading': 'We are creating your project. Please wait a moment.',
-    'toast-success': 'Your project has been created successfully.',
+    'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
+    'toast-success': 'Your clock-in/clock-out has been registered successfully.',
     'toast-error': 'Something went wrong. Please try again.'
   }
 }

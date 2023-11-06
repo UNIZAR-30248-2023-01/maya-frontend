@@ -45,8 +45,8 @@ export function ClockIn ({
   console.log("out_date ", typeof form.out_date)
   console.log("out_hour ", typeof form.out_hour)
 
-  const handleSubmit = async () => {
-    //e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
     const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
@@ -58,7 +58,7 @@ export function ClockIn ({
 
     try {
       inAndOutsSchema.parse({ in_date, out_date, total: 0})
-      const createManualClockin = () => {
+      const createClockIn = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{ 
             username: 'hec7orci7o', 
@@ -67,7 +67,6 @@ export function ClockIn ({
             total: 0
           }])
             .then(() => {
-              setIsSheetOpen(true)
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
             })
@@ -77,7 +76,7 @@ export function ClockIn ({
         })
       }
 
-      toast.promise(createManualClockin, {
+      toast.promise(createClockIn, {
         loading: dictionary.inandouts['toast-loading'],
         success: () => dictionary.inandouts['toast-success'],
         error: () => dictionary.inandouts['toast-error']

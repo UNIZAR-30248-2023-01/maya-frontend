@@ -47,8 +47,8 @@ export function SidePanelManual ({
     const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
 
     const tiempoEnMilisegundos = timestampOut- timestampIn;
-    const horasTotales = tiempoEnMilisegundos / (1000 * 60);
-    const horasRedondeadas = Math.round(horasTotales);
+    const minsT = tiempoEnMilisegundos / (1000 * 60);
+    const minutosTotales = Math.round(minsT);
 
     {/* mutate : actualiza la interfaz */}
 
@@ -58,18 +58,15 @@ export function SidePanelManual ({
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{ 
             username: 'hec7orci7o', 
-            in_date: timestampIn,
+            in_date: timestampIn,            
             out_date: timestampOut,
-            total: horasRedondeadas
+            total: minutosTotales
           }])
             .then(() => {
-              setIsSheetOpen(true)
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
             })
-            .catch((error) => {
-              reject(error); 
-            })
+            .catch((error) => reject(error))
         })
       }
 

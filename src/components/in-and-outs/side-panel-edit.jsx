@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -37,17 +37,37 @@ export function SidePanelEdit ({
   const [invalidHour, setInvalidHour] = useState(true);
 
   const { dictionary } = useLang()
-  const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+  const handleOpenSidePanel = () => {
+    setIsSidePanelOpen(true);
+  };
+
+  const handleCloseSidePanel = () => {
+    setIsSidePanelClose(true);
+  };
+
+  const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
+
   const initialDate = new Date(fechaEntrada);
   const finalDate = new Date(fechaSalida);
-
-  // Coger el valor de la hora de initialDate y finalDate en formeato HH:MM
   const initialHour = initialDate.getHours() + ':' + initialDate.getMinutes();
- // setter({ key: 'in_hour', value: initialHour });
   const finalHour = finalDate.getHours() + ':' + finalDate.getMinutes();
+  // useEffect para actualizar el estado del formulario con los valores iniciales
+    useEffect(() => {
+      console.log('El useEffect se ha ejecutado');
+      setForm({
+        ...form,
+        in_hour: initialHour,
+        out_hour: finalHour,
+        in_date: initialDate,
+        out_date: finalDate,
+        // ... otras propiedades del formulario según tu esquema
+      });
+    }, []); 
 
 
   const handleSubmit = async (e) => {
@@ -98,7 +118,7 @@ export function SidePanelEdit ({
 
   return (
     <Sheet>
-      <SheetTrigger>{triggerBtn}</SheetTrigger>
+      <SheetTrigger onClick={handleOpenSidePanel}>{triggerBtn}</SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
@@ -114,14 +134,14 @@ export function SidePanelEdit ({
             
             <Field.DatePicker
               label={dictionary.inandouts['in-column']}
-              value={initialDate}
+              value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
               onChange={(e) => {
               
                 if( form.out_date !== null && form.out_date < e ) {
                   toast.error(dictionary.inandouts['error-in-date']);
                 } else {
-                  setter({ key: 'in_date', value: e })
+                  setter({ key: 'in_date', value: e || null })
                 }
               }}
             />
@@ -129,7 +149,7 @@ export function SidePanelEdit ({
             <div className="w-[65px]">
               <Field.Text
                 id="in_hour"
-                value={form.in_hour }
+                value={form.in_hour || ''}
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => {
                   const inputHour = e.target.value;
@@ -145,6 +165,7 @@ export function SidePanelEdit ({
                     setErrorInHour(dictionary.inandouts['error-hour']);
                     inputElement.classList.add('border-red-500');
                   }
+                  
                   
                 }}
               />
@@ -162,7 +183,7 @@ export function SidePanelEdit ({
             <Field.DatePicker
               id="out_date"
               label={dictionary.inandouts['out-column']}
-              value={finalDate}
+              value={form.out_date}
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
               onChange={(e) => {
               
@@ -178,7 +199,7 @@ export function SidePanelEdit ({
                 <Field.Text
                   id="out_hour"
                   placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
-                  value={finalHour}
+                  value={form.out_hour}
                   onChange={(e) => {
                     const inputHour = e.target.value;
                     const inputElement = e.target;e.target.value 
@@ -208,7 +229,7 @@ export function SidePanelEdit ({
 
           </div>
           <SheetFooter className="">
-            <SheetClose asChild >
+            <SheetClose asChild onClose={handleCloseSidePanel}>
               <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
