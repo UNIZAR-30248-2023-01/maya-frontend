@@ -338,9 +338,9 @@ export const confirmation = {
     'confirmation-title': '¿Estás completamente seguro?',
     'confirmation-desc-edit': 'Esto modificará y cambiará tus datos de nuestra base de datos',
     'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
-    'confirmation-visibility': '¿Estás seguro de que quieres cambiar la visibilidad de este proyecto?',
-    'confirmation-desc-close': '¿Estás seguro de que quieres cerrar este proyecto?',
-    'confirmation-desc-open': '¿Estás seguro de que quieres abrir este proyecto? Al hacerlo cualquiera podrá ver su contenido.',
+    'confirmation-visibility': '¿Estás seguro de que quieres cambiar la visibilidad de este proyecto?. Esto puede generar que algunos usuarios puedan / no puedan ver el proyecto.',
+    'confirmation-desc-close': '¿Estás seguro de que quieres cerrar este proyecto?. Al hacerlo se va a deshabilitar su flujo de trabajo y se eliminará de la lista de proyectos abiertos.',
+    'confirmation-desc-open': '¿Estás seguro de que quieres abrir este proyecto?. Al hacerlo se va a habilitar su flujo de trabajo y se añadirá a la lista de proyectos abiertos.',
     'confirmation-delete': 'Si, eliminar',
     'confirmation-edit-task': 'Si, modificar tarea',
     'confirmation-delete-task': 'Si, eliminar tarea',
@@ -353,9 +353,9 @@ export const confirmation = {
     'confirmation-title': 'Are you absolutely sure?',
     'confirmation-desc-edit': 'This will modify and change your data from our servers.',
     'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
-    'confirmation-visibility': 'Are you sure you want to change the visibility of this project?',
-    'confirmation-desc-close': 'Are you sure you want to close this project?',
-    'confirmation-desc-open': 'Are you sure you want to open this project? By doing so anyone will be able to see its content.',
+    'confirmation-visibility': 'Are you sure you want to change the visibility of this project?. This may cause that some users can / can\'t see this project.',
+    'confirmation-desc-close': 'Are you sure you want to close this project?. By doing so will disable its workflows and remove it to the list of open projects.',
+    'confirmation-desc-open': 'Are you sure you want to open this project?. By doing so will enable its workflows and add it to the list of open projects.',
     'confirmation-delete': 'Yes, delete',
     'confirmation-edit-task': 'Yes, edit task',
     'confirmation-delete-task': 'Yes, delete task',
@@ -384,7 +384,16 @@ export const projectSettings = {
     'explain-open-project': 'Abrir un proyecto va a habilitar su flujo de trabajo y lo añadirá a la lista de proyectos abiertos.',
     'delete-project': 'Eliminar proyecto',
     'explain-delete-project':
-      'Una vez elimines un proyecto, no hay vuelta atrás. Por favor, asegurate.'
+      'Una vez elimines un proyecto, no hay vuelta atrás. Por favor, asegurate.',
+    'toast-data-loading': 'Estamos actualizando los datos de tu proyecto. Por favor, espera un momento.',
+    'toast-data-success': 'Tu proyecto se ha actualizado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-visibility-loading': 'Estamos actualizando la visibilidad de tu proyecto. Por favor, espera un momento.',
+    'toast-visibility-success': 'Se ha actualizado la visibilidad de tu proyecto correctamente.',
+    'toast-close-loading': 'Estamos actualizando el estado de tu proyecto. Por favor, espera un momento.',
+    'toast-close-success': 'Se ha actualizado el estado de tu proyecto correctamente.',
+    'toast-delete-loading': 'Estamos eliminando tu proyecto. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu proyecto se ha eliminado correctamente.'
   },
   en: {
     name: 'Project name',
@@ -403,6 +412,15 @@ export const projectSettings = {
     'explain-open-project': 'Opening a project will enable its workflows and add it to the list of open projects.',
     'delete-project': 'Delete project',
     'explain-delete-project':
-      'Once you delete a project, there is no going back. Please be certain.'
+      'Once you delete a project, there is no going back. Please be certain.',
+    'toast-data-loading': 'We are updating your project data. Please wait a moment.',
+    'toast-data-success': 'Your project has been updated successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-visibility-loading': 'We are updating your project visibility. Please wait a moment.',
+    'toast-visibility-success': 'Your project visibility has been updated successfully.',
+    'toast-close-loading': 'We are updating your project status. Please wait a moment.',
+    'toast-close-success': 'Your project status has been updated successfully.',
+    'toast-delete-loading': 'We are deleting your project. Please wait a moment.',
+    'toast-delete-success': 'Your project has been deleted successfully.'
   }
 }

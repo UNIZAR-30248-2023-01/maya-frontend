@@ -1,6 +1,6 @@
 'use client'
 
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 // import { TabsContent } from '@/components/ui/tabs'
 
 import { ConfirmationVisibilityButton } from '@/components/projects/settings/confirmationVisibilityButton'
@@ -21,14 +21,13 @@ export function ProjectSettings ({ projectName }) {
   const { dictionary } = useLang()
   const path = usePathname()
   const router = useRouter()
-  console.log(path.split('/').slice(0, 3).join('/'))
   const [form, setForm] = useState(getForm(projectSettingsSchema._def.shape()))
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   if (!isLoading) {
-    const close = project[0]?.satus === 'closed'
-    const publicBool = project[0]?.visibility === 'public'
+    const isClosed = project[0]?.status === 'closed'
+    const isPublic = project[0]?.visibility === 'public'
     const defaultName = project[0]?.name
     const defaultDescription = project[0]?.description
 
@@ -46,8 +45,6 @@ export function ProjectSettings ({ projectName }) {
                   .eq('name', projectName)
                   .select()
                   .then(() => {
-                    // Actualización de los datos en la interfaz
-                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
                     resolve()
                   }).catch((error) => {
                     console.error(error)
@@ -58,8 +55,8 @@ export function ProjectSettings ({ projectName }) {
           }
 
           toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-role-loading'],
-            success: () => dictionary.projectSettings['toast-role-success'],
+            loading: dictionary.projectSettings['toast-data-loading'],
+            success: () => dictionary.projectSettings['toast-data-success'],
             error: () => dictionary.projectSettings['toast-error']
           })
         }
@@ -72,8 +69,6 @@ export function ProjectSettings ({ projectName }) {
                   .eq('name', projectName)
                   .select()
                   .then(() => {
-                    // Actualización de los datos en la interfaz
-                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
                     resolve()
                   }).catch((error) => {
                     console.error(error)
@@ -84,8 +79,8 @@ export function ProjectSettings ({ projectName }) {
           }
 
           toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-role-loading'],
-            success: () => dictionary.projectSettings['toast-role-success'],
+            loading: dictionary.projectSettings['toast-data-loading'],
+            success: () => dictionary.projectSettings['toast-data-success'],
             error: () => dictionary.projectSettings['toast-error']
           })
         }
@@ -98,8 +93,6 @@ export function ProjectSettings ({ projectName }) {
                   .eq('name', projectName)
                   .select()
                   .then(() => {
-                    // Actualización de los datos en la interfaz
-                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
                     resolve()
                   }).catch((error) => {
                     console.error(error)
@@ -110,8 +103,8 @@ export function ProjectSettings ({ projectName }) {
           }
 
           toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-role-loading'],
-            success: () => dictionary.projectSettings['toast-role-success'],
+            loading: dictionary.projectSettings['toast-data-loading'],
+            success: () => dictionary.projectSettings['toast-data-success'],
             error: () => dictionary.projectSettings['toast-error']
           })
         }
@@ -120,8 +113,10 @@ export function ProjectSettings ({ projectName }) {
         toast.error(path[0] + ': ' + message)
       }
 
-      if (form && form.name !== defaultName) {
+      if (form.name && form.name !== projectName) {
         router.replace(`${path.split('/').slice(0, 3).join('/')}/${form.name}`)
+      } else {
+        e.target.reset()
       }
     }
 
@@ -129,11 +124,12 @@ export function ProjectSettings ({ projectName }) {
       <div className="flex flex-col gap-4 max-w-[800px]">
         {/* <TabsContent value={value} className='space-y-6'> */}
 
-        <form onSubmit={(e) => handleSubmit(e)} className="space-y-8">
+        <form id='form-project-settings' onSubmit={(e) => handleSubmit(e)} className="space-y-8">
           <Text
             id="name"
             label={dictionary.projectSettings.name}
             placeholder={defaultName}
+            className='normal-case first-letter:uppercase'
             onChange={(e) => setter({ key: 'name', value: e.target.value })}
           />
           <TextArea
@@ -142,6 +138,7 @@ export function ProjectSettings ({ projectName }) {
             placeholder={
               dictionary.projectSettings['explain-description']
             }
+            className='normal-case first-letter:uppercase'
             onChange={(e) => setter({ key: 'description', value: e.target.value })}
           />
           <div className='flex justify-end'>
@@ -161,22 +158,20 @@ export function ProjectSettings ({ projectName }) {
                   {dictionary.projectSettings.visibility}
                 </Label>
                 <Label className="text-muted-foreground text-sm">
-                  {dictionary.projectSettings['private-visibility']}
+                  {isPublic ? dictionary.projectSettings['public-visibility'] : dictionary.projectSettings['private-visibility']}
                 </Label>
               </div>
-              <ConfirmationVisibilityButton
-                isPublic={publicBool}
-              ></ConfirmationVisibilityButton>
+              <ConfirmationVisibilityButton isPublic={isPublic} projectName={projectName} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
               <div className="flex flex-col">
-                <Label className="text-base">{dictionary.projectSettings['close-project']}</Label>
+                <Label className="text-base">{isClosed ? dictionary.projectSettings['open-project'] : dictionary.projectSettings['close-project']}</Label>
                 <Label className="text-muted-foreground text-sm">
-                  {dictionary.projectSettings['explain-close-project']}
+                  {isClosed ? dictionary.projectSettings['explain-open-project'] : dictionary.projectSettings['explain-close-project']}
                 </Label>
               </div>
-              <ConfirmationCloseButton isClose={close}></ConfirmationCloseButton>
+              <ConfirmationCloseButton isClose={isClosed} projectName={projectName} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
@@ -186,7 +181,7 @@ export function ProjectSettings ({ projectName }) {
                   {dictionary.projectSettings['explain-delete-project']}
                 </Label>
               </div>
-              <ConfirmationDeleteButton></ConfirmationDeleteButton>
+              <ConfirmationDeleteButton projectName={projectName} />
             </div>
           </div>
         </div>
