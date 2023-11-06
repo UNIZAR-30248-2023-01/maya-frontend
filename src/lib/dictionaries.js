@@ -406,4 +406,3 @@ export const projectSettings = {
       'Once you delete a project, there is no going back. Please be certain.'
   }
 }
-

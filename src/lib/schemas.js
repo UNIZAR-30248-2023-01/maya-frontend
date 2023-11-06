@@ -35,3 +35,8 @@ export const teamSchema = z.object({
   visibility: z.enum(['public', 'private']).default('private'),
   organization: z.string()
 })
+
+export const projectSettingsSchema = z.object({
+  name: z.string().min(1).max(30),
+  description: z.string().max(150).nullable()
+})

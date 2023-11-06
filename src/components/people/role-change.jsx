@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -37,9 +37,6 @@ export function RoleChange ({
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   console.log(username, projectName, defaultRole)
-  useEffect(() => {
-    console.log(form)
-  }, [form])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

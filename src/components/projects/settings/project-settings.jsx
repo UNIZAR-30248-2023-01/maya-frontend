@@ -1,191 +1,197 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 // import { TabsContent } from '@/components/ui/tabs'
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { ConfirmationVisibilityButton } from '@/components/projects/settings/confirmationVisibilityButton'
 import { ConfirmationDeleteButton } from '@/components/projects/settings/confirmationDeleteButton'
 import { ConfirmationCloseButton } from '@/components/projects/settings/confirmationCloseButton'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
+import { getForm, supabase } from '@/lib/utils'
+import { useState } from 'react'
+import { projectSettingsSchema } from '@/lib/schemas'
+import { Text, TextArea } from '@/components/forms'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { useRouter, usePathname } from 'next/navigation'
 
-const profileFormSchema = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: 'Username must be at least 2 characters.'
-    })
-    .max(30, {
-      message: 'Username must not be longer than 30 characters.'
-    }),
-  email: z
-    .string({
-      required_error: 'Please select an email to display.'
-    })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: 'Please enter a valid URL.' })
-      })
-    )
-    .optional()
-})
-
-// This can come from your database or API.
-const defaultValues = {
-  bio: 'I own a computer.',
-  urls: [
-    { value: 'https://shadcn.com' },
-    { value: 'http://twitter.com/shadcn' }
-  ]
-}
-
-export function ProjectSettings({ projectName }) {
-  const { data: project } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
-  console.log(project)
-  const close = project.satus === 'closed'
-  const publicBool = project.visibility === 'public'
-
-  const form = useForm({
-    resolver: zodResolver(profileFormSchema),
-    defaultValues,
-    mode: 'onChange'
-  })
-
-  function onSubmit(data) {
-    toast.message('You submitted the following values:', { description: JSON.stringify(data, null, 2) })
-  }
-
+export function ProjectSettings ({ projectName }) {
+  const { data: project, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
   const { dictionary } = useLang()
+  const path = usePathname()
+  const router = useRouter()
+  console.log(path.split('/').slice(0, 3).join('/'))
+  const [form, setForm] = useState(getForm(projectSettingsSchema._def.shape()))
 
-  return (
-    <div className='flex flex-col gap-4 max-w-[800px]'>
-      {/* <TabsContent value={value} className='space-y-6'> */}
+  const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-          <FormField
-            control={form.control}
-            name='project-name'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{dictionary.projectSettings.name}</FormLabel>
-                <FormControl>
-                  <Input placeholder='shadcn' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+  if (!isLoading) {
+    const close = project[0]?.satus === 'closed'
+    const publicBool = project[0]?.visibility === 'public'
+    const defaultName = project[0]?.name
+    const defaultDescription = project[0]?.description
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+
+      const { name, description } = form
+
+      try {
+        if (!name && description !== defaultDescription) {
+          const changeProjectSettings = () => {
+            return new Promise((resolve, reject) => {
+              (async () => {
+                await supabase.from('projects').update({ description })
+                  .eq('name', projectName)
+                  .select()
+                  .then(() => {
+                    // Actualización de los datos en la interfaz
+                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
+                    resolve()
+                  }).catch((error) => {
+                    console.error(error)
+                    reject(error)
+                  })
+              })()
+            })
+          }
+
+          toast.promise(changeProjectSettings, {
+            loading: dictionary.projectSettings['toast-role-loading'],
+            success: () => dictionary.projectSettings['toast-role-success'],
+            error: () => dictionary.projectSettings['toast-error']
+          })
+        }
+
+        if (!description && name !== defaultName) {
+          const changeProjectSettings = () => {
+            return new Promise((resolve, reject) => {
+              (async () => {
+                await supabase.from('projects').update({ name })
+                  .eq('name', projectName)
+                  .select()
+                  .then(() => {
+                    // Actualización de los datos en la interfaz
+                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
+                    resolve()
+                  }).catch((error) => {
+                    console.error(error)
+                    reject(error)
+                  })
+              })()
+            })
+          }
+
+          toast.promise(changeProjectSettings, {
+            loading: dictionary.projectSettings['toast-role-loading'],
+            success: () => dictionary.projectSettings['toast-role-success'],
+            error: () => dictionary.projectSettings['toast-error']
+          })
+        }
+
+        if (name && description && (defaultName !== 'name' || defaultDescription !== 'description')) {
+          const changeProjectSettings = () => {
+            return new Promise((resolve, reject) => {
+              (async () => {
+                await supabase.from('projects').update({ name, description })
+                  .eq('name', projectName)
+                  .select()
+                  .then(() => {
+                    // Actualización de los datos en la interfaz
+                    // mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
+                    resolve()
+                  }).catch((error) => {
+                    console.error(error)
+                    reject(error)
+                  })
+              })()
+            })
+          }
+
+          toast.promise(changeProjectSettings, {
+            loading: dictionary.projectSettings['toast-role-loading'],
+            success: () => dictionary.projectSettings['toast-role-success'],
+            error: () => dictionary.projectSettings['toast-error']
+          })
+        }
+      } catch (error) {
+        const { path, message } = JSON.parse(error.message)[0]
+        toast.error(path[0] + ': ' + message)
+      }
+
+      if (form && form.name !== defaultName) {
+        router.replace(`${path.split('/').slice(0, 3).join('/')}/${form.name}`)
+      }
+    }
+
+    return (
+      <div className="flex flex-col gap-4 max-w-[800px]">
+        {/* <TabsContent value={value} className='space-y-6'> */}
+
+        <form onSubmit={(e) => handleSubmit(e)} className="space-y-8">
+          <Text
+            id="name"
+            label={dictionary.projectSettings.name}
+            placeholder={defaultName}
+            onChange={(e) => setter({ key: 'name', value: e.target.value })}
           />
-          <FormField
-            control={form.control}
-            name='project-description'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{dictionary.projectSettings.description}</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder={
-                      dictionary.projectSettings['example-description']
-                    }
-                    className='resize-none'
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  {dictionary.projectSettings['explain-description']}
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+          <TextArea
+            id="description"
+            label={dictionary.projectSettings.description}
+            placeholder={
+              dictionary.projectSettings['explain-description']
+            }
+            onChange={(e) => setter({ key: 'description', value: e.target.value })}
           />
-          <div className='space-y-4'>
-            <h4 className='text-lg font-medium'>
-              {dictionary.projectSettings['danger-zone']}
-            </h4>
-            <div className='rounded-lg border border-red-600 divide-y divide-red-600'>
-              <FormField
-                control={form.control}
-                name='marketing_emails'
-                render={({ field }) => (
-                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
-                    <div className='space-y-0.5'>
-                      <FormLabel className='text-base'>
-                        {dictionary.projectSettings.visibility}
-                      </FormLabel>
-                      <FormDescription>
-                        {dictionary.projectSettings['private-visibility']}
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <ConfirmationVisibilityButton isPublic={publicBool}></ConfirmationVisibilityButton>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='marketing_emails'
-                render={({ field }) => (
-                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
-                    <div className='space-y-0.5'>
-                      <FormLabel className='text-base'>
-                        {/*close
-                          ? dictionary.projectSettings['open-project']
-                          : */dictionary.projectSettings['close-project']}
-                      </FormLabel>
-                      <FormDescription>
-                        {/*close
-                          ? dictionary.projectSettings['explain-open-project']
-                          : */dictionary.projectSettings['explain-close-project']}
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <ConfirmationCloseButton isClose={close}></ConfirmationCloseButton>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='marketing_emails'
-                render={({ field }) => (
-                  <FormItem className='flex flex-row items-center justify-between p-4 gap-8'>
-                    <div className='space-y-0.5'>
-                      <FormLabel className='text-base'>
-                        {dictionary.projectSettings['delete-project']}
-                      </FormLabel>
-                      <FormDescription>
-                        {dictionary.projectSettings['explain-delete-project']}
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <ConfirmationDeleteButton></ConfirmationDeleteButton>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
+          <div className='flex justify-end'>
+            <Button type="submit" disabled={!form.name && !form.description}>{dictionary.common.save}</Button>
           </div>
         </form>
-      </Form>
-      {/* </TabsContent> */}
-    </div>
-  )
+
+        <div className="space-y-4">
+          <h4 className="text-lg font-medium">
+            {dictionary.projectSettings['danger-zone']}
+          </h4>
+
+          <div className="rounded-lg border border-red-600 divide-y divide-red-600">
+            <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
+              <div className="flex flex-col">
+                <Label className="text-base">
+                  {dictionary.projectSettings.visibility}
+                </Label>
+                <Label className="text-muted-foreground text-sm">
+                  {dictionary.projectSettings['private-visibility']}
+                </Label>
+              </div>
+              <ConfirmationVisibilityButton
+                isPublic={publicBool}
+              ></ConfirmationVisibilityButton>
+            </div>
+
+            <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
+              <div className="flex flex-col">
+                <Label className="text-base">{dictionary.projectSettings['close-project']}</Label>
+                <Label className="text-muted-foreground text-sm">
+                  {dictionary.projectSettings['explain-close-project']}
+                </Label>
+              </div>
+              <ConfirmationCloseButton isClose={close}></ConfirmationCloseButton>
+            </div>
+
+            <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
+              <div className="flex flex-col">
+                <Label className="text-base">{dictionary.projectSettings['delete-project']}</Label>
+                <Label className="text-muted-foreground text-sm">
+                  {dictionary.projectSettings['explain-delete-project']}
+                </Label>
+              </div>
+              <ConfirmationDeleteButton></ConfirmationDeleteButton>
+            </div>
+          </div>
+        </div>
+        {/* </TabsContent> */}
+      </div>
+    )
+  }
 }
