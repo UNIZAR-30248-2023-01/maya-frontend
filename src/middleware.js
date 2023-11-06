@@ -1,6 +1,6 @@
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
-import { verify } from "@/lib/jwt_sign_verify";
+import { devolverTokenUsuario } from '@/lib/jwt_sign_verify'
 
 const locales = ['en', 'es']
 
@@ -35,6 +35,10 @@ export function middleware (request) {
     request.nextUrl.pathname = "/es";
     return Response.redirect(request.nextUrl);
   }else{  //TOKEN EXISTE
+    if( devolverTokenUsuario(jwt, "secret") === null ){
+      request.nextUrl.pathname = "/es";
+      return Response.redirect(request.nextUrl);
+    }
     const pathnameHasLocale = locales.some(
       (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     )
