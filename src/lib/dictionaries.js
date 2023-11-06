@@ -108,6 +108,7 @@ export const inandouts = {
     'new-check-in': 'Fichar entrada',
     'new-check-out': 'Fichar salida',
     'edit': 'Editar',
+    'delete': 'Eliminar',
     
     'new-table-description': 'Selecciona la fecha de entrada y salida para registrar tus horas.',
     'new-table-description-in': 'Selecciona la fecha y la hora de entrada.',
@@ -142,6 +143,7 @@ export const inandouts = {
     'new-check-in': 'Clock-in',
     'new-check-out': 'Clock-out',
     'edit': 'Edit',
+    'delete': 'Delete',
     
     'new-table-description': 'Select your clock-in and clock-out date to register your hours.',
     'new-table-description-in': 'Select your clock-in date and hour.',

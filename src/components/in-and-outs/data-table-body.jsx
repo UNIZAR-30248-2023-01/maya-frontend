@@ -45,12 +45,13 @@ export function DataTableBody ({ table }) {
                 description={dictionary.inandouts['new-table-description']} // Descripcion del panel
                 descriptionIn={dictionary.inandouts['new-table-description-in']}
                 descriptionOut={dictionary.inandouts['new-table-description-out']}
-                actionBtn={dictionary.inandouts['new-table-create']} 
+                actionBtn={dictionary.inandouts['edit']} 
                 triggerBtn={dictionary.inandouts['edit']} 
                 schema={inAndOutsSchema}
                 dictionary={dictionary}
                 fechaEntrada={row.original.in_date}
                 fechaSalida={row.original.out_date}
+                deleteBtn={dictionary.inandouts['delete']}
               />
             
           </TableRow>

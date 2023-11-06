@@ -10,8 +10,8 @@ import useSWR from 'swr'
 export function BottonController() {
 
   const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`) 
-  const [isClockInVisible, setIsClockInVisible] = useState(inAndOuts.length === 0);
-  const [isClockOutVisible, setIsClockOutVisible] = useState(inAndOuts.length > 0 );
+  const [isClockInVisible, setIsClockInVisible] = useState(/*inAndOuts.length === 0*/);
+  const [isClockOutVisible, setIsClockOutVisible] = useState(/*inAndOuts.length > 0 */);
 
   const { dictionary } = useLang()
 

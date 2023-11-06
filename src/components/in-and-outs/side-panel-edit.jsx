@@ -29,7 +29,8 @@ export function SidePanelEdit ({
   triggerBtn,
   actionBtn,
   fechaEntrada,
-  fechaSalida
+  fechaSalida,
+  deleteBtn
 }) {
 
   const [errorOutHour, setErrorOutHour] = useState('');
@@ -47,7 +48,7 @@ export function SidePanelEdit ({
   };
 
   const handleCloseSidePanel = () => {
-    setIsSidePanelClose(true);
+    setIsSidePanelOpen(true);
   };
 
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
@@ -59,15 +60,18 @@ export function SidePanelEdit ({
   // useEffect para actualizar el estado del formulario con los valores iniciales
     useEffect(() => {
       console.log('El useEffect se ha ejecutado');
-      setForm({
-        ...form,
-        in_hour: initialHour,
-        out_hour: finalHour,
-        in_date: initialDate,
-        out_date: finalDate,
-        // ... otras propiedades del formulario según tu esquema
-      });
-    }, []); 
+      if(isSidePanelOpen){
+        console.log('El useEffect se ha ejecutado y el sidepanel está abierto');
+        setForm({
+          ...form,
+          in_hour: initialHour,
+          out_hour: finalHour,
+          in_date: initialDate,
+          out_date: finalDate,
+          // ... otras propiedades del formulario según tu esquema
+        });
+      }
+    }, [isSidePanelOpen]); 
 
 
   const handleSubmit = async (e) => {
@@ -88,14 +92,14 @@ export function SidePanelEdit ({
       inAndOutsSchema.parse({ in_date, out_date, total: 0})
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ 
-            username: 'hec7orci7o', 
+          supabase.from('in-and-outs').update({ 
             in_date: timestampIn,
             out_date: timestampOut,
             total: horasRedondeadas
-          }])
+          })
+          .eq('id', inAndOuts[0].id)
             .then(() => {
-              setIsSheetOpen(true)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
               resolve()
             })
@@ -115,6 +119,38 @@ export function SidePanelEdit ({
       toast.error(path[0] + ': ' + message)
     }
   }
+
+  const handleDelete = async () => {
+    const { in_hour, out_hour, in_date, out_date, total, ...data } = form // eliminamos los campos in_hour y out_hour del form
+
+    try{
+      inAndOutsSchema.parse({ in_date: null, out_date: null, total: 0})
+      const deleteManualClockin = () => {
+        return new Promise((resolve, reject) => {
+          supabase.from('in-and-outs').delete().eq('id', inAndOuts[0].id)
+            .then(() => {
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              resolve()
+            })
+            .catch((error) => {
+              reject(error); 
+            })
+        })
+      }
+  
+      toast.promise(deleteManualClockin, {
+        loading: dictionary.inandouts['toast-loading'],
+        success: () => dictionary.inandouts['toast-success'],
+        error: () => dictionary.inandouts['toast-error']
+      })
+    }catch (error) { 
+      const { path, message } = JSON.parse(error.message)[0]
+      console.log("erroooooor ", error)
+      toast.error(path[0] + ': ' + message)
+    }
+    
+    
+  };
 
   return (
     <Sheet>
@@ -229,6 +265,10 @@ export function SidePanelEdit ({
 
           </div>
           <SheetFooter className="">
+            <Button style={{ backgroundColor: 'red', color: 'white' }} onClick={handleDelete}>
+              {deleteBtn}
+            </Button>
+
             <SheetClose asChild onClose={handleCloseSidePanel}>
               <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
