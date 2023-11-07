@@ -41,6 +41,26 @@ export function SidePanelManual ({
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    // Expresión regular para verificar el formato hh:mm
+    const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+
+    if (!regex.test(form.in_hour) ) {
+      toast.error(dictionary.inandouts['error-hour']);
+      setErrorInHour(dictionary.inandouts['error-hour']);
+      return
+    } if (!regex.test(form.out_hour)) {
+      toast.error(dictionary.inandouts['error-hour']);
+      setErrorOutHour(dictionary.inandouts['error-hour']);
+      return
+    } else if (form.in_hour > form.out_hour) {
+      toast.error(dictionary.inandouts['error-in-hour']);
+      setErrorInHour(dictionary.inandouts['error-in-hour']);
+      return
+    } else{
+      setErrorInHour('');
+      setErrorOutHour('');
+    }
+
     const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
     const timestampIn = new Date(in_date.getFullYear(), in_date.getMonth(), in_date.getDate(), in_hour.split(":")[0], in_hour.split(":")[1])
@@ -119,18 +139,7 @@ export function SidePanelManual ({
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => {
                   const inputHour = e.target.value;
-
-                  const inputElement = e.target;
-
-                  if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
-                    setErrorInHour(''); 
                     setter({ key: 'in_hour', value: inputHour });
-                    inputElement.classList.remove('border-red-500');
-
-                  } else {
-                    setErrorInHour(dictionary.inandouts['error-hour']);
-                    inputElement.classList.add('border-red-500');
-                  }
                 }}
               />
             </div>
@@ -165,20 +174,13 @@ export function SidePanelManual ({
                   placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                   onChange={(e) => {
                     const inputHour = e.target.value;
-                    const inputElement = e.target;e.target.value 
 
                     if( form.in_date === form.out_date && form.in_hour > inputHour ) {
                       toast.error(dictionary.inandouts['error-out-hour']);
                       setInvalidHour(false)
                     } else {
-                      if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
-                        inputElement.classList.remove('border-red-500');
-                        setErrorOutHour(''); 
                         setter({ key: 'out_hour', value: inputHour });
-                      } else {
-                        setErrorOutHour(dictionary.inandouts['error-hour']);
-                        inputElement.classList.add('border-red-500');
-                      }
+                      
                     }
                     
                   }}

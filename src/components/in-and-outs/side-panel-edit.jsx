@@ -20,6 +20,7 @@ import { toast } from 'sonner'
 import { mutate } from 'swr'
 import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
 import useSWR from 'swr'
+import {LuClipboardEdit} from 'react-icons/lu'
 
 
 export function SidePanelEdit ({
@@ -27,7 +28,6 @@ export function SidePanelEdit ({
   description,
   descriptionIn,
   descriptionOut,
-  triggerBtn,
   actionBtn,
   fechaEntrada,
   fechaSalida,
@@ -87,6 +87,27 @@ export function SidePanelEdit ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Expresión regular para verificar el formato hh:mm
+    const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+
+    if (!regex.test(form.in_hour) ) {
+      toast.error(dictionary.inandouts['error-hour']);
+      setErrorInHour(dictionary.inandouts['error-hour']);
+      return
+    } if (!regex.test(form.out_hour)) {
+      toast.error(dictionary.inandouts['error-hour']);
+      setErrorOutHour(dictionary.inandouts['error-hour']);
+      return
+    } else if (form.in_hour > form.out_hour) {
+      toast.error(dictionary.inandouts['error-in-hour']);
+      setErrorInHour(dictionary.inandouts['error-in-hour']);
+      return
+    } else{
+      setErrorInHour('');
+      setErrorOutHour('');
+    }
+
 
     const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
 
@@ -167,7 +188,7 @@ export function SidePanelEdit ({
 
   return (
     <Sheet>
-      <SheetTrigger onClick={handleOpenSidePanel}>{triggerBtn}</SheetTrigger>
+      <SheetTrigger className='py-3' onClick={handleOpenSidePanel}><LuClipboardEdit className="h-5 w-5 flex-shrink-0" aria-hidden="true" /></SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
@@ -198,30 +219,17 @@ export function SidePanelEdit ({
             <div className="w-[65px]">
               <Field.Text
                 id="in_hour"
-                value={form.in_hour || ''}
+                value={form.in_hour}
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
                 onChange={(e) => {
                   const inputHour = e.target.value;
-
-                  const inputElement = e.target;
-
-                  if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
-                    setErrorInHour(''); 
-                    setter({ key: 'in_hour', value: inputHour });
-                    inputElement.classList.remove('border-red-500');
-
-                  } else {
-                    setErrorInHour(dictionary.inandouts['error-hour']);
-                    inputElement.classList.add('border-red-500');
-                  }
-                  
-                  
+                  setter({ key: 'in_hour', value: inputHour });
                 }}
               />
             </div>
 
-            <SheetDescription>
-              {errorInHour && <p className="text-red-500">{errorInHour}</p>} 
+            <SheetDescription className="text-red-500">
+              {errorInHour} 
             </SheetDescription>
 
 
@@ -236,9 +244,12 @@ export function SidePanelEdit ({
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
               onChange={(e) => {
               
-                if( form.in_date > e ) {
+                  
+                if( e < form.in_date) {
+                  console.log("form.in_date ", form.in_date.Date)
                   toast.error(dictionary.inandouts['error-out-date']);
-                } else {
+              
+                } else{
                   setter({ key: 'out_date', value: e })
                 }
               }}
@@ -251,28 +262,13 @@ export function SidePanelEdit ({
                   value={form.out_hour}
                   onChange={(e) => {
                     const inputHour = e.target.value;
-                    const inputElement = e.target;e.target.value 
-
-                    if( form.in_date === form.out_date && form.in_hour > inputHour ) {
-                      toast.error(dictionary.inandouts['error-out-hour']);
-                      setInvalidHour(false)
-                    } else {
-                      if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(inputHour)) {
-                        inputElement.classList.remove('border-red-500');
-                        setErrorOutHour(''); 
-                        setter({ key: 'out_hour', value: inputHour });
-                      } else {
-                        setErrorOutHour(dictionary.inandouts['error-hour']);
-                        inputElement.classList.add('border-red-500');
-                      }
-                    }
-                    
+                    setter({ key: 'out_hour', value: inputHour });
                   }}
                 />
               </div>
 
-            <SheetDescription>
-              {errorOutHour && <p className="text-red-500">{errorOutHour}</p>} 
+            <SheetDescription className="text-red-500">
+              {errorOutHour} 
             </SheetDescription>
             
 
