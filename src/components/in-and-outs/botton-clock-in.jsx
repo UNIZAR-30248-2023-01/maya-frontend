@@ -68,6 +68,7 @@ export function ClockIn ({
           }])
             .then(() => {
               mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)
               resolve()
             })
             .catch((error) => {

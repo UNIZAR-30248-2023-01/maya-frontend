@@ -19,6 +19,7 @@ import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
 import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
+import useSWR from 'swr'
 
 
 export function SidePanelEdit ({
@@ -57,6 +58,16 @@ export function SidePanelEdit ({
   const finalDate = new Date(fechaSalida);
   const initialHour = initialDate.getHours() + ':' + initialDate.getMinutes();
   const finalHour = finalDate.getHours() + ':' + finalDate.getMinutes();
+
+  console.log("initialDate ", typeof initialDate, initialDate)
+  console.log("finalDate ", typeof finalDate, finalDate)
+
+  // Formatea las fechas en formato ISO8601
+  const formattedInitialDate = initialDate.toISOString();
+  const formattedFinalDate = finalDate.toISOString();
+
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
+
   // useEffect para actualizar el estado del formulario con los valores iniciales
     useEffect(() => {
       console.log('El useEffect se ha ejecutado');
@@ -122,6 +133,8 @@ export function SidePanelEdit ({
 
   const handleDelete = async () => {
     const { in_hour, out_hour, in_date, out_date, total, ...data } = form // eliminamos los campos in_hour y out_hour del form
+
+    console.log("inAndOuts de handleDelete ", inAndOuts)
 
     try{
       inAndOutsSchema.parse({ in_date: null, out_date: null, total: 0})

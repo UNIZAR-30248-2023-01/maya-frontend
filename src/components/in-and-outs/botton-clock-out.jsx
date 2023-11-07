@@ -28,12 +28,9 @@ export function ClockOut ({
 }) {
 
   const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)  
-  console.log("inAndOutsssssssssssssss ", inAndOuts)
 
   const { dictionary } = useLang()
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
-
-  const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   function getCurrentTime() {
     const now = new Date();
@@ -87,6 +84,7 @@ export function ClockOut ({
               .then(() => {
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))
