@@ -151,7 +151,11 @@ export const tasks = {
     'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas',
     'toast-loading': 'Estamos creando tu tarea. Por favor, espera un momento.',
     'toast-success': 'Tu tarea se ha creado correctamente.',
-    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-delete-loading': 'Estamos eliminando tu tarea. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu tarea se ha eliminado correctamente.',
+    'toast-edit-loading': 'Estamos editando tu tarea. Por favor, espera un momento.',
+    'toast-edit-success': 'Tu tarea se ha editado correctamente.'
   },
   en: {
     'tasks-tab': 'Tasks',
@@ -180,7 +184,11 @@ export const tasks = {
     'new-task-estimated-placeholder': 'Estimate time in hours',
     'toast-loading': 'We are creating your tasks. Please wait a moment.',
     'toast-success': 'Your tasks has been created successfully.',
-    'toast-error': 'Something went wrong. Please try again.'
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-delete-loading': 'We are deleting your task. Please wait a moment.',
+    'toast-delete-success': 'Your tasks has been deleted successfully.',
+    'toast-edit-loading': 'We are editing your tasks Please wait a moment.',
+    'toast-edit-success': 'Your task has been edited successfully.'
   }
 }
 

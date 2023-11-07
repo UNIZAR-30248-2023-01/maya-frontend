@@ -117,6 +117,7 @@ export function SidePanel ({
                 label={dictionary.tasks['assignees-column']}
                 placeholder={dictionary.tasks['assignees-column']}
                 list={data.assignees.map((assignee) => ({ value: assignee.username, label: assignee.username }))}
+                dictionary={dictionary}
                 values={form.assignees || []}
                 onChange={(e) => {
                   console.log(e)
@@ -155,7 +156,6 @@ export function SidePanel ({
                   searchDictionary={dictionary.search}
                   onChange={(e) => {
                     const original = Object.keys(dictionary.status).find(key => key === e)
-                    console.log(original)
                     setter({ key: 'status', value: original === form.status ? null : original })
                   }}
                 />
@@ -169,7 +169,6 @@ export function SidePanel ({
                   searchDictionary={dictionary.search}
                   onChange={(e) => {
                     const original = Object.keys(dictionary.labels).find(key => key === e)
-                    console.log(original)
                     setter({ key: 'label', value: original === form.label ? null : original })
                   }}
                 />

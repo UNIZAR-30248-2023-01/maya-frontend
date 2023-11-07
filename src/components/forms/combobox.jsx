@@ -20,7 +20,7 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, onChange, dictionary, searchDictionary }) {
+export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictionary, onChange }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover open={open} onOpenChange={setOpen}>
