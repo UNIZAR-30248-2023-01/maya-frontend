@@ -1,30 +1,30 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { signIn } from "next-auth/react"
-import { LuGithub } from "react-icons/lu"
-import { toast } from "sonner"
-import { useLang } from "@/context/language-context"
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { signIn } from 'next-auth/react'
+import { LuGithub } from 'react-icons/lu'
+import { toast } from 'sonner'
+import { useLang } from '@/context/language-context'
 
-export function UserSignIn({ className, ...props }) {
+export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = event.target
-    
+
     try {
       const logIn = () => {
         return new Promise((resolve, reject) => {
           setIsLoading(true)
           signIn('credentials', {
-            username: username.value, 
-            password: password.value, 
+            username: username.value,
+            password: password.value,
             redirect: false
           })
             .then(() => {
@@ -49,7 +49,7 @@ export function UserSignIn({ className, ...props }) {
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={handleSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
