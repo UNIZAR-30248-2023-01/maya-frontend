@@ -1,37 +1,37 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { toast } from "sonner"
-import { LuGithub } from "react-icons/lu"
-import { useLang } from "@/context/language-context"
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { toast } from 'sonner'
+import { LuGithub } from 'react-icons/lu'
+import { useLang } from '@/context/language-context'
 
-export function UserSignUp({ className, ...props }) {
+export function UserSignUp ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { email, password } = event.target
+    // const { email, password } = event.target
 
     const newUser = {
-      email: "johndoe@example.com",
-      username: "johndoe",
-      firstname: "John",
-      lastname: "Doe",
-      password: "password",
+      email: 'johndoe@example.com',
+      username: 'johndoe',
+      firstname: 'John',
+      lastname: 'Doe',
+      password: 'password'
     }
-    
+
     try {
       const logIn = async () => {
         setIsLoading(true)
-        await fetch("http://localhost:3000/api/sign-up", {
-          method: "POST",
+        await fetch('http://localhost:3000/api/sign-up', {
+          method: 'POST',
           body: JSON.stringify(newUser),
-          headers: { "Content-Type": "application/json" }
+          headers: { 'Content-Type': 'application/json' }
         }).catch(error => console.error(error))
       }
 
@@ -46,7 +46,7 @@ export function UserSignUp({ className, ...props }) {
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={handleSubmit}>
         <div className="grid gap-2">
           <div className="grid gap-1">
