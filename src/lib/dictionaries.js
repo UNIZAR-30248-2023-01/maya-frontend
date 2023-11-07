@@ -259,3 +259,22 @@ export const status = {
     'in progress': 'in progress'
   }
 }
+
+export const auth = {
+  es: {
+    'signin-loading': 'Estamos iniciando sesión. Por favor, espera un momento.',
+    'signin-success': 'Has iniciado sesión correctamente.',
+    'signin-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'signup-loading': 'Estamos registrando tu cuenta. Por favor, espera un momento.',
+    'signup-success': 'Tu cuenta se ha registrado correctamente.',
+    'signup-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'signin-loading': 'We are signing in. Please wait a moment.',
+    'signin-success': 'You have signed in successfully.',
+    'signin-error': 'Something went wrong. Please try again.',
+    'signup-loading': 'We are creating your account. Please wait a moment.',
+    'signup-success': 'Your account has been created successfully.',
+    'signup-error': 'Something went wrong. Please try again.'
+  }
+}
