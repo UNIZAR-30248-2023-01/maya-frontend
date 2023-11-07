@@ -7,7 +7,7 @@ export const columns = [
   {
     accessorKey: 'name',
     header: ({ column, dictionary }) => {
-      return <DataTableColumnHeader column={column} title={dictionary['team-column']} />
+      return <DataTableColumnHeader column={column} title={dictionary['workspace-column']} />
     },
     cell: ({ row, dictionary }) => {
       if (!row.getValue('name')) return <Skeleton className='w-44 h-4'/>
@@ -39,6 +39,15 @@ export const columns = [
   // Columna privada 2
   {
     accessorKey: 'secretKey',
+    header: ({ column, dictionary }) => {
+      return <div/>
+    },
+    cell: ({ row, dictionary }) => {
+      const { id } = row.original
+      if (!id) return <Skeleton className='w-24 h-4'/>
+
+      return <div></div>
+    },
     isVisible: false // Oculta la columna
   }
 ]

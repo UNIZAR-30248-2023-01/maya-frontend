@@ -2,7 +2,7 @@
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react'
 import { SeatsioClient, Region } from 'seatsio'
 import { supabase } from '@/lib/utils'
-
+// import { useLang } from '@/context/language-context'
 import React, { useRef, useState, useEffect } from 'react'
 // import { set } from 'cypress/types/lodash'
 // import { set } from 'cypress/types/lodash'   "545ec209-b1a2-4477-8ec2-47aeb69c1dba"
@@ -10,6 +10,8 @@ import React, { useRef, useState, useEffect } from 'react'
 // const eventKey = '115b9d7a-4d67-4729-b759-d0d51709b125'
 const user = 'user1'
 function MySeatingChart (name) {
+  // const { dictionary } = useLang()
+
   const seatingChartRef = useRef(null)
   const [selectedSeats, setSelectedSeats] = useState([])
   const [reservations, setReservations] = useState([])
@@ -87,13 +89,16 @@ function MySeatingChart (name) {
   // }
   const renderSelectedSeats = () => {
     return selectedSeats.map((seat, index) => (
-      <div key={index}>{`Asiento ${seat}`}</div>
+      <div key={index}>{`Número ${seat}`}</div>
     ))
   }
 
   const renderReservationsSeats = () => {
     return reservations.map((seat, index) => (
-      <div key={index}>{`Asientos Reservados ${seat.seatId}`}</div>
+      <tr key={index}>
+        <td>Número {seat.seatId}</td>
+      </tr>
+      // <div key={index}>{`Número ${seat.seatId}`}</div>
     ))
   }
 
@@ -164,47 +169,98 @@ function MySeatingChart (name) {
   }
 
   return (
-    <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div style={{ display: 'flex' }}>
-        <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-1/2 p-4'>
-          <SeatsioSeatingChart
-            workspaceKey={Workspace}
-            event={event}
-            region="eu"
-            language='es'
-            ref={seatingChartRef}
-            onObjectSelected={handleSeatSelect}
-            onObjectDeselected={handleSeatDeSelect}
-          />
-        </div>
-
-        <div className='border-2 border-dashed min-h-full flex items-left justify-start h-96 w-1/2 p-4'>
-          <div><h1>Asientos Seleccionados</h1></div>
+    <div style={{ display: 'flex' }}>
+      <div className='rounded-md border min-h-full flex items-center justify-start h-96 w-2/3 p-4' style={{ margin: '10px' }}>
+        <SeatsioSeatingChart
+          workspaceKey={Workspace}
+          event={event}
+          region="eu"
+          language='es'
+          ref={seatingChartRef}
+          onObjectSelected={handleSeatSelect}
+          onObjectDeselected={handleSeatDeSelect}
+          maxSelectedObjects={1}
+        />
+      </div>
+      <div className='rounded-md border min-h-full flex items-center justify-start h-96 w-1/3 p-4' style={{ margin: '10px' }}>
+        <div>
           {hasReservation && (
-          <div id="selected-seats-container">
-            {renderReservationsSeats()}
-          </div>)}
-          {!hasReservation && (
-          <div id="selected-seats-container">
-            {renderSelectedSeats()}
-          </div>)
-          }
-          <div class="fixed bottom-4 right-4">
-          <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
-            <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleSaveSeats}>Guardar</button></div>
-          </div>
-          </div>
-          {hasReservation && (
-            <div class="fixed bottom-4 right-50">
-              <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
-                <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleCancelReservation}>Cancelar Reserva</button>
-              </div>
+            <div id="selected-seats-container">
+              <h1 style={{ fontSize: '1rem', fontWeight: '600', color: '#47433E' }}>Asientos Reservados</h1>
+              <table>
+                {/* <thead>
+                  <tr>
+                    <th>Número</th>
+                  </tr>
+                </thead> */}
+                <tbody>
+                    <tr>
+                      <td>{renderReservationsSeats()}</td>
+                    </tr>
+                </tbody>
+              </table>
             </div>
           )}
+          {!hasReservation && (
+            <div id="selected-seats-container">
+              <h1 style={{ fontSize: '1rem', fontWeight: '600', color: '#47433E' }}>Asientos Seleccionados</h1>
+              {renderSelectedSeats()}
+            </div>
+          )}
+          <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+            <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleSaveSeats}>Guardar</button>
+            {hasReservation && (
+              <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleCancelReservation}>Cancelar Reserva</button>
+            )}
+          </div>
         </div>
-      </>
+      </div>
+    </div>
   )
+
+  // <>
+  //   {/* <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/> */}
+  //   <div style={{ display: 'flex' }}>
+  //     <div className='rounded-md border min-h-full flex items-center justify-start h-96 w-1/2 p-4' style={{ margin: '10px' }}>
+  //       <SeatsioSeatingChart
+  //         workspaceKey={Workspace}
+  //         event={event}
+  //         region="eu"
+  //         language='es'
+  //         ref={seatingChartRef}
+  //         onObjectSelected={handleSeatSelect}
+  //         onObjectDeselected={handleSeatDeSelect}
+  //         maxSelectedObjects={1}
+  //       />
+  //     </div>
+  //     <div className='rounded-md border min-h-full flex items-center justify-start h-96 w-1/2 p-4' style={{ margin: '10px' }}>
+  //         <div>
+  //         {hasReservation && (
+  //         <div id="selected-seats-container">
+  //           <div><h1>Asientos Reservados</h1></div>
+  //           {renderReservationsSeats()}
+  //         </div>)}
+  //         {!hasReservation && (
+  //         <div id="selected-seats-container">
+  //           <div><h1>Asientos Seleccionados</h1></div>
+  //           {renderSelectedSeats()}
+  //         </div>)
+  //         }
+  //         </div>
+  //         <div class="fixed top-70 right-15">
+  //           <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+  //             <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleSaveSeats}>Guardar</button></div>
+  //           </div>
+  //         </div>
+  //         {hasReservation && (
+  //           <div class="fixed bottom-96 right-15">
+  //             <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+  //               <button class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-9 px-4 py-2" type="submit" onClick={handleCancelReservation}>Cancelar Reserva</button>
+  //             </div>
+  //           </div>
+  //         )}
+  //     </div>
+  //     </>
 }
 
 export default MySeatingChart

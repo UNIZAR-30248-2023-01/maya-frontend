@@ -259,3 +259,18 @@ export const status = {
     'in progress': 'in progress'
   }
 }
+
+export const workspaces = {
+  es: {
+    'workspace-column': 'Lugares de trabajo',
+    seats: 'Asientos',
+    seat: 'Asiento',
+    reservedSeats: 'Asientos reservados'
+  },
+  en: {
+    'workspace-column': 'Workspaces',
+    seats: 'Seats',
+    seat: 'Seat',
+    reservedSeats: 'Reserved Seats '
+  }
+}
