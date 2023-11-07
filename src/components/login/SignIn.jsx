@@ -1,15 +1,10 @@
 'use client'
 import { UserAuthFormIn } from "@/components/login/user-auth-form-in"
 
-import Link from "next/link"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 
@@ -17,7 +12,7 @@ import {
 export function SignIn() {
   return (
     <Dialog>
-    <DialogTrigger><button className="text-white text-xl font-medium">Sign In</button></DialogTrigger>
+    <DialogTrigger asChild><button className="text-white text-xl font-medium">Sign In</button></DialogTrigger>
     <DialogContent>
       <DialogHeader>
       <div className="lg:p-8">
@@ -31,7 +26,7 @@ export function SignIn() {
               </p>
             </div>
             <UserAuthFormIn />
-            <p className="px-8 text-center text-sm text-muted-foreground">
+            {/* <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
                 href="/terms"
@@ -47,7 +42,7 @@ export function SignIn() {
                 Privacy Policy
               </Link>
               .
-            </p>
+            </p> */}
           </div>
         </div>
       </DialogHeader>

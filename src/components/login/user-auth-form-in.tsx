@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { supabase } from '@/lib/utils'
-import { sign } from "@/lib/jwt_sign_verify";
+import { signin } from "@/lib/jwt_sign_verify";
 
-const secret = process.env.SECRET || "secret"; //De momento // Hay que meterla en .env y mas compleja en futuro
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthFormIn({ className, ...props }: UserAuthFormProps) {
@@ -25,9 +24,8 @@ async function verifyCredentials(username, password) {
     const { data, error } = await supabase.from("people").select().eq("username", username);
     if (data && data.length === 1 && data[0].passwd_hash === password) {
       // Autenticación exitosa, emite un JWT
-      const payload = { userId: data[0].username } // Reemplaza esto con tus datos
-      const secretKey = secret // Reemplaza 'tu_secreto' con tu clave secreta segura
-      const token = await sign(payload , secretKey);
+      const token = await signin(data[0].username);
+      
       document.cookie = `OutsiteJWT=${token}`;
 
       return { user: data[0], token }
@@ -35,6 +33,7 @@ async function verifyCredentials(username, password) {
       return { user: null, error: "Credenciales incorrectas" };
     }
   } catch (error) {
+    console.log(error)
     return { user: null, error: "Error al verificar las credenciales" };
   }
 }
@@ -43,7 +42,6 @@ async function verifyCredentials(username, password) {
     event.preventDefault()
     setIsLoading(true)
     const { user, token, error } = await verifyCredentials(username, password)
-
     if (error) {
       setIsLoading(false)
       return (
@@ -53,7 +51,6 @@ async function verifyCredentials(username, password) {
       window.location.href = "/home"
     }
   }
-  
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={onSubmit}>

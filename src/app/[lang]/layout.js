@@ -2,7 +2,6 @@ import '@/styles/globals.css'
 
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
-import { Layout } from '@/components/layout'
 import { LanguageProvider } from '@/context/language-context'
 import { SWRProvider } from '@/context/swr-context'
 

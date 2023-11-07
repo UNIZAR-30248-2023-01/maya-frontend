@@ -1,8 +1,6 @@
 'use client'
 import { UserAuthFormSignUp } from "@/components/login/user-auth-form-up"
 
-
-import Link from "next/link"
 import {
   Dialog,
   DialogContent,
@@ -14,7 +12,7 @@ import {
 export function SignUp() {
   return (
     <Dialog>
-    <DialogTrigger><button className="text-gray-700 text-xl font-medium">Sign Up</button></DialogTrigger>
+    <DialogTrigger asChild><button className="text-gray-700 text-xl font-medium">Sign Up</button></DialogTrigger>
     <DialogContent>
       <DialogHeader>
       <div className="lg:p-8">
@@ -28,6 +26,7 @@ export function SignUp() {
               </p>
             </div>
             <UserAuthFormSignUp />
+          {/*
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
@@ -37,7 +36,7 @@ export function SignUp() {
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link
+              <Link     
                 href="/privacy"
                 className="underline underline-offset-4 hover:text-primary"
               >
@@ -45,6 +44,7 @@ export function SignUp() {
               </Link>
               .
             </p>
+          */}
           </div>
         </div>
       </DialogHeader>

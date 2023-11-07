@@ -11,7 +11,7 @@ export function Inicio ({ children }) {
                 <div className="flex items-center">
                     <img className="w-28 h-[104px]" src="/assets/avatars/iconos/abeja.png" alt="Abeja" />
                 </div>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 mr-4">
                     <div className="px-4 py-2 rounded-md shadow border border-gray-300">
                         <SignUp></SignUp>
                     </div>
@@ -21,7 +21,7 @@ export function Inicio ({ children }) {
                 </div>
             </div>
 
-            <div class="flex flex-col items-center justify-center h-screen ">
+            <div className="flex flex-col items-center justify-center h-screen ">
                 <div className="flex space-x-8">
                     <img className="w-246 h-193" src="/assets/avatars/iconos/abeja.png" />
                     <div className="text-black text-8xl font-medium font-['Inter'] leading-tight">MAYA</div>
