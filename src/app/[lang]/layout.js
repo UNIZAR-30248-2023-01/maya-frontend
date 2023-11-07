@@ -1,9 +1,12 @@
-import '@/styles/globals.css'
+'use client'
 
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
-import { Layout } from '@/components/Layout'
-import { getDictionary } from '@/lib/dictionaries'
+import { SessionProvider } from 'next-auth/react'
+import { LanguageProvider } from '@/context/language-context'
+import { SWRProvider } from '@/context/swr-context'
+
+import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +15,22 @@ export const metadata = {
   themeColor: '#ffffff'
 }
 
-export default async function RootLayout ({ children, params: { lang } }) {
-  const dict = await getDictionary(lang)
-
+export default function RootLayout ({ children }) {
   return (
-    <html lang={lang ?? 'en'}>
-      <body className={inter.className}>
-      <Toaster />
-        <Layout dict={dict}>
-          {children}
-        </Layout>
+    <html lang='en'>
+      <body className={`${inter.className} max-w-screen overflow-x-hidden`}>
+        <Toaster />
+        <LanguageProvider>
+          <SessionProvider
+            refetchInterval={5 * 60}
+            refetchOnWindowFocus={true}
+            basePath="/api/auth"
+          >
+            <SWRProvider>
+              {children}
+            </SWRProvider>
+          </SessionProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

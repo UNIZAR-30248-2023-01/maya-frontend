@@ -26,23 +26,33 @@
 - `public`: Static content.
 - `styles`: Contains the styles of the application. Override or new styles in `tailwind.config.js`.
 
+## Naming convention
+
+- camelCase for variable names and object properties (e.g: SupportedLanguages)
+- PascalCase for type names and classes (e.g: ProjectsPage)
+- kebab-case for module names (e.g: language-context)
+
 ## Getting Started
 
 ### Install dependencies
 
 ```bash
-npm run ci
+npm ci
 ```
 
 ### Run for a development environment
 
 ```bash
+git clone -b develop https://github.com/UNIZAR-30248-2023-01/maya-frontend.git
+npm ci
 npm run dev
 ```
 
 ### Run for a production environment
 
 ```bash
+git clone --depth 1 https://github.com/UNIZAR-30248-2023-01/maya-frontend.git
+npm ci
 npm run build
 npm run start
 ```

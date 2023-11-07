@@ -20,6 +20,7 @@
     ],
     "rules": {
         "cypress/no-unnecessary-waiting": "off",
-        "cypress/unsafe-to-chain-command": "off"
+        "cypress/unsafe-to-chain-command": "off",
+        "@next/next/no-img-element": "off"
     }
 }
