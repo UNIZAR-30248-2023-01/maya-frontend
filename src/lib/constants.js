@@ -177,6 +177,28 @@ export const loadingProjects = [
   }
 ]
 
+export const loadingInAndOuts = [
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  },
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  },
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  }
+
+]
+
 export const loadingPeople = [
   {
     id: null,
