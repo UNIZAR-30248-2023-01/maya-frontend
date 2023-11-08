@@ -7,10 +7,6 @@ import { Stats } from '@/components/landing/stats'
 import { Footer } from '@/components/landing/footer'
 import { Feature1, Feature2 } from '@/components/landing/features'
 
-export const metadata = {
-  title: 'Home',
-  description: 'This is the home page'
-}
 
 export default function page () {
   return (

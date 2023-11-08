@@ -6,11 +6,6 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { UserSignUp } from '@/components/auth/user-signup-form'
 
-export const metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.'
-}
-
 export default function SignUpPage () {
   return (
     <>

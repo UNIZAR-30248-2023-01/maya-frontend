@@ -58,7 +58,7 @@ export function UserSignIn ({ className, ...props }) {
             </Label>
             <Input
               id="username"
-              placeholder="John Doe"
+              placeholder="Username"
               type="username"
               autoCapitalize="none"
               autoComplete="username"

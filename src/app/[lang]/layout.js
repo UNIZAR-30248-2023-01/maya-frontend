@@ -10,11 +10,6 @@ import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  manifest: '/manifest.json',
-  themeColor: '#ffffff'
-}
-
 export default function RootLayout ({ children }) {
   return (
     <html lang='en'>
