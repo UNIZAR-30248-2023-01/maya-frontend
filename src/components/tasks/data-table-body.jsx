@@ -25,7 +25,7 @@ export function DataTableBody ({ table }) {
                   cell.column.columnDef.cell,
                   {
                     ...cell.getContext(),
-                    dictionary: dictionary.tasks
+                    dictionary: { ...dictionary.tasks, ...dictionary.labels }
                   }
                 )}
               </TableCell>

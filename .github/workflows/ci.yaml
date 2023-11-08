@@ -5,6 +5,9 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  push:
+    branches: [main, develop]
+
   pull_request:
     branches: [main, develop]
 
@@ -19,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-          node-version: 20
+          node-version: 18
       - name: Install Dependencies
         run: npm ci
       - name: Lint
