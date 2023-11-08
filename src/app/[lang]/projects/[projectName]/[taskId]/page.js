@@ -4,24 +4,27 @@ import { Number, ComboboxEnum, ComboboxArray, DatePicker, TextArea } from '@/com
 import { useLang } from '@/context/language-context'
 import { tasksLabels, tasksStatuses } from '@/lib/constants'
 import { Label } from '@/components/ui/label'
-import { cn, normalize, getForm } from '@/lib/utils'
+import { cn, normalize, getForm, supabase } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { TeamMember } from '@/components/team-member'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { ConfirmationTaskButton } from '@/components/tasks/confirmationButton'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { format, parseISO } from 'date-fns'
 import { tasksSchema } from '@/lib/schemas'
 import { Comment } from '@/components/tasks/comments'
 import { Input } from '@/components/ui/input'
 import { LuSend } from 'react-icons/lu'
+import { toast } from 'sonner'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
   const [edit, setEdit] = useState(false)
+  const [newComment, setNewComment] = useState(null)
 
   const [form, setForm] = useState(getForm(tasksSchema._def.shape()))
 
@@ -32,6 +35,46 @@ export default function TaskPage ({ params }) {
   const handleCancel = () => {
     setEdit(false)
     // borrar datos de editar???
+  }
+
+  // guardar los comentarios en el backend
+  const handleAddComment = (e) => {
+    e.preventDefault()
+    // lee el comentario y lo guarda en el backend
+    console.log(newComment)
+    try {
+      const addComment = () => {
+        return new Promise((resolve, reject) => {
+          (async () => {
+            await supabase.from('task-comments').insert({
+              task: params.taskId,
+              username: 'hec7orci7o',
+              comment: newComment
+            }).select()
+              .then(() => {
+                // Actualización de los datos en la interfaz
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-comments?task=eq.${params.taskId}&select=*`)
+                resolve()
+              }).catch((error) => {
+                console.error(error)
+                reject(error)
+              })
+          })()
+        })
+      }
+
+      toast.promise(addComment, {
+        loading: dictionary.comments['toast-loading'],
+        success: () => dictionary.comments['toast-success'],
+        error: () => dictionary.comments['toast-error']
+      })
+      setNewComment(null)
+      e.target.reset()
+    } catch (error) {
+      console.log(error)
+      const { path, message } = JSON.parse(error.message)[0]
+      toast.error(path[0] + ': ' + message)
+    }
   }
 
   // Conexiones con el backend
@@ -60,6 +103,8 @@ export default function TaskPage ({ params }) {
 
     const parsedDate = task.end_date ? parseISO(task.end_date) : ''
     const formattedDate = parsedDate !== '' ? format(parsedDate, 'PPP') : dictionary.tasks['new-task-label-placeholder']
+
+    comments.sort((a, b) => a.created_at - b.created_at)
 
     console.log('comments', comments)
 
@@ -326,13 +371,19 @@ export default function TaskPage ({ params }) {
           </Label>
           <Card>
             <CardContent className='p-8 flex flex-col gap-8'>
-              {comments.map((comment, id) => (
-                <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
-              ))}
-              <div className='flex flex-row gap-4'>
-                <Input type='text' placeholder={dictionary.comments.placeholder} />
-                <Button className='px-4 flex flex-row gap-2'> {dictionary.comments.button} <LuSend /></Button>
-              </div>
+              <ScrollArea className='h-96 p-4'>
+                <div className='flex flex-col gap-8'>
+                  {comments.map((comment, id) => (
+                  <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
+                  ))}
+                </div>
+              </ScrollArea>
+
+              <form onSubmit={(e) => handleAddComment(e)}
+                className='flex flex-row gap-4'>
+                <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
+                <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+              </form>
             </CardContent>
           </Card>
         </div>}

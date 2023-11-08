@@ -437,11 +437,17 @@ export const comments = {
   es: {
     titulo: 'Comentarios',
     placeholder: 'Escribe aquí tu comentario ...',
-    button: 'Enviar'
+    button: 'Enviar',
+    'toast-loading': 'Estamos enviando tu comentario. Por favor, espera un momento.',
+    'toast-success': 'Tu comentario se ha enviado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     titulo: 'Comments',
     placholder: 'Type here your comment ...',
-    button: 'Send'
+    button: 'Send',
+    'toast-loading': 'We are sending your comment. Please wait a moment.',
+    'toast-success': 'Your comment has been sent successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
