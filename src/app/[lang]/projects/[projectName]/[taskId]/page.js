@@ -4,7 +4,7 @@ import { Number, ComboboxEnum, ComboboxArray, DatePicker, TextArea } from '@/com
 import { useLang } from '@/context/language-context'
 import { tasksLabels, tasksStatuses } from '@/lib/constants'
 import { Label } from '@/components/ui/label'
-import { cn, normalize, getForm, supabase } from '@/lib/utils'
+import { cn, normalize, getForm } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { TeamMember } from '@/components/team-member'
@@ -16,8 +16,10 @@ import { CalendarIcon } from '@radix-ui/react-icons'
 import { format, parseISO } from 'date-fns'
 import { tasksSchema } from '@/lib/schemas'
 import { Comment } from '@/components/tasks/comments'
+import { Input } from '@/components/ui/input'
+import { LuSend } from 'react-icons/lu'
 
-export default async function TaskPage({ params }) {
+export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
   const [edit, setEdit] = useState(false)
 
@@ -48,8 +50,8 @@ export default async function TaskPage({ params }) {
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-comments?task=eq.${params.taskId}&select=*`
   )
 
-
-
+  console.log(tasks)
+  console.log(people)
 
   if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading) {
     const task = tasks[0]
@@ -59,7 +61,7 @@ export default async function TaskPage({ params }) {
     const parsedDate = task.end_date ? parseISO(task.end_date) : ''
     const formattedDate = parsedDate !== '' ? format(parsedDate, 'PPP') : dictionary.tasks['new-task-label-placeholder']
 
-    console.log(comments)
+    console.log('comments', comments)
 
     return (
       <div className='flex flex-col gap-6'>
@@ -147,7 +149,7 @@ export default async function TaskPage({ params }) {
                 placeholder={task.description}
                 onChange={(e) => setter({ key: 'description', value: e.target.value })}
               />
-            )
+              )
             : (
               <>
                 <Label
@@ -162,7 +164,7 @@ export default async function TaskPage({ params }) {
                   </CardContent>
                 </Card>
               </>
-            )}
+              )}
         </div>
 
         <div className='flex flex-col gap-1.5'>
@@ -195,7 +197,7 @@ export default async function TaskPage({ params }) {
                 }}
                 dictionary={dictionary}
               />
-            )
+              )
             : (
               <>
                 <Label
@@ -218,7 +220,7 @@ export default async function TaskPage({ params }) {
                   ))}
                 </div>
               </>
-            )}
+              )}
         </div>
 
         <div className='flex justify-between gap-6 pt-4'>
@@ -232,7 +234,7 @@ export default async function TaskPage({ params }) {
                   value={form.end_date}
                   onChange={(e) => setter({ key: 'end_date', value: e || null })}
                 />
-              )
+                )
               : (
                 <>
                   <Label
@@ -248,7 +250,7 @@ export default async function TaskPage({ params }) {
                     </CardContent>
                   </Card>
                 </>
-              )}
+                )}
           </div>
 
           <div className='flex flex-col w-full gap-1.5'>
@@ -261,7 +263,7 @@ export default async function TaskPage({ params }) {
                   placeholder={task.estimated}
                   onChange={(e) => setter({ key: 'estimated', value: e.target.valueAsNumber })}
                 />
-              )
+                )
               : (
                 <>
                   <Label
@@ -274,7 +276,7 @@ export default async function TaskPage({ params }) {
                     <CardContent className='p-0'>{task.estimated}</CardContent>
                   </Card>
                 </>
-              )}
+                )}
           </div>
         </div>
 
@@ -318,16 +320,22 @@ export default async function TaskPage({ params }) {
           </div>
         )}
 
-        <div className='flex flex-col gap-1.5'>
+        {!edit && <div className='flex flex-col gap-1.5'>
           <Label className='capitalize'>
-            {dictionary.comments['titulo']}
+            {dictionary.comments.titulo}
           </Label>
           <Card>
             <CardContent className='p-8 flex flex-col gap-8'>
-              <Comment date={'44'} username={'hec7orci7o'} comment={'hola que hase'}></Comment>
+              {comments.map((comment, id) => (
+                <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
+              ))}
+              <div className='flex flex-row gap-4'>
+                <Input type='text' placeholder={dictionary.comments.placeholder} />
+                <Button className='px-4 flex flex-row gap-2'> {dictionary.comments.button} <LuSend /></Button>
+              </div>
             </CardContent>
           </Card>
-        </div>
+        </div>}
       </div>
     )
   }

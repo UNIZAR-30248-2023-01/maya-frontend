@@ -435,9 +435,13 @@ export const projectSettings = {
 
 export const comments = {
   es: {
-    titulo: 'Comentarios'
+    titulo: 'Comentarios',
+    placeholder: 'Escribe aquí tu comentario ...',
+    button: 'Enviar'
   },
   en: {
-    titulo: 'Comments'
+    titulo: 'Comments',
+    placholder: 'Type here your comment ...',
+    button: 'Send'
   }
 }
