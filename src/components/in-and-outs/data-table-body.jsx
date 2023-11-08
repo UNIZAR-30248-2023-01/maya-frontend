@@ -6,19 +6,15 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
-import { useRouter } from 'next/navigation'
 import { useLang } from '@/context/language-context'
 import { SidePanelEdit } from '@/components/in-and-outs/side-panel-edit'
-import { inAndOutsSchema } from '@/lib/schemas'
-import { useState } from 'react'
 
 export function DataTableBody ({ table }) {
-  //const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+  // const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const { dictionary } = useLang()
-  //const router = useRouter()
+  // const router = useRouter()
   // Enruta la pagina a una URL especifica que lleva el nombre del proyecto
-  //const goTo = (row) => router.push(`/in-and-outs/${String(row.original.id).toLowerCase().replace(/ /g, '-')}`)
-
+  // const goTo = (row) => router.push(`/in-and-outs/${String(row.original.id).toLowerCase().replace(/ /g, '-')}`)
 
   return (
     <TableBody>
@@ -41,16 +37,16 @@ export function DataTableBody ({ table }) {
               </TableCell>
             ))}
               <SidePanelEdit
-                title={dictionary.inandouts['edit']}
+                title={dictionary.inandouts.edit}
                 description={dictionary.inandouts['new-table-description']} // Descripcion del panel
                 descriptionIn={dictionary.inandouts['new-table-description-in']}
                 descriptionOut={dictionary.inandouts['new-table-description-out']}
-                actionBtn={dictionary.inandouts['edit']} 
+                actionBtn={dictionary.inandouts.edit}
                 fechaEntrada={row.original.in_date}
                 fechaSalida={row.original.out_date}
-                deleteBtn={dictionary.inandouts['delete']}
+                deleteBtn={dictionary.inandouts.delete}
               />
-            
+
           </TableRow>
           )))
         : (

@@ -18,8 +18,6 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
-import { CounterClockwiseClockIcon } from '@radix-ui/react-icons'
-
 
 export function SidePanelManual ({
   title,
@@ -29,12 +27,12 @@ export function SidePanelManual ({
   triggerBtn,
   actionBtn
 }) {
-  const [errorOutHour, setErrorOutHour] = useState('');
-  const [errorInHour, setErrorInHour] = useState('');
-  const [invalidHour, setInvalidHour] = useState(true);
+  const [errorOutHour, setErrorOutHour] = useState('')
+  const [errorInHour, setErrorInHour] = useState('')
+  const [invalidHour, setInvalidHour] = useState(true)
 
   const { dictionary } = useLang()
-  const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape())}) // devuelve unos objetos
+  const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
@@ -44,41 +42,42 @@ export function SidePanelManual ({
     // Expresión regular para verificar el formato hh:mm
     const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
 
-    if (!regex.test(form.in_hour) ) {
-      toast.error(dictionary.inandouts['error-hour']);
-      setErrorInHour(dictionary.inandouts['error-hour']);
+    if (!regex.test(form.in_hour)) {
+      toast.error(dictionary.inandouts['error-hour'])
+      setErrorInHour(dictionary.inandouts['error-hour'])
       return
     } if (!regex.test(form.out_hour)) {
-      toast.error(dictionary.inandouts['error-hour']);
-      setErrorOutHour(dictionary.inandouts['error-hour']);
+      toast.error(dictionary.inandouts['error-hour'])
+      setErrorOutHour(dictionary.inandouts['error-hour'])
       return
     } else if (form.in_hour > form.out_hour) {
-      toast.error(dictionary.inandouts['error-in-hour']);
-      setErrorInHour(dictionary.inandouts['error-in-hour']);
+      toast.error(dictionary.inandouts['error-in-hour'])
+      setErrorInHour(dictionary.inandouts['error-in-hour'])
       return
-    } else{
-      setErrorInHour('');
-      setErrorOutHour('');
+    } else {
+      setErrorInHour('')
+      setErrorOutHour('')
     }
 
-    const { in_hour, out_hour, in_date, out_date, ...data } = form // eliminamos los campos in_hour y out_hour del form
+    /* eslint-disable camelcase */
+    const { in_hour, out_hour, in_date, out_date } = form // eliminamos los campos in_hour y out_hour del form
 
-    const timestampIn = new Date(in_date.getFullYear(), in_date.getMonth(), in_date.getDate(), in_hour.split(":")[0], in_hour.split(":")[1])
-    const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(":")[0], out_hour.split(":")[1])
+    const timestampIn = new Date(in_date.getFullYear(), in_date.getMonth(), in_date.getDate(), in_hour.split(':')[0], in_hour.split(':')[1])
+    const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(':')[0], out_hour.split(':')[1])
 
-    const tiempoEnMilisegundos = timestampOut- timestampIn;
-    const minsT = tiempoEnMilisegundos / (1000 * 60);
-    const minutosTotales = Math.round(minsT);
+    const tiempoEnMilisegundos = timestampOut - timestampIn
+    const minsT = tiempoEnMilisegundos / (1000 * 60)
+    const minutosTotales = Math.round(minsT)
 
-    {/* mutate : actualiza la interfaz */}
+    /* mutate : actualiza la interfaz */
 
     try {
-      inAndOutsSchema.parse({ in_date, out_date, total: 0})
+      inAndOutsSchema.parse({ in_date, out_date, total: 0 })
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').insert([{ 
-            username: 'hec7orci7o', 
-            in_date: timestampIn,            
+          supabase.from('in-and-outs').insert([{
+            username: 'hec7orci7o',
+            in_date: timestampIn,
             out_date: timestampOut,
             total: minutosTotales
           }])
@@ -118,15 +117,14 @@ export function SidePanelManual ({
             <SheetDescription>
               {descriptionIn}
             </SheetDescription>
-            
+
             <Field.DatePicker
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
               onChange={(e) => {
-              
-                if( form.out_date !== null && form.out_date < e ) {
-                  toast.error(dictionary.inandouts['error-in-date']);
+                if (form.out_date !== null && form.out_date < e) {
+                  toast.error(dictionary.inandouts['error-in-date'])
                 } else {
                   setter({ key: 'in_date', value: e })
                 }
@@ -136,18 +134,17 @@ export function SidePanelManual ({
             <div className="w-[65px]">
               <Field.Text
                 id="in_hour"
-                placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
+                placeholder={dictionary.inandouts['new-table-hour-placeholder']}
                 onChange={(e) => {
-                  const inputHour = e.target.value;
-                    setter({ key: 'in_hour', value: inputHour });
+                  const inputHour = e.target.value
+                  setter({ key: 'in_hour', value: inputHour })
                 }}
               />
             </div>
 
             <SheetDescription>
-              {errorInHour && <p className="text-red-500">{errorInHour}</p>} 
+              {errorInHour && <p className="text-red-500">{errorInHour}</p>}
             </SheetDescription>
-
 
             <SheetDescription style={{ marginTop: '20px' }}>
               {descriptionOut}
@@ -159,9 +156,8 @@ export function SidePanelManual ({
               value={form.out_date}
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
               onChange={(e) => {
-              
-                if( form.in_date > e ) {
-                  toast.error(dictionary.inandouts['error-out-date']);
+                if (form.in_date > e) {
+                  toast.error(dictionary.inandouts['error-out-date'])
                 } else {
                   setter({ key: 'out_date', value: e })
                 }
@@ -171,26 +167,23 @@ export function SidePanelManual ({
             <div className="w-[65px]">
                 <Field.Text
                   id="out_hour"
-                  placeholder={dictionary.inandouts['new-table-hour-placeholder']} 
+                  placeholder={dictionary.inandouts['new-table-hour-placeholder']}
                   onChange={(e) => {
-                    const inputHour = e.target.value;
+                    const inputHour = e.target.value
 
-                    if( form.in_date === form.out_date && form.in_hour > inputHour ) {
-                      toast.error(dictionary.inandouts['error-out-hour']);
+                    if (form.in_date === form.out_date && form.in_hour > inputHour) {
+                      toast.error(dictionary.inandouts['error-out-hour'])
                       setInvalidHour(false)
                     } else {
-                        setter({ key: 'out_hour', value: inputHour });
-                      
+                      setter({ key: 'out_hour', value: inputHour })
                     }
-                    
                   }}
                 />
               </div>
 
             <SheetDescription>
-              {errorOutHour && <p className="text-red-500">{errorOutHour}</p>} 
+              {errorOutHour && <p className="text-red-500">{errorOutHour}</p>}
             </SheetDescription>
-            
 
           </div>
           <SheetFooter className="">

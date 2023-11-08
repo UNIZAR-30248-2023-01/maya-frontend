@@ -10,12 +10,9 @@ import {
 } from '@tanstack/react-table'
 
 import { Table } from '@/components/ui/table'
-import { DataTableToolbar } from '@/components/in-and-outs/data-table-toolbar'
 import { DataTableHeader } from '@/components/in-and-outs/data-table-header'
 import { DataTableBody } from '@/components/in-and-outs/data-table-body'
 import { SidePanelManual } from '@/components/in-and-outs/side-panel-manual'
-import { ClockIn } from '@/components/in-and-outs/botton-clock-in'
-import { ClockOut } from '@/components/in-and-outs/botton-clock-out'
 import { BottonController } from '@/components/in-and-outs/controller-bottons'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { useLang } from '@/context/language-context'
@@ -50,19 +47,19 @@ export function DataTable ({ data, columns }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        {/*<DataTableToolbar table={table} />*/}
+        {/* <DataTableToolbar table={table} /> */}
         <SidePanelManual
           title={dictionary.inandouts['new-date']}
           description={dictionary.inandouts['new-table-description']} // Descripcion del panel
           descriptionIn={dictionary.inandouts['new-table-description-in']}
           descriptionOut={dictionary.inandouts['new-table-description-out']}
           triggerBtn={dictionary.inandouts['new-date']} // Nombre del boton
-          actionBtn={dictionary.inandouts['new-table-create']} 
+          actionBtn={dictionary.inandouts['new-table-create']}
           schema={inAndOutsSchema}
           dictionary={dictionary}
         />
         <BottonController />
-        
+
       </div>
       <div className="rounded-md border">
         <Table>

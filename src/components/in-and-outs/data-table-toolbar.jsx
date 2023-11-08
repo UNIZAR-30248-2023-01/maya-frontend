@@ -1,9 +1,6 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { DataTableFacetedFilter } from '@/components/projects/data-table-faceted-filter'
-import { projectStatuses, visibility } from '@/lib/constants'
 import { useLang } from '@/context/language-context'
 import { Cross2Icon } from '@radix-ui/react-icons'
 
@@ -36,7 +33,7 @@ export function DataTableToolbar ({ table }) {
           title={dictionary.inandouts.out_date}
           options={out_date.map(v => ({ ...v, value: v.value }))}
         />
-      )}*/}
+      )} */}
       {isFiltered && (
         <Button
           variant="ghost"

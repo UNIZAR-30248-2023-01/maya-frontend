@@ -1,9 +1,9 @@
 'use client'
 
-import {  HiChevronRight } from 'react-icons/hi2'
+import { HiChevronRight } from 'react-icons/hi2'
 
 export function Hero () {
-    return (
+  return (
       <div className="relative isolate overflow-hidden">
         <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
@@ -91,5 +91,5 @@ export function Hero () {
           </div>
         </div>
       </div>
-    )
-  }
+  )
+}

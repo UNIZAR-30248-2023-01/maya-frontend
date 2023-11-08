@@ -14,7 +14,7 @@ export const projectSchema = z.object({
 export const inAndOutsSchema = z.object({
   in_date: z.date().nullable(),
   out_date: z.date().nullable(),
-  total: z.number().nullable(),
+  total: z.number().nullable()
 })
 
 export const tasksSchema = z.object({

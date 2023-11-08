@@ -1,38 +1,33 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/in-and-outs/data-table-column-header'
-import { LuTable2, LuArchive } from 'react-icons/lu'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useLang } from '@/context/language-context'
 
 // Funcion para formatear la fecha
-function formatDate(timestamp) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  const { dictionary } = useLang()
-  
-  if (!timestamp) return null;
+function formatDate (timestamp, language) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }
 
-  return new Date(timestamp).toLocaleDateString(dictionary.inandouts['language'], options);
+  if (!timestamp) return null
+
+  return new Date(timestamp).toLocaleDateString(language, options)
 }
 
-// Funcion para formatear el tiempo total siendo el parametro de entrada un int4 
+// Funcion para formatear el tiempo total siendo el parametro de entrada un int4
 
-function formatTime(total) {  
-  const hours = Math.floor(total / 60);
-  const minutes = total % 60;
-  return `${hours}h ${minutes}m`;
+function formatTime (total) {
+  const hours = Math.floor(total / 60)
+  const minutes = total % 60
+  return `${hours}h ${minutes}m`
 }
 
-
-{/* Fichero encargador de nombrar las columnas */}
+/* Fichero encargador de nombrar las columnas */
 export const columns = [
   {
     accessorKey: 'in_date',
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['in-column']} />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { id } = row.original
       if (!id) {
         return (
@@ -45,7 +40,7 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">
-            {formatDate(row.getValue('in_date'))}
+            {formatDate(row.getValue('in_date'), dictionary.language)}
           </span>
         </div>
 
@@ -54,14 +49,13 @@ export const columns = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     }
-  }
-  ,
+  },
   {
     accessorKey: 'out_date',
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['out-column']} />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { id } = row.original
       if (!id) {
         return (
@@ -74,7 +68,7 @@ export const columns = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[400px] truncate font-medium">
-            {formatDate(row.getValue('out_date'))}
+            {formatDate(row.getValue('out_date'), dictionary.language)}
           </span>
         </div>
       )
@@ -111,5 +105,3 @@ export const columns = [
     }
   }
 ]
-
-

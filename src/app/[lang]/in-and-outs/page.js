@@ -6,9 +6,7 @@ import { loadingInAndOuts } from '@/lib/constants'
 import useSWR from 'swr'
 
 export default function InAndOutsPage () {
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)  
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
   console.log('inAndOuts', inAndOuts)
   return <DataTable data={inAndOuts || loadingInAndOuts} columns={columns}/>
 }
-
-

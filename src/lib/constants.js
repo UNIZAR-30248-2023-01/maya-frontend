@@ -177,7 +177,7 @@ export const loadingProjects = [
   }
 ]
 
-export const loadingInAndOuts= [
+export const loadingInAndOuts = [
   {
     id: null,
     username: null,
