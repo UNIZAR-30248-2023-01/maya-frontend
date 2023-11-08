@@ -28,7 +28,7 @@ export function UserSignUp ({ className, ...props }) {
     try {
       const logIn = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:3000/api/sign-up', {
+        await fetch(`${process.env.VERCEL_URL}/api/sign-up`, {
           method: 'POST',
           body: JSON.stringify(newUser),
           headers: { 'Content-Type': 'application/json' }
