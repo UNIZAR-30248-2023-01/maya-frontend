@@ -432,3 +432,12 @@ export const projectSettings = {
     'toast-delete-success': 'Your project has been deleted successfully.'
   }
 }
+
+export const comments = {
+  es: {
+    titulo: 'Comentarios'
+  },
+  en: {
+    titulo: 'Comments'
+  }
+}
