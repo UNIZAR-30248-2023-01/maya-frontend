@@ -22,7 +22,7 @@ export function DataTableHeader ({ table }) {
                   ? null
                   : flexRender(header.column.columnDef.header, {
                     ...header.getContext(),
-                    dictionary: dictionary.teams
+                    dictionary: dictionary.workspaces
                   })}
               </TableHead>
             )
