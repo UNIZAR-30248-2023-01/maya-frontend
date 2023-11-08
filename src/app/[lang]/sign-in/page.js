@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { UserSignIn } from '@/components/auth/user-signin-form'
 
-
 export default function SignInPage () {
   return (
     <>

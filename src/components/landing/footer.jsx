@@ -91,7 +91,7 @@ const footerNavigation = {
 }
 
 export function Footer () {
-    return (
+  return (
       <footer aria-labelledby="footer-heading" className="relative">
         <h2 id="footer-heading" className="sr-only">
           Footer
@@ -112,5 +112,5 @@ export function Footer () {
           </div>
         </div>
       </footer>
-    )
-  }
+  )
+}

@@ -95,6 +95,81 @@ export const projects = {
   }
 }
 
+// Tabla in and out
+export const inandouts = {
+  es: {
+    language: 'es-ES',
+    'in-column': 'Entrada',
+    'out-column': 'Salida',
+    'total-column': 'Total',
+    filter: 'Filtrar horas',
+    'new-date': 'Fichaje manual',
+    'new-date-automatic-clock-in': 'Fichaje entrada automático',
+    'new-date-automatic-clock-out': 'Fichaje salida automático',
+    'new-check-in': 'Fichar entrada',
+    'new-check-out': 'Fichar salida',
+    edit: 'Editar',
+    delete: 'Eliminar',
+
+    'new-table-description': 'Selecciona la fecha de entrada y salida para registrar tus horas.',
+    'new-table-description-in': 'Selecciona la fecha y la hora de entrada.',
+    'new-table-description-out': 'Selecciona la fecha y la hora de salida.',
+    'new-table-name': 'Nombre',
+    'new-table-desc': 'Descripción',
+
+    'new-table-in-placeholder': 'Fecha de entrada',
+    'new-table-out-placeholder': 'Fecha de salida',
+    'new-table-hour-placeholder': '00:00',
+
+    'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida',
+    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada',
+    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada',
+    'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida',
+    'error-hour': 'Formato de hora no válido',
+
+    'new-table-create': 'Fichar',
+    'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
+    'toast-success': 'Tu fichaje se ha almacenado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    language: 'en-US',
+    'day-column': 'Date',
+    'in-column': 'In',
+    'out-column': 'Out',
+    'total-column': 'Total',
+    filter: 'Filter hours',
+    'new-date': 'Manual clock-in',
+    'new-date-automatic-clock-in': 'Automatic clock-in',
+    'new-date-automatic-clock-out': 'Automatic clock-out',
+    'new-check-in': 'Clock-in',
+    'new-check-out': 'Clock-out',
+    edit: 'Edit',
+    delete: 'Delete',
+
+    'new-table-description': 'Select your clock-in and clock-out date to register your hours.',
+    'new-table-description-in': 'Select your clock-in date and hour.',
+    'new-table-description-out': 'Select your clock-out date and hour',
+    'new-table-name': 'Name',
+    'new-table-desc': 'Short description',
+
+    'new-table-in-placeholder': 'Clock-in date',
+    'new-table-out-placeholder': 'Clock-out date',
+    'new-table-hour-placeholder': '00:00',
+
+    'error-in-date': 'Clock-in date cannot be greater than clock-out date',
+    'error-out-date': 'Clock-out date cannot be less than clock-in date',
+    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour',
+    'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour',
+    'error-hour': 'Invalid hour format',
+
+    'new-table-create': 'Clock in/clock out',
+    'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
+    'toast-success': 'Your clock-in/clock-out has been registered successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
 export const tasks = {
   es: {
     'tasks-column': 'Tarea',

@@ -9,7 +9,7 @@ import {
   HiServer,
   HiBolt,
   HiCalendarDays,
-  HiUsers,
+  HiUsers
 } from 'react-icons/hi2'
 
 const primaryFeatures = [
