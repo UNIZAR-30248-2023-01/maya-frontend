@@ -1,9 +1,12 @@
 'use client'
 
-import {  HiChevronRight } from 'react-icons/hi2'
+// import { HiChevronRight } from 'react-icons/hi2'
+import { useLang } from '@/context/language-context'
+import Link from 'next/link'
 
 export function Hero () {
-    return (
+  const { dictionary } = useLang()
+  return (
       <div className="relative isolate overflow-hidden">
         <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
@@ -44,11 +47,11 @@ export function Hero () {
         <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-40 lg:flex lg:px-8 lg:pt-40">
           <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
             <img
-              className="h-11"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+              className="w-20 h-auto"
+              src="/logo.webp"
               alt="Your Company"
             />
-            <div className="mt-24 sm:mt-32 lg:mt-16">
+            {/* <div className="mt-24 sm:mt-32 lg:mt-16">
               <a href="#" className="inline-flex space-x-6">
                 <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
                   Latest updates
@@ -58,24 +61,23 @@ export function Hero () {
                   <HiChevronRight className="h-5 w-5 text-gray-500" aria-hidden="true" />
                 </span>
               </a>
-            </div>
-            <h1 className="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              Deploy to the cloud with confidence
+            </div> */}
+            <h1 className="mt-10 text-4xl font-bold tracking-tight sm:text-6xl">
+              {dictionary.landing.title}
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+            <p className="mt-6 text-lg leading-8 text-gray-700">
+              {dictionary.landing.description}
             </p>
             <div className="mt-10 flex items-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+              <Link
+                href="/sign-up"
+                className="rounded-md border-2 border-black hover:font-semibold hover:border-black duration-300 bg-black px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-transparent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Get started
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-white">
-                Live demo <span aria-hidden="true">→</span>
-              </a>
+                {dictionary.landing.start}
+              </Link>
+              {/* <a href="#" className="text-sm font-semibold leading-6 text-white">
+              {dictionary.landing.demo} <span aria-hidden="true">→</span>
+              </a> */}
             </div>
           </div>
           <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
@@ -91,5 +93,5 @@ export function Hero () {
           </div>
         </div>
       </div>
-    )
-  }
+  )
+}
