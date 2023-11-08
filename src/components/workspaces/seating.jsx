@@ -6,7 +6,6 @@ import { conectSeatsio } from '@/lib/seatsioUtils'
 
 // import { useLang } from '@/context/language-context'
 import React, { useRef, useState, useEffect } from 'react'
-// import { set } from 'cypress/types/lodash'
 // import { set } from 'cypress/types/lodash'   "545ec209-b1a2-4477-8ec2-47aeb69c1dba"
 
 // const eventKey = '115b9d7a-4d67-4729-b759-d0d51709b125'
@@ -32,13 +31,14 @@ function MySeatingChart (name) {
     if (error) console.log('error:', error)
     if (workspace) {
       console.log('WORKSPACE EN SPACE:', workspace)
+      console.log('*******************************************************************')
+      console.log('workspace key:', workspace[0].key)
+      console.log('event secret key:', workspace[0].secretKey)
+      setWorkspace(workspace[0].key)
+      setEvent(workspace[0].secretKey)
     }
-    console.log('*******************************************************************')
-    console.log('workspace:', workspace[0].key)
-    console.log('event:', workspace[0].secretKey)
-    setWorkspace(workspace[0].key)
-    setEvent(workspace[0].secretKey)
   }
+  // Llamar a la función para obtener el workspace antes del renderizado
 
   // Esto es para guardar los asientos SELECCIONADOS
   const handleSeatSelect = (selectedObject) => {
@@ -73,6 +73,7 @@ function MySeatingChart (name) {
       .select('*')
       .eq('userId', user) // Reemplaza 'usuario1' con el ID del usuario actual
       .eq('timeBooked', timeBooked)
+      .eq('event', event)
 
     if (error) console.log('error:', error)
     if (workspaces) {
@@ -97,19 +98,26 @@ function MySeatingChart (name) {
   }
 
   const renderReservationsSeats = () => {
+    console.log('reservations:', reservations)
     return reservations.map((seat, index) => (
-      <tr key={index}>
-        <td>Número {seat.seatId}</td>
-      </tr>
-      // <div key={index}>{`Número ${seat.seatId}`}</div>
+      // <tr key={index}>
+      //   <td>Número {seat.seatId}</td>
+      // </tr>
+      <div key={index}>{`Número ${seat.seatId}`}</div>
     ))
   }
+
+  // useEffect(async () => {
+  //   await obtenerWorkspace()
+  // }, [])
 
   // Para verificar si el usuario actual tiene una reserva
   useEffect(() => {
     const checkReservation = async () => {
+      // await obtenerWorkspace()
       const timeBooked = new Date().toISOString().slice(0, 10)
       console.log(timeBooked)
+      console.log('event checkReseervation:', event)
       const { data: seatsReserved, error } = await supabase
         .from('reservations')
         .select('*')
@@ -120,32 +128,34 @@ function MySeatingChart (name) {
       if (error) {
         console.log('error:', error)
       } else {
-        // console.log('reservas', seatsReserved[0])
-        // console.log(seatsReserved.length)
+        console.log('reservas', seatsReserved)
+        console.log('ASIEENTOS RESERVAS', seatsReserved.length)
         if (seatsReserved && seatsReserved.length > 0) {
-          setHasReservation(true)
           setReservations(seatsReserved)
-          console.log('reservations:', reservations)
+          setHasReservation(true)
         }
       }
     }
     checkReservation()
-  }, [hasReservation])
+  }, [Workspace, event, hasReservation])
 
   useEffect(() => {
-    console.log('selectedSeats:', selectedSeats)
-    setHasReservation(false)
-  }, [selectedSeats])
-
-  useEffect(() => {
-    obtenerWorkspace()
+    const ejecutar = async () => {
+      try {
+        // await obtenerWorkspace()
+        await obtenerWorkspace()
+        // Ambas funciones se han completado
+      } catch (error) {
+        // Manejar errores si es necesario
+      }
+    }
+    ejecutar()
   }, [])
-
-  useEffect(() => {
-    console.log('--------------------------------------------------------')
-    console.log('workspace:', Workspace)
-    console.log('event:', event)
-  }, [Workspace])
+  // useEffect(() => {
+  //   console.log('--------------------------------------------------------')
+  //   console.log('workspace:', Workspace)
+  //   console.log('event:', event)
+  // }, [Workspace])
 
   const handleCancelReservation = async () => {
     if (hasReservation) {
@@ -165,6 +175,7 @@ function MySeatingChart (name) {
         .eq('seatId', seatId)
         .eq('userId', userId)
         .eq('timeBooked', timeBooked)
+        .eq('event', event)
       if (error) console.log('error:', error)
     }
 
@@ -191,13 +202,7 @@ function MySeatingChart (name) {
           {hasReservation && (
             <div id="selected-seats-container">
               <h1 style={{ fontSize: '1rem', fontWeight: '600', color: '#47433E' }}>Asientos Reservados</h1>
-              <table>
-                <tbody>
-                    <tr>
-                      <td>{renderReservationsSeats()}</td>
-                    </tr>
-                </tbody>
-              </table>
+              {renderReservationsSeats()}
             </div>
           )}
           {!hasReservation && (
