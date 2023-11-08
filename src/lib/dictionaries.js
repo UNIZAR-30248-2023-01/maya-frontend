@@ -354,6 +354,76 @@ export const auth = {
   }
 }
 
+export const signin = {
+  es: {
+    'signin-register': 'Registrar',
+    'signin-message' : 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
+    'signin-login' : 'Inicia sesión',
+    'signin-email' :'Introduce tu correo abajo para iniciar sesión',
+    'signin-continue' :'Al hacer clic en continuar, aceptas nuestra',
+    'signin-terms' :'Terminos De Servicio',
+    'signin-privacy' :'Política de Privacidad',
+    'signin-and' :'y',
+    'signin-username': 'Usuario',
+    'signin-password': 'Contraseña',
+    'signin-sigin': 'Iniciar sesión con el correo',
+    'signin-continuee': 'O continuar con'
+
+  },
+  en: {
+    'signin-register': 'Register',
+    'signin-message' : 'Thanks to MaYA I have managed to save my team 90 hours.',
+    'signin-login' : 'Log in to your account',
+    'signin-email' :'Enter your email below to log in to your account',
+    'signin-continue' :'By clicking continue, you agree to our',
+    'signin-terms' :'Terms of Service',
+    'signin-privacy' :'Privacy Policy',
+    'signin-and' :'and',
+    'signin-username': 'Username',
+    'signin-password': 'Password',
+    'signin-sigin': 'Sign In with Email',
+    'signin-continuee': 'Or continue with'
+
+  }
+}
+
+export const signup = {
+  es: {
+    'signup-login': 'Iniciar Sesión',
+    'signup-message' : 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
+    'signup-create' : 'Crear cuenta',
+    'signup-emails' :'Introduce tus datos personales para crear una cuenta',
+    'signup-continue' :'Al hacer clic en continuar, aceptas nuestra',
+    'signup-terms' :'Terminos De Servicio',
+    'signup-privacy' :'Política de Privacidad',
+    'signup-and' :'y',
+    'signup-username': 'Usuario',
+    'signup-password': 'Contraseña',
+    'signup-email': 'Correo',
+    'signup-firstname': 'Primer apellido',
+    'signup-lastname': 'Segundo apellido',
+    'signup-sigin': 'Iniciar sesión con el correo',
+    'signup-continuee': 'O continuar con'
+
+  },
+  en: {
+    'signup-login': 'Sign In',
+    'signup-message' : 'Thanks to MaYA I have managed to save my team 90 hours.',
+    'signup-create' : 'Create an account',
+    'signup-emails' :'Enter data to create an account',
+    'signup-continue' :'By clicking continue, you agree to our',
+    'signup-terms' :'Terms of Service',
+    'signup-privacy' :'Privacy Policy',
+    'signup-and' :'and',
+    'signup-username': 'Username',
+    'signup-password': 'Password',
+    'signup-email': 'Email',
+    'signup-firstname': 'First Name',
+    'signup-lastname': 'Last Name',
+    'signup-sigin': 'Sign In with Email',
+    'signup-continuee': 'Or continue with'
+}
+
 export const landing = {
   es: {
     title: 'Gestionar tu trabajo nunca fue tan fácil',
