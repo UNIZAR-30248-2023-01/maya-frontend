@@ -8,21 +8,22 @@ import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import { LuGithub } from 'react-icons/lu'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignUp ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
-
+  const router = useRouter()
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const { email, password } = event.target
-
+    const { email, password, firstname, lastname, username} = e.target
     const newUser = {
-      email: 'johndoe@example.com',
-      username: 'johndoe',
-      firstname: 'John',
-      lastname: 'Doe',
-      password: 'password'
+      email: email.value,
+      username: username.value,
+      firstname: firstname.value,
+      lastname: lastname.value,
+      password: password.value
     }
 
     try {
@@ -55,10 +56,66 @@ export function UserSignUp ({ className, ...props }) {
             </Label>
             <Input
               id="username"
-              placeholder="John Doe"
+              placeholder="Username"
               type="username"
               autoCapitalize="none"
               autoComplete="username"
+              autoCorrect="off"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="email">
+              email
+            </Label>
+            <Input
+              id="email"
+              placeholder="Email"
+              type="email"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect="off"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="firstname">
+              First Name
+            </Label>
+            <Input
+              id="firstname"
+              placeholder="First Name"
+              type="firstname"
+              autoCapitalize="none"
+              autoComplete="firstname"
+              autoCorrect="off"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="lastname">
+              Last Name
+            </Label>
+            <Input
+              id="lastname"
+              placeholder="Last Name"
+              type="lastname"
+              autoCapitalize="none"
+              autoComplete="lastname"
+              autoCorrect="off"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="grid gap-1">
+            <Label className="sr-only" htmlFor="password">
+            password
+            </Label>
+            <Input
+              id="password"
+              placeholder="password"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
               autoCorrect="off"
               disabled={isLoading}
             />

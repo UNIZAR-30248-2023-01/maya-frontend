@@ -9,10 +9,12 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ export function UserSignIn ({ className, ...props }) {
           })
             .then(() => {
               setIsLoading(false)
+              router.push('/home')
               resolve()
             })
             .catch((error) => {

@@ -23,7 +23,7 @@ export async function POST (req) {
           salt
         }
       ])
-
+ 
     if (error) return new Response(error.message, { status: 500 })
     return new Response('OK', { status: 200 })
   } catch (error) {
