@@ -14,10 +14,10 @@ export function UserSignUp ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { email, password, firstname, lastname, username} = e.target
+    const { email, password, firstname, lastname, username } = e.target
     const newUser = {
       email: email.value,
       username: username.value,
@@ -29,17 +29,16 @@ export function UserSignUp ({ className, ...props }) {
     try {
       const logIn = async () => {
         setIsLoading(true)
-        await fetch(`${process.env.VERCEL_URL}/api/sign-up`, {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sign-up`, {
           method: 'POST',
           body: JSON.stringify(newUser),
           headers: { 'Content-Type': 'application/json' }
         })
-        .then(() => {
-          setIsLoading(false)
-          router.push('/sign-in')
-          resolve()
-        })
-        .catch(error => console.error(error))
+          .then(() => {
+            setIsLoading(false)
+            router.push('/sign-in')
+          })
+          .catch(error => console.error(error))
       }
 
       toast.promise(logIn, {
@@ -55,8 +54,38 @@ export function UserSignUp ({ className, ...props }) {
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={handleSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
+        <div className="grid grid-cols-2 gap-2">
+          <div className="col-span-1">
+            <Label className="sr-only" htmlFor="firstname">
+              First Name
+            </Label>
+            <Input
+              id="firstname"
+              placeholder={dictionary.signup['signup-firstname']}
+              type="firstname"
+              autoCapitalize="none"
+              autoComplete="firstname"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <div className="col-span-1">
+            <Label className="sr-only" htmlFor="lastname">
+              Last Name
+            </Label>
+            <Input
+              id="lastname"
+              placeholder={dictionary.signup['signup-lastname']}
+              type="lastname"
+              autoCapitalize="none"
+              autoComplete="lastname"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <div className="col-span-2">
             <Label className="sr-only" htmlFor="username">
               Username
             </Label>
@@ -71,7 +100,7 @@ export function UserSignUp ({ className, ...props }) {
               required={true}
             />
           </div>
-          <div className="grid gap-1">
+          <div className="col-span-2">
             <Label className="sr-only" htmlFor="email">
               email
             </Label>
@@ -86,39 +115,7 @@ export function UserSignUp ({ className, ...props }) {
               required={true}
             />
           </div>
-          <div className="flex ">
-            <div className="grid gap-1">
-              <Label className="sr-only" htmlFor="firstname">
-                First Name
-              </Label>
-              <Input
-                id="firstname"
-                placeholder={dictionary.signup['signup-firstname']}
-                type="firstname"
-                autoCapitalize="none"
-                autoComplete="firstname"
-                autoCorrect="off"
-                disabled={isLoading}
-                required={true}
-              />
-            </div>
-            <div className="grid gap-1">
-              <Label className="sr-only" htmlFor="lastname">
-                Last Name
-              </Label>
-              <Input
-                id="lastname"
-                placeholder={dictionary.signup['signup-lastname']}
-                type="lastname"
-                autoCapitalize="none"
-                autoComplete="lastname"
-                autoCorrect="off"
-                disabled={isLoading}
-                required={true}
-              />
-            </div>
-          </div>
-          <div className="grid gap-1">
+          <div className="col-span-2">
             <Label className="sr-only" htmlFor="password">
             password
             </Label>
@@ -133,7 +130,7 @@ export function UserSignUp ({ className, ...props }) {
               required={true}
             />
           </div>
-          <Button disabled={isLoading}>
+          <Button disabled={isLoading} className="col-span-2">
             {dictionary.signin['signin-register']}
           </Button>
         </div>
