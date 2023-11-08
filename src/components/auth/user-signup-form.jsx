@@ -33,7 +33,13 @@ export function UserSignUp ({ className, ...props }) {
           method: 'POST',
           body: JSON.stringify(newUser),
           headers: { 'Content-Type': 'application/json' }
-        }).catch(error => console.error(error))
+        })
+        .then(() => {
+          setIsLoading(false)
+          router.push('/sign-in')
+          resolve()
+        })
+        .catch(error => console.error(error))
       }
 
       toast.promise(logIn, {
@@ -56,12 +62,13 @@ export function UserSignUp ({ className, ...props }) {
             </Label>
             <Input
               id="username"
-              placeholder="Username"
+              placeholder={dictionary.signup['signup-username']}
               type="username"
               autoCapitalize="none"
               autoComplete="username"
               autoCorrect="off"
               disabled={isLoading}
+              required={true}
             />
           </div>
           <div className="grid gap-1">
@@ -70,41 +77,46 @@ export function UserSignUp ({ className, ...props }) {
             </Label>
             <Input
               id="email"
-              placeholder="Email"
+              placeholder={dictionary.signup['signup-email']}
               type="email"
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              required={true}
             />
           </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="firstname">
-              First Name
-            </Label>
-            <Input
-              id="firstname"
-              placeholder="First Name"
-              type="firstname"
-              autoCapitalize="none"
-              autoComplete="firstname"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="lastname">
-              Last Name
-            </Label>
-            <Input
-              id="lastname"
-              placeholder="Last Name"
-              type="lastname"
-              autoCapitalize="none"
-              autoComplete="lastname"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
+          <div className="flex ">
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="firstname">
+                First Name
+              </Label>
+              <Input
+                id="firstname"
+                placeholder={dictionary.signup['signup-firstname']}
+                type="firstname"
+                autoCapitalize="none"
+                autoComplete="firstname"
+                autoCorrect="off"
+                disabled={isLoading}
+                required={true}
+              />
+            </div>
+            <div className="grid gap-1">
+              <Label className="sr-only" htmlFor="lastname">
+                Last Name
+              </Label>
+              <Input
+                id="lastname"
+                placeholder={dictionary.signup['signup-lastname']}
+                type="lastname"
+                autoCapitalize="none"
+                autoComplete="lastname"
+                autoCorrect="off"
+                disabled={isLoading}
+                required={true}
+              />
+            </div>
           </div>
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="password">
@@ -112,16 +124,17 @@ export function UserSignUp ({ className, ...props }) {
             </Label>
             <Input
               id="password"
-              placeholder="password"
+              placeholder={dictionary.signup['signup-password']}
               type="password"
               autoCapitalize="none"
               autoComplete="password"
               autoCorrect="off"
               disabled={isLoading}
+              required={true}
             />
           </div>
           <Button disabled={isLoading}>
-            Register
+            {dictionary.signin['signin-register']}
           </Button>
         </div>
       </form>
@@ -131,7 +144,7 @@ export function UserSignUp ({ className, ...props }) {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+          {dictionary.signup['signup-continuee']}
           </span>
         </div>
       </div>
