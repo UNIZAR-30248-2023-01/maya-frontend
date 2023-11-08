@@ -14,7 +14,7 @@ export function DataTableToolbar ({ table }) {
       <div className="flex flex-1 items-center space-x-2">
         <Input
           id="filter-teams"
-          placeholder={`${dictionary.teams.filter}...`}
+          placeholder={`${dictionary.workspaces.filter}...`}
           value={(table.getColumn('name')?.getFilterValue()) ?? ''}
           onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"

@@ -1,7 +1,9 @@
 'use client'
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react'
-import { SeatsioClient, Region } from 'seatsio'
+// import { SeatsioClient, Region } from 'seatsio'
 import { supabase } from '@/lib/utils'
+import { conectSeatsio } from '@/lib/seatsioUtils'
+
 // import { useLang } from '@/context/language-context'
 import React, { useRef, useState, useEffect } from 'react'
 // import { set } from 'cypress/types/lodash'
@@ -18,7 +20,7 @@ function MySeatingChart (name) {
   const [hasReservation, setHasReservation] = useState(false)
   const [Workspace, setWorkspace] = useState('')
   const [event, setEvent] = useState('')
-  const client = new SeatsioClient(Region.EU(), 'c537f060-cdde-4539-b528-b8290629c0e0')
+  // const client = new SeatsioClient(Region.EU(), 'c537f060-cdde-4539-b528-b8290629c0e0')
 
   console.log('name EN SEATING:', name.name)
 
@@ -50,7 +52,7 @@ function MySeatingChart (name) {
 
   // Para guardar los asientos seleccionados en la base de datos y en seatsio
   const handleSaveSeats = async () => {
-    await client.events.book(event, selectedSeats)
+    await conectSeatsio.events.book(event, selectedSeats)
     const timeBooked = new Date().toISOString().slice(0, 10)
     console.log(timeBooked)
 
@@ -60,7 +62,8 @@ function MySeatingChart (name) {
       const { error } = await supabase.from('reservations').insert([{
         seatId,
         userId,
-        timeBooked
+        timeBooked,
+        event
       }])
       if (error) console.log('error:', error)
     }
@@ -112,6 +115,7 @@ function MySeatingChart (name) {
         .select('*')
         .eq('userId', user) // Reemplaza 'usuario1' con el ID del usuario actual
         .eq('timeBooked', timeBooked)
+        .eq('event', event)
 
       if (error) {
         console.log('error:', error)
@@ -146,7 +150,7 @@ function MySeatingChart (name) {
   const handleCancelReservation = async () => {
     if (hasReservation) {
       reservations.forEach(async (reservation) => {
-        await client.events.release(event, reservation.seatId)
+        await conectSeatsio.events.release(event, reservation.seatId)
       })
     }
     const timeBooked = new Date().toISOString().slice(0, 10)
@@ -188,11 +192,6 @@ function MySeatingChart (name) {
             <div id="selected-seats-container">
               <h1 style={{ fontSize: '1rem', fontWeight: '600', color: '#47433E' }}>Asientos Reservados</h1>
               <table>
-                {/* <thead>
-                  <tr>
-                    <th>Número</th>
-                  </tr>
-                </thead> */}
                 <tbody>
                     <tr>
                       <td>{renderReservationsSeats()}</td>

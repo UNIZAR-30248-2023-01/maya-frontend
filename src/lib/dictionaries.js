@@ -265,12 +265,14 @@ export const workspaces = {
     'workspace-column': 'Lugares de trabajo',
     seats: 'Asientos',
     seat: 'Asiento',
+    filter: 'Filtrar por nombre',
     reservedSeats: 'Asientos reservados'
   },
   en: {
     'workspace-column': 'Workspaces',
     seats: 'Seats',
     seat: 'Seat',
+    filter: 'Filter by name',
     reservedSeats: 'Reserved Seats '
   }
 }
