@@ -8,31 +8,37 @@ import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import { LuGithub } from 'react-icons/lu'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignUp ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const { email, password } = event.target
-
+    const { email, password, firstname, lastname, username } = e.target
     const newUser = {
-      email: 'johndoe@example.com',
-      username: 'johndoe',
-      firstname: 'John',
-      lastname: 'Doe',
-      password: 'password'
+      email: email.value,
+      username: username.value,
+      firstname: firstname.value,
+      lastname: lastname.value,
+      password: password.value
     }
 
     try {
       const logIn = async () => {
         setIsLoading(true)
-        await fetch('http://localhost:3000/api/sign-up', {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sign-up`, {
           method: 'POST',
           body: JSON.stringify(newUser),
           headers: { 'Content-Type': 'application/json' }
-        }).catch(error => console.error(error))
+        })
+          .then(() => {
+            setIsLoading(false)
+            router.push('/sign-in')
+          })
+          .catch(error => console.error(error))
       }
 
       toast.promise(logIn, {
@@ -48,23 +54,84 @@ export function UserSignUp ({ className, ...props }) {
   return (
     <div className={cn('grid gap-6', className)} {...props}>
       <form onSubmit={handleSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
+        <div className="grid grid-cols-2 gap-2">
+          <div className="col-span-1">
+            <Label className="sr-only" htmlFor="firstname">
+              First Name
+            </Label>
+            <Input
+              id="firstname"
+              placeholder={dictionary.signup['signup-firstname']}
+              type="firstname"
+              autoCapitalize="none"
+              autoComplete="firstname"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <div className="col-span-1">
+            <Label className="sr-only" htmlFor="lastname">
+              Last Name
+            </Label>
+            <Input
+              id="lastname"
+              placeholder={dictionary.signup['signup-lastname']}
+              type="lastname"
+              autoCapitalize="none"
+              autoComplete="lastname"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <div className="col-span-2">
             <Label className="sr-only" htmlFor="username">
               Username
             </Label>
             <Input
               id="username"
-              placeholder="John Doe"
+              placeholder={dictionary.signup['signup-username']}
               type="username"
               autoCapitalize="none"
               autoComplete="username"
               autoCorrect="off"
               disabled={isLoading}
+              required={true}
             />
           </div>
-          <Button disabled={isLoading}>
-            Register
+          <div className="col-span-2">
+            <Label className="sr-only" htmlFor="email">
+              email
+            </Label>
+            <Input
+              id="email"
+              placeholder={dictionary.signup['signup-email']}
+              type="email"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <div className="col-span-2">
+            <Label className="sr-only" htmlFor="password">
+            password
+            </Label>
+            <Input
+              id="password"
+              placeholder={dictionary.signup['signup-password']}
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
+              autoCorrect="off"
+              disabled={isLoading}
+              required={true}
+            />
+          </div>
+          <Button disabled={isLoading} className="col-span-2">
+            {dictionary.signin['signin-register']}
           </Button>
         </div>
       </form>
@@ -74,7 +141,7 @@ export function UserSignUp ({ className, ...props }) {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+          {dictionary.signup['signup-continuee']}
           </span>
         </div>
       </div>

@@ -5,6 +5,7 @@ export async function POST (req) {
   try {
     const body = await req.json()
     const { email, username, firstname, lastname, password } = body
+    console.log(body)
 
     const salt = crypto.randomBytes(16).toString('hex')
     const hashedPassword = crypto

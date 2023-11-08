@@ -20,7 +20,8 @@ export const authOptions = {
       name: 'Credentials',
       credentials: {
         username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' }
+        password: { label: 'Password', type: 'password' },
+        redirect: false
       },
       async authorize (credentials, req) {
         const { username, password } = credentials

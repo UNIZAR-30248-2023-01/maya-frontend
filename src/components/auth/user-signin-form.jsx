@@ -9,10 +9,12 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ export function UserSignIn ({ className, ...props }) {
           })
             .then(() => {
               setIsLoading(false)
+              router.push('/home')
               resolve()
             })
             .catch((error) => {
@@ -58,7 +61,7 @@ export function UserSignIn ({ className, ...props }) {
             </Label>
             <Input
               id="username"
-              placeholder="John Doe"
+              placeholder= {dictionary.signin['signin-username']}
               type="username"
               autoCapitalize="none"
               autoComplete="username"
@@ -72,7 +75,7 @@ export function UserSignIn ({ className, ...props }) {
             </Label>
             <Input
               id="password"
-              placeholder="********"
+              placeholder= {dictionary.signin['signin-password']}
               type="password"
               autoCapitalize="none"
               autoComplete="password"
@@ -81,7 +84,7 @@ export function UserSignIn ({ className, ...props }) {
             />
           </div>
           <Button disabled={isLoading}>
-            Sign In with Email
+          {dictionary.signin['signin-sigin']}
           </Button>
         </div>
       </form>
@@ -91,7 +94,7 @@ export function UserSignIn ({ className, ...props }) {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+          {dictionary.signin['signin-continuee']}
           </span>
         </div>
       </div>
