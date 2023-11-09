@@ -16,8 +16,9 @@ export function DataTableBody ({ table }) {
 
   return (
     <TableBody>
-      {table.getRowModel().rows?.length ? (
-        table.getRowModel().rows.map((row) => (
+      {table.getRowModel().rows?.length
+        ? (
+            table.getRowModel().rows.map((row) => (
           <TableRow
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
@@ -29,8 +30,9 @@ export function DataTableBody ({ table }) {
               </TableCell>
             ))}
           </TableRow>
-        ))
-      ) : (
+            ))
+          )
+        : (
         <TableRow>
           <TableCell
             // colSpan={columns.length}
@@ -40,7 +42,7 @@ export function DataTableBody ({ table }) {
             {dictionary.search['not-found']}
           </TableCell>
         </TableRow>
-      )}
+          )}
     </TableBody>
   )
 }
