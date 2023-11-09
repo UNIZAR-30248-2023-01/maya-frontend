@@ -201,6 +201,7 @@ export const inandouts = {
 export const tasks = {
   es: {
     'tasks-tab': 'Tareas',
+    'teams-tab': 'Equipos',
     'settings-tab': 'Configuración',
     'tasks-column': 'Tarea',
     'assignees-column': 'Asignados',
@@ -234,6 +235,7 @@ export const tasks = {
   },
   en: {
     'tasks-tab': 'Tasks',
+    'teams-tab': 'Teams',
     'settings-tab': 'Settings',
     'tasks-column': 'Tasks',
     'assignees-column': 'Assignees',
