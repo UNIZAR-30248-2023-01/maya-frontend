@@ -1,12 +1,24 @@
 /// <reference types="cypress" />
 
+// const defaultUser = {
+//   username: 'johndoe',
+//   password: 'password'
+// }
+
 const project = {
   name: 'New Project',
   description: 'Description of the new project'
 }
 
-describe('Project Resource', () => {
+describe('Project Resource', async () => {
   it('Creating a New Project', () => {
+    // cy.request({
+    //   method: 'POST',
+    //   url: `${Cypress.config().baseUrl}/api/auth/callback/credentials`,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(defaultUser)
+    // })
+
     cy.visit('/en/projects')
 
     cy.wait(3000)
