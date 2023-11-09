@@ -2,7 +2,8 @@
 
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/people/data-table-column-header'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Label } from '@/components/ui/label'
 import { DataTableRowActions } from '@/components/people/data-table-row-actions'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -13,12 +14,11 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
-      const { avatar, firstname, lastname, username } = row.original
-
-      if (!username) {
+      console.log(row.original)
+      if (!row.original.people?.username) {
         return (
-          <div className="flex items-start space-x-2">
-            <Skeleton className="rounded-full">
+          <div className='flex items-start space-x-2'>
+            <Skeleton className='rounded-full'>
               <Avatar>
                 <AvatarImage />
               </Avatar>
@@ -32,18 +32,17 @@ export const columns = [
       }
 
       return (
-        <div className="flex items-start space-x-2">
+        <div className="flex items-center space-x-4 group">
           <Avatar>
-            <AvatarImage src={avatar} />
-            <AvatarFallback className="uppercase">{String(firstname)[0] + String(lastname)[0]}</AvatarFallback>
+            <AvatarImage src={row.original.people.avatar} />
+            <AvatarFallback>{String(row.original.people.firstname[0]).toUpperCase() + String(row.original.people.lastname[0]).toUpperCase()}</AvatarFallback>
           </Avatar>
-          <div className='max-w-[150px] flex flex-col gap-y-1'>
-            <span className="max-w-full truncate font-medium capitalize">
-              {firstname + ' ' + lastname}
-            </span>
-            <Badge variant="outline" className='max-w-fit'>{username}</Badge>
+          <div className='flex flex-col gap-0.5'>
+            <Label className="text-sm font-medium leading-none capitalize">{row.original.people.firstname + ' ' + row.original.people.lastname}</Label>
+            <Label className="text-sm text-muted-foreground font-normal">{row.original.people.username}</Label>
           </div>
         </div>
+
       )
     },
     filterFn: (row, id, value) => {
@@ -51,17 +50,17 @@ export const columns = [
     }
   }, {
     accessorKey: 'role',
-    header: null,
-    cell: ({ row }) => {
+    header: ({ column, dictionary }) => {
+      return <DataTableColumnHeader column={column} title={dictionary.role} />
+    },
+    cell: ({ row, dictionary }) => {
       const { username } = row.original
       if (!username) {
-        return <Skeleton variant="outline" className='w-24 h-4'/>
+        return <Skeleton variant='outline' className='w-24 h-4'/>
       }
 
       return (
-        row.getValue('role')
-          ? <Badge variant="outline" className='max-w-fit'>{row.getValue('role')}</Badge>
-          : <Badge variant="outline" className='max-w-fit'>member</Badge>
+        <Badge variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
       )
     },
     filterFn: (row, id, value) => {
@@ -73,7 +72,7 @@ export const columns = [
       const { username } = row.original
       if (!username) return null
 
-      return <DataTableRowActions row={row} />
+      return <div className='flex justify-end pr-4'><DataTableRowActions row={row} /></div>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))

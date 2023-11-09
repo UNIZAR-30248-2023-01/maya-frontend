@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
+import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
@@ -95,19 +95,19 @@ export function SidePanel ({
             </SheetDescription>
           </SheetHeader>
           <div className="grid gap-4 py-4">
-            <Field.Text
+            <Text
               id="name"
               label={dictionary.teams['name-column']}
               placeholder={dictionary.teams['new-team-name-placeholder']}
               onChange={(e) => setter({ key: 'name', value: e.target.value })}
             />
-            <Field.TextArea
+            <TextArea
               id="description"
               label={dictionary.teams['description-column']}
               placeholder={dictionary.teams['new-team-desc-placeholder']}
               onChange={(e) => setter({ key: 'description', value: e.target.value })}
             />
-            <Field.ComboboxArray
+            <ComboboxArray
               id="members"
               label={dictionary.teams['member-column']}
               placeholder={dictionary.teams['new-team-member-placeholder']}
@@ -122,7 +122,7 @@ export function SidePanel ({
                 setter({ key: 'members', value: [...members, e] })
               }}
             />
-            <Field.Bool
+            <Bool
               id="visibility"
               label={dictionary.teams.public}
               checked={form.visibility === 'public'}

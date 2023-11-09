@@ -52,15 +52,15 @@ export function DataTable ({ data, columns }) {
           title={dictionary.projects['new-table']}
           description={dictionary.projects['new-table-description']}
           triggerBtn={dictionary.projects['new-project']}
-          actionBtn={dictionary.projects['new-table-create']}
+          actionBtn={dictionary.common.create}
           schema={projectSchema}
           dictionary={dictionary}
         />
       </div>
       <div className="rounded-md border">
         <Table>
-          <DataTableHeader table={table}/>
-          <DataTableBody table={table}/>
+          <DataTableHeader table={table} />
+          <DataTableBody table={table} />
         </Table>
       </div>
       <DataTablePagination table={table} />

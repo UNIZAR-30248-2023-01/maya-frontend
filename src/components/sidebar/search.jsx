@@ -6,13 +6,15 @@ import {
   CommandItem,
   CommandList
 } from '@/components/ui/command'
+import { useLang } from '@/context/language-context'
 
 export function Search ({ open, setOpen }) {
+  const { dictionary } = useLang()
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
         <CommandGroup heading="Suggestions">
           <CommandItem>Calendar</CommandItem>
           <CommandItem>Search Emoji</CommandItem>
