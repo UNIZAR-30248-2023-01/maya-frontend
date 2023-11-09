@@ -7,7 +7,7 @@ import { useLang } from '@/context/language-context'
 
 export function Breadcrumbs () {
   let pages = usePathname()
-  pages = pages.split('/').slice(2)
+  pages = pages.split('/').slice(2, 4)
 
   const { dictionary } = useLang()
 

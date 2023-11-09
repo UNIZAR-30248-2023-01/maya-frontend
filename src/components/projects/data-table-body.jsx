@@ -17,7 +17,8 @@ export function DataTableBody ({ table }) {
   return (
     <TableBody>
       {table.getRowModel().rows?.length
-        ? (table.getRowModel().rows.map((row) => (
+        ? (
+            table.getRowModel().rows.map((row) => (
           <TableRow
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
@@ -26,26 +27,24 @@ export function DataTableBody ({ table }) {
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>
-                {flexRender(
-                  cell.column.columnDef.cell,
-                  {
-                    ...cell.getContext(),
-                    dictionary: dictionary.projects
-                  }
-                )}
+                {flexRender(cell.column.columnDef.cell, {
+                  ...cell.getContext(),
+                  dictionary: dictionary.projects
+                })}
               </TableCell>
             ))}
           </TableRow>
-          )))
+            ))
+          )
         : (
-          <TableRow>
-            <TableCell
-              colSpan={table.getAllColumns().length}
-              className="h-24 text-center"
-            >
-              No results.
-            </TableCell>
-          </TableRow>
+        <TableRow>
+          <TableCell
+            colSpan={table.getAllColumns().length}
+            className="h-24 text-center"
+          >
+            {dictionary.search['not-found']}
+          </TableCell>
+        </TableRow>
           )}
     </TableBody>
   )

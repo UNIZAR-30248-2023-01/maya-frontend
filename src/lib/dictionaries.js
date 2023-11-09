@@ -1,5 +1,22 @@
 // COMMON: Add here the dictionaries for the common components
 
+export const common = {
+  es: {
+    delete: 'Borrar',
+    cancel: 'Cancelar',
+    edit: 'Editar',
+    create: 'Crear',
+    save: 'Guardar cambios'
+  },
+  en: {
+    delete: 'Delete',
+    cancel: 'Cancel',
+    edit: 'Edit',
+    create: 'Create',
+    save: 'Save changes'
+  }
+}
+
 export const navigation = {
   es: {
     overview: 'resumen',
@@ -18,6 +35,17 @@ export const navigation = {
     workSpaces: 'workspaces',
     'in-and-outs': 'in-and-outs',
     tickets: 'tickets'
+  }
+}
+
+export const search = {
+  es: {
+    'not-found': 'No hay resultados',
+    'search-placeholder': 'Buscar...'
+  },
+  en: {
+    'not-found': 'No results',
+    'search-placeholder': 'Search...'
   }
 }
 
@@ -172,61 +200,76 @@ export const inandouts = {
 
 export const tasks = {
   es: {
+    'tasks-tab': 'Tareas',
+    'settings-tab': 'Configuración',
     'tasks-column': 'Tarea',
     'assignees-column': 'Asignados',
-    'label-column': 'Etiqueta',
-    'status-column': 'Estado',
-    'estimated-column': 'Estimado',
-    'end-date-column': 'Fecha de finalización',
-    'description-column': 'Descripción',
-    'new-task-desc-placeholder': 'Ayuda a tu equipo a entender lo que quieres hacer con esta tarea.',
     filter: 'Filtrar por tarea',
     assignees: 'Asignados',
     label: 'Etiqueta',
     status: 'Estado',
-    new: 'nueva',
-    block: 'bloqueada',
-    done: 'completada',
-    'in progress': 'en progreso',
     'new-task': 'nueva tarea',
-    'new-table-description': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
+    'new-table-description':
+      'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
     'new-task-create': 'Crear',
-    'new-table-name-placeholder': 'Comprar leche',
-    'end-date-placeholder': 'Fecha de finalización',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'label-column': 'Etiqueta',
+    'status-column': 'Estado',
+    'estimated-column': 'Estimado',
+    'end-date-column': 'Fecha de finalización',
+    'new-task-name-placeholder': 'Tarea inicial',
+    'new-task-description-placeholder': 'Las tareas son una forma de comunicar lo que vas a hacer al resto de tu equipo.',
+    'new-task-label-placeholder': '---',
+    'new-task-status-placeholder': '---',
+    'new-end-date-placeholder': 'Fecha de finalización',
+    'new-task-estimated-placeholder': 'Tiempo estimado de la tarea en horas',
     'toast-loading': 'Estamos creando tu tarea. Por favor, espera un momento.',
     'toast-success': 'Tu tarea se ha creado correctamente.',
-    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-delete-loading': 'Estamos eliminando tu tarea. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu tarea se ha eliminado correctamente.',
+    'toast-edit-loading': 'Estamos editando tu tarea. Por favor, espera un momento.',
+    'toast-edit-success': 'Tu tarea se ha editado correctamente.'
   },
   en: {
+    'tasks-tab': 'Tasks',
+    'settings-tab': 'Settings',
     'tasks-column': 'Tasks',
     'assignees-column': 'Assignees',
-    'label-column': 'Label',
-    'status-column': 'Status',
-    'estimated-column': 'Estimated',
-    'end-date-column': 'End date',
-    'description-column': 'Description',
-    'new-task-desc-placeholder': 'Help your team understand what you want to do with this task.',
     filter: 'Filter by task',
     assignees: 'Assignees',
     label: 'Label',
     status: 'Status',
-    new: 'new',
-    block: 'block',
-    done: 'done',
-    'in progress': 'in progress',
     'new-task': 'new task',
-    'new-table-description': 'Tasks are a way of communicating what you are going to do to the rest of your team.',
+    'new-table-description':
+      'Tasks are a way of communicating what you are going to do to the rest of your team.',
     'new-task-create': 'Create',
-    'new-table-name-placeholder': 'Buy milk',
-    'end-date-placeholder': 'End date',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'label-column': 'Label',
+    'status-column': 'Status',
+    'estimated-column': 'Estimated time',
+    'end-date-column': 'Deadline',
+    'new-task-name-placeholder': 'Initial task',
+    'new-task-description-placeholder': 'Help your team understand what you want to do with this task.',
+    'new-task-label-placeholder': '---',
+    'new-task-status-placeholder': '---',
+    'new-end-date-placeholder': 'End date',
+    'new-task-estimated-placeholder': 'Estimate time in hours',
     'toast-loading': 'We are creating your tasks. Please wait a moment.',
     'toast-success': 'Your tasks has been created successfully.',
-    'toast-error': 'Something went wrong. Please try again.'
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-delete-loading': 'We are deleting your task. Please wait a moment.',
+    'toast-delete-success': 'Your tasks has been deleted successfully.',
+    'toast-edit-loading': 'We are editing your tasks Please wait a moment.',
+    'toast-edit-success': 'Your task has been edited successfully.'
   }
 }
 
 export const people = {
   es: {
+    'members-tab': 'Miembros',
     'member-column': 'Miembros',
     filter: 'Filtrar por nombre de usuario',
     role: 'Roles',
@@ -237,9 +280,22 @@ export const people = {
     'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
     invite: 'Añadir miembros',
     search: 'Buscar miembros',
-    'invite-member-send': 'reclutar'
+    'invite-member-send': 'reclutar',
+    'manage-member-title': 'Gestionar %s',
+    'manage-member-description': 'Modifica la información de un usuario en este proyecto.',
+    'manage-member-submit': 'Cambiar rol',
+    'manage-member-delete-title': 'Eliminar del proyecto',
+    'manage-member-delete-description': 'Retira el permiso de un usuario a este proyecto.',
+    'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
+    'toast-success': 'Se han añadido los nuevos miembros correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
+    'toast-role-success': 'Se ha modificado la información correctamente.',
+    'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
   },
   en: {
+    'members-tab': 'Members',
     'member-column': 'Members',
     filter: 'Filter people by username',
     role: 'Roles',
@@ -250,12 +306,25 @@ export const people = {
     'invite-member-description': 'Add members to your project to improve your team.',
     invite: 'Add members',
     search: 'Search members',
-    'invite-member-send': 'recruit'
+    'invite-member-send': 'recruit',
+    'manage-member-title': 'Manage %s',
+    'manage-member-description': 'Modify the info of a user in this project',
+    'manage-member-submit': 'Change role',
+    'manage-member-delete-title': 'Remove from this project',
+    'manage-member-delete-description': 'Remove the access of a user to this project',
+    'toast-loading': 'We are adding new members. Please wait a moment.',
+    'toast-success': 'New members added successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
+    'toast-role-success': 'Member info updated successfully.',
+    'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
+    'toast-remove-success': 'Member removed successfully.'
   }
 }
 
 export const teams = {
   es: {
+    'team-tab': 'Equipos',
     'team-column': 'Equipos',
     'member-column': 'Miembros',
     'name-column': 'Nombre',
@@ -274,6 +343,7 @@ export const teams = {
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
+    'team-tab': 'Teams',
     'team-column': 'Teams',
     'member-column': 'Members',
     'name-column': 'Name',
@@ -296,27 +366,19 @@ export const teams = {
 export const labels = {
   es: {
     enhancement: 'mejora',
-    bug: 'error',
+    'data model': 'modelo de datos',
     documentation: 'documentación',
-    duplicate: 'duplicado',
-    'good first issue': 'buen primer problema',
-    'help wanted': 'se necesita ayuda',
-    invalid: 'inválido',
-    question: 'pregunta',
-    testing: 'pruebas',
-    wontfix: 'no se arreglará'
+    bug: 'error',
+    testing: 'test',
+    ui: 'UI'
   },
   en: {
     enhancement: 'enhancement',
+    'data model': 'data model',
+    documentation: 'vdocumentation',
     bug: 'bug',
-    documentation: 'documentation',
-    duplicate: 'duplicate',
-    'good first issue': 'good first issue',
-    'help wanted': 'help wanted',
-    invalid: 'invalid',
-    question: 'question',
     testing: 'testing',
-    wontfix: 'wontfix'
+    ui: 'UI'
   }
 }
 
@@ -332,6 +394,136 @@ export const status = {
     block: 'block',
     done: 'done',
     'in progress': 'in progress'
+  }
+}
+
+export const roles = {
+  es: {
+    owner: 'Propietario',
+    developer: 'Desarrollador',
+    member: 'Miembro',
+    'scrum master': 'Scrum Master',
+    tester: 'QA',
+    designer: 'Diseñador'
+  },
+  en: {
+    owner: 'Owner',
+    developer: 'Developer',
+    member: 'Member',
+    'scrum master': 'Scrum Master',
+    tester: 'QA',
+    designer: 'Designer'
+  }
+}
+
+export const confirmation = {
+  es: {
+    'confirmation-title': '¿Estás completamente seguro?',
+    'confirmation-desc-edit': 'Esto modificará y cambiará tus datos de nuestra base de datos',
+    'confirmation-desc-delete': 'Esta acción no se puede deshacer. Se eliminará permanentemente de nuestra base de datos.',
+    'confirmation-visibility': '¿Estás seguro de que quieres cambiar la visibilidad de este proyecto?. Esto puede generar que algunos usuarios puedan / no puedan ver el proyecto.',
+    'confirmation-desc-close': '¿Estás seguro de que quieres cerrar este proyecto?. Al hacerlo se va a deshabilitar su flujo de trabajo y se eliminará de la lista de proyectos abiertos.',
+    'confirmation-desc-open': '¿Estás seguro de que quieres abrir este proyecto?. Al hacerlo se va a habilitar su flujo de trabajo y se añadirá a la lista de proyectos abiertos.',
+    'confirmation-delete': 'Si, eliminar',
+    'confirmation-edit-task': 'Si, modificar tarea',
+    'confirmation-delete-task': 'Si, eliminar tarea',
+    'confirmation-visibility-public': 'Si, hacer público',
+    'confirmation-visibility-private': 'Si, hacer privado',
+    'confirmation-close': 'Si, cerrar proyecto',
+    'confirmation-open': 'Si, abrir proyecto'
+  },
+  en: {
+    'confirmation-title': 'Are you absolutely sure?',
+    'confirmation-desc-edit': 'This will modify and change your data from our servers.',
+    'confirmation-desc-delete': 'This action cannot be undone. This will permanently delete this from our servers.',
+    'confirmation-visibility': 'Are you sure you want to change the visibility of this project?. This may cause that some users can / can\'t see this project.',
+    'confirmation-desc-close': 'Are you sure you want to close this project?. By doing so will disable its workflows and remove it to the list of open projects.',
+    'confirmation-desc-open': 'Are you sure you want to open this project?. By doing so will enable its workflows and add it to the list of open projects.',
+    'confirmation-delete': 'Yes, delete',
+    'confirmation-edit-task': 'Yes, edit task',
+    'confirmation-delete-task': 'Yes, delete task',
+    'confirmation-visibility-public': 'Yes, make public',
+    'confirmation-visibility-private': 'Yes, make private',
+    'confirmation-close': 'Yes, close project',
+    'confirmation-open': 'Yes, open project'
+  }
+}
+
+export const projectSettings = {
+  es: {
+    name: 'Nombre del proyecto',
+    description: 'Breve descripción',
+    'example-description': 'Cuentanos un poco sobre tu proyecto',
+    'explain-description': 'Explica a los usuarios sobre que va tu proyecto.',
+    'danger-zone': 'Zona peligrosa',
+    visibility: 'Visibilidad',
+    'change-visibility': 'Cambiar visibilidad',
+    'private-visibility': 'Este proyecto actualmente es privado.',
+    'public-visibility': 'Este proyecto actualmente es público.',
+    'close-project': 'Cerrar proyecto',
+    'open-project': 'Abrir proyecto',
+    'explain-close-project':
+      'Cerrar un proyecto va a deshabilitar su flujo de trabajo y lo eliminará de la lista de proyectos abiertos.',
+    'explain-open-project': 'Abrir un proyecto va a habilitar su flujo de trabajo y lo añadirá a la lista de proyectos abiertos.',
+    'delete-project': 'Eliminar proyecto',
+    'explain-delete-project':
+      'Una vez elimines un proyecto, no hay vuelta atrás. Por favor, asegurate.',
+    'toast-data-loading': 'Estamos actualizando los datos de tu proyecto. Por favor, espera un momento.',
+    'toast-data-success': 'Tu proyecto se ha actualizado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-visibility-loading': 'Estamos actualizando la visibilidad de tu proyecto. Por favor, espera un momento.',
+    'toast-visibility-success': 'Se ha actualizado la visibilidad de tu proyecto correctamente.',
+    'toast-close-loading': 'Estamos actualizando el estado de tu proyecto. Por favor, espera un momento.',
+    'toast-close-success': 'Se ha actualizado el estado de tu proyecto correctamente.',
+    'toast-delete-loading': 'Estamos eliminando tu proyecto. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu proyecto se ha eliminado correctamente.'
+  },
+  en: {
+    name: 'Project name',
+    description: 'Short description',
+    'example-description': 'Tell us a little bit about your project.',
+    'explain-description': "Explain your user's what your project is about.",
+    'danger-zone': 'Danger zone',
+    visibility: 'Visibility',
+    'change-visibility': 'Change visibility',
+    'private-visibility': 'This project is currently private.',
+    'public-visibility': 'This project is currently public.',
+    'close-project': 'Close project',
+    'open-project': 'Open project',
+    'explain-close-project':
+      'Closing a project will disable its workflows and remove it from the list of open projects.',
+    'explain-open-project': 'Opening a project will enable its workflows and add it to the list of open projects.',
+    'delete-project': 'Delete project',
+    'explain-delete-project':
+      'Once you delete a project, there is no going back. Please be certain.',
+    'toast-data-loading': 'We are updating your project data. Please wait a moment.',
+    'toast-data-success': 'Your project has been updated successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-visibility-loading': 'We are updating your project visibility. Please wait a moment.',
+    'toast-visibility-success': 'Your project visibility has been updated successfully.',
+    'toast-close-loading': 'We are updating your project status. Please wait a moment.',
+    'toast-close-success': 'Your project status has been updated successfully.',
+    'toast-delete-loading': 'We are deleting your project. Please wait a moment.',
+    'toast-delete-success': 'Your project has been deleted successfully.'
+  }
+}
+
+export const comments = {
+  es: {
+    titulo: 'Comentarios',
+    placeholder: 'Escribe aquí tu comentario ...',
+    button: 'Enviar',
+    'toast-loading': 'Estamos enviando tu comentario. Por favor, espera un momento.',
+    'toast-success': 'Tu comentario se ha enviado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    titulo: 'Comments',
+    placholder: 'Type here your comment ...',
+    button: 'Send',
+    'toast-loading': 'We are sending your comment. Please wait a moment.',
+    'toast-success': 'Your comment has been sent successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
   }
 }
 
@@ -357,13 +549,13 @@ export const auth = {
 export const signin = {
   es: {
     'signin-register': 'Registrar',
-    'signin-message' : 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
-    'signin-login' : 'Inicia sesión',
-    'signin-email' :'Introduce tu correo abajo para iniciar sesión',
-    'signin-continue' :'Al hacer clic en continuar, aceptas nuestra',
-    'signin-terms' :'Terminos De Servicio',
-    'signin-privacy' :'Política de Privacidad',
-    'signin-and' :'y',
+    'signin-message': 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
+    'signin-login': 'Inicia sesión',
+    'signin-email': 'Introduce tu correo abajo para iniciar sesión',
+    'signin-continue': 'Al hacer clic en continuar, aceptas nuestra',
+    'signin-terms': 'Terminos De Servicio',
+    'signin-privacy': 'Política de Privacidad',
+    'signin-and': 'y',
     'signin-username': 'Usuario',
     'signin-password': 'Contraseña',
     'signin-sigin': 'Iniciar sesión con el correo',
@@ -372,13 +564,13 @@ export const signin = {
   },
   en: {
     'signin-register': 'Register',
-    'signin-message' : 'Thanks to MaYA I have managed to save my team 90 hours.',
-    'signin-login' : 'Log in to your account',
-    'signin-email' :'Enter your email below to log in to your account',
-    'signin-continue' :'By clicking continue, you agree to our',
-    'signin-terms' :'Terms of Service',
-    'signin-privacy' :'Privacy Policy',
-    'signin-and' :'and',
+    'signin-message': 'Thanks to MaYA I have managed to save my team 90 hours.',
+    'signin-login': 'Log in to your account',
+    'signin-email': 'Enter your email below to log in to your account',
+    'signin-continue': 'By clicking continue, you agree to our',
+    'signin-terms': 'Terms of Service',
+    'signin-privacy': 'Privacy Policy',
+    'signin-and': 'and',
     'signin-username': 'Username',
     'signin-password': 'Password',
     'signin-sigin': 'Sign In with Email',
@@ -390,31 +582,31 @@ export const signin = {
 export const signup = {
   es: {
     'signup-login': 'Iniciar Sesión',
-    'signup-message' : 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
-    'signup-create' : 'Crear cuenta',
-    'signup-emails' :'Introduce tus datos personales para crear una cuenta',
-    'signup-continue' :'Al hacer clic en continuar, aceptas nuestra',
-    'signup-terms' :'Terminos De Servicio',
-    'signup-privacy' :'Política de Privacidad',
-    'signup-and' :'y',
-    'signup-username': 'Usuario',
+    'signup-message': 'Gracias a MaYA he conseguido ahorrar 90 horas a mi equipo.',
+    'signup-create': 'Crear cuenta',
+    'signup-emails': 'Introduce tus datos personales para crear una cuenta',
+    'signup-continue': 'Al hacer clic en continuar, aceptas nuestra',
+    'signup-terms': 'Terminos De Servicio',
+    'signup-privacy': 'Política de Privacidad',
+    'signup-and': 'y',
+    'signup-username': 'Nombre de usuario',
     'signup-password': 'Contraseña',
-    'signup-email': 'Correo',
-    'signup-firstname': 'Primer apellido',
-    'signup-lastname': 'Segundo apellido',
+    'signup-email': 'Correo electrónico',
+    'signup-firstname': 'Nombre',
+    'signup-lastname': 'Apellido',
     'signup-sigin': 'Iniciar sesión con el correo',
     'signup-continuee': 'O continuar con'
 
   },
   en: {
     'signup-login': 'Sign In',
-    'signup-message' : 'Thanks to MaYA I have managed to save my team 90 hours.',
-    'signup-create' : 'Create an account',
-    'signup-emails' :'Enter data to create an account',
-    'signup-continue' :'By clicking continue, you agree to our',
-    'signup-terms' :'Terms of Service',
-    'signup-privacy' :'Privacy Policy',
-    'signup-and' :'and',
+    'signup-message': 'Thanks to MaYA I have managed to save my team 90 hours.',
+    'signup-create': 'Create an account',
+    'signup-emails': 'Enter data to create an account',
+    'signup-continue': 'By clicking continue, you agree to our',
+    'signup-terms': 'Terms of Service',
+    'signup-privacy': 'Privacy Policy',
+    'signup-and': 'and',
     'signup-username': 'Username',
     'signup-password': 'Password',
     'signup-email': 'Email',
@@ -422,6 +614,7 @@ export const signup = {
     'signup-lastname': 'Last Name',
     'signup-sigin': 'Sign In with Email',
     'signup-continuee': 'Or continue with'
+  }
 }
 
 export const landing = {
@@ -486,5 +679,6 @@ export const landing = {
     'feat-2-description': 'Waste no more time managing your projects. With our tool you can save time and dedicate it to what really matters.',
     'feat-3-title': 'Book your workspace',
     'feat-3-description': 'Forget about the old way of booking your workspace. With our tool you can book your workspace in a few clicks.'
+
   }
 }

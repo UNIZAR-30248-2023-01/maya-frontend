@@ -6,6 +6,7 @@ import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { useLang } from '@/context/language-context'
 import {
   Command,
   CommandEmpty,
@@ -25,6 +26,7 @@ import { Separator } from '@/components/ui/separator'
 export function DataTableFacetedFilter ({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
+  const { dictionary } = useLang()
 
   return (
     <Popover>
@@ -55,13 +57,13 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                       options
                         .filter((option) => selectedValues.has(option.value))
                         .map((option) => (
-                          <Badge
-                            variant="secondary"
-                            key={option.value}
-                            className="rounded-sm px-1 font-normal"
-                          >
-                            {option.value}
-                          </Badge>
+                      <Badge
+                        variant="secondary"
+                        key={option.value}
+                        className="rounded-sm px-1 font-normal"
+                      >
+                        {option.value}
+                      </Badge>
                         ))
                     )}
               </div>
@@ -73,7 +75,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
@@ -105,7 +107,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                     )}
-                    <span className='capitalize'>{option.value}</span>
+                    <span className='capitalize'>{dictionary.roles[option.value]}</span>
                     {facets?.get(option.value) && (
                       <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
                         {facets.get(option.value)}

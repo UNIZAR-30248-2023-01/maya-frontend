@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLang } from '@/context/language-context'
 import { DataTableFacetedFilter } from '@/components/people/data-table-faceted-filter'
-import { mockRoles } from '@/lib/constants'
+import { roles } from '@/lib/constants'
 
 export function DataTableToolbar ({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0
@@ -27,7 +27,7 @@ export function DataTableToolbar ({ table }) {
           <DataTableFacetedFilter
             column={table.getColumn('role')}
             title={dictionary.people.role}
-            options={mockRoles.map(role => ({ value: role.value }))}
+            options={roles.map(role => ({ value: role.value }))}
           />
         )}
         {isFiltered && (

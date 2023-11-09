@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import {
   Avatar,
   AvatarFallback,
@@ -15,13 +14,14 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
+import { Link } from 'next/link'
 
 export function TeamMember ({
   user = {
     src: '/assets/avatars/memojis/4.webp',
     name: 'Sofia',
     lastname: 'Davis',
-    email: 'm@example.com'
+    username: 'm@example.com'
   }
 }) {
   return (

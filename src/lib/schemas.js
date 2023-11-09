@@ -19,20 +19,20 @@ export const inAndOutsSchema = z.object({
 
 export const tasksSchema = z.object({
   name: z.string().min(1).max(30),
+  description: z.string().optional().nullable(),
   assignees: z.array(z.string()).optional(),
-  label: z.enum(['dependencies', 'bug', 'documentation', 'duplicate', 'enhancement', 'good first issue', 'help wanted', 'invalid', 'question', 'wontfix']).optional().nullable(),
-  status: z.enum(['new', 'block', 'in progress', 'done']).optional().nullable(),
-  estimated: z.number().min(0).optional().nullable(),
+  label: z.enum(['ui', 'data model', 'documentation', 'enhancement', 'testing', 'bug']),
+  status: z.enum(['new', 'block', 'in progress', 'done']),
+  estimated: z.number().min(0),
   end_date: z.date().optional().nullable()
 })
 
 export const peopleSchema = z.object({
-  id: z.string(),
-  avatar: z.enum([]),
-  firstname: z.string().min(1).max(30),
-  lastname: z.string().min(1).max(30),
-  username: z.string().min(1).max(30),
-  email: z.string().email()
+  members: z.array(z.string().min(1).max(30))
+})
+
+export const roleSchema = z.object({
+  role: z.enum(['owner', 'developer', 'scrum master', 'tester', 'designer', 'member']).default('member')
 })
 
 export const teamSchema = z.object({
@@ -41,4 +41,9 @@ export const teamSchema = z.object({
   members: z.array(z.string()).optional(),
   visibility: z.enum(['public', 'private']).default('private'),
   organization: z.string()
+})
+
+export const projectSettingsSchema = z.object({
+  name: z.string().min(1).max(30),
+  description: z.string().max(150).nullable()
 })
