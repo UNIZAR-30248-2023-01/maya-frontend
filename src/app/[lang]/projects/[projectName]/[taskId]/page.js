@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { cn, normalize, getForm, supabase } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
-import { TeamMember } from '@/components/team-member'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { ConfirmationTaskButton } from '@/components/tasks/confirmationButton'
@@ -253,15 +253,16 @@ export default function TaskPage ({ params }) {
                 </Label>
                 <div className='flex flex-row gap-6 px-3 py-2'>
                   {people.map((user) => (
-                    <TeamMember
-                      key={user.username}
-                      user={{
-                        name: user.people.firstname,
-                        lastname: user.people.lastname,
-                        src: user.people.avatar,
-                        username: user.people.username
-                      }}
-                    />
+                    <div key={user.people.username} className="flex items-center space-x-4 group">
+                      <Avatar>
+                        <AvatarImage src={user.people.avatar} />
+                        <AvatarFallback>{String(user.people.firstname[0]).toUpperCase() + String(user.people.lastname[0]).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div className='flex flex-col gap-0.5'>
+                        <Label className="text-sm font-medium leading-none capitalize">{user.people.firstname + ' ' + user.people.lastname}</Label>
+                        <Label className="text-sm text-muted-foreground font-normal">{user.people.username}</Label>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </>

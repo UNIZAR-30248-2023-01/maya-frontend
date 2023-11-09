@@ -2,10 +2,10 @@
 
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/people/data-table-column-header'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Label } from '@/components/ui/label'
 import { DataTableRowActions } from '@/components/people/data-table-row-actions'
 import { Skeleton } from '@/components/ui/skeleton'
-import { TeamMember } from '../team-member'
 
 export const columns = [
   {
@@ -14,6 +14,7 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
+      console.log(row.original)
       if (!row.original.people?.username) {
         return (
           <div className='flex items-start space-x-2'>
@@ -31,12 +32,17 @@ export const columns = [
       }
 
       return (
-        <TeamMember user={{
-          name: row.original.people.firstname,
-          lastname: row.original.people.lastname,
-          username: row.original.username,
-          src: row.original.people.avatar
-        }}/>
+        <div className="flex items-center space-x-4 group">
+          <Avatar>
+            <AvatarImage src={row.original.people.avatar} />
+            <AvatarFallback>{String(row.original.people.firstname[0]).toUpperCase() + String(row.original.people.lastname[0]).toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <div className='flex flex-col gap-0.5'>
+            <Label className="text-sm font-medium leading-none capitalize">{row.original.people.firstname + ' ' + row.original.people.lastname}</Label>
+            <Label className="text-sm text-muted-foreground font-normal">{row.original.people.username}</Label>
+          </div>
+        </div>
+
       )
     },
     filterFn: (row, id, value) => {
