@@ -6,9 +6,20 @@ import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
 import { Navbar } from '@/components/navbar'
 import { navigation } from '@/lib/constants'
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
+  const { status } = useSession()
+
+  if (!process.env.NODE_ENV === 'production') {
+    if (status === 'loading') {
+      return <div>Loading...</div>
+    } else if (status === 'unauthenticated') {
+      return redirect('/sign-in')
+    }
+  }
 
   return (
     <>

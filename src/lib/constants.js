@@ -77,40 +77,6 @@ export const projectStatuses = [
   }
 ]
 
-export const tasksLabels = [
-  {
-    value: 'enhancement',
-    style: ''
-  }, {
-    value: 'bug',
-    style: ''
-  }, {
-    value: 'documentation',
-    style: ''
-  }, {
-    value: 'duplicate',
-    style: ''
-  }, {
-    value: 'good first issue',
-    style: ''
-  }, {
-    value: 'help wanted',
-    style: ''
-  }, {
-    value: 'invalid',
-    style: ''
-  }, {
-    value: 'question',
-    style: ''
-  }, {
-    value: 'testing',
-    style: ''
-  }, {
-    value: 'wontfix',
-    style: ''
-  }
-]
-
 export const tasksStatuses = [
   {
     value: 'new',
@@ -128,6 +94,33 @@ export const tasksStatuses = [
     value: 'done',
     style: 'border-green-500 text-green-500 bg-green-50',
     icon: <>✅</>
+  }
+]
+
+export const tasksLabels = [
+  {
+    value: 'enhancement',
+    style: 'dark:border-[#C1B8FF] dark:text-[#C1B8FF] dark:bg-[#7057FF2E] border-[#7057FF] text-[#7057FF]'
+  },
+  {
+    value: 'data model',
+    style: 'dark:border-[#E79913] dark:text-[#E79913] dark:bg-[#E99D122E] border-[#E99D12] text-[#E99D12]'
+  },
+  {
+    value: 'documentation',
+    style: 'dark:border-[#35ABFF] dark:text-[#35ABFF] dark:bg-[#0075CA2E] border-[#0075CA] text-[#0075CA]'
+  },
+  {
+    value: 'bug',
+    style: 'dark:border-[#EB9CA6] dark:text-[#EB9CA6] dark:bg-[#D73A4A2E] border-[#D73A4A] text-[#D73A4A]'
+  },
+  {
+    value: 'testing',
+    style: 'dark:border-[#00E6C4] dark:text-[#00E6C4] dark:bg-[#0086722E] border-[#008672] text-[#008672]'
+  },
+  {
+    value: 'ui',
+    style: 'dark:border-[#D97EE5] dark:text-[#D97EE5] dark:bg-[#D876E32E] border-[#D876E3] text-[#D876E3]'
   }
 ]
 
@@ -175,6 +168,28 @@ export const loadingProjects = [
     createdAt: null,
     updatedAt: null
   }
+]
+
+export const loadingInAndOuts = [
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  },
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  },
+  {
+    id: null,
+    username: null,
+    in_date: null,
+    out_date: null
+  }
+
 ]
 
 export const loadingPeople = [
@@ -381,50 +396,24 @@ export const loadingTasks = [
   }
 ]
 
-export const mockRoles = [
+export const roles = [
   {
     id: 1,
     value: 'owner'
   }, {
     id: 2,
+    value: 'developer'
+  }, {
+    id: 3,
+    value: 'scrum master'
+  }, {
+    id: 4,
+    value: 'tester'
+  }, {
+    id: 5,
+    value: 'designer'
+  }, {
+    id: 6,
     value: 'member'
-  }
-]
-
-export const mockProjectData = [
-  {
-    id: 'm5gr84i9',
-    label: 'public',
-    title: 'reign chess',
-    description: 'A chess game made with react for the web',
-    status: 'open'
-  },
-  {
-    id: '3u1reuv4',
-    label: 'public',
-    title: 'hot asm',
-    description: 'A website to code in assembly',
-    status: 'open'
-  },
-  {
-    id: 'derv1ws0',
-    label: 'private',
-    title: 'vercel v0',
-    description: 'Customize your vercel project with this tool',
-    status: 'closed'
-  },
-  {
-    id: '5kma53ae',
-    label: 'private',
-    title: 'react v17',
-    description: 'Library to create react apps',
-    status: 'closed'
-  },
-  {
-    id: 'bhqecj4p',
-    label: 'private',
-    title: 'shopify v2',
-    description: 'An ecommerce website made with shopify',
-    status: 'closed'
   }
 ]

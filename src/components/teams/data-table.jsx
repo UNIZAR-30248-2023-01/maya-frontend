@@ -51,7 +51,7 @@ export function DataTable ({ data, columns, people }) {
           title={dictionary.teams['new-team']}
           description={dictionary.teams['new-table-description']}
           triggerBtn={dictionary.teams['new-team']}
-          actionBtn={dictionary.teams['new-team-create']}
+          actionBtn={dictionary.common.create}
           schema={teamSchema}
           dictionary={dictionary}
           data={{ members: people }}
@@ -59,8 +59,8 @@ export function DataTable ({ data, columns, people }) {
       </div>
       <div className="rounded-md border">
         <Table>
-          <DataTableHeader table={table}/>
-          <DataTableBody table={table}/>
+          <DataTableHeader table={table} />
+          <DataTableBody table={table} />
         </Table>
       </div>
       <DataTablePagination table={table} />

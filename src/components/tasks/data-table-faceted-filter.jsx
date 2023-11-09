@@ -75,7 +75,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
           <CommandList>
             <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup>
-              {options.map((option) => {
+              {options?.map((option) => {
                 const isSelected = selectedValues.has(option.value)
                 return (
                   <CommandItem
