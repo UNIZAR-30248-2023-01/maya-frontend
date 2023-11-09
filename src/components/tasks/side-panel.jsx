@@ -12,23 +12,26 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
+import { Text, TextArea, Number, ComboboxEnum, ComboboxArray, DatePicker } from '@/components/forms'
 import { useLang } from '@/context/language-context'
-import { tasksSchema } from '@/lib/schemas'
+import { tasksLabels, tasksStatuses } from '@/lib/constants'
 import { getForm, supabase } from '@/lib/utils'
+import { tasksSchema } from '@/lib/schemas'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
-import { tasksStatuses, tasksLabels } from '@/lib/constants'
 
 export function SidePanel ({
   title,
   description,
+  projectName,
   triggerBtn,
   actionBtn,
   data
 }) {
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(tasksSchema._def.shape()))
+
+  const badForm = !(form.name && form.estimated && form.label && form.status)
 
   const setter = ({ key, value }) => {
     return setForm({ ...form, [key]: value })
@@ -38,14 +41,16 @@ export function SidePanel ({
     e.preventDefault()
 
     const { assignees, ...task } = form
+    // console.log(form)
+    // console.log(tasksSchema.parse({ ...task, project: projectName }))
 
     try {
-      tasksSchema.parse({ ...task, project: 'reign-frontend' })
+      tasksSchema.parse({ ...task, project: projectName })
       const createTask = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-          // Primera inserción en la tabla 'tasks'
-            await supabase.from('tasks').insert([{ ...task, project: 'reign-frontend' }]).select()
+            // Primera inserción en la tabla 'tasks'
+            await supabase.from('tasks').insert([{ ...task, project: projectName }]).select()
               .then(async (res) => {
                 if (res.error !== null) return
                 // Segunda inserción en la tabla 'people-tasks'
@@ -56,8 +61,8 @@ export function SidePanel ({
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?project=eq.${projectName}&select=*,people-tasks(username)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -81,89 +86,100 @@ export function SidePanel ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-task" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id='new-task' className='capitalize h-8'>
+          {triggerBtn}
+        </Button>
       </SheetTrigger>
-      <SheetContent>
-        <form onSubmit={e => handleSubmit(e)}>
+      <SheetContent className='min-w-[600px]'>
+        <form onSubmit={e => handleSubmit(e)} className='h-full'>
           <SheetHeader>
-            <SheetTitle className="capitalize">{title}</SheetTitle>
-            <SheetDescription>
-              {description}
-            </SheetDescription>
+            <SheetTitle className='capitalize'>{title}</SheetTitle>
+            <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
-          <div className="grid gap-4 py-4">
-            <Field.Text
-              id="name"
-              label={dictionary.tasks['tasks-column']}
-              placeholder={dictionary.tasks['new-table-name-placeholder']}
-              onChange={(e) => setter({ key: 'name', value: e.target.value })}
-            />
-            <Field.TextArea
-              id="description"
-              label={dictionary.tasks['description-column']}
-              placeholder={dictionary.tasks['new-task-desc-placeholder']}
-              onChange={(e) => setter({ key: 'description', value: e.target.value })}
-            />
-            <Field.ComboboxArray
-              id="assignees"
-              label={dictionary.tasks['assignees-column']}
-              placeholder={dictionary.tasks['assignees-column']}
-              list={data.assignees.map((assignee) => ({ value: assignee.username, label: assignee.username }))}
-              values={form.assignees || []}
-              onChange={(e) => {
-                const assigness = form.assignees || []
-                const isSelected = assigness ? assigness.includes(e) : false
-                if (isSelected) {
-                  return setter({ key: 'assignees', value: assigness?.filter((assignee) => assignee !== e) })
-                }
-                setter({ key: 'assignees', value: [...assigness, e] })
-              }}
-            />
-            <Field.ComboboxEnum
-              id="label"
-              label={dictionary.tasks['label-column']}
-              list={tasksLabels}
-              value={dictionary.labels[form.label]}
-              dictionary={dictionary.labels}
-              onChange={(e) => {
-                const original = Object.keys(dictionary.labels).find(key => dictionary.labels[key] === e)
-                setter({ key: 'label', value: original === form.label ? null : original })
-              }}
-            />
-            <Field.ComboboxEnum
-              id="status"
-              label={dictionary.tasks['status-column']}
-              list={tasksStatuses}
-              value={dictionary.status[form.status]}
-              dictionary={dictionary.status}
-              onChange={(e) => {
-                const original = Object.keys(dictionary.status).find(key => dictionary.status[key] === e)
-                setter({ key: 'status', value: original === form.status ? null : original })
-              }}
-            />
-            <Field.Number
-              id="estimated"
-              label={dictionary.tasks['estimated-column']}
-              min={0}
-              onChange={(e) => setter({ key: 'estimated', value: Number(e.target.value) })}
-            />
-            <Field.DatePicker
-              id="end-date"
-              label={dictionary.tasks['end-date-column']}
-              value={form.end_date}
-              placeholder={dictionary.tasks['end-date-placeholder']}
-              onChange={(e) => setter({ key: 'end_date', value: e || null })}
-            />
+          <div className='flex flex-col justify-between h-full'>
+            <div className='grid gap-6 py-4'>
+              <Text
+                id='name'
+                label={dictionary.tasks['name-column'] + '*'}
+                placeholder={dictionary.tasks['new-task-name-placeholder']}
+                onChange={(e) => setter({ key: 'name', value: e.target.value })}
+              />
+
+              <TextArea
+                id='description'
+                label={dictionary.tasks['description-column']}
+                placeholder={dictionary.tasks['new-task-description-placeholder']}
+                onChange={(e) => setter({ key: 'description', value: e.target.value })}
+              />
+
+              <ComboboxArray
+                id='assignees'
+                label={dictionary.tasks['assignees-column']}
+                placeholder={dictionary.tasks['assignees-column']}
+                list={data.assignees.map((assignee) => ({ value: assignee.username, label: assignee.username }))}
+                dictionary={dictionary}
+                values={form.assignees || []}
+                onChange={(e) => {
+                  console.log(e)
+                  const assigness = form.assignees || []
+                  const isSelected = assigness ? assigness.includes(e) : false
+                  if (isSelected) {
+                    return setter({ key: 'assignees', value: assigness?.filter((assignee) => assignee !== e) })
+                  }
+                  setter({ key: 'assignees', value: [...assigness, e] })
+                }}
+              />
+
+              <Number
+                min={0}
+                id={dictionary.tasks['estimated-column']}
+                label={dictionary.tasks['estimated-column'] + '*'}
+                placeholder={dictionary.tasks['new-task-estimated-placeholder']}
+                onChange={(e) => setter({ key: 'estimated', value: e.target.valueAsNumber })}
+              />
+
+              <DatePicker
+                id="end-date"
+                label={dictionary.tasks['end-date-column']}
+                placeholder={dictionary.tasks['new-end-date-placeholder']}
+                value={form.end_date}
+                onChange={(e) => setter({ key: 'end_date', value: e || null })} />
+
+              <div className='flex justify-between gap-4'>
+
+                <ComboboxEnum
+                  id='status'
+                  label={dictionary.tasks['status-column'] + '*'}
+                  list={tasksStatuses}
+                  value={form.status}
+                  dictionary={dictionary.status}
+                  searchDictionary={dictionary.search}
+                  onChange={(e) => {
+                    const original = Object.keys(dictionary.status).find(key => key === e)
+                    setter({ key: 'status', value: original === form.status ? null : original })
+                  }}
+                />
+
+                <ComboboxEnum
+                  id='label'
+                  label={dictionary.tasks['label-column'] + '*'}
+                  list={tasksLabels}
+                  value={form.label}
+                  dictionary={dictionary.labels}
+                  searchDictionary={dictionary.search}
+                  onChange={(e) => {
+                    const original = Object.keys(dictionary.labels).find(key => key === e)
+                    setter({ key: 'label', value: original === form.label ? null : original })
+                  }}
+                />
+              </div>
+            </div>
+            <SheetFooter className='pb-12'>
+              <SheetClose asChild>
+                <Button type='submit' disabled={badForm}>{actionBtn}</Button>
+              </SheetClose>
+            </SheetFooter>
           </div>
-          <SheetFooter className="">
-            <SheetClose asChild>
-              <Button
-                type="submit"
-              >
-                {actionBtn}
-              </Button>
-            </SheetClose>
-          </SheetFooter>
         </form>
       </SheetContent>
     </Sheet>

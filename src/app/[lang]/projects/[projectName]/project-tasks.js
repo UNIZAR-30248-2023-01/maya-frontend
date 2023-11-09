@@ -5,11 +5,10 @@ import { columns } from '@/components/tasks/columns'
 import { loadingTasks } from '@/lib/constants'
 import useSWR from 'swr'
 
-export default function TasksPage () {
-  let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?select=*,people-tasks(username)`)
-  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*,people-project(*)`)
-
-  if (!tasks || !people) return <DataTable data={loadingTasks} columns={columns} people={[]}/>
+export default function TasksPage ({ projectName }) {
+  let { data: tasks } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?project=eq.${projectName}&select=*,people-tasks(username)`)
+  const { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+  const { data: projectPeople } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?select=*`)
 
   tasks = tasks?.map(item => {
     return {
@@ -18,5 +17,5 @@ export default function TasksPage () {
     }
   })
 
-  return <DataTable data={tasks} columns={columns} people={people}/>
+  return <DataTable data={tasks || loadingTasks} columns={columns} people={projectPeople || []} projectName={projectName} />
 }

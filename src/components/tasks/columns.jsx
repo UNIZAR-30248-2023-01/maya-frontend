@@ -2,10 +2,11 @@
 
 import { DataTableColumnHeader } from '@/components/tasks/data-table-column-header'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import { AvatarFallback } from '@radix-ui/react-avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { tasksStatuses } from '@/lib/constants'
+import { tasksLabels, tasksStatuses } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+import { format, parseISO } from 'date-fns'
 
 export const columns = [
   {
@@ -15,7 +16,7 @@ export const columns = [
     },
     cell: ({ row, dictionary }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-44 h-4'/>
+      if (!id) return <Skeleton className='w-44 h-4' />
 
       return (
         <div className="max-w-[150px] truncate font-medium capitalize">
@@ -34,6 +35,7 @@ export const columns = [
     ),
     cell: ({ row }) => {
       const { id } = row.original
+      console.log(id)
       if (!id) {
         return (
           <div className="flex">
@@ -52,8 +54,8 @@ export const columns = [
         <div className="flex">
           {row.getValue('people').map((person, id) => (
             <Avatar key={id} className="h-8 w-8">
-              <AvatarImage src={person.avatar} />
-              <AvatarFallback className="uppercase">{String(person.firstname)[0] + String(person.lastname)[0]}</AvatarFallback>
+              <AvatarImage src={person?.avatar} />
+              <AvatarFallback>{person?.firstname[0] + person?.lastname[0]}</AvatarFallback>
             </Avatar>
           ))}
         </div>
@@ -62,7 +64,8 @@ export const columns = [
     filterFn: (row, id, value) => {
       const usernames = row.getValue(id).map(person => person.username)
       return value.some(username => usernames.includes(username))
-    }
+    },
+    enableSorting: false
   },
   {
     accessorKey: 'label',
@@ -71,9 +74,11 @@ export const columns = [
     ),
     cell: ({ row, dictionary }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-24 h-4'/>
+      if (!id) return <Skeleton className='w-24 h-4' />
 
-      return row.getValue('label') && <Badge variant="outline" className='max-w-fit'>{dictionary[row.getValue('label')]}</Badge>
+      const label = tasksLabels.find(label => label.value === row.getValue('label'))
+
+      return row.getValue('label') && <Badge variant="outline" className={cn('max-w-fit', label.style)}>{dictionary[label.value]}</Badge>
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
@@ -86,13 +91,13 @@ export const columns = [
     ),
     cell: ({ row, dictionary }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-24 h-4'/>
+      if (!id) return <Skeleton className='w-24 h-4' />
 
       const status = tasksStatuses.find(status => status.value === row.getValue('status'))
       if (!status) return null
 
       return (
-        <Badge variant="outline" className={`flex w-fit items-center gap-x-1 ${status.style}`}>
+        <Badge variant="outline" className={cn('flex w-fit items-center gap-x-1', status.style)}>
           {status.icon && <span>{status.icon}</span>}
           <span className='capitalize'>{dictionary[status.value]}</span>
         </Badge>
@@ -109,7 +114,7 @@ export const columns = [
     ),
     cell: ({ row }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-10 h-4'/>
+      if (!id) return <Skeleton className='w-10 h-4' />
 
       return (
         <div className="flex w-[100px] items-center">
@@ -126,16 +131,17 @@ export const columns = [
     header: ({ column, dictionary }) => (
       <DataTableColumnHeader column={column} title={dictionary['end-date-column']} />
     ),
-    cell: ({ row }) => {
+    cell: ({ row, dictionary }) => {
       const { id } = row.original
-      if (!id) return <Skeleton className='w-24 h-4'/>
-      if (!row.getValue('end_date')) return null
+      if (!id) return <Skeleton className='w-24 h-4' />
+      if (!row.getValue('end_date')) return dictionary['new-task-label-placeholder']
 
-      const options = { year: 'numeric', month: 'short', day: 'numeric' }
+      const parsedDate = parseISO(row.getValue('end_date'))
+      const formattedDate = format(parsedDate, 'PPP')
 
       return (
         <div className="flex w-fit items-center">
-          <span>{new Date(row.getValue('end_date')).toLocaleDateString(undefined, options)}</span>
+          <span>{formattedDate}</span>
         </div>
       )
     },
