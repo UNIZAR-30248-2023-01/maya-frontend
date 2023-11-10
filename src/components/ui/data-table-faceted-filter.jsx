@@ -19,10 +19,12 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { useLang } from '@/context/language-context'
 
 export function DataTableFacetedFilter ({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
+  const { dictionary } = useLang()
 
   return (
     <Popover>
@@ -71,7 +73,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)

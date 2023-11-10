@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
+import { DatePicker, Text } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
@@ -118,8 +118,7 @@ export function SidePanelManual ({
               {descriptionIn}
             </SheetDescription>
 
-            <Field.DatePicker
-              id="in_date"
+            <DatePicker
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
@@ -133,7 +132,7 @@ export function SidePanelManual ({
             />
 
             <div className="w-[65px]">
-              <Field.Text
+              <Text
                 id="in_hour"
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']}
                 onChange={(e) => {
@@ -151,7 +150,7 @@ export function SidePanelManual ({
               {descriptionOut}
             </SheetDescription>
 
-            <Field.DatePicker
+            <DatePicker
               id="out_date"
               label={dictionary.inandouts['out-column']}
               value={form.out_date}
@@ -166,7 +165,7 @@ export function SidePanelManual ({
             />
 
             <div className="w-[65px]">
-                <Field.Text
+                <Text
                   id="out_hour"
                   placeholder={dictionary.inandouts['new-table-hour-placeholder']}
                   onChange={(e) => {

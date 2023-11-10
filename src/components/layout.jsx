@@ -12,10 +12,13 @@ import { redirect } from 'next/navigation'
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
   const { status } = useSession()
-  if (status === 'loading') {
-    return <div>Loading...</div>
-  } else if (status === 'unauthenticated') {
-    return redirect('/sign-in')
+
+  if (!process.env.NODE_ENV === 'production') {
+    if (status === 'loading') {
+      return <div>Loading...</div>
+    } else if (status === 'unauthenticated') {
+      return redirect('/sign-in')
+    }
   }
 
   return (

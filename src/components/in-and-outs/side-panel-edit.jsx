@@ -12,13 +12,13 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import * as Field from '@/components/forms/package'
 import { useLang } from '@/context/language-context'
 import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
 import { LuClipboardEdit } from 'react-icons/lu'
+import { DatePicker, Text } from '@/components/forms'
 
 export function SidePanelEdit ({
   title,
@@ -192,7 +192,7 @@ export function SidePanelEdit ({
               {descriptionIn}
             </SheetDescription>
 
-            <Field.DatePicker
+            <DatePicker
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
@@ -206,7 +206,7 @@ export function SidePanelEdit ({
             />
 
             <div className="w-[65px]">
-              <Field.Text
+              <Text
                 id="in_hour"
                 value={form.in_hour}
                 placeholder={dictionary.inandouts['new-table-hour-placeholder']}
@@ -225,7 +225,7 @@ export function SidePanelEdit ({
               {descriptionOut}
             </SheetDescription>
 
-            <Field.DatePicker
+            <DatePicker
               id="out_date"
               label={dictionary.inandouts['out-column']}
               value={form.out_date}
@@ -241,7 +241,7 @@ export function SidePanelEdit ({
             />
 
             <div className="w-[65px]">
-                <Field.Text
+                <Text
                   id="out_hour"
                   placeholder={dictionary.inandouts['new-table-hour-placeholder']}
                   value={form.out_hour}

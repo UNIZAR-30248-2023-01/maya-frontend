@@ -1,33 +1,22 @@
 'use client'
 
-import { DotsHorizontalIcon } from '@radix-ui/react-icons'
-
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+import { RoleChange } from './role-change'
+import { useLang } from '@/context/language-context'
 
 export function DataTableRowActions ({ row }) {
+  const { dictionary } = useLang()
+  console.log(row.original)
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-        >
-          <DotsHorizontalIcon className="h-4 w-4" />
-          <span className="sr-only">Open menu</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-fit">
-        <DropdownMenuItem>Manage</DropdownMenuItem>
-        <DropdownMenuItem>Change role...</DropdownMenuItem>
-        <DropdownMenuItem>Conver to outside collaborator</DropdownMenuItem>
-        <DropdownMenuItem>Remove from organization...</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <RoleChange
+      title={row.original.people.firstname + ' ' + row.original.people.lastname}
+      description={dictionary.people['manage-member-description']}
+      actionBtn={dictionary.people['manage-member-submit']}
+      deleteTitle={dictionary.people['manage-member-delete-title']}
+      deleteDescription={dictionary.people['manage-member-delete-description']}
+      projectName={row.original.project}
+      username={row.original.username}
+      defaultRole={row.original.role}
+    />
   )
 }
