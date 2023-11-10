@@ -10,7 +10,6 @@ export const projectSchema = z.object({
   organization: z.string()
 })
 
-// BORRAR: probablemente falta id
 export const inAndOutsSchema = z.object({
   in_date: z.date().nullable(),
   out_date: z.date().nullable(),
@@ -46,4 +45,12 @@ export const teamSchema = z.object({
 export const projectSettingsSchema = z.object({
   name: z.string().min(1).max(30),
   description: z.string().max(150).nullable()
+})
+
+export const accountFormSchema = z.object({
+  name: z.string().min(2).max(30),
+  username: z.string().min(2).max(30),
+  email: z.string().email(),
+  dob: z.date(),
+  language: z.string()
 })

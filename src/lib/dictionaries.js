@@ -153,6 +153,7 @@ export const inandouts = {
     'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada',
     'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada',
     'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida',
+    'error-current-day': 'La fecha no puede ser posterior a la fecha actual',
     'error-hour': 'Formato de hora no válido',
 
     'new-table-create': 'Fichar',
@@ -189,6 +190,7 @@ export const inandouts = {
     'error-out-date': 'Clock-out date cannot be less than clock-in date',
     'error-out-hour': 'Clock-out hour cannot be less than clock-in hour',
     'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour',
+    'error-current-day': 'Date cannot be after current date',
     'error-hour': 'Invalid hour format',
 
     'new-table-create': 'Clock in/clock out',
