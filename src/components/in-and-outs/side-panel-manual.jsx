@@ -103,7 +103,7 @@ export function SidePanelManual ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-manual-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
@@ -119,6 +119,7 @@ export function SidePanelManual ({
             </SheetDescription>
 
             <Field.DatePicker
+              id="in_date"
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
