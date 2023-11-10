@@ -31,6 +31,8 @@ export function SidePanelManual ({
   const [errorInHour, setErrorInHour] = useState('')
   const [invalidHour, setInvalidHour] = useState(true)
 
+  const currentDay = new Date(new Date().getTime())
+
   const { dictionary } = useLang()
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
 
@@ -125,6 +127,8 @@ export function SidePanelManual ({
               onChange={(e) => {
                 if (form.out_date !== null && form.out_date < e) {
                   toast.error(dictionary.inandouts['error-in-date'])
+                } else if (e > currentDay) {
+                  toast.error(dictionary.inandouts['error-current-day'])
                 } else {
                   setter({ key: 'in_date', value: e })
                 }
@@ -158,6 +162,8 @@ export function SidePanelManual ({
               onChange={(e) => {
                 if (form.in_date > e) {
                   toast.error(dictionary.inandouts['error-out-date'])
+                } else if (e > currentDay) {
+                  toast.error(dictionary.inandouts['error-current-day'])
                 } else {
                   setter({ key: 'out_date', value: e })
                 }
