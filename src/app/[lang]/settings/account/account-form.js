@@ -1,211 +1,178 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
-import { format } from 'date-fns'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
+import { useState, useEffect } from 'react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem
-} from '@/components/ui/command'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
+  Form
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger
-} from '@/components/ui/popover'
+  SheetDescription
+
+} from '@/components/ui/sheet'
 import { toast } from 'sonner'
-
-const languages = [
-  { label: 'English', value: 'en' },
-  { label: 'French', value: 'fr' },
-  { label: 'German', value: 'de' },
-  { label: 'Spanish', value: 'es' },
-  { label: 'Portuguese', value: 'pt' },
-  { label: 'Russian', value: 'ru' },
-  { label: 'Japanese', value: 'ja' },
-  { label: 'Korean', value: 'ko' },
-  { label: 'Chinese', value: 'zh' }
-]
-
-const accountFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: 'Name must be at least 2 characters.'
-    })
-    .max(30, {
-      message: 'Name must not be longer than 30 characters.'
-    }),
-  dob: z.date({
-    required_error: 'A date of birth is required.'
-  }),
-  language: z.string({
-    required_error: 'Please select a language.'
-  })
-})
-
-// This can come from your database or API.
-const defaultValues = {
-  // name: "Your name",
-  // dob: new Date("2023-01-23"),
-}
+import { getForm, supabase } from '@/lib/utils'
+import useSWR, { mutate } from 'swr'
+import { useLang } from '@/context/language-context'
+import { accountFormSchema } from '@/lib/schemas'
+import { Text } from '@/components/forms'
+import { useSession } from 'next-auth/react'
 
 export function AccountForm () {
-  const form = useForm({
-    resolver: zodResolver(accountFormSchema),
-    defaultValues
-  })
+  const [form, setForm] = useState({ ...getForm(accountFormSchema._def.shape()) })
+  const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-  function onSubmit (data) {
-    toast.message('You submitted the following values:', { description: JSON.stringify(data, null, 2) })
+  const [loading, setLoading] = useState(false)
+
+  const { data: session } = useSession()
+
+  console.log('session', session)
+
+  // const { data: accountData } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${session.user.email}&select=*`)
+  // console.log('accountData', accountData)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (session && session.user && !loading) {
+        const { data: accountData } = await supabase
+          .from('people')
+          .select('*')
+          .eq('email', session.user.email)
+
+        console.log('accountData', accountData)
+
+        if (accountData && accountData.length > 0) {
+          setForm({
+            ...form,
+            username: accountData[0].username,
+            email: accountData[0].email,
+            avatar: accountData[0].avatar,
+            firstname: accountData[0].firstname,
+            lastname: accountData[0].lastname
+          })
+          setLoading(true)
+        }
+      }
+    }
+
+    fetchData()
+  }, [loading])
+
+  const { dictionary } = useLang()/*
+  if (accountData !== undefined && !loading) {
+    if (accountData !== undefined && !loading) {
+      console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
+      setForm({
+        ...form,
+        username: accountData[0].username,
+        email: accountData[0].email,
+        avatar: accountData[0].avatar,
+        firstname: accountData[0].firstname,
+        lastname: accountData[0].lastname
+      })
+      setLoading(true)
+    }
+  } */
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('form', form)
+
+    try {
+      accountFormSchema.parse({ ...form })
+      const updateUserAccount = () => {
+        return new Promise((resolve, reject) => {
+          (async () => {
+            await supabase.from('people')
+              .update({ firstname: form.firstname, lastname: form.lastname })
+              .eq('email', session.user.email)
+              .then(() => {
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${session.user.email}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?firstname=eq.${form.firstname}&lastname=eq.${form.lastname}&select=*`)
+                resolve()
+              })
+              .catch((error) => reject(error))
+          })()
+        })
+      }
+
+      toast.promise(updateUserAccount, {
+        loading: dictionary.inandouts['toast-loading'],
+        success: () => dictionary.inandouts['toast-success'],
+        error: () => dictionary.inandouts['toast-error']
+      })
+    } catch (error) {
+      const { path, message } = JSON.parse(error.message)[0]
+      toast.error(path[0] + ': ' + message)
+    }
   }
+
+  const defaultAvatar = '/assets/avatars/memojis/4.webp'
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your name" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+      <form onSubmit={e => handleSubmit(e)} className="space-y-8">
+        <div className="flex space-x-4 items-center">
+          <div className="flex-1">
+            <Text
+              label={dictionary.settingsAccount['user-username']}
+              id="username"
+              value={form.username}
+            />
+            <SheetDescription style={{ marginTop: '5px' }}>
+                {dictionary.settingsAccount['message-username']}
+            </SheetDescription>
+          </div>
+          <div className="flex-shrink-0">
+            <img
+                src={form.avatar ? form.avatar : defaultAvatar}
+                alt="Avatar"
+                className="w-24 h-24 rounded-full"
+            />
+          </div>
+        </div>
+        <div className="flex space-x-4">
+          <div className="flex-1">
+            <Text
+              label={dictionary.settingsAccount['user-firstname']}
+              id="firstname"
+              placeholder={form.firstname}
+              onChange={(e) => {
+                if (e.target.value.length > 0) {
+                  e.target.classList.remove('border-red-500')
+                  setter({ key: 'firstname', value: e.target.value })
+                } else {
+                  e.target.classList.add('border-red-500')
+                  toast.error(dictionary.settingsAccount['error-firstname'])
+                }
+              }}
+            />
+          </div>
+          <div className="flex-1">
+            <Text
+                label={dictionary.settingsAccount['user-lastname']}
+                id="lastname"
+                placeholder={form.lastname}
+                onChange={(e) => {
+                  if (e.target.value.length > 0) {
+                    e.target.classList.remove('border-red-500')
+                    setter({ key: 'lastname', value: e.target.value })
+                  } else {
+                    e.target.classList.add('border-red-500')
+                    toast.error(dictionary.settingsAccount['error-lastname'])
+                  }
+                }}
+              />
+            </div>
+        </div>
+        <Text
+          label={dictionary.settingsAccount['user-email']}
+          id="email"
+          value={form.email}
         />
-        <FormField
-          control={form.control}
-          name="dob"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={'outline'}
-                      className={cn(
-                        'w-[240px] pl-3 text-left font-normal',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value
-                        ? (
-                            format(field.value, 'PPP')
-                          )
-                        : (
-                        <span>Pick a date</span>
-                          )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date('1900-01-01')
-                    }
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>
-                Your date of birth is used to calculate your age.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="language"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Language</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      className={cn(
-                        'w-[200px] justify-between',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value
-                        ? languages.find(
-                          (language) => language.value === field.value
-                        )?.label
-                        : 'Select language'}
-                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
-                  <Command>
-                    <CommandInput placeholder="Search language..." />
-                    <CommandEmpty>No language found.</CommandEmpty>
-                    <CommandGroup>
-                      {languages.map((language) => (
-                        <CommandItem
-                          value={language.label}
-                          key={language.value}
-                          onSelect={() => {
-                            form.setValue('language', language.value)
-                          }}
-                        >
-                          <CheckIcon
-                            className={cn(
-                              'mr-2 h-4 w-4',
-                              language.value === field.value
-                                ? 'opacity-100'
-                                : 'opacity-0'
-                            )}
-                          />
-                          {language.label}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              <FormDescription>
-                This is the language that will be used in the dashboard.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Update account</Button>
+        <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
       </form>
     </Form>
   )

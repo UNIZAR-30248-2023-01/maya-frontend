@@ -4,7 +4,6 @@ import { TeamMember } from '@/components/team-member'
 import { SidebarHeader } from '@/components/sidebar/sidebar-header'
 import { SidebarNavigation } from '@/components/sidebar/sidebar-navigation'
 import { useLang } from '@/context/language-context'
-import Link from 'next/link'
 
 export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
   const { dictionary } = useLang()
@@ -21,9 +20,7 @@ export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
               <SidebarNavigation navigation={navigation} />
             </li>
             <li className="mt-auto">
-              <Link href='/settings'>
-                <TeamMember />
-              </Link>
+              <TeamMember />
             </li>
           </ul>
         </nav>

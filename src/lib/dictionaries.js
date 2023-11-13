@@ -200,6 +200,51 @@ export const inandouts = {
   }
 }
 
+export const settingsAccount = {
+  es: {
+    'account-headline': 'Mi cuenta',
+    'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, imagen de perfil e idioma preferido.',
+
+    language: 'es-ES',
+    'user-firstname': 'Nombre',
+    'user-lastname': 'Apellido',
+    'user-username': 'Nombre de usuario',
+    'user-avatar': 'Imagen de perfil',
+    'user-email': 'Correo electrónico',
+    'submitted-values': 'Has actualizado los siguientes valores',
+
+    'message-username': '* El nombre de usuario no se puede modificar.',
+
+    'error-firstname': 'El nombre no puede estar vacío.',
+    'error-lastname': 'El apellido no puede estar vacío',
+
+    'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
+    'toast-success': 'Tu cuenta se ha actualizada correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'account-headline': 'My account',
+    'account-under-headline': 'Update your account settings. Set your name, lastname and preferred avatar and language.',
+
+    language: 'en-US',
+    'user-firstname': 'Name',
+    'user-lastname': 'Lastname',
+    'user-username': 'User name',
+    'user-avatar': 'Profil photo',
+    'user-email': 'E-mail',
+    'submitted-values': 'You submitted the following values.',
+
+    'message-username': '* Username cannot be modified.',
+
+    'error-firstname': 'Name cannot be empty.',
+    'error-lastname': 'Lastname cannot be empty',
+
+    'toast-loading': 'We are validating your info account. Please wait a moment.',
+    'toast-success': 'Your info account has been updated successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
 export const tasks = {
   es: {
     'tasks-tab': 'Tareas',

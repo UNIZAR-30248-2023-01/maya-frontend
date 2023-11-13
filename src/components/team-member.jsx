@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
-import { Link } from 'next/link'
+import Link from 'next/link'
 
 export function TeamMember ({
   user = {
