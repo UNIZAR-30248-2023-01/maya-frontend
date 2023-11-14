@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { useLang } from '@/context/language-context'
 
 export function TeamMember ({
   user = {
@@ -24,6 +25,8 @@ export function TeamMember ({
     username: 'm@example.com'
   }
 }) {
+  const { dictionary } = useLang()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,37 +42,27 @@ export function TeamMember ({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuLabel>{dictionary.settingsAccount['account-headline']}</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link href="/settings">
-              Profile
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/account">
-              Account
+              {dictionary.settingsAccount['account-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/appearance">
-              Appearance
+              {dictionary.settingsAccount['apperance-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/notifications">
-              Notifications
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/display">
-              Display
+              {dictionary.settingsAccount['notifications-tab']}
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
           <button onClick={() => signOut({ redirect: false })}>
-            Log out
+            {dictionary.settingsAccount['logout-tab']}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

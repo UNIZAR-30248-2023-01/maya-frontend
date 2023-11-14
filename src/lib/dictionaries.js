@@ -202,6 +202,11 @@ export const inandouts = {
 
 export const settingsAccount = {
   es: {
+    'account-tab': 'Cuenta',
+    'apperance-tab': 'Apariencia',
+    'notifications-tab': 'Notificaciones',
+    'logout-tab': 'Cerrar sesión',
+
     'account-headline': 'Mi cuenta',
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, imagen de perfil e idioma preferido.',
 
@@ -211,18 +216,28 @@ export const settingsAccount = {
     'user-username': 'Nombre de usuario',
     'user-avatar': 'Imagen de perfil',
     'user-email': 'Correo electrónico',
+    'user-password': 'Contraseña',
+    'user-password-confirm': 'Confirmar contraseña',
+
     'submitted-values': 'Has actualizado los siguientes valores',
 
     'message-username': '* El nombre de usuario no se puede modificar.',
+    'message-email': '* El correo electrónico no se puede modificar.',
 
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
+    'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
 
     'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
     'toast-success': 'Tu cuenta se ha actualizada correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
+    'account-tab': 'Account',
+    'apperance-tab': 'Appearance',
+    'notifications-tab': 'Notifications',
+    'logout-tab': 'Logout',
+
     'account-headline': 'My account',
     'account-under-headline': 'Update your account settings. Set your name, lastname and preferred avatar and language.',
 
@@ -232,12 +247,17 @@ export const settingsAccount = {
     'user-username': 'User name',
     'user-avatar': 'Profil photo',
     'user-email': 'E-mail',
+    'user-password': 'Password',
+    'user-password-confirm': 'Confirm password',
+
     'submitted-values': 'You submitted the following values.',
 
     'message-username': '* Username cannot be modified.',
+    'message-email': '* E-mail cannot be modified.',
 
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
+    'error-full-new-password': 'New password cannot be empty.',
 
     'toast-loading': 'We are validating your info account. Please wait a moment.',
     'toast-success': 'Your info account has been updated successfully.',

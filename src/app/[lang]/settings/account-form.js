@@ -12,17 +12,18 @@ import {
 } from '@/components/ui/sheet'
 import { toast } from 'sonner'
 import { getForm, supabase } from '@/lib/utils'
-import useSWR, { mutate } from 'swr'
+import { mutate } from 'swr'
 import { useLang } from '@/context/language-context'
 import { accountFormSchema } from '@/lib/schemas'
 import { Text } from '@/components/forms'
 import { useSession } from 'next-auth/react'
 
 export function AccountForm () {
-  const [form, setForm] = useState({ ...getForm(accountFormSchema._def.shape()) })
+  const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  console.log('loading', loading)
 
   const { data: session } = useSession()
 
@@ -32,8 +33,9 @@ export function AccountForm () {
   // console.log('accountData', accountData)
 
   useEffect(() => {
+    console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
     const fetchData = async () => {
-      if (session && session.user && !loading) {
+      if (session && session.user && loading) {
         const { data: accountData } = await supabase
           .from('people')
           .select('*')
@@ -50,13 +52,13 @@ export function AccountForm () {
             firstname: accountData[0].firstname,
             lastname: accountData[0].lastname
           })
-          setLoading(true)
+          setLoading(false)
         }
       }
     }
 
     fetchData()
-  }, [loading])
+  }, [loading && session])
 
   const { dictionary } = useLang()/*
   if (accountData !== undefined && !loading) {
@@ -99,9 +101,9 @@ export function AccountForm () {
       }
 
       toast.promise(updateUserAccount, {
-        loading: dictionary.inandouts['toast-loading'],
-        success: () => dictionary.inandouts['toast-success'],
-        error: () => dictionary.inandouts['toast-error']
+        loading: dictionary.settingsAccount['toast-loading'],
+        success: () => dictionary.settingsAccount['toast-success'],
+        error: () => dictionary.settingsAccount['toast-error']
       })
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
@@ -138,15 +140,10 @@ export function AccountForm () {
             <Text
               label={dictionary.settingsAccount['user-firstname']}
               id="firstname"
-              placeholder={form.firstname}
+              value={form.firstname}
               onChange={(e) => {
-                if (e.target.value.length > 0) {
-                  e.target.classList.remove('border-red-500')
-                  setter({ key: 'firstname', value: e.target.value })
-                } else {
-                  e.target.classList.add('border-red-500')
-                  toast.error(dictionary.settingsAccount['error-firstname'])
-                }
+                e.target.classList.remove('border-red-500')
+                setter({ key: 'firstname', value: e.target.value })
               }}
             />
           </div>
@@ -154,15 +151,10 @@ export function AccountForm () {
             <Text
                 label={dictionary.settingsAccount['user-lastname']}
                 id="lastname"
-                placeholder={form.lastname}
+                value={form.lastname}
                 onChange={(e) => {
-                  if (e.target.value.length > 0) {
-                    e.target.classList.remove('border-red-500')
-                    setter({ key: 'lastname', value: e.target.value })
-                  } else {
-                    e.target.classList.add('border-red-500')
-                    toast.error(dictionary.settingsAccount['error-lastname'])
-                  }
+                  e.target.classList.remove('border-red-500')
+                  setter({ key: 'lastname', value: e.target.value })
                 }}
               />
             </div>
@@ -172,6 +164,43 @@ export function AccountForm () {
           id="email"
           value={form.email}
         />
+        <SheetDescription style={{ marginTop: '5px' }}>
+            {dictionary.settingsAccount['message-email']}
+        </SheetDescription>
+        <Text
+            label={dictionary.settingsAccount['user-password']}
+            placeholder="***********"
+            onChange={(e) => {
+              if (e.target.value.length > 0) {
+                e.target.classList.remove('border-red-500')
+                setter({ key: 'password', value: e.target.value })
+              } else {
+                e.target.classList.add('border-red-500')
+                // toast.error(dictionary.settingsAccount['error-lastname'])
+              }
+            }}
+          />
+        <Text
+            label={dictionary.settingsAccount['user-password-confirm']}
+            placeholder="***********"
+            onChange={(e) => {
+              console.log('form ', form)
+              console.log('form.password ', form.password)
+              if (form.password !== null) {
+                if (e.target.value.length > 8) {
+                  e.target.classList.remove('border-red-500')
+                  // setter({ key: 'lastname', value: e.target.value })
+                } else {
+                  e.target.classList.add('border-red-500')
+                  // toast.error(dictionary.settingsAccount['error-lastname'])
+                }
+              } else {
+                console.log('estoy  aqui')
+                e.target.value = ''
+                toast.error(dictionary.settingsAccount['error-full-new-password'])
+              }
+            }}
+          />
         <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
       </form>
     </Form>

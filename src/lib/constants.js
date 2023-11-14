@@ -35,12 +35,8 @@ export const navigation = [
 
 export const profileNavItems = [
   {
-    title: 'profile',
-    href: '/settings'
-  },
-  {
     title: 'account',
-    href: '/settings/account'
+    href: '/settings'
   },
   {
     title: 'appearance',
