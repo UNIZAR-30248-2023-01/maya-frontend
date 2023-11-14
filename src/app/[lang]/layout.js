@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 import { SessionProvider } from 'next-auth/react'
 import { LanguageProvider } from '@/context/language-context'
 import { SWRProvider } from '@/context/swr-context'
+import { UserProvider } from '@/context/user-context'
 
 import '@/styles/globals.css'
 
@@ -21,9 +22,11 @@ export default function RootLayout ({ children }) {
             refetchOnWindowFocus={true}
             basePath="/api/auth"
           >
-            <SWRProvider>
-              {children}
-            </SWRProvider>
+            <UserProvider>
+              <SWRProvider>
+                {children}
+              </SWRProvider>
+            </UserProvider>
           </SessionProvider>
         </LanguageProvider>
       </body>

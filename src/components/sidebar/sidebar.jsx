@@ -4,10 +4,11 @@ import { TeamMember } from '@/components/team-member'
 import { SidebarHeader } from '@/components/sidebar/sidebar-header'
 import { SidebarNavigation } from '@/components/sidebar/sidebar-navigation'
 import { useLang } from '@/context/language-context'
-import Link from 'next/link'
+import { useUser } from '@/context/user-context'
 
 export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
   const { dictionary } = useLang()
+  const { user } = useUser()
   navigation = navigation.map((item) => ({ ...item, name: dictionary.navigation[item.name] }))
 
   return (sheet) && (
@@ -21,9 +22,12 @@ export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
               <SidebarNavigation navigation={navigation} />
             </li>
             <li className="mt-auto">
-              <Link href='/settings'>
-                <TeamMember />
-              </Link>
+              <TeamMember
+                username={user.username}
+                firstname={user.firstname}
+                lastname={user.lastname}
+                image={user.avatar}
+              />
             </li>
           </ul>
         </nav>
