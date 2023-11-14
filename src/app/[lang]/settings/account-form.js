@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/form'
 import {
   SheetDescription
-
 } from '@/components/ui/sheet'
 import { toast } from 'sonner'
 import { getForm, supabase } from '@/lib/utils'
@@ -17,13 +16,19 @@ import { useLang } from '@/context/language-context'
 import { accountFormSchema } from '@/lib/schemas'
 import { Text } from '@/components/forms'
 import { useSession } from 'next-auth/react'
+import { PopupProfile } from '@/components/settings/popup-profile.jsx'
 
 export function AccountForm () {
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
+  const defaultAvatar = '/assets/avatars/memojis/4.webp'
+  const [isPopupOpen, setPopupOpen] = useState(false)
+
   const [loading, setLoading] = useState(true)
   console.log('loading', loading)
+
+  const { dictionary } = useLang()
 
   const { data: session } = useSession()
 
@@ -59,8 +64,7 @@ export function AccountForm () {
 
     fetchData()
   }, [loading && session])
-
-  const { dictionary } = useLang()/*
+  /*
   if (accountData !== undefined && !loading) {
     if (accountData !== undefined && !loading) {
       console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
@@ -111,98 +115,102 @@ export function AccountForm () {
     }
   }
 
-  const defaultAvatar = '/assets/avatars/memojis/4.webp'
-
   return (
-    <Form {...form}>
-      <form onSubmit={e => handleSubmit(e)} className="space-y-8">
-        <div className="flex space-x-4 items-center">
-          <div className="flex-1">
-            <Text
-              label={dictionary.settingsAccount['user-username']}
-              id="username"
-              value={form.username}
-            />
-            <SheetDescription style={{ marginTop: '5px' }}>
-                {dictionary.settingsAccount['message-username']}
-            </SheetDescription>
-          </div>
-          <div className="flex-shrink-0">
-            <img
-                src={form.avatar ? form.avatar : defaultAvatar}
-                alt="Avatar"
-                className="w-24 h-24 rounded-full"
-            />
-          </div>
+    <Form>
+      <form onSubmit={e => handleSubmit(e)} className="space-y-8"></form>
+      <div className="flex space-x-4 items-center">
+        <div className="flex-1">
+          <Text
+            label={dictionary.settingsAccount['user-username']}
+            id="username"
+            value={form.username}
+          />
+          <SheetDescription style={{ marginTop: '5px' }}>
+              {dictionary.settingsAccount['message-username']}
+          </SheetDescription>
         </div>
-        <div className="flex space-x-4">
-          <div className="flex-1">
-            <Text
-              label={dictionary.settingsAccount['user-firstname']}
-              id="firstname"
-              value={form.firstname}
+        <div className="flex-shrink-0" onClick={() => setPopupOpen(true)}>
+          <img
+            src={form.avatar ? form.avatar : defaultAvatar}
+            alt="Avatar"
+            className="w-24 h-24 rounded-full"
+          />
+          {isPopupOpen && (
+            <PopupProfile
+              username={form.username}
+              isPopupOpen={true}
+              setPopupOpen={setPopupOpen}
+            />
+          )}
+        </div>
+      </div>
+      <div className="flex space-x-4">
+        <div className="flex-1">
+          <Text
+            label={dictionary.settingsAccount['user-firstname']}
+            id="firstname"
+            value={form.firstname}
+            onChange={(e) => {
+              e.target.classList.remove('border-red-500')
+              setter({ key: 'firstname', value: e.target.value })
+            }}
+          />
+        </div>
+        <div className="flex-1">
+          <Text
+              label={dictionary.settingsAccount['user-lastname']}
+              id="lastname"
+              value={form.lastname}
               onChange={(e) => {
                 e.target.classList.remove('border-red-500')
-                setter({ key: 'firstname', value: e.target.value })
+                setter({ key: 'lastname', value: e.target.value })
               }}
             />
           </div>
-          <div className="flex-1">
-            <Text
-                label={dictionary.settingsAccount['user-lastname']}
-                id="lastname"
-                value={form.lastname}
-                onChange={(e) => {
-                  e.target.classList.remove('border-red-500')
-                  setter({ key: 'lastname', value: e.target.value })
-                }}
-              />
-            </div>
-        </div>
-        <Text
-          label={dictionary.settingsAccount['user-email']}
-          id="email"
-          value={form.email}
+      </div>
+      <Text
+        label={dictionary.settingsAccount['user-email']}
+        id="email"
+        value={form.email}
+      />
+      <SheetDescription style={{ marginTop: '5px' }}>
+          {dictionary.settingsAccount['message-email']}
+      </SheetDescription>
+      <Text
+          label={dictionary.settingsAccount['user-password']}
+          placeholder="***********"
+          onChange={(e) => {
+            if (e.target.value.length > 0) {
+              e.target.classList.remove('border-red-500')
+              setter({ key: 'password', value: e.target.value })
+            } else {
+              e.target.classList.add('border-red-500')
+              // toast.error(dictionary.settingsAccount['error-lastname'])
+            }
+          }}
         />
-        <SheetDescription style={{ marginTop: '5px' }}>
-            {dictionary.settingsAccount['message-email']}
-        </SheetDescription>
-        <Text
-            label={dictionary.settingsAccount['user-password']}
-            placeholder="***********"
-            onChange={(e) => {
-              if (e.target.value.length > 0) {
+      <Text
+          label={dictionary.settingsAccount['user-password-confirm']}
+          placeholder="***********"
+          onChange={(e) => {
+            console.log('form ', form)
+            console.log('form.password ', form.password)
+            if (form.password !== null) {
+              if (e.target.value.length > 8) {
                 e.target.classList.remove('border-red-500')
-                setter({ key: 'password', value: e.target.value })
+                // setter({ key: 'lastname', value: e.target.value })
               } else {
                 e.target.classList.add('border-red-500')
                 // toast.error(dictionary.settingsAccount['error-lastname'])
               }
-            }}
-          />
-        <Text
-            label={dictionary.settingsAccount['user-password-confirm']}
-            placeholder="***********"
-            onChange={(e) => {
-              console.log('form ', form)
-              console.log('form.password ', form.password)
-              if (form.password !== null) {
-                if (e.target.value.length > 8) {
-                  e.target.classList.remove('border-red-500')
-                  // setter({ key: 'lastname', value: e.target.value })
-                } else {
-                  e.target.classList.add('border-red-500')
-                  // toast.error(dictionary.settingsAccount['error-lastname'])
-                }
-              } else {
-                console.log('estoy  aqui')
-                e.target.value = ''
-                toast.error(dictionary.settingsAccount['error-full-new-password'])
-              }
-            }}
-          />
-        <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
-      </form>
+            } else {
+              console.log('estoy  aqui')
+              e.target.value = ''
+              toast.error(dictionary.settingsAccount['error-full-new-password'])
+            }
+          }}
+        />
+      <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
     </Form>
   )
 }
