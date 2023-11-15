@@ -83,8 +83,6 @@ export function AccountForm () {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('form', form)
-
     try {
       accountFormSchema.parse({ ...form })
       const updateUserAccount = () => {
@@ -117,7 +115,7 @@ export function AccountForm () {
 
   return (
     <Form>
-      <form onSubmit={e => handleSubmit(e)} className="space-y-8"></form>
+      <form onSubmit={e => handleSubmit(e)} className="space-y-8">
       <div className="flex space-x-4 items-center">
         <div className="flex-1">
           <Text
@@ -130,18 +128,10 @@ export function AccountForm () {
           </SheetDescription>
         </div>
         <div className="flex-shrink-0" onClick={() => setPopupOpen(true)}>
-          <img
-            src={form.avatar ? form.avatar : defaultAvatar}
-            alt="Avatar"
-            className="w-24 h-24 rounded-full"
-          />
-          {isPopupOpen && (
-            <PopupProfile
-              username={form.username}
-              isPopupOpen={true}
-              setPopupOpen={setPopupOpen}
+          <PopupProfile
+            username={form.username}
+            avatar={form.avatar ? form.avatar : defaultAvatar}
             />
-          )}
         </div>
       </div>
       <div className="flex space-x-4">
@@ -210,7 +200,8 @@ export function AccountForm () {
             }
           }}
         />
-      <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
+        <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
+        </form>
     </Form>
   )
 }

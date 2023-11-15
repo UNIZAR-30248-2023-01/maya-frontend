@@ -48,10 +48,10 @@ export const projectSettingsSchema = z.object({
 })
 
 export const accountFormSchema = z.object({
-  username: z.string().min(2).max(30),
-  email: z.string().email(),
-  avatar: z.string().url().nullable(),
-  firstname: z.string().min(2).max(30),
-  lastname: z.string().min(2).max(30),
+  username: z.string().min(1).max(30),
+  email: z.string().email().nullable(),
+  avatar: z.string().nullable(),
+  firstname: z.string().min(1).max(30).nullable(),
+  lastname: z.string().min(1).max(30).nullable(),
   language: z.string().nullable()
 })
