@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sidebar } from '@/components/sidebar/sidebar'
 import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
@@ -11,14 +11,16 @@ import { redirect } from 'next/navigation'
 
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
-  const { status } = useSession()
+  const { status, data } = useSession()
 
-  if (!process.env.NODE_ENV === 'production') {
-    if (status === 'loading') {
-      return <div>Loading...</div>
-    } else if (status === 'unauthenticated') {
-      return redirect('/sign-in')
-    }
+  useEffect(() => {
+    console.log(data, status)
+  }, [data])
+
+  if (status === 'loading') {
+    return <div>Loading...</div>
+  } else if (status === 'unauthenticated') {
+    return redirect('/sign-in')
   }
 
   return (
