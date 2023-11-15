@@ -48,8 +48,6 @@ export function PopupProfile ({
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('usernameeeeeeeeeeeee ', username, typeof username)
-
     try {
       accountFormSchema.parse({ username, ...form })
       const updateUserProfile = () => {
@@ -62,7 +60,6 @@ export function PopupProfile ({
                 console.log('Updated profile')
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&avatar=eq.${form.avatar}&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -98,10 +95,10 @@ export function PopupProfile ({
                   key={index}
                   src={memoji}
                   alt={`Memoji ${index + 1}`}
-                  className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
+                  className={`w-10 h-10 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
                   onClick={() => {
-                    handleSelectAvatar(memoji);
-                    setter({ key: 'avatar', value: memoji });
+                    handleSelectAvatar(memoji)
+                    setter({ key: 'avatar', value: memoji })
                   }}
                 />
               ))}
