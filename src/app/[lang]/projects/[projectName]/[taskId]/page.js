@@ -20,6 +20,8 @@ import { Input } from '@/components/ui/input'
 import { LuSend } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Hour } from '@/components/tasks/hours'
 
 export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
@@ -48,7 +50,7 @@ export default function TaskPage ({ params }) {
           (async () => {
             await supabase.from('task-comments').insert({
               task: params.taskId,
-              username: 'hec7orci7o',
+              username: JSON.parse(localStorage.getItem('maya-user')).username,
               comment: newComment
             }).select()
               .then(() => {
@@ -95,6 +97,33 @@ export default function TaskPage ({ params }) {
 
   console.log(tasks)
   console.log(people)
+
+  const CommentsSection = () => {
+    return (
+      <div className='flex flex-col gap-1.5'>
+        <Label className='capitalize'>
+          {dictionary.comments.titulo}
+        </Label>
+        <Card>
+          <CardContent className='p-8 flex flex-col gap-8'>
+            <ScrollArea className='h-96 p-4'>
+              <div className='flex flex-col gap-8'>
+                {comments.map((comment, id) => (
+                <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
+                ))}
+              </div>
+            </ScrollArea>
+
+            <form onSubmit={(e) => handleAddComment(e)}
+              className='flex flex-row gap-4'>
+              <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
+              <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading) {
     const task = tasks[0]
@@ -366,28 +395,29 @@ export default function TaskPage ({ params }) {
           </div>
         )}
 
-        {!edit && <div className='flex flex-col gap-1.5'>
-          <Label className='capitalize'>
-            {dictionary.comments.titulo}
-          </Label>
-          <Card>
-            <CardContent className='p-8 flex flex-col gap-8'>
-              <ScrollArea className='h-96 p-4'>
-                <div className='flex flex-col gap-8'>
-                  {comments.map((comment, id) => (
-                  <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
-                  ))}
-                </div>
-              </ScrollArea>
-
-              <form onSubmit={(e) => handleAddComment(e)}
-                className='flex flex-row gap-4'>
-                <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
-                <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>}
+        {!edit && people.find(e => e.username === JSON.parse(localStorage.getItem('maya-user')).username)
+          ? (
+            <>
+              <Tabs defaultValue="comments" className="w-full">
+                <TabsList>
+                  <TabsTrigger value="comments" className="flex items-center gap-x-1.5 capitalize">
+                    {dictionary.comments.titulo}
+                  </TabsTrigger>
+                  <TabsTrigger value="time" className="flex items-center gap-x-1.5 capitalize">
+                    {dictionary.comments.titulo}
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="comments">
+                  <CommentsSection />
+                </TabsContent>
+                <TabsContent value="time">
+                  <Hour username={'hec7orci70'} hour={3} date={comments[0].created_at}/>
+                </TabsContent>
+              </Tabs>
+            </>
+            )
+          : (<CommentsSection />
+            )}
       </div>
     )
   }

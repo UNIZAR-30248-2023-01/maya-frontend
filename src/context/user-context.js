@@ -40,7 +40,7 @@ export function UserProvider ({ children }) {
     }
 
     (async function fetchData (email) {
-      const user = await fetcher(`${process.env.NEXT_PUBLIC_SUPABASE_URL}rest/v1/people?email=eq.${email}&select=username,firstname,lastname,email,avatar`)
+      const user = await fetcher(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${email}&select=username,firstname,lastname,email,avatar`)
       setUser(user[0])
     }(user.email))
   }, [status, data])

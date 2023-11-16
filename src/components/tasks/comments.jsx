@@ -11,7 +11,7 @@ export function Comment ({
   const parsedDate = parseISO(date)
   const formattedDate = format(parsedDate, 'PPP')
 
-  if (username === 'hec7orci7o') {
+  if (username === JSON.parse(localStorage.getItem('maya-user')).username) {
     return (
             <div className='flex justify-end'>
                 <div className='p-4 pt-2 w-fit max-w-xl rounded-md flex flex-col gap-2 shadow-md bg-[#B2E7D8]'>

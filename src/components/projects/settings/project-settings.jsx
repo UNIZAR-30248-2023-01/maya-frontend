@@ -124,7 +124,7 @@ export function ProjectSettings ({ projectName }) {
       <div className="flex flex-col gap-4 max-w-[800px]">
         {/* <TabsContent value={value} className='space-y-6'> */}
 
-        <form id='form-project-settings' onSubmit={(e) => handleSubmit(e)} className="space-y-8">
+        <form id='form-project-settings' onSubmit={(e) => handleSubmit(e)} className="space-y-8 mt-4">
           <Text
             id="name"
             label={dictionary.projectSettings.name}
