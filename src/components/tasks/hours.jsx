@@ -12,12 +12,10 @@ export function Hour ({
   const formattedDate = format(parsedDate, 'PPP')
   return (
 
-        <div className='p-4 pt-2 w-fit max-w-xl rounded-md flex flex-col gap-2 shadow-md bg-[#FFD1DC]'>
-            <div className='flex flex-row gap-4 items-center'>
-                <Label className='text-sm font-semibold'>{username}</Label>
-                <Label className='text-muted-foreground text-xs font-normal'>{formattedDate}</Label>
-                <Label className='text-sm pl-4'>{hour}</Label>
-            </div>
+        <div className='p-4 w-full rounded-md flex flex-row gap-2 justify-between shadow-md bg-[#efefef]'>
+          <Label className='text-sm font-semibold text-left'>{username}</Label>
+          <Label className='text-sm font-normal'>{formattedDate}</Label>
+          <Label className='text-sm pl-4'>{hour}h</Label>
         </div>
   )
 }

@@ -529,6 +529,31 @@ export const comments = {
   }
 }
 
+export const hours = {
+  es: {
+    titulo: 'Registro de horas',
+    placeholder: 'Escribe aquí tu tiempo invertido (en horas)...',
+    button: 'Añadir horas',
+    hours: 'Horas',
+    date: 'Fecha',
+    user: 'Usuario',
+    'toast-loading': 'Estamos enviando tu comentario. Por favor, espera un momento.',
+    'toast-success': 'Tu comentario se ha enviado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    titulo: 'Time log',
+    placeholder: 'Type here your time spent (in hours)...',
+    button: 'Add hours',
+    hours: 'Time spent',
+    date: 'Date',
+    user: 'Username',
+    'toast-loading': 'We are sending your comment. Please wait a moment.',
+    'toast-success': 'Your comment has been sent successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
 export const auth = {
   es: {
     'signin-loading': 'Estamos iniciando sesión. Por favor, espera un momento.',

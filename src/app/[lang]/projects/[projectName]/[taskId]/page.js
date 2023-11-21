@@ -17,16 +17,18 @@ import { format, parseISO } from 'date-fns'
 import { tasksSchema } from '@/lib/schemas'
 import { Comment } from '@/components/tasks/comments'
 import { Input } from '@/components/ui/input'
-import { LuSend } from 'react-icons/lu'
+import { LuSend, LuPlus } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Hour } from '@/components/tasks/hours'
+import { Separator } from '@/components/ui/separator'
 
 export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
   const [edit, setEdit] = useState(false)
   const [newComment, setNewComment] = useState(null)
+  const [newHour, setNewHour] = useState(null)
 
   const [form, setForm] = useState(getForm(tasksSchema._def.shape()))
 
@@ -42,8 +44,6 @@ export default function TaskPage ({ params }) {
   // guardar los comentarios en el backend
   const handleAddComment = (e) => {
     e.preventDefault()
-    // lee el comentario y lo guarda en el backend
-    console.log(newComment)
     try {
       const addComment = () => {
         return new Promise((resolve, reject) => {
@@ -79,6 +79,44 @@ export default function TaskPage ({ params }) {
     }
   }
 
+  // guardar los comentarios en el backend
+  const handleAddHour = (e) => {
+    e.preventDefault()
+    try {
+      const addHour = () => {
+        return new Promise((resolve, reject) => {
+          (async () => {
+            await supabase.from('task-hours').insert({
+              id: params.taskId,
+              username: JSON.parse(localStorage.getItem('maya-user')).username,
+              hora: newHour
+            }).select()
+              .then(() => {
+                // Actualización de los datos en la interfaz
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-hours?id=eq.${params.taskId}&select=*`)
+                resolve()
+              }).catch((error) => {
+                console.error(error)
+                reject(error)
+              })
+          })()
+        })
+      }
+
+      toast.promise(addHour, {
+        loading: dictionary.hours['toast-loading'],
+        success: () => dictionary.hours['toast-success'],
+        error: () => dictionary.hours['toast-error']
+      })
+      setNewHour(null)
+      e.target.reset()
+    } catch (error) {
+      console.log(error)
+      const { path, message } = JSON.parse(error.message)[0]
+      toast.error(path[0] + ': ' + message)
+    }
+  }
+
   // Conexiones con el backend
   const { data: tasks, isLoading: taskLoadig } = useSWR(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/tasks?id=eq.${params.taskId}&select=*`
@@ -95,37 +133,14 @@ export default function TaskPage ({ params }) {
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-comments?task=eq.${params.taskId}&select=*`
   )
 
+  const { data: hours, isLoading: hoursLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-hours?id=eq.${params.taskId}&select=*`
+  )
+
   console.log(tasks)
   console.log(people)
 
-  const CommentsSection = () => {
-    return (
-      <div className='flex flex-col gap-1.5'>
-        <Label className='capitalize'>
-          {dictionary.comments.titulo}
-        </Label>
-        <Card>
-          <CardContent className='p-8 flex flex-col gap-8'>
-            <ScrollArea className='h-96 p-4'>
-              <div className='flex flex-col gap-8'>
-                {comments.map((comment, id) => (
-                <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
-                ))}
-              </div>
-            </ScrollArea>
-
-            <form onSubmit={(e) => handleAddComment(e)}
-              className='flex flex-row gap-4'>
-              <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
-              <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
-
-  if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading) {
+  if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading && !hoursLoading) {
     const task = tasks[0]
     const status = tasksStatuses.find(status => status.value === task.status)
     const label = tasksLabels.find(label => label.value === task.label)
@@ -134,6 +149,7 @@ export default function TaskPage ({ params }) {
     const formattedDate = parsedDate !== '' ? format(parsedDate, 'PPP') : dictionary.tasks['new-task-label-placeholder']
 
     comments.sort((a, b) => a.created_at - b.created_at)
+    comments.sort((a, b) => a.date - b.date)
 
     console.log('comments', comments)
 
@@ -404,19 +420,92 @@ export default function TaskPage ({ params }) {
                     {dictionary.comments.titulo}
                   </TabsTrigger>
                   <TabsTrigger value="time" className="flex items-center gap-x-1.5 capitalize">
-                    {dictionary.comments.titulo}
+                    {dictionary.hours.titulo}
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="comments">
-                  <CommentsSection />
+                <div className='flex flex-col gap-1.5'>
+                  <Label className='capitalize'>
+                    {dictionary.comments.titulo}
+                  </Label>
+                  <Card>
+                    <CardContent className='p-8 flex flex-col gap-8'>
+                      <ScrollArea className='h-96 p-4'>
+                        <div className='flex flex-col gap-8'>
+                          {comments.map((comment, id) => (
+                          <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
+                          ))}
+                        </div>
+                      </ScrollArea>
+
+                      <form onSubmit={(e) => handleAddComment(e)}
+                        className='flex flex-row gap-4'>
+                        <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
+                        <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+                      </form>
+                    </CardContent>
+                  </Card>
+                </div>
                 </TabsContent>
                 <TabsContent value="time">
-                  <Hour username={'hec7orci70'} hour={3} date={comments[0].created_at}/>
+                  <div className='flex flex-col gap-1.5'>
+                    <Label className='capitalize'>
+                      {dictionary.hours.titulo}
+                    </Label>
+                    <Card>
+                      <CardContent className='p-8 flex flex-col'>
+                        <div className='flex flex-row w-full justify-between items-center p-4 pl-8 pr-8 '>
+                          <Label>{dictionary.hours.user}</Label>
+                          <Label>{dictionary.hours.date}</Label>
+                          <Label>{dictionary.hours.hours}</Label>
+                        </div>
+                        <Separator />
+                        <ScrollArea className='h-96 p-4'>
+                          <div className='flex flex-col gap-4'>
+                            {hours.map((hour, id) => (
+                              <Hour key={'hour-' + params.taskId + '-' + id} username={hour.username} hour={hour.hora} date={hour.date}/>
+                            ))}
+                          </div>
+                        </ScrollArea>
+
+                        <form onSubmit={(e) => handleAddHour(e)}
+                          className='flex flex-row gap-4 items-center'>
+                          <Input type='number'
+                            min={0}
+                            id={'time-log-input'}
+                            placeholder={dictionary.hours.placeholder}
+                            onChange={(e) => setNewHour(e.target.valueAsNumber)}/>
+                          <Button className='px-4 flex flex-row gap-2 min-w-fit'> {dictionary.hours.button} <LuPlus /></Button>
+                        </form>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </TabsContent>
               </Tabs>
             </>
             )
-          : (<CommentsSection />
+          : (<div className='flex flex-col gap-1.5'>
+                <Label className='capitalize'>
+                  {dictionary.comments.titulo}
+                </Label>
+                <Card>
+                  <CardContent className='p-8 flex flex-col gap-8'>
+                    <ScrollArea className='h-96 p-4'>
+                      <div className='flex flex-col gap-8'>
+                        {comments.map((comment, id) => (
+                        <Comment key={'comment-' + params.taskId + '-' + id} date={comment.created_at} username={comment.username} comment={comment.comment} />
+                        ))}
+                      </div>
+                    </ScrollArea>
+
+                    <form onSubmit={(e) => handleAddComment(e)}
+                      className='flex flex-row gap-4'>
+                      <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
+                      <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             )}
       </div>
     )
