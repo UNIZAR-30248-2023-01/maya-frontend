@@ -13,7 +13,9 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
+  DialogClose,
+  DialogFooter
 } from '@/components/ui/dialog'
 
 export function PopupProfile ({
@@ -84,13 +86,13 @@ export function PopupProfile ({
   return (
     <Dialog>
       <DialogTrigger><img
-                src={originalAvatar || form.avatar}
-                alt=""
-                className="w-24 h-24 rounded-full"
-              /></DialogTrigger>
+        src={originalAvatar || form.avatar}
+        alt=""
+        className="w-24 h-24 rounded-full"
+      /></DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Selecciona</DialogTitle>
+          <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
           <DialogDescription>
             <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
               {memojiList.map((memoji, index) => (
@@ -109,8 +111,14 @@ export function PopupProfile ({
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
-          <Button type="submit" onClick={handleSubmit}>Update account</Button>
+          <Button type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
         </div>
+        {/*<DialogFooter>
+          <DialogClose className="flex justify-end mt-4" style={{ marginTop: '20px' }} onClick={handleSubmit}>
+            {dictionary.settingsAccount['update-avatar']}
+          </DialogClose>
+        </DialogFooter>*/}
+        
       </DialogContent>
     </Dialog>
 

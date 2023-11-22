@@ -211,6 +211,9 @@ export const settingsAccount = {
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
     'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.',
 
+    'pick-avatar': 'Selecciona un avatar',
+    'update-avatar': 'Actualizar',
+
     language: 'es-ES',
     'user-firstname': 'Nombre',
     'user-lastname': 'Apellido',
@@ -242,6 +245,9 @@ export const settingsAccount = {
     'account-headline': 'My account',
     'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
     'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+
+    'pick-avatar': 'Pick an avatar',
+    'update-avatar': 'Update',
 
     language: 'en-US',
     'user-firstname': 'Name',
