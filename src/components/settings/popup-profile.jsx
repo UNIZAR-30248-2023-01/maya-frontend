@@ -20,7 +20,9 @@ export function PopupProfile ({
   username,
   avatar
 }) {
-  console.log('username', username)
+  // console.log('username', username)
+
+  const originalAvatar = avatar
 
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   // const setter = ({ key, value }) => setForm({ ...form, [key]: value })
@@ -58,6 +60,7 @@ export function PopupProfile ({
               .eq('username', username)
               .then(() => {
                 console.log('Updated profile')
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&avatar=eq.${originalAvatar}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
                 resolve()

@@ -55,3 +55,7 @@ export const accountFormSchema = z.object({
   lastname: z.string().min(1).max(30).nullable(),
   language: z.string().nullable()
 })
+
+export const appearanceFormSchema = z.object({
+  theme: z.enum(['light', 'dark']).default('light'),
+})

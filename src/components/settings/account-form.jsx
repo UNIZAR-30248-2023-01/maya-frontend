@@ -15,70 +15,42 @@ import { mutate } from 'swr'
 import { useLang } from '@/context/language-context'
 import { accountFormSchema } from '@/lib/schemas'
 import { Text } from '@/components/forms'
-import { useSession } from 'next-auth/react'
 import { PopupProfile } from '@/components/settings/popup-profile.jsx'
+import { useUser } from '@/context/user-context'
 
 export function AccountForm () {
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   const defaultAvatar = '/assets/avatars/memojis/4.webp'
-  const [isPopupOpen, setPopupOpen] = useState(false)
 
-  const [loading, setLoading] = useState(true)
-  console.log('loading', loading)
+  const [loading, setLoading] = useState(false)
+
+  const { user } = useUser()
 
   const { dictionary } = useLang()
 
-  const { data: session } = useSession()
-
-  console.log('session', session)
-
-  // const { data: accountData } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${session.user.email}&select=*`)
-  // console.log('accountData', accountData)
+  console.log('User: ', user)
 
   useEffect(() => {
-    console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
+    console.log('El useEffect se ha ejecutado')
+
     const fetchData = async () => {
-      if (session && session.user && loading) {
-        const { data: accountData } = await supabase
-          .from('people')
-          .select('*')
-          .eq('email', session.user.email)
+      if (user !== undefined && !loading) {
+        console.log('El if de useEffect se ha ejecutado')
 
-        console.log('accountData', accountData)
-
-        if (accountData && accountData.length > 0) {
-          setForm({
-            ...form,
-            username: accountData[0].username,
-            email: accountData[0].email,
-            avatar: accountData[0].avatar,
-            firstname: accountData[0].firstname,
-            lastname: accountData[0].lastname
-          })
-          setLoading(false)
-        }
+        setForm({
+          ...form,
+          avatar: user.avatar,
+          firstname: user.firstname,
+          lastname: user.lastname
+        })
+        setLoading(true)
       }
     }
 
     fetchData()
-  }, [loading && session])
-  /*
-  if (accountData !== undefined && !loading) {
-    if (accountData !== undefined && !loading) {
-      console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
-      setForm({
-        ...form,
-        username: accountData[0].username,
-        email: accountData[0].email,
-        avatar: accountData[0].avatar,
-        firstname: accountData[0].firstname,
-        lastname: accountData[0].lastname
-      })
-      setLoading(true)
-    }
-  } */
+  }, [user, loading])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -90,11 +62,12 @@ export function AccountForm () {
           (async () => {
             await supabase.from('people')
               .update({ firstname: form.firstname, lastname: form.lastname })
-              .eq('email', session.user.email)
+              .eq('username', user?.username)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${session.user.email}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?firstname=eq.${form.firstname}&lastname=eq.${form.lastname}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?firstname=eq.${form.firstname}&lastname=eq.${form.lastname}&avatar=${form.avatar}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&avatar=${form.avatar}&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -121,19 +94,17 @@ export function AccountForm () {
           <Text
             label={dictionary.settingsAccount['user-username']}
             id="username"
-            value={form.username}
+            value={user?.username}
           />
           <SheetDescription style={{ marginTop: '5px' }}>
               {dictionary.settingsAccount['message-username']}
           </SheetDescription>
         </div>
-        <div className="flex-shrink-0" onClick={() => setPopupOpen(true)}>
-          <PopupProfile
-            username={form.username}
-            avatar={form.avatar ? form.avatar : defaultAvatar}
+        <PopupProfile
+            username={user?.username}
+            avatar={user?.avatar ? user?.avatar : defaultAvatar}
             />
         </div>
-      </div>
       <div className="flex space-x-4">
         <div className="flex-1">
           <Text
@@ -161,7 +132,7 @@ export function AccountForm () {
       <Text
         label={dictionary.settingsAccount['user-email']}
         id="email"
-        value={form.email}
+        value={user?.email}
       />
       <SheetDescription style={{ marginTop: '5px' }}>
           {dictionary.settingsAccount['message-email']}
@@ -183,8 +154,6 @@ export function AccountForm () {
           label={dictionary.settingsAccount['user-password-confirm']}
           placeholder="***********"
           onChange={(e) => {
-            console.log('form ', form)
-            console.log('form.password ', form.password)
             if (form.password !== null) {
               if (e.target.value.length > 8) {
                 e.target.classList.remove('border-red-500')
@@ -194,7 +163,6 @@ export function AccountForm () {
                 // toast.error(dictionary.settingsAccount['error-lastname'])
               }
             } else {
-              console.log('estoy  aqui')
               e.target.value = ''
               toast.error(dictionary.settingsAccount['error-full-new-password'])
             }
