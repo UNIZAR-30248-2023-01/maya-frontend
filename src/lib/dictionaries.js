@@ -208,7 +208,8 @@ export const settingsAccount = {
     'logout-tab': 'Cerrar sesión',
 
     'account-headline': 'Mi cuenta',
-    'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, imagen de perfil e idioma preferido.',
+    'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
+    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.',
 
     language: 'es-ES',
     'user-firstname': 'Nombre',
@@ -239,7 +240,8 @@ export const settingsAccount = {
     'logout-tab': 'Logout',
 
     'account-headline': 'My account',
-    'account-under-headline': 'Update your account settings. Set your name, lastname and preferred avatar and language.',
+    'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
+    'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
 
     language: 'en-US',
     'user-firstname': 'Name',

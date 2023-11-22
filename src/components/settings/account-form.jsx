@@ -35,7 +35,7 @@ export function AccountForm () {
   useEffect(() => {
     console.log('El useEffect se ha ejecutado')
 
-    const fetchData = async () => {
+    const fetchData = () => {
       if (user !== undefined && !loading) {
         console.log('El if de useEffect se ha ejecutado')
 
@@ -103,6 +103,7 @@ export function AccountForm () {
         <PopupProfile
             username={user?.username}
             avatar={user?.avatar ? user?.avatar : defaultAvatar}
+            email={user?.email}
             />
         </div>
       <div className="flex space-x-4">

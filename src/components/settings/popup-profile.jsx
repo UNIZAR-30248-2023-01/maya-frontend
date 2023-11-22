@@ -18,7 +18,8 @@ import {
 
 export function PopupProfile ({
   username,
-  avatar
+  avatar,
+  email
 }) {
   // console.log('username', username)
 
@@ -63,6 +64,7 @@ export function PopupProfile ({
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&avatar=eq.${originalAvatar}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}rest/v1/people?email=eq.${email}&select=username,firstname,lastname,email,avatar`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -92,13 +94,13 @@ export function PopupProfile ({
         <DialogHeader>
           <DialogTitle>Selecciona</DialogTitle>
           <DialogDescription>
-            <div className="grid grid-cols-10 gap-4" style={{ marginTop: '20px' }}>
+            <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
               {memojiList.map((memoji, index) => (
                 <img
                   key={index}
                   src={memoji}
                   alt={`Memoji ${index + 1}`}
-                  className={`w-10 h-10 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
+                  className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
                   onClick={() => {
                     handleSelectAvatar(memoji)
                     setter({ key: 'avatar', value: memoji })
