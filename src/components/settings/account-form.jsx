@@ -22,8 +22,6 @@ export function AccountForm () {
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-  const defaultAvatar = '/assets/avatars/memojis/4.webp'
-
   const [loading, setLoading] = useState(false)
 
   const { user } = useUser()
@@ -100,11 +98,7 @@ export function AccountForm () {
               {dictionary.settingsAccount['message-username']}
           </SheetDescription>
         </div>
-        <PopupProfile
-            username={user?.username}
-            avatar={user?.avatar ? user?.avatar : defaultAvatar}
-            email={user?.email}
-            />
+        <PopupProfile user={user} />
         </div>
       <div className="flex space-x-4">
         <div className="flex-1">

@@ -17,13 +17,11 @@ import {
 } from '@/components/ui/dialog'
 
 export function PopupProfile ({
-  username,
-  avatar,
-  email
+  user
 }) {
   // console.log('username', username)
 
-  const originalAvatar = avatar
+  const originalAvatar = user?.avatar ? user?.avatar : '/assets/avatars/memojis/4.webp'
 
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   // const setter = ({ key, value }) => setForm({ ...form, [key]: value })
@@ -34,7 +32,7 @@ export function PopupProfile ({
     console.log('Value: ', value)
   }
 
-  const [selectedAvatar, setSelectedAvatar] = useState()
+  const [selectedAvatar, setSelectedAvatar] = useState(originalAvatar)
 
   const { dictionary } = useLang()
 
@@ -52,19 +50,19 @@ export function PopupProfile ({
     e.preventDefault()
 
     try {
-      accountFormSchema.parse({ username, ...form })
+      accountFormSchema.parse({ username: user?.username, ...form })
       const updateUserProfile = () => {
         return new Promise((resolve, reject) => {
           (async () => {
             await supabase.from('people')
               .update({ avatar: form.avatar })
-              .eq('username', username)
+              .eq('username', user?.username)
               .then(() => {
                 console.log('Updated profile')
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&avatar=eq.${originalAvatar}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${username}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&avatar=eq.${originalAvatar}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}rest/v1/people?email=eq.${email}&select=username,firstname,lastname,email,avatar`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${user?.email}&select=username,firstname,lastname,email,avatar`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -86,7 +84,7 @@ export function PopupProfile ({
   return (
     <Dialog>
       <DialogTrigger><img
-                src={avatar}
+                src={originalAvatar || form.avatar}
                 alt=""
                 className="w-24 h-24 rounded-full"
               /></DialogTrigger>

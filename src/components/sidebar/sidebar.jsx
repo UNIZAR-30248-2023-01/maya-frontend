@@ -9,6 +9,7 @@ import { useUser } from '@/context/user-context'
 export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
   const { dictionary } = useLang()
   const { user } = useUser()
+  console.log('sidebar', user)
   navigation = navigation.map((item) => ({ ...item, name: dictionary.navigation[item.name] }))
 
   return (sheet) && (
