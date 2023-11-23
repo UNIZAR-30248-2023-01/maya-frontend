@@ -172,7 +172,6 @@ export function SidePanelEdit ({
       })
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
-      console.log('erroooooor ', error)
       toast.error(path[0] + ': ' + message)
     }
   }

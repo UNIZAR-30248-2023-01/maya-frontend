@@ -1,14 +1,18 @@
+'use client'
+
 import { Separator } from '@/components/ui/separator'
-import { AppearanceForm } from './appearance-form'
+import { AppearanceForm } from '@/components/settings/appearance-form'
+import { useLang } from '@/context/language-context'
 
 export default function SettingsAppearancePage () {
+  const { dictionary } = useLang()
+
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">Appearance</h3>
+        <h3 className="text-lg font-medium">{dictionary.settingsAccount['apperance-tab']}</h3>
         <p className="text-sm text-muted-foreground">
-          Customize the appearance of the app. Automatically switch between day
-          and night themes.
+          {dictionary.settingsAccount['appearace-headline']}
         </p>
       </div>
       <Separator />
