@@ -18,6 +18,7 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function SidePanelManual ({
   title,
@@ -30,6 +31,8 @@ export function SidePanelManual ({
   const [errorOutHour, setErrorOutHour] = useState('')
   const [errorInHour, setErrorInHour] = useState('')
   const [invalidHour, setInvalidHour] = useState(true)
+
+  const { user } = useUser()
 
   const currentDay = new Date(new Date().getTime())
 
@@ -78,13 +81,13 @@ export function SidePanelManual ({
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{
-            username: 'hec7orci7o',
+            username: user?.username,
             in_date: timestampIn,
             out_date: timestampOut,
             total: minutosTotales
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => reject(error))

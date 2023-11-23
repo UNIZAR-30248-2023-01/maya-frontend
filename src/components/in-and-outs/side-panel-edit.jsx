@@ -19,6 +19,7 @@ import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
 import { LuClipboardEdit } from 'react-icons/lu'
 import { DatePicker, Text } from '@/components/forms'
+import { useUser } from '@/context/user-context'
 
 export function SidePanelEdit ({
   title,
@@ -35,6 +36,7 @@ export function SidePanelEdit ({
   const [invalidHour] = useState(true)
 
   const { dictionary } = useLang()
+  const { user } = useUser()
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
@@ -62,7 +64,7 @@ export function SidePanelEdit ({
   const formattedInitialDate = initialDate.toISOString()
   const formattedFinalDate = finalDate.toISOString()
 
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
 
   // useEffect para actualizar el estado del formulario con los valores iniciales
   useEffect(() => {
@@ -126,8 +128,8 @@ export function SidePanelEdit ({
           })
             .eq('id', inAndOuts[0].id)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => {
