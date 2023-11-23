@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { useLang } from '@/context/language-context'
 
 export function TeamMember ({
   image = '/assets/avatars/memojis/4.webp',
@@ -22,9 +23,11 @@ export function TeamMember ({
   lastname = 'Davis',
   username = 'm@example.com'
 }) {
+  const { dictionary, lang } = useLang()
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild id="team-member">
         <div className="flex items-center space-x-4 group hover:cursor-pointer">
           <Avatar>
             <AvatarImage src={image} />
@@ -66,7 +69,9 @@ export function TeamMember ({
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
-          <button onClick={() => signOut({ redirect: false })}>
+          <button onClick={() => {
+            signOut({ callbackUrl: `http://localhost:3000/${lang}` })
+          }} id="sign-out-button">
             Log out
           </button>
         </DropdownMenuItem>

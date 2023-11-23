@@ -70,6 +70,7 @@ export function Hero () {
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <Link
+                id="start-button-site"
                 href="/sign-up"
                 className="rounded-md border-2 border-black hover:font-semibold hover:border-black duration-300 bg-black px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-transparent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
