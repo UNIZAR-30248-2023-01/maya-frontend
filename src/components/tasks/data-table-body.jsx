@@ -41,7 +41,7 @@ export function DataTableBody ({ table }) {
             ))
           )
         : (
-        <TableRow>
+        <TableRow id="no-results">
           <TableCell
             colSpan={table.getAllColumns().length}
             className="h-24 text-center"

@@ -30,7 +30,7 @@ describe('Tasks Resource', () => {
   it('Creating a New Tasks', () => {
     cy.visit(`/en/projects/${project.name}`)
 
-    cy.wait(3000)
+    cy.wait(1000)
     cy.get('button#new-task').click()
 
     cy.get('input#name').type(task.name)

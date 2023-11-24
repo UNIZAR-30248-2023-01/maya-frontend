@@ -32,7 +32,7 @@ export default function ProjectPage ({ params }) {
             <LuUsers className="w-3.5 h-3.5"/>
             {dictionary.tasks['teams-tab']}
           </TabsTrigger>
-          <TabsTrigger value="settings" className="flex items-center gap-x-1.5 capitalize">
+          <TabsTrigger id="project-settings" value="settings" className="flex items-center gap-x-1.5 capitalize">
             <LuSettings2 className="w-3.5 h-3.5" />
             {dictionary.tasks['settings-tab']}
           </TabsTrigger>

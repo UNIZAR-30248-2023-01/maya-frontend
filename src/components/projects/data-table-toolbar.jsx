@@ -24,6 +24,7 @@ export function DataTableToolbar ({ table }) {
       />
       {table.getColumn('status') && (
         <DataTableFacetedFilter
+          id='close-filter'
           column={table.getColumn('status')}
           title={dictionary.projects.status}
           options={projectStatuses.map(status => ({ ...status, value: status.value }))}
@@ -31,6 +32,7 @@ export function DataTableToolbar ({ table }) {
       )}
       {table.getColumn('visibility') && (
         <DataTableFacetedFilter
+          id='visibility-filter'
           column={table.getColumn('visibility')}
           title={dictionary.projects.visibility}
           options={visibility.map(v => ({ ...v, value: v.value }))}

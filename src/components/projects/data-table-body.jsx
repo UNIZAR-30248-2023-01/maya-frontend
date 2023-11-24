@@ -20,6 +20,7 @@ export function DataTableBody ({ table }) {
         ? (
             table.getRowModel().rows.map((row) => (
           <TableRow
+            id={row.original.name}
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
             onClick={() => goTo(row)}
@@ -37,8 +38,9 @@ export function DataTableBody ({ table }) {
             ))
           )
         : (
-        <TableRow>
+        <TableRow id="no-results">
           <TableCell
+            id="no-results"
             colSpan={table.getAllColumns().length}
             className="h-24 text-center"
           >
