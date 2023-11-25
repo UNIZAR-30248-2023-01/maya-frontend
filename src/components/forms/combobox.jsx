@@ -51,7 +51,9 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
           <CommandInput placeholder={searchDictionary['search-placeholder']} className="h-9" />
           <CommandEmpty>{searchDictionary['not-found']}</CommandEmpty>
           <CommandGroup>
-            {list.map((item) => (
+            {list
+              .sort((a, b) => a.label.localeCompare(b.label))
+              .map((item) => (
               <CommandItem
                 key={item.value}
                 onSelect={() => {
@@ -69,7 +71,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
                   )}
                 />
               </CommandItem>
-            ))}
+              ))}
           </CommandGroup>
         </Command>
       </PopoverContent>
@@ -106,9 +108,11 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
           <CommandList>
             <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
-              {list.map((option) => {
-                const isSelected = values.includes(option.value)
-                return (
+              {list
+                .sort((a, b) => a.label.localeCompare(b.label))
+                .map((option) => {
+                  const isSelected = values.includes(option.value)
+                  return (
                   <CommandItem
                     key={option.value}
                     onSelect={(e) => onChange(e)}
@@ -125,8 +129,8 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
                     </div>
                     <span className='capitalize'>{option.label}</span>
                   </CommandItem>
-                )
-              })}
+                  )
+                })}
             </CommandGroup>
           </CommandList>
         </Command>
