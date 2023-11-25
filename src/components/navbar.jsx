@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 
 export function Navbar () {
   return (
-    <div className="z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0">
+    <div className="z-40 flex items-center gap-x-6 light:bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0 dark:bg-dark">
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon">
             <span className="sr-only">Open sidebar</span>

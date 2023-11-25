@@ -105,7 +105,7 @@ export function SidePanelManual ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-manual-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-manual-date" className='capitalize'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
