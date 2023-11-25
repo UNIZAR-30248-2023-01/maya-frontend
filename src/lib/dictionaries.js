@@ -209,7 +209,7 @@ export const settingsAccount = {
 
     'account-headline': 'Mi cuenta',
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
-    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.',
+    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
 
     'pick-avatar': 'Selecciona un avatar',
     'update-avatar': 'Actualizar',
@@ -224,9 +224,16 @@ export const settingsAccount = {
     'user-password-confirm': 'Confirmar contraseña',
 
     'submitted-values': 'Has actualizado los siguientes valores',
+    'theme-submit': 'El color del tema se ha actualizado correctamente.',
 
     'message-username': '* El nombre de usuario no se puede modificar.',
     'message-email': '* El correo electrónico no se puede modificar.',
+
+    'appearance-theme': 'Tema',
+    'appearance-theme-light': 'Claro',
+    'appearance-theme-dark': 'Oscuro',
+    'appearance-subheadline': 'Selecciona el tema para el panel de control.',
+    'appearance-update': 'Actualizar color del tema',
 
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
@@ -259,9 +266,16 @@ export const settingsAccount = {
     'user-password-confirm': 'Confirm password',
 
     'submitted-values': 'You submitted the following values.',
+    'theme-submit': 'Theme color has been updated successfully.',
 
     'message-username': '* Username cannot be modified.',
     'message-email': '* E-mail cannot be modified.',
+
+    'appearance-theme': 'Theme',
+    'appearance-theme-light': 'Light',
+    'appearance-theme-dark': 'Dark',
+    'appearance-subheadline': 'Select the theme for the dashboard.',
+    'appearance-update': 'Update theme color',
 
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
