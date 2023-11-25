@@ -6,12 +6,9 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
-import { useRouter } from 'next/navigation'
 import { useLang } from '@/context/language-context'
 
 export function DataTableBody ({ table }) {
-  const router = useRouter()
-  const goTo = (row) => router.push(`/teams/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
   const { dictionary } = useLang()
 
   return (
@@ -22,8 +19,6 @@ export function DataTableBody ({ table }) {
           <TableRow
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
-            onClick={() => goTo(row)}
-            className="cursor-pointer"
           >
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>

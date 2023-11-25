@@ -14,7 +14,7 @@ export default function StaffPage () {
       role: rest.role,
       organization: rest.organization
     }
-  }).filter(row => row.organization === 'hec7orci7o')
+  }).filter(row => row.organization === 'reign')
 
   return <DataTable data={people || loadingPeople} columns={columns}/>
 }
