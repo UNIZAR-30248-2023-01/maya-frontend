@@ -6,6 +6,7 @@ import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { Label } from '@/components/ui/label'
 import { normalize, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useLang } from '@/context/language-context'
 import {
   Command,
   CommandEmpty,
@@ -20,8 +21,9 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictionary, onChange }) {
+export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChange }) {
   const [open, setOpen] = useState(false)
+  const { dictionary } = useLang()
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className='flex flex-col gap-1.5 w-full'>
@@ -75,8 +77,10 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange, dictionary }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
+  const { dictionary } = useLang()
+
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
       <div className='flex flex-col gap-1.5 w-full'>
@@ -107,10 +111,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
                 return (
                   <CommandItem
                     key={option.value}
-                    onSelect={(e) => {
-                      onChange(e)
-                      setOpen(false)
-                    }}
+                    onSelect={(e) => onChange(e)}
                   >
                     <div
                       className={cn(

@@ -36,8 +36,6 @@ export function RoleChange ({
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-  console.log(username, projectName, defaultRole)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -108,7 +106,6 @@ export function RoleChange ({
                   searchDictionary={dictionary.search}
                   onChange={(e) => {
                     const original = Object.keys(dictionary.roles).find(key => key === e)
-                    console.log(original)
                     setter({ key: 'role', value: original === form.role ? null : original })
                   }}
                 />

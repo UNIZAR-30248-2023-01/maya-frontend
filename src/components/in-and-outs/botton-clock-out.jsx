@@ -40,18 +40,9 @@ export function ClockOut ({
 
     const timestampIn = new Date(year, month, day, hour, minute)
     const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(':')[0], out_hour.split(':')[1])
-
-    console.log('timestampIn aaaaaaaaaaaa ', typeof timestampIn, timestampIn)
-    console.log('timestampOut aaaaaaaaaaaa ', typeof timestampOut, timestampOut)
-
     const tiempoEnMilisegundos = timestampOut - timestampIn
     const horasTotales = tiempoEnMilisegundos / (1000 * 60)
     const minutosTotales = Math.round(horasTotales)
-
-    console.log('minutosTotales ', minutosTotales)
-
-    // setIsClockOutVisible(false)
-    // setIsClockInVisible(true)
 
     try {
       inAndOutsSchema.parse({ in_date, out_date, total: 0 })
@@ -80,7 +71,6 @@ export function ClockOut ({
       })
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
-      console.log('erroooooor ', error)
       toast.error(path[0] + ': ' + message)
     }
   }

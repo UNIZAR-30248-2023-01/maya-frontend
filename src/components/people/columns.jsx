@@ -14,7 +14,6 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
-      console.log(row.original)
       if (!row.original.people?.username) {
         return (
           <div className='flex items-start space-x-2'>
