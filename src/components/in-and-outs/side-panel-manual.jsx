@@ -113,7 +113,7 @@ export function SidePanelManual ({
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle className="capitalize">{title}</SheetTitle>
+            <SheetTitle id="necesitoelid" className="capitalize">{title}</SheetTitle>
             <SheetDescription style={{ marginBottom: '20px' }}>
               {description}
             </SheetDescription>
@@ -124,6 +124,7 @@ export function SidePanelManual ({
             </SheetDescription>
 
             <DatePicker
+              id="in_date"
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
@@ -197,7 +198,7 @@ export function SidePanelManual ({
           </div>
           <SheetFooter className="">
             <SheetClose asChild >
-              <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>

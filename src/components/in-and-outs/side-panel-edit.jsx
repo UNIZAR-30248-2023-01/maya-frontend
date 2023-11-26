@@ -158,7 +158,7 @@ export function SidePanelEdit ({
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').delete().eq('id', inAndOuts[0].id)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -168,8 +168,8 @@ export function SidePanelEdit ({
       }
 
       toast.promise(deleteManualClockin, {
-        loading: dictionary.inandouts['toast-loading'],
-        success: () => dictionary.inandouts['toast-success'],
+        loading: dictionary.inandouts['toast-delete-loading'],
+        success: () => dictionary.inandouts['toast-delete-success'],
         error: () => dictionary.inandouts['toast-error']
       })
     } catch (error) {
@@ -260,9 +260,11 @@ export function SidePanelEdit ({
 
           </div>
           <SheetFooter className="">
-            <Button style={{ backgroundColor: 'red', color: 'white' }} onClick={handleDelete}>
-              {deleteBtn}
-            </Button>
+            <SheetClose asChild onClose={handleCloseSidePanel}>
+              <Button id="eliminar" className="bg-rose-500 text-white" variant="outline" type="button" onClick={handleDelete}>
+                {deleteBtn}
+              </Button>
+            </SheetClose>
 
             <SheetClose asChild onClose={handleCloseSidePanel}>
               <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
