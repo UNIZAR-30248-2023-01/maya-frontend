@@ -62,10 +62,6 @@ export function AccountForm () {
               .update({ firstname: form.firstname, lastname: form.lastname })
               .eq('username', user?.username)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?firstname=eq.${form.firstname}&lastname=eq.${form.lastname}&avatar=${form.avatar}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&avatar=${form.avatar}&select=*`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${user?.email}&select=username,firstname,lastname,email,avatar`)
                 resolve()
               })
@@ -107,10 +103,15 @@ export function AccountForm () {
             label={dictionary.settingsAccount['user-firstname']}
             id="firstname"
             value={form.firstname}
-            onChange={(e) => {
-              e.target.classList.remove('border-red-500')
-              setter({ key: 'firstname', value: e.target.value })
-            }}
+              onChange={(e) => {
+                if (e.target.value.length > 0) {
+                  e.target.classList.remove('border-red-500')
+                  setter({ key: 'firstname', value: e.target.value })
+                } else {
+                  e.target.classList.add('border-red-500')
+                  // toast.error(dictionary.settingsAccount['error-firstname'])
+                }
+              }}
           />
         </div>
         <div className="flex-1">
@@ -164,7 +165,7 @@ export function AccountForm () {
             }
           }}
         />
-        <Button type="submit" style={{ marginTop: '20px' }}>Update account</Button>
+        <Button type="submit" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
         </form>
     </Form>
   )

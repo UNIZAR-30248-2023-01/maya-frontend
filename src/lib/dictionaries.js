@@ -196,7 +196,6 @@ export const inandouts = {
   }
 }
 
-
 export const settingsAccount = {
   es: {
     'account-tab': 'Cuenta',
@@ -219,6 +218,7 @@ export const settingsAccount = {
     'user-email': 'Correo electrónico',
     'user-password': 'Contraseña',
     'user-password-confirm': 'Confirmar contraseña',
+    'account-update': 'Actualizar',
 
     'submitted-values': 'Has actualizado los siguientes valores',
     'theme-submit': 'El color del tema se ha actualizado correctamente.',
@@ -261,6 +261,7 @@ export const settingsAccount = {
     'user-email': 'E-mail',
     'user-password': 'Password',
     'user-password-confirm': 'Confirm password',
+    'account-update': 'Update',
 
     'submitted-values': 'You submitted the following values.',
     'theme-submit': 'Theme color has been updated successfully.',
