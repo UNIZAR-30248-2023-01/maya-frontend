@@ -6,8 +6,6 @@ import { SessionProvider } from 'next-auth/react'
 import { LanguageProvider } from '@/context/language-context'
 import { SWRProvider } from '@/context/swr-context'
 import { UserProvider } from '@/context/user-context'
-import { ThemeProvider } from '@/components/theme-provider'
-
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,13 +23,7 @@ export default function RootLayout ({ children }) {
           >
             <UserProvider>
               <SWRProvider>
-                <ThemeProvider
-                  attribute="class"
-                  defaultTheme="light"
-                  enableSystem
-                  disableTransitionOnChange>
-                    {children}
-               </ThemeProvider>
+                {children}
               </SWRProvider>
             </UserProvider>
           </SessionProvider>

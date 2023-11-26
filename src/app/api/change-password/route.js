@@ -1,8 +1,14 @@
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
+import { getToken } from "next-auth/jwt"
+
 // problema cambio contraseña
 export async function POST (req) {
+  const token = await getToken({ req })
+  console.log(token)
+  if (!token) return new Response('Unauthorized', { status: 401 })
+
   try {
     const body = await req.json()
     const { username, password } = body

@@ -9,6 +9,7 @@ import { navigation } from '@/lib/constants'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { UserProvider } from '@/context/user-context'
+import { ThemeProvider } from '@/components/theme-provider'
 import useSWR from 'swr'
 
 export function Layout ({ children }) {
@@ -24,31 +25,35 @@ export function Layout ({ children }) {
 
   return (
     <>
-      <UserProvider user={user[0]}>
-        <Sheet>
-          <SheetContent side="left" className="p-0 w-fit">
-            <Sidebar
-              navigation={navigation}
-              sheet={true}
-              setSearchOpen={setOpen}
-            />
-          </SheetContent>
-
-          <div className="h-screen w-screen flex">
-            <div className='h-full flex-1'>
-              <Navbar />
-              <main className="py-10">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-y-2">
-                  {children}
-                </div>
-              </main>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <UserProvider user={user[0]}>
+          <Sheet>
+            <SheetContent side="left" className="p-0 w-fit">
+              <Sidebar
+                navigation={navigation}
+                sheet={true}
+                setSearchOpen={setOpen}
+              />
+            </SheetContent>
+            <div className="h-screen w-screen flex">
+              <div className='h-full flex-1'>
+                <Navbar />
+                <main className="py-10">
+                  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-y-2">
+                    {children}
+                  </div>
+                </main>
+              </div>
             </div>
-          </div>
-        </Sheet>
-
-        <Search open={open} setOpen={setOpen} />
-      </UserProvider>
-
+          </Sheet>
+          <Search open={open} setOpen={setOpen} />
+        </UserProvider>
+      </ThemeProvider>
     </>
   )
 }
