@@ -1,9 +1,9 @@
 'use client'
 
-import { DataTableColumnHeader } from '@/components/teams/data-table-column-header'
+import { DataTableColumnHeader } from '@/components/teams-projects/data-table-column-header'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
-import { DataTableRowActions } from '@/components/teams/data-table-row-actions'
+import { DataTableRowActions } from '@/components/teams-projects/data-table-row-actions'
 
 export const columns = [
   {

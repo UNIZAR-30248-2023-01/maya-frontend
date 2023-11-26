@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Sidebar } from '@/components/sidebar/sidebar'
 import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
@@ -11,11 +11,7 @@ import { redirect } from 'next/navigation'
 
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
-  const { status, data } = useSession()
-
-  useEffect(() => {
-    console.log(data, status)
-  }, [data])
+  const { status } = useSession()
 
   if (status === 'loading') {
     return <div>Loading...</div>

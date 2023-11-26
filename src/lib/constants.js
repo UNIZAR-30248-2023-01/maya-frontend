@@ -5,7 +5,6 @@ import {
   LuUser,
   LuLaptop2,
   LuCalendar,
-  LuTicket,
   LuTable2,
   LuArchive,
   LuUnlock,
@@ -29,8 +28,7 @@ export const navigation = [
   { name: 'teams', href: '/teams', icon: LuUsers, current: false },
   { name: 'staff', href: '/staff', icon: LuUser, current: false },
   { name: 'workSpaces', href: '/workspaces', icon: LuLaptop2, current: false },
-  { name: 'in-and-outs', href: '/in-and-outs', icon: LuCalendar, current: false },
-  { name: 'tickets', href: '/tickets', icon: LuTicket, current: false }
+  { name: 'in-and-outs', href: '/in-and-outs', icon: LuCalendar, current: false }
 ]
 
 export const profileNavItems = [
