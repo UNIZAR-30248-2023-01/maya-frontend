@@ -58,6 +58,16 @@ export function AccountForm () {
       const updateUserAccount = () => {
         return new Promise((resolve, reject) => {
           (async () => {
+            if (form.password !== null) {
+              await fetch('http://localhost:3000/api/change-password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: form.password })
+              })
+                .then((res) => res.status ? resolve() : reject(new Error(res.status)))
+                .catch((error) => reject(error))
+            }
+
             await supabase.from('people')
               .update({ firstname: form.firstname, lastname: form.lastname })
               .eq('username', user?.username)
@@ -84,77 +94,82 @@ export function AccountForm () {
   return (
     <Form>
       <form onSubmit={e => handleSubmit(e)} className="space-y-8">
-      <div className="flex space-x-4 items-center">
-        <div className="flex-1">
-          <Text
-            label={dictionary.settingsAccount['user-username']}
-            id="username"
-            value={user?.username}
-          />
-          <SheetDescription style={{ marginTop: '5px' }}>
-              {dictionary.settingsAccount['message-username']}
-          </SheetDescription>
-        </div>
-        <PopupProfile user={user} />
-        </div>
-      <div className="flex space-x-4">
-        <div className="flex-1">
-          <Text
-            label={dictionary.settingsAccount['user-firstname']}
-            id="firstname"
-            value={form.firstname}
-              onChange={(e) => {
-                if (e.target.value.length > 0) {
-                  e.target.classList.remove('border-red-500')
-                  setter({ key: 'firstname', value: e.target.value })
-                } else {
-                  e.target.classList.add('border-red-500')
-                  // toast.error(dictionary.settingsAccount['error-firstname'])
-                }
-              }}
-          />
-        </div>
-        <div className="flex-1">
-          <Text
-              label={dictionary.settingsAccount['user-lastname']}
-              id="lastname"
-              value={form.lastname}
-              onChange={(e) => {
-                e.target.classList.remove('border-red-500')
-                setter({ key: 'lastname', value: e.target.value })
-              }}
+        <div className="flex space-x-4 items-center">
+          <div className="flex-1">
+            <Text
+              label={dictionary.settingsAccount['user-username']}
+              id="username"
+              value={user?.username}
+            />
+            <SheetDescription style={{ marginTop: '5px' }}>
+                {dictionary.settingsAccount['message-username']}
+            </SheetDescription>
+          </div>
+          <PopupProfile user={user} />
+          </div>
+        <div className="flex space-x-4">
+          <div className="flex-1">
+            <Text
+              label={dictionary.settingsAccount['user-firstname']}
+              id="firstname"
+              value={form.firstname}
+                onChange={(e) => {
+                  if (e.target.value.length > 0) {
+                    e.target.classList.remove('border-red-500')
+                    setter({ key: 'firstname', value: e.target.value })
+                  } else {
+                    e.target.classList.add('border-red-500')
+                    // toast.error(dictionary.settingsAccount['error-firstname'])
+                  }
+                }}
             />
           </div>
-      </div>
-      <Text
-        label={dictionary.settingsAccount['user-email']}
-        id="email"
-        value={user?.email}
-      />
-      <SheetDescription style={{ marginTop: '5px' }}>
-          {dictionary.settingsAccount['message-email']}
-      </SheetDescription>
-      <Text
-          label={dictionary.settingsAccount['user-password']}
-          placeholder="***********"
-          onChange={(e) => {
-            if (e.target.value.length > 0) {
-              e.target.classList.remove('border-red-500')
-              setter({ key: 'password', value: e.target.value })
-            } else {
-              e.target.classList.add('border-red-500')
-              // toast.error(dictionary.settingsAccount['error-lastname'])
-            }
-          }}
+          <div className="flex-1">
+            <Text
+                label={dictionary.settingsAccount['user-lastname']}
+                id="lastname"
+                value={form.lastname}
+                onChange={(e) => {
+                  e.target.classList.remove('border-red-500')
+                  setter({ key: 'lastname', value: e.target.value })
+                }}
+              />
+            </div>
+        </div>
+        <Text
+          label={dictionary.settingsAccount['user-email']}
+          id="email"
+          value={user?.email}
         />
-      <Text
+        <SheetDescription style={{ marginTop: '5px' }}>
+            {dictionary.settingsAccount['message-email']}
+        </SheetDescription>
+        <Text
+            label={dictionary.settingsAccount['user-password']}
+            placeholder="***********"
+            onChange={(e) => {
+              if (e.target.value.length > 0) {
+                e.target.classList.remove('border-red-500')
+                setter({ key: 'password', value: e.target.value })
+              } else {
+                e.target.classList.add('border-red-500')
+                // toast.error(dictionary.settingsAccount['error-lastname'])
+              }
+            }}
+        />
+        <Text
           label={dictionary.settingsAccount['user-password-confirm']}
           placeholder="***********"
           onChange={(e) => {
             if (form.password !== null) {
               if (e.target.value.length > 8) {
                 e.target.classList.remove('border-red-500')
-                // setter({ key: 'lastname', value: e.target.value })
+                if (form.password !== e.target.value) {
+                  toast.error(dictionary.settingsAccount['error-same-password'])
+                } else {
+                  e.target.classList.remove('border-red-500')
+                  setter({ key: 'password', value: e.target.value })
+                }
               } else {
                 e.target.classList.add('border-red-500')
                 // toast.error(dictionary.settingsAccount['error-lastname'])

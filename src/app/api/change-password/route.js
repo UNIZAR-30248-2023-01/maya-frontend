@@ -1,17 +1,16 @@
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
-import { getToken } from "next-auth/jwt"
+import { getToken } from 'next-auth/jwt'
 
 // problema cambio contraseña
-export async function POST (req) {
+export async function PUT (req) {
   const token = await getToken({ req })
-  console.log(token)
   if (!token) return new Response('Unauthorized', { status: 401 })
 
   try {
     const body = await req.json()
-    const { username, password } = body
+    const { password } = body
 
     const salt = crypto.randomBytes(16).toString('hex')
     const hashedPassword = crypto
@@ -20,13 +19,12 @@ export async function POST (req) {
 
     const { error } = await supabase
       .from('people')
-      .eq('username', username)
-      .update([
-        {
-          passwd_hash: hashedPassword,
-          salt
-        }
-      ])
+      .update({
+        passwd_hash: hashedPassword,
+        salt
+      })
+      .eq('email', token.email)
+    console.log(error)
 
     if (error) return new Response(error.message, { status: 500 })
     return new Response('OK', { status: 200 })

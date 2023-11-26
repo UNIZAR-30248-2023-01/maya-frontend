@@ -235,6 +235,7 @@ export const settingsAccount = {
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
     'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
+    'error-same-password': 'Ambas contraseñas deben ser las mismas',
 
     'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
     'toast-success': 'Tu cuenta se ha actualizada correctamente.',
@@ -278,6 +279,7 @@ export const settingsAccount = {
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
     'error-full-new-password': 'New password cannot be empty.',
+    'error-same-password': 'Both password should bethe same',
 
     'toast-loading': 'We are validating your info account. Please wait a moment.',
     'toast-success': 'Your info account has been updated successfully.',

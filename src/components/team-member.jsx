@@ -25,14 +25,13 @@ export function TeamMember ({
 }) {
   const { dictionary } = useLang()
 
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild id="team-member">
         <div className="flex items-center space-x-4 group hover:cursor-pointer">
           <Avatar>
             <AvatarImage src={image} />
-            <AvatarFallback className="capitalize">{firstname[0] + lastname[0]}</AvatarFallback>
+            <AvatarFallback className="uppercase">{firstname[0] + lastname[0]}</AvatarFallback>
           </Avatar>
           <div>
             <p className="text-sm font-medium leading-none capitalize">{firstname} {lastname}</p>

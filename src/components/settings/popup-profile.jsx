@@ -13,15 +13,20 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose,
-  DialogFooter
+  DialogTrigger
 } from '@/components/ui/dialog'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from '@/components/ui/avatar'
 
 export function PopupProfile ({
   user
 }) {
   // console.log('username', username)
+
+  //  <AvatarFallback className="uppercase">{user?.firstname + lastname[0]}</AvatarFallback>
 
   const originalAvatar = user?.avatar ? user?.avatar : '/assets/avatars/memojis/4.webp'
 
@@ -85,11 +90,12 @@ export function PopupProfile ({
 
   return (
     <Dialog>
-      <DialogTrigger><img
-        src={originalAvatar || form.avatar}
-        alt=""
-        className="w-24 h-24 rounded-full"
-      /></DialogTrigger>
+      <DialogTrigger>
+        <Avatar className="w-20 h-20">
+          <AvatarImage src={originalAvatar || form.avatar} />
+          <AvatarFallback className="uppercase">{user?.firstname + user?.lastname}</AvatarFallback>
+        </Avatar>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
@@ -113,12 +119,12 @@ export function PopupProfile ({
         <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
           <Button type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
         </div>
-        {/*<DialogFooter>
+        {/* <DialogFooter>
           <DialogClose className="flex justify-end mt-4" style={{ marginTop: '20px' }} onClick={handleSubmit}>
             {dictionary.settingsAccount['update-avatar']}
           </DialogClose>
-        </DialogFooter>*/}
-        
+        </DialogFooter> */}
+
       </DialogContent>
     </Dialog>
 
