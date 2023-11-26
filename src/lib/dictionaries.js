@@ -149,11 +149,12 @@ export const inandouts = {
     'new-table-out-placeholder': 'Fecha de salida',
     'new-table-hour-placeholder': '00:00',
 
-    'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida',
-    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada',
-    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada',
-    'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida',
-    'error-hour': 'Formato de hora no válido',
+    'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida.',
+    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada.',
+    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada.',
+    'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida.',
+    'error-current-day': 'La fecha no puede ser posterior a la fecha actual.',
+    'error-hour': 'Formato de hora no válido.',
 
     'new-table-create': 'Fichar',
     'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
@@ -185,15 +186,103 @@ export const inandouts = {
     'new-table-out-placeholder': 'Clock-out date',
     'new-table-hour-placeholder': '00:00',
 
-    'error-in-date': 'Clock-in date cannot be greater than clock-out date',
-    'error-out-date': 'Clock-out date cannot be less than clock-in date',
-    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour',
-    'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour',
-    'error-hour': 'Invalid hour format',
+    'error-in-date': 'Clock-in date cannot be greater than clock-out date.',
+    'error-out-date': 'Clock-out date cannot be less than clock-in date.',
+    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour.',
+    'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour.',
+    'error-current-day': 'Date cannot be after current date.',
+    'error-hour': 'Invalid hour format.',
 
     'new-table-create': 'Clock in/clock out',
     'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
     'toast-success': 'Your clock-in/clock-out has been registered successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
+export const settingsAccount = {
+  es: {
+    'account-tab': 'Cuenta',
+    'apperance-tab': 'Apariencia',
+    'notifications-tab': 'Notificaciones',
+    'logout-tab': 'Cerrar sesión',
+
+    'account-headline': 'Mi cuenta',
+    'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
+    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
+
+    'pick-avatar': 'Selecciona un avatar',
+    'update-avatar': 'Actualizar',
+
+    language: 'es-ES',
+    'user-firstname': 'Nombre',
+    'user-lastname': 'Apellido',
+    'user-username': 'Nombre de usuario',
+    'user-avatar': 'Imagen de perfil',
+    'user-email': 'Correo electrónico',
+    'user-password': 'Contraseña',
+    'user-password-confirm': 'Confirmar contraseña',
+
+    'submitted-values': 'Has actualizado los siguientes valores',
+    'theme-submit': 'El color del tema se ha actualizado correctamente.',
+
+    'message-username': '* El nombre de usuario no se puede modificar.',
+    'message-email': '* El correo electrónico no se puede modificar.',
+
+    'appearance-theme': 'Tema',
+    'appearance-theme-light': 'Claro',
+    'appearance-theme-dark': 'Oscuro',
+    'appearance-subheadline': 'Selecciona el tema para el panel de control.',
+    'appearance-update': 'Actualizar color del tema',
+
+    'error-firstname': 'El nombre no puede estar vacío.',
+    'error-lastname': 'El apellido no puede estar vacío',
+    'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
+
+    'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
+    'toast-success': 'Tu cuenta se ha actualizada correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'account-tab': 'Account',
+    'apperance-tab': 'Appearance',
+    'notifications-tab': 'Notifications',
+    'logout-tab': 'Logout',
+
+    'account-headline': 'My account',
+    'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
+    'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+
+    'pick-avatar': 'Pick an avatar',
+    'update-avatar': 'Update',
+
+    language: 'en-US',
+    'user-firstname': 'Name',
+    'user-lastname': 'Lastname',
+    'user-username': 'User name',
+    'user-avatar': 'Profil photo',
+    'user-email': 'E-mail',
+    'user-password': 'Password',
+    'user-password-confirm': 'Confirm password',
+
+    'submitted-values': 'You submitted the following values.',
+    'theme-submit': 'Theme color has been updated successfully.',
+
+    'message-username': '* Username cannot be modified.',
+    'message-email': '* E-mail cannot be modified.',
+
+    'appearance-theme': 'Theme',
+    'appearance-theme-light': 'Light',
+    'appearance-theme-dark': 'Dark',
+    'appearance-subheadline': 'Select the theme for the dashboard.',
+    'appearance-update': 'Update theme color',
+
+    'error-firstname': 'Name cannot be empty.',
+    'error-lastname': 'Lastname cannot be empty',
+    'error-full-new-password': 'New password cannot be empty.',
+
+    'toast-loading': 'We are validating your info account. Please wait a moment.',
+    'toast-success': 'Your info account has been updated successfully.',
     'toast-error': 'Something went wrong. Please try again.'
   }
 }

@@ -23,7 +23,8 @@ export function TeamMember ({
   lastname = 'Davis',
   username = 'm@example.com'
 }) {
-  const { dictionary, lang } = useLang()
+  const { dictionary } = useLang()
+
 
   return (
     <DropdownMenu>
@@ -40,39 +41,29 @@ export function TeamMember ({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuLabel>{dictionary.settingsAccount['account-headline']}</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link href="/settings">
-              Profile
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/account">
-              Account
+              {dictionary.settingsAccount['account-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/appearance">
-              Appearance
+              {dictionary.settingsAccount['apperance-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/notifications">
-              Notifications
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/display">
-              Display
+              {dictionary.settingsAccount['notifications-tab']}
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
           <button onClick={() => {
-            signOut({ callbackUrl: `http://localhost:3000/${lang}` })
+            signOut({ callbackUrl: '/' })
           }} id="sign-out-button">
-            Log out
+            {dictionary.settingsAccount['logout-tab']}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
