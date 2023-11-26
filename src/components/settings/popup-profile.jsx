@@ -88,12 +88,20 @@ export function PopupProfile ({
     }
   }
 
+  const displayAvatar =
+    user?.avatar
+      ? (<AvatarImage src={user?.avatar} />)
+      : (
+      <AvatarFallback className="uppercase">
+        {user?.firstname[0] + user?.lastname[0]}
+      </AvatarFallback>
+        )
+
   return (
     <Dialog>
       <DialogTrigger>
         <Avatar className="w-20 h-20">
-          <AvatarImage src={originalAvatar || form.avatar} />
-          <AvatarFallback className="uppercase">{user?.firstname + user?.lastname}</AvatarFallback>
+          {displayAvatar}
         </Avatar>
       </DialogTrigger>
       <DialogContent>

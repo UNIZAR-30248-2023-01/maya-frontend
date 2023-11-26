@@ -2,11 +2,6 @@ import { Layout } from '@/components/layout'
 import { SidebarNav } from '@/components/settings-sidenav'
 import { profileNavItems } from '@/lib/constants'
 
-export const metadata = {
-  title: 'Profile Settings',
-  description: 'Here you can customize your experience.'
-}
-
 export default function SettingsLayout ({ children }) {
   return (
     <Layout>
