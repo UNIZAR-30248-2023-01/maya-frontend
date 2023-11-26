@@ -5,12 +5,13 @@ import { themes } from '@/lib/themes'
 
 const ThemeContext = React.createContext()
 
-export function useTheme () {
+export function useTheme2 () {
   return useContext(ThemeContext)
 }
 
-export function ThemeProvider ({ children }) {
-  const [theme, setTheme] = useState(themes.light)
+export function ThemeProvider2 ({ children }) {
+  const themeName = localStorage.getItem('theme')
+  const [theme, setTheme] = useState({ themeName })
 
   const changeTheme = ({ themeName }) => {
     const themes2Select = Object.keys(themes)
@@ -31,7 +32,7 @@ export function ThemeProvider ({ children }) {
       console.log('themeName2', themeName)
       changeTheme({ themeName: 'light' })
     }
-  }, [])
+  }, [themeName])
 
   return (
     <ThemeContext.Provider value={{

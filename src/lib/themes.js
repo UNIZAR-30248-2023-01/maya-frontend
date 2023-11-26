@@ -8,7 +8,7 @@ export const themes = {
     lightest: '#FFFFFF'
   },
   dark: {
-    brand: '#DEB841',
+    brand: '#000000',
     darkest: '#37323E',
     dark: '#6D6A75',
     mid: '#A8A5B1',
