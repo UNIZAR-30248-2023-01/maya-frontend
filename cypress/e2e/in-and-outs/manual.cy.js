@@ -1,25 +1,25 @@
 /// <reference types="cypress" />
 
+import { user, createUser, deleteUser } from '../setUp/setUp'
+
 const exampleClockin = {
   in_hour: '11:11',
   out_hour: '12:12'
 }
 
-const exampleUser = {
-  name: 'jaimee.mt',
-  password: '1234567890'
-}
-
 describe('In and outs', () => {
-  it('Creating and Deleting a Manual Checkin', () => {
-    cy.visit('/es/sign-in')
+  before(() => {
+    createUser()
+  })
+
+  after(() => {
+    deleteUser()
+  })
+
+  it('Creating, Editing and Deleting a Manual Checkin', () => {
+    cy.login(user)
 
     cy.wait(3000)
-    cy.get('input#username').type(exampleUser.name)
-    cy.get('input#password').type(exampleUser.password)
-
-    cy.get('form').submit()
-    cy.wait(5000)
 
     cy.visit('/es/in-and-outs')
     cy.wait(5000)
@@ -45,8 +45,17 @@ describe('In and outs', () => {
     cy.get('tbody').contains(exampleClockin.in_hour)
     cy.get('tbody').contains(exampleClockin.out_hour)
 
+    // Edit the checkin
     cy.wait(2000)
-    cy.get(':nth-child(1) > .py-3').click()
+    cy.get('#icon').click()
+    // eliminar texto
+    cy.get('input#in_hour').clear()
+    cy.get('input#in_hour').type('11:13')
+    cy.get('button#fichar').click()
+    cy.get('tbody').contains('11:13')
+
+    cy.wait(2000)
+    cy.get('#icon').click()
     cy.wait(1000)
     cy.get('button#eliminar').click()
 
