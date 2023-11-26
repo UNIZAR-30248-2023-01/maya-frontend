@@ -7,11 +7,14 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function ClockOut ({
   triggerBtn
 }) {
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)
+  const { user } = useUser()
+
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
 
   const { dictionary } = useLang()
   const [form] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
@@ -40,9 +43,18 @@ export function ClockOut ({
 
     const timestampIn = new Date(year, month, day, hour, minute)
     const timestampOut = new Date(out_date.getFullYear(), out_date.getMonth(), out_date.getDate(), out_hour.split(':')[0], out_hour.split(':')[1])
+
+    console.log('timestampIn aaaaaaaaaaaa ', typeof timestampIn, timestampIn)
+    console.log('timestampOut aaaaaaaaaaaa ', typeof timestampOut, timestampOut)
+
     const tiempoEnMilisegundos = timestampOut - timestampIn
     const horasTotales = tiempoEnMilisegundos / (1000 * 60)
     const minutosTotales = Math.round(horasTotales)
+
+    console.log('minutosTotales ', minutosTotales)
+
+    // setIsClockOutVisible(false)
+    // setIsClockInVisible(true)
 
     try {
       inAndOutsSchema.parse({ in_date, out_date, total: 0 })
@@ -54,9 +66,9 @@ export function ClockOut ({
               .update({ out_date: timestampOut, total: minutosTotales })
               .eq('id', inAndOuts[0].id)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${timestampIn}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -71,11 +83,12 @@ export function ClockOut ({
       })
     } catch (error) {
       const { path, message } = JSON.parse(error.message)[0]
+      console.log('erroooooor ', error)
       toast.error(path[0] + ': ' + message)
     }
   }
 
   return (
-    <Button id="new-date" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
+    <Button id="new-date-out" variant="outline" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
   )
 }

@@ -8,6 +8,7 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function ClockIn ({
   triggerBtn
@@ -24,8 +25,14 @@ export function ClockIn ({
     return `${hours}:${minutes}`
   }
 
+  const { user } = useUser()
+
   form.in_date = new Date(new Date().getTime())
   form.in_hour = getCurrentTime().toString()
+
+  console.log('form ', form)
+  console.log('out_date ', typeof form.out_date)
+  console.log('out_hour ', typeof form.out_hour)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,14 +50,14 @@ export function ClockIn ({
       const createClockIn = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{
-            username: 'hec7orci7o',
+            username: user?.username,
             in_date: timestampIn,
             out_date: null,
             total: 0
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?out_date=is.null&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -71,7 +78,7 @@ export function ClockIn ({
   }
 
   return (
-    <Button id="new-date" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
+    <Button id="new-date" variant="outline" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
 
   )
 }

@@ -19,6 +19,7 @@ import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
 import { LuClipboardEdit } from 'react-icons/lu'
 import { DatePicker, Text } from '@/components/forms'
+import { useUser } from '@/context/user-context'
 
 export function SidePanelEdit ({
   title,
@@ -35,6 +36,7 @@ export function SidePanelEdit ({
   const [invalidHour] = useState(true)
 
   const { dictionary } = useLang()
+  const { user } = useUser()
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
@@ -55,15 +57,20 @@ export function SidePanelEdit ({
   const initialHour = initialDate.getHours() + ':' + initialDate.getMinutes()
   const finalHour = finalDate.getHours() + ':' + finalDate.getMinutes()
 
+  console.log('initialDate ', typeof initialDate, initialDate)
+  console.log('finalDate ', typeof finalDate, finalDate)
+
   // Formatea las fechas en formato ISO8601
   const formattedInitialDate = initialDate.toISOString()
   const formattedFinalDate = finalDate.toISOString()
 
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
 
   // useEffect para actualizar el estado del formulario con los valores iniciales
   useEffect(() => {
+    console.log('El useEffect se ha ejecutado')
     if (isSidePanelOpen) {
+      console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
       setForm({
         ...form,
         in_hour: initialHour,
@@ -121,8 +128,8 @@ export function SidePanelEdit ({
           })
             .eq('id', inAndOuts[0].id)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -143,13 +150,15 @@ export function SidePanelEdit ({
   }
 
   const handleDelete = async () => {
+    console.log('inAndOuts de handleDelete ', inAndOuts)
+
     try {
       inAndOutsSchema.parse({ in_date: null, out_date: null, total: 0 })
       const deleteManualClockin = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').delete().eq('id', inAndOuts[0].id)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -159,8 +168,8 @@ export function SidePanelEdit ({
       }
 
       toast.promise(deleteManualClockin, {
-        loading: dictionary.inandouts['toast-loading'],
-        success: () => dictionary.inandouts['toast-success'],
+        loading: dictionary.inandouts['toast-delete-loading'],
+        success: () => dictionary.inandouts['toast-delete-success'],
         error: () => dictionary.inandouts['toast-error']
       })
     } catch (error) {
@@ -225,6 +234,7 @@ export function SidePanelEdit ({
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
               onChange={(e) => {
                 if (e < form.in_date) {
+                  console.log('form.in_date ', form.in_date.Date)
                   toast.error(dictionary.inandouts['error-out-date'])
                 } else {
                   setter({ key: 'out_date', value: e })
@@ -250,9 +260,11 @@ export function SidePanelEdit ({
 
           </div>
           <SheetFooter className="">
-            <Button style={{ backgroundColor: 'red', color: 'white' }} onClick={handleDelete}>
-              {deleteBtn}
-            </Button>
+            <SheetClose asChild onClose={handleCloseSidePanel}>
+              <Button id="eliminar" className="bg-rose-500 text-white" variant="outline" type="button" onClick={handleDelete}>
+                {deleteBtn}
+              </Button>
+            </SheetClose>
 
             <SheetClose asChild onClose={handleCloseSidePanel}>
               <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
