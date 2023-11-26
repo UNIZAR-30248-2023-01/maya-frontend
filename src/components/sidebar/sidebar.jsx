@@ -9,7 +9,6 @@ import { useUser } from '@/context/user-context'
 export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
   const { dictionary } = useLang()
   const { user } = useUser()
-  console.log('sidebar', user)
   navigation = navigation.map((item) => ({ ...item, name: dictionary.navigation[item.name] }))
 
   return (sheet) && (
@@ -18,7 +17,7 @@ export function Sidebar ({ navigation, sheet = false, setSearchOpen }) {
       <div className="flex grow flex-col gap-3 overflow-y-auto border-r border-gray-200 bg-white px-6 py-4 dark:bg-black">
         <SidebarHeader setOpenSearchCommand={setSearchOpen} />
         <nav className="flex flex-1 flex-col">
-          <ul role="list" className="flex flex-1 flex-col gap-y-7">
+          <ul role="list" className={'flex flex-1 flex-col gap-y-7'}>
             <li>
               <SidebarNavigation navigation={navigation} />
             </li>

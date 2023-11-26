@@ -16,7 +16,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useLang } from '@/context/language-context'
 import { appearanceFormSchema } from '@/lib/schemas'
 import { useTheme } from 'next-themes'
-import { useTheme2 } from '@/context/theme-context'
 
 export function AppearanceForm () {
   const form = useForm({
@@ -25,7 +24,6 @@ export function AppearanceForm () {
 
   const { setTheme } = useTheme()
   const { dictionary } = useLang()
-  const { changeTheme } = useTheme2()
 
   return (
     <Form {...form}>
@@ -41,9 +39,7 @@ export function AppearanceForm () {
               <FormMessage />
               <RadioGroup
                 onValueChange={(value) => {
-                  console.log('valuuuuuue', value)
                   setTheme(value)
-                  changeTheme({ themeName: value })// Trigger onChange whenever radio selection changes
                 }}
                 defaultValue={field.value}
                 className="grid max-w-md grid-cols-2 gap-8 pt-2"

@@ -10,7 +10,6 @@ import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { UserProvider } from '@/context/user-context'
 import { ThemeProvider } from '@/components/theme-provider'
-import { ThemeProvider2 } from '@/context/theme-context'
 import useSWR from 'swr'
 
 export function Layout ({ children }) {
@@ -32,7 +31,6 @@ export function Layout ({ children }) {
         enableSystem
         disableTransitionOnChange
       >
-      <ThemeProvider2>
         <UserProvider user={user[0]}>
           <Sheet>
             <SheetContent side="left" className="p-0 w-fit">
@@ -55,8 +53,7 @@ export function Layout ({ children }) {
           </Sheet>
           <Search open={open} setOpen={setOpen} />
         </UserProvider>
-      </ThemeProvider2>
-     </ThemeProvider>
+      </ThemeProvider>
     </>
   )
 }
