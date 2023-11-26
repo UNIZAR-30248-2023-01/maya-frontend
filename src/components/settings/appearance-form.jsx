@@ -1,12 +1,8 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChevronDownIcon } from '@radix-ui/react-icons'
 import { useForm } from 'react-hook-form'
-import * as z from 'zod'
 
-import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -17,40 +13,41 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
 import { appearanceFormSchema } from '@/lib/schemas'
-
-// This can come from your database or API.
-const defaultValues = {
-  theme: 'light'
-}
+import { useTheme } from 'next-themes'
 
 export function AppearanceForm () {
   const form = useForm({
-    resolver: zodResolver(appearanceFormSchema),
-    defaultValues
+    resolver: zodResolver(appearanceFormSchema)
   })
 
-  function onSubmit (data) {
-    toast.message('You submitted the following values:', { description: JSON.stringify(data, null, 2) })
-  }
+  const { setTheme } = useTheme()
+  const { dictionary } = useLang()
+
+  /* function onSubmit (data) {
+    setTheme(data.theme)
+    console.log('data.theme', data.theme)
+    toast.message(dictionary.settingsAccount['theme-submit'])
+  } */
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="theme"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel>Theme</FormLabel>
-              <FormDescription>
-                Select the theme for the dashboard.
+              <FormLabel>{dictionary.settingsAccount['appearance-theme']}</FormLabel>
+              <FormDescription style={{ marginBottom: '20px' }}>
+                {dictionary.settingsAccount['appearance-subheadline']}
               </FormDescription>
               <FormMessage />
               <RadioGroup
-                onValueChange={field.onChange}
+                onValueChange={(value) => {
+                  // field.onChange(value)
+                  setTheme(value)// Trigger onChange whenever radio selection changes
+                }}
                 defaultValue={field.value}
                 className="grid max-w-md grid-cols-2 gap-8 pt-2"
               >
@@ -76,7 +73,7 @@ export function AppearanceForm () {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Light
+                      {dictionary.settingsAccount['appearance-theme-light']}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -102,7 +99,7 @@ export function AppearanceForm () {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Dark
+                      {dictionary.settingsAccount['appearance-theme-dark']}
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -110,9 +107,6 @@ export function AppearanceForm () {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Update preferences</Button>
-      </form>
     </Form>
   )
 }

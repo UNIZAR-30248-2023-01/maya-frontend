@@ -1,10 +1,11 @@
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
+// problema cambio contraseña
 export async function POST (req) {
   try {
     const body = await req.json()
-    const { email, username, firstname, lastname, password } = body
+    const { username, password } = body
 
     const salt = crypto.randomBytes(16).toString('hex')
     const hashedPassword = crypto
@@ -13,12 +14,9 @@ export async function POST (req) {
 
     const { error } = await supabase
       .from('people')
-      .upsert([
+      .eq('username', username)
+      .update([
         {
-          email,
-          username,
-          firstname,
-          lastname,
           passwd_hash: hashedPassword,
           salt
         }

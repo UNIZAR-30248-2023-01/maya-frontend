@@ -138,24 +138,20 @@ export const inandouts = {
     'new-check-out': 'Fichar salida',
     edit: 'Editar',
     delete: 'Eliminar',
-
     'new-table-description': 'Selecciona la fecha de entrada y salida para registrar tus horas.',
     'new-table-description-in': 'Selecciona la fecha y la hora de entrada.',
     'new-table-description-out': 'Selecciona la fecha y la hora de salida.',
     'new-table-name': 'Nombre',
     'new-table-desc': 'Descripción',
-
     'new-table-in-placeholder': 'Fecha de entrada',
     'new-table-out-placeholder': 'Fecha de salida',
     'new-table-hour-placeholder': '00:00',
-
     'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida.',
     'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada.',
     'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada.',
     'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida.',
     'error-current-day': 'La fecha no puede ser posterior a la fecha actual.',
     'error-hour': 'Formato de hora no válido.',
-
     'new-table-create': 'Fichar',
     'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
     'toast-success': 'Tu fichaje se ha almacenado correctamente.',
@@ -177,24 +173,20 @@ export const inandouts = {
     'new-check-out': 'Clock-out',
     edit: 'Edit',
     delete: 'Delete',
-
     'new-table-description': 'Select your clock-in and clock-out date to register your hours.',
     'new-table-description-in': 'Select your clock-in date and hour.',
     'new-table-description-out': 'Select your clock-out date and hour',
     'new-table-name': 'Name',
     'new-table-desc': 'Short description',
-
     'new-table-in-placeholder': 'Clock-in date',
     'new-table-out-placeholder': 'Clock-out date',
     'new-table-hour-placeholder': '00:00',
-
     'error-in-date': 'Clock-in date cannot be greater than clock-out date.',
     'error-out-date': 'Clock-out date cannot be less than clock-in date.',
     'error-out-hour': 'Clock-out hour cannot be less than clock-in hour.',
     'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour.',
     'error-current-day': 'Date cannot be after current date.',
     'error-hour': 'Invalid hour format.',
-
     'new-table-create': 'Clock in/clock out',
     'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
     'toast-success': 'Your clock-in/clock-out has been registered successfully.',
@@ -203,6 +195,7 @@ export const inandouts = {
     'toast-delete-success': 'Your clock-in/clock-out has been deleted successfully.'
   }
 }
+
 
 export const settingsAccount = {
   es: {
@@ -213,7 +206,7 @@ export const settingsAccount = {
 
     'account-headline': 'Mi cuenta',
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
-    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre temas de día y de noche.',
+    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
 
     'pick-avatar': 'Selecciona un avatar',
     'update-avatar': 'Actualizar',
@@ -228,9 +221,16 @@ export const settingsAccount = {
     'user-password-confirm': 'Confirmar contraseña',
 
     'submitted-values': 'Has actualizado los siguientes valores',
+    'theme-submit': 'El color del tema se ha actualizado correctamente.',
 
     'message-username': '* El nombre de usuario no se puede modificar.',
     'message-email': '* El correo electrónico no se puede modificar.',
+
+    'appearance-theme': 'Tema',
+    'appearance-theme-light': 'Claro',
+    'appearance-theme-dark': 'Oscuro',
+    'appearance-subheadline': 'Selecciona el tema para el panel de control.',
+    'appearance-update': 'Actualizar color del tema',
 
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
@@ -263,9 +263,16 @@ export const settingsAccount = {
     'user-password-confirm': 'Confirm password',
 
     'submitted-values': 'You submitted the following values.',
+    'theme-submit': 'Theme color has been updated successfully.',
 
     'message-username': '* Username cannot be modified.',
     'message-email': '* E-mail cannot be modified.',
+
+    'appearance-theme': 'Theme',
+    'appearance-theme-light': 'Light',
+    'appearance-theme-dark': 'Dark',
+    'appearance-subheadline': 'Select the theme for the dashboard.',
+    'appearance-update': 'Update theme color',
 
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
@@ -409,13 +416,20 @@ export const teams = {
     'team-column': 'Equipos',
     'member-column': 'Miembros',
     'name-column': 'Nombre',
+    'teams-column': 'Equipos',
     'description-column': 'Descripción',
     'new-team-name-placeholder': 'Repartidores',
     'new-team-desc-placeholder': 'Ayuda a tu equipo a entender el propósito de este equipo',
     public: 'público',
     private: 'privado',
     filter: 'Filtrar por nombre de equipo',
+    search: 'Buscar equipos',
     'new-team': 'nuevo equipo',
+    'edit-team': 'editar equipo',
+    'add-team': 'Añade equipos',
+    invite: 'Añadir equipos',
+    'add-team-description': 'Añade equipos a tu proyecto para crecer tu proyecto.',
+    'add-team-send': 'añadir',
     'new-team-member-placeholder': 'Elige a tu equipo',
     'new-table-description': 'Los equipos son una forma de organizar a las personas que trabajan en tu proyecto.',
     'new-team-create': 'Crear',
@@ -427,6 +441,7 @@ export const teams = {
     'team-tab': 'Teams',
     'team-column': 'Teams',
     'member-column': 'Members',
+    'teams-column': 'Teams',
     'name-column': 'Name',
     'description-column': 'Description',
     'new-team-name-placeholder': 'Delivery',
@@ -434,7 +449,13 @@ export const teams = {
     public: 'public',
     private: 'private',
     filter: 'Filter by team name',
+    search: 'Search teams',
     'new-team': 'new team',
+    'edit-team': 'edit team',
+    'add-team': 'Add teams',
+    invite: 'Add teams',
+    'add-team-description': 'Add teams to your project to grow your project.',
+    'add-team-send': 'add',
     'new-team-member-placeholder': 'Choose your team',
     'new-table-description': 'Teams are a way of organizing the people working on your project.',
     'new-team-create': 'Create',

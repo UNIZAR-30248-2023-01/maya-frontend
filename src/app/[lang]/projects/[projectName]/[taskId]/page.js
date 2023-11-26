@@ -41,7 +41,6 @@ export default function TaskPage ({ params }) {
   const handleAddComment = (e) => {
     e.preventDefault()
     // lee el comentario y lo guarda en el backend
-    console.log(newComment)
     try {
       const addComment = () => {
         return new Promise((resolve, reject) => {
@@ -71,7 +70,6 @@ export default function TaskPage ({ params }) {
       setNewComment(null)
       e.target.reset()
     } catch (error) {
-      console.log(error)
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
@@ -93,9 +91,6 @@ export default function TaskPage ({ params }) {
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-comments?task=eq.${params.taskId}&select=*`
   )
 
-  console.log(tasks)
-  console.log(people)
-
   if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading) {
     const task = tasks[0]
     const status = tasksStatuses.find(status => status.value === task.status)
@@ -105,8 +100,6 @@ export default function TaskPage ({ params }) {
     const formattedDate = parsedDate !== '' ? format(parsedDate, 'PPP') : dictionary.tasks['new-task-label-placeholder']
 
     comments.sort((a, b) => a.created_at - b.created_at)
-
-    console.log('comments', comments)
 
     return (
       <div className='flex flex-col gap-6'>

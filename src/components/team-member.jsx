@@ -25,9 +25,10 @@ export function TeamMember ({
 }) {
   const { dictionary } = useLang()
 
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild id="team-member">
         <div className="flex items-center space-x-4 group hover:cursor-pointer">
           <Avatar>
             <AvatarImage src={image} />
@@ -59,7 +60,9 @@ export function TeamMember ({
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
-          <button onClick={() => signOut({ redirect: false })}>
+          <button onClick={() => {
+            signOut({ callbackUrl: '/' })
+          }} id="sign-out-button">
             {dictionary.settingsAccount['logout-tab']}
           </button>
         </DropdownMenuItem>

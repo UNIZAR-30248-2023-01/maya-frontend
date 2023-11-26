@@ -13,7 +13,6 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
-import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -24,9 +23,9 @@ export function SidePanel ({
   description,
   triggerBtn,
   actionBtn,
+  dictionary,
   data
 }) {
-  const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(teamSchema._def.shape()))
 
   const setter = ({ key, value, type }) => {
@@ -54,7 +53,7 @@ export function SidePanel ({
                 // Segunda inserción en la tabla 'people-teams'
                 if (members && members.length > 0) {
                   await supabase.from('people-teams').insert(members.map((assignee) => ({
-                    team: res.data[0].id,
+                    team: res.data[0].name,
                     username: assignee
                   })))
                 }

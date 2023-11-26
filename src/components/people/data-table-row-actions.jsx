@@ -5,11 +5,10 @@ import { useLang } from '@/context/language-context'
 
 export function DataTableRowActions ({ row }) {
   const { dictionary } = useLang()
-  console.log(row.original)
 
   return (
     <RoleChange
-      title={row.original.people.firstname + ' ' + row.original.people.lastname}
+      title={row.original?.people?.firstname + ' ' + row.original?.people?.lastname}
       description={dictionary.people['manage-member-description']}
       actionBtn={dictionary.people['manage-member-submit']}
       deleteTitle={dictionary.people['manage-member-delete-title']}

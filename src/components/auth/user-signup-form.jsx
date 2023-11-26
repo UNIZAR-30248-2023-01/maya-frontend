@@ -29,7 +29,7 @@ export function UserSignUp ({ className, ...props }) {
     try {
       const logIn = async () => {
         setIsLoading(true)
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sign-up`, {
+        await fetch('/api/sign-up', {
           method: 'POST',
           body: JSON.stringify(newUser),
           headers: { 'Content-Type': 'application/json' }

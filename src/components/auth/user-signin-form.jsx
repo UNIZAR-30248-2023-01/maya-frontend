@@ -83,7 +83,7 @@ export function UserSignIn ({ className, ...props }) {
               disabled={isLoading}
             />
           </div>
-          <Button disabled={isLoading}>
+          <Button id="sign-in-button" disabled={isLoading}>
           {dictionary.signin['signin-sigin']}
           </Button>
         </div>
