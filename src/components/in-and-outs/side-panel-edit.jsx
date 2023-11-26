@@ -55,9 +55,6 @@ export function SidePanelEdit ({
   const initialHour = initialDate.getHours() + ':' + initialDate.getMinutes()
   const finalHour = finalDate.getHours() + ':' + finalDate.getMinutes()
 
-  console.log('initialDate ', typeof initialDate, initialDate)
-  console.log('finalDate ', typeof finalDate, finalDate)
-
   // Formatea las fechas en formato ISO8601
   const formattedInitialDate = initialDate.toISOString()
   const formattedFinalDate = finalDate.toISOString()
@@ -66,9 +63,7 @@ export function SidePanelEdit ({
 
   // useEffect para actualizar el estado del formulario con los valores iniciales
   useEffect(() => {
-    console.log('El useEffect se ha ejecutado')
     if (isSidePanelOpen) {
-      console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
       setForm({
         ...form,
         in_hour: initialHour,
@@ -148,8 +143,6 @@ export function SidePanelEdit ({
   }
 
   const handleDelete = async () => {
-    console.log('inAndOuts de handleDelete ', inAndOuts)
-
     try {
       inAndOutsSchema.parse({ in_date: null, out_date: null, total: 0 })
       const deleteManualClockin = () => {
@@ -232,7 +225,6 @@ export function SidePanelEdit ({
               placeholder={dictionary.inandouts['new-table-out-placeholder']}
               onChange={(e) => {
                 if (e < form.in_date) {
-                  console.log('form.in_date ', form.in_date.Date)
                   toast.error(dictionary.inandouts['error-out-date'])
                 } else {
                   setter({ key: 'out_date', value: e })

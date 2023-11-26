@@ -16,7 +16,7 @@ export function Breadcrumbs () {
       <ol className="flex items-center space-x-4">
         <li>
           <div>
-            <Link href="/" className="text-gray-400 hover:text-gray-500">
+            <Link id="home-button" href="/home" className="text-gray-400 hover:text-gray-500">
               <LuHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </Link>

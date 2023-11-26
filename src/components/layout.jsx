@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Sidebar } from '@/components/sidebar/sidebar'
 import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
@@ -15,10 +15,6 @@ export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
   const { status, data } = useSession()
   const { data: user, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${data?.user?.email}&select=username,firstname,lastname,email,avatar`)
-
-  useEffect(() => {
-    console.log(data, status)
-  }, [data])
 
   if (status === 'loading' || isLoading) {
     return <div>Loading...</div>

@@ -27,10 +27,6 @@ export function ClockIn ({
   form.in_date = new Date(new Date().getTime())
   form.in_hour = getCurrentTime().toString()
 
-  console.log('form ', form)
-  console.log('out_date ', typeof form.out_date)
-  console.log('out_hour ', typeof form.out_hour)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 

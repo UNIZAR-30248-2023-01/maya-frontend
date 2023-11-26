@@ -13,6 +13,18 @@ export function getForm (zodShape) {
   return Object.fromEntries(entries)
 }
 
+export function unique (array, clave) {
+  const conjuntoDeClaves = new Set()
+  return array.filter((objeto) => {
+    const valor = objeto[clave]
+    if (!conjuntoDeClaves.has(valor)) {
+      conjuntoDeClaves.add(valor)
+      return true
+    }
+    return false
+  })
+}
+
 export function normalize (str) {
   try {
     return str.replace(/[-_]/gi, ' ').toLowerCase()

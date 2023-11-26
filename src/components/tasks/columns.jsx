@@ -35,7 +35,6 @@ export const columns = [
     ),
     cell: ({ row }) => {
       const { id } = row.original
-      console.log(id)
       if (!id) {
         return (
           <div className="flex">
