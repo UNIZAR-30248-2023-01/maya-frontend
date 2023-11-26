@@ -159,7 +159,9 @@ export const inandouts = {
     'new-table-create': 'Fichar',
     'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
     'toast-success': 'Tu fichaje se ha almacenado correctamente.',
-    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-delete-loading': 'Estamos eliminando tu fichaje. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu fichaje se ha eliminado correctamente.'
   },
   en: {
     language: 'en-US',
@@ -196,7 +198,9 @@ export const inandouts = {
     'new-table-create': 'Clock in/clock out',
     'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
     'toast-success': 'Your clock-in/clock-out has been registered successfully.',
-    'toast-error': 'Something went wrong. Please try again.'
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-delete-loading': 'We are deleting your clock-in/clock-out. Please wait a moment.',
+    'toast-delete-success': 'Your clock-in/clock-out has been deleted successfully.'
   }
 }
 
