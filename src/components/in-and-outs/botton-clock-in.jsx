@@ -78,7 +78,7 @@ export function ClockIn ({
   }
 
   return (
-    <Button id="new-date" variant="outline" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
+    <Button id="new-date" className='capitalize dark:bg-custom-mustard ' onClick={handleSubmit}>{triggerBtn}</Button>
 
   )
 }

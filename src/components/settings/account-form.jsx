@@ -180,7 +180,7 @@ export function AccountForm () {
             }
           }}
         />
-        <Button type="submit" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
+        <Button type="submit" className="text-black bg-custom-mustard" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
         </form>
     </Form>
   )

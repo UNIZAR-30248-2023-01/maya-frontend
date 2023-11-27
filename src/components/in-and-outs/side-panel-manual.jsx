@@ -108,7 +108,7 @@ export function SidePanelManual ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-manual-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-manual-date" className='capitalize dark:bg-custom-mustard'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
@@ -198,7 +198,7 @@ export function SidePanelManual ({
           </div>
           <SheetFooter className="">
             <SheetClose asChild >
-              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" className="dark:bg-custom-mustard" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>

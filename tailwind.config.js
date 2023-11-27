@@ -15,7 +15,9 @@ module.exports = {
     extend: {
       colors: {
         custom: {
-          mustard: '#DEB841'
+          mustard: '#DEB841',
+          lightGray: '#F1F1F1',
+          beige: '#FCF2C1'
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
