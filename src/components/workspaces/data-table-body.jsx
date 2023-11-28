@@ -41,6 +41,7 @@ export function DataTableBody ({ table }) {
     // router.push(destinationURL, null, { shallow: true, state: { key, secretKey } })
     const urlActual = window.location.href
     console.log('URL actual 1:', urlActual)
+    console.log('ROW:', row)
 
     const name = String(row.original.name).toLowerCase().replace(/ /g, '-')
     saveWorkspace(name, key, secretKey, false)
@@ -53,6 +54,7 @@ export function DataTableBody ({ table }) {
         ? (table.getRowModel().rows.map((row) => (
             <TableRow
               key={row.id}
+              id={`row-${row.id}`} // Asigna un id único a cada fila
               data-state={row.getIsSelected() && 'selected'}
               // onClick={() => goTo(row)}
               onClick={() => {

@@ -53,6 +53,7 @@ export function DataTableBody ({ table }) {
         ? (table.getRowModel().rows.map((row) => (
             <TableRow
               key={row.id}
+              id={`row-${row.id}`} // Asigna un id único a cada fila
               data-state={row.getIsSelected() && 'selected'}
               // onClick={() => goTo(row)}
               onClick={() => {
