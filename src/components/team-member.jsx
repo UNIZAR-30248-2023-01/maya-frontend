@@ -49,12 +49,7 @@ export function TeamMember ({
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/appearance">
-              {dictionary.settingsAccount['apperance-tab']}
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/notifications">
-              {dictionary.settingsAccount['notifications-tab']}
+              {dictionary.settingsAccount['appearance-tab']}
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

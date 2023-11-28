@@ -10,9 +10,9 @@ export default function SettingsAppearancePage () {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{dictionary.settingsAccount['apperance-tab']}</h3>
+        <h3 className="text-lg font-medium">{dictionary.settingsAccount['appearance-tab']}</h3>
         <p className="text-sm text-muted-foreground">
-          {dictionary.settingsAccount['appearace-headline']}
+          {dictionary.settingsAccount['appearance-headline']}
         </p>
       </div>
       <Separator />

@@ -39,10 +39,6 @@ export const profileNavItems = [
   {
     title: 'appearance',
     href: '/settings/appearance'
-  },
-  {
-    title: 'notifications',
-    href: '/settings/notifications'
   }
 ]
 

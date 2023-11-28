@@ -5,10 +5,13 @@ import { usePathname } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { useLang } from '@/context/language-context'
 
 export function SidebarNav ({ className, items, ...props }) {
   let pathname = usePathname()
   pathname = '/' + pathname.split('/').slice(2).join('/')
+
+  const { dictionary } = useLang()
 
   return (
     <nav
@@ -25,12 +28,12 @@ export function SidebarNav ({ className, items, ...props }) {
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             pathname === item.href
-              ? 'bg-muted hover:bg-muted'
-              : 'hover:bg-transparent hover:underline',
+              ? 'bg-custom-mustard hover:bg-custom-mustard dark:text-black'
+              : 'hover:bg-custom-lightGray dark:hover:text-black ',
             'justify-start'
           )}
         >
-          {item.title}
+          {dictionary.settingsAccount[`${item.title}-tab`]}
         </Link>
       ))}
     </nav>

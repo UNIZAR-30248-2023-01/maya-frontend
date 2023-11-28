@@ -19,14 +19,14 @@ export function SidebarNavigation ({ navigation }) {
             href={item.href}
             className={cn(
               getCurrent(item, id)
-                ? 'bg-custom-lightGray text-custom-mustard dark:text-custom-mustard dark:bg-custom-lightGray'
+                ? 'bg-custom-lightGray text-custom-mustard dark:text-black dark:bg-custom-ligthYellow '
                 : 'text-gray-700 dark:text-custom-mustard hover:text-white hover:bg-custom-mustard dark:hover:text-gray-700',
               'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium capitalize'
             )}
           >
             <item.icon
               className={cn(
-                getCurrent(item, id) ? 'text-custom-mustard' : 'text-gray-400 group-hover:text-gray-700 dark:text-custom-mustard',
+                getCurrent(item, id) ? 'text-custom-mustard dark:text-black' : 'text-gray-400 group-hover:text-gray-700 dark:text-custom-mustard',
                 'h-5 w-5 shrink-0 stroke-1'
               )}
               aria-hidden="true"
