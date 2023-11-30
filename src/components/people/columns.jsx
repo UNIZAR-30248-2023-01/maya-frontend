@@ -68,9 +68,9 @@ export const columns = [
     }
   }, {
     id: 'actions',
-    cell: ({ row }) => {
+    cell: ({ row, owner }) => {
       const { username } = row.original
-      if (!username) return null
+      if (!username || !owner) return null
 
       return <div className='flex justify-end pr-4'><DataTableRowActions row={row} /></div>
     },

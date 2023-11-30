@@ -15,6 +15,7 @@ import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
 import { InviteMember } from '@/components/people/invite-member'
 import { useLang } from '@/context/language-context'
+import { useUser } from '@/context/user-context'
 
 export function DataTable ({ data, columns, projectName }) {
   const { dictionary } = useLang()
@@ -42,23 +43,27 @@ export function DataTable ({ data, columns, projectName }) {
     }
   })
 
+  const { user } = useUser()
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <DataTableToolbar table={table} />
-        <InviteMember
-          title={dictionary.people['invite-member']}
-          description={dictionary.people['invite-member-description']}
-          triggerBtn={dictionary.people.invite}
-          actionBtn={dictionary.people['invite-member-send']}
-          data={{ members: data }}
-          projectName={projectName}
-        />
+        { data.find(e => e.username === user.username && e.role === 'owner') &&
+          <InviteMember
+            title={dictionary.people['invite-member']}
+            description={dictionary.people['invite-member-description']}
+            triggerBtn={dictionary.people.invite}
+            actionBtn={dictionary.people['invite-member-send']}
+            data={{ members: data }}
+            projectName={projectName}
+          />
+        }
       </div>
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>
-          <DataTableBody table={table} />
+          <DataTableBody table={table} owner={data.find(e => e.username === user.username && e.role === 'owner')} />
         </Table>
       </div>
       <DataTablePagination table={table} />

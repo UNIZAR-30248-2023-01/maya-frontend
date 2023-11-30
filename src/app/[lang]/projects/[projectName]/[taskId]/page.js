@@ -23,9 +23,11 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Hour } from '@/components/tasks/hours'
 import { Separator } from '@/components/ui/separator'
+import { useUser } from '@/context/user-context'
 
 export default function TaskPage ({ params }) {
   const { dictionary } = useLang()
+  const { user } = useUser()
   const [edit, setEdit] = useState(false)
   const [newComment, setNewComment] = useState(null)
   const [newHour, setNewHour] = useState(null)
@@ -173,23 +175,25 @@ export default function TaskPage ({ params }) {
               )}
             </div>
 
-            <div className='flex gap-4'>
-              <Button
-                variant='outline'
-                onClick={() => (edit ? handleCancel() : setEdit(true))}
-              >
-                {edit ? dictionary.common.cancel : dictionary.common.edit}
-              </Button>
-              <ConfirmationTaskButton
-                className='bg-red-500 hover:bg-red-700'
-                isEdit={edit}
-                taskId={params.taskId}
-                projectName={params.projectName}
-                form={form}
-                taskPeople={people}
-                setEdit={setEdit}
-              />
-            </div>
+            {(people.find(e => e.username === user.username) || projectPeople.find(e => e.username === user.username && e.role === 'owner')) &&
+              <div className='flex gap-4'>
+                <Button
+                  variant='outline'
+                  onClick={() => (edit ? handleCancel() : setEdit(true))}
+                >
+                  {edit ? dictionary.common.cancel : dictionary.common.edit}
+                </Button>
+                <ConfirmationTaskButton
+                  className='bg-red-500 hover:bg-red-700'
+                  isEdit={edit}
+                  taskId={params.taskId}
+                  projectName={params.projectName}
+                  form={form}
+                  taskPeople={people}
+                  setEdit={setEdit}
+                />
+              </div>
+            }
           </div>
 
           {!edit && (
@@ -411,7 +415,7 @@ export default function TaskPage ({ params }) {
           </div>
         )}
 
-        {!edit && people.find(e => e.username === JSON.parse(localStorage.getItem('maya-user')).username)
+        {!edit && people.find(e => e.username === user.username)
           ? (
             <>
               <Tabs defaultValue="comments" className="w-full">

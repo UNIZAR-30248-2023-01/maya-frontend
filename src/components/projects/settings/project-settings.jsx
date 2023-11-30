@@ -1,6 +1,4 @@
 'use client'
-
-import useSWR from 'swr'
 // import { TabsContent } from '@/components/ui/tabs'
 
 import { ConfirmationVisibilityButton } from '@/components/projects/settings/confirmationVisibilityButton'
@@ -16,8 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useRouter, usePathname } from 'next/navigation'
 
-export function ProjectSettings ({ projectName }) {
-  const { data: project, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+export function ProjectSettings ({ project }) {
   const { dictionary } = useLang()
   const path = usePathname()
   const router = useRouter()
@@ -25,102 +22,101 @@ export function ProjectSettings ({ projectName }) {
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
-  if (!isLoading) {
-    const isClosed = project[0]?.status === 'closed'
-    const isPublic = project[0]?.visibility === 'public'
-    const defaultName = project[0]?.name
-    const defaultDescription = project[0]?.description
+  const isClosed = project?.status === 'closed'
+  const isPublic = project?.visibility === 'public'
+  const defaultName = project?.name
+  const defaultDescription = project?.description
 
-    const handleSubmit = async (e) => {
-      e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-      const { name, description } = form
+    const { name, description } = form
 
-      try {
-        if (!name && description !== defaultDescription) {
-          const changeProjectSettings = () => {
-            return new Promise((resolve, reject) => {
-              (async () => {
-                await supabase.from('projects').update({ description })
-                  .eq('name', projectName)
-                  .select()
-                  .then(() => {
-                    resolve()
-                  }).catch((error) => {
-                    console.error(error)
-                    reject(error)
-                  })
-              })()
-            })
-          }
-
-          toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-data-loading'],
-            success: () => dictionary.projectSettings['toast-data-success'],
-            error: () => dictionary.projectSettings['toast-error']
+    try {
+      if (!name && description !== defaultDescription) {
+        const changeProjectSettings = () => {
+          return new Promise((resolve, reject) => {
+            (async () => {
+              await supabase.from('projects').update({ description })
+                .eq('name', project.name)
+                .select()
+                .then(() => {
+                  resolve()
+                }).catch((error) => {
+                  console.error(error)
+                  reject(error)
+                })
+            })()
           })
         }
 
-        if (!description && name !== defaultName) {
-          const changeProjectSettings = () => {
-            return new Promise((resolve, reject) => {
-              (async () => {
-                await supabase.from('projects').update({ name })
-                  .eq('name', projectName)
-                  .select()
-                  .then(() => {
-                    resolve()
-                  }).catch((error) => {
-                    console.error(error)
-                    reject(error)
-                  })
-              })()
-            })
-          }
-
-          toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-data-loading'],
-            success: () => dictionary.projectSettings['toast-data-success'],
-            error: () => dictionary.projectSettings['toast-error']
-          })
-        }
-
-        if (name && description && (defaultName !== 'name' || defaultDescription !== 'description')) {
-          const changeProjectSettings = () => {
-            return new Promise((resolve, reject) => {
-              (async () => {
-                await supabase.from('projects').update({ name, description })
-                  .eq('name', projectName)
-                  .select()
-                  .then(() => {
-                    resolve()
-                  }).catch((error) => {
-                    console.error(error)
-                    reject(error)
-                  })
-              })()
-            })
-          }
-
-          toast.promise(changeProjectSettings, {
-            loading: dictionary.projectSettings['toast-data-loading'],
-            success: () => dictionary.projectSettings['toast-data-success'],
-            error: () => dictionary.projectSettings['toast-error']
-          })
-        }
-      } catch (error) {
-        const { path, message } = JSON.parse(error.message)[0]
-        toast.error(path[0] + ': ' + message)
+        toast.promise(changeProjectSettings, {
+          loading: dictionary.projectSettings['toast-data-loading'],
+          success: () => dictionary.projectSettings['toast-data-success'],
+          error: () => dictionary.projectSettings['toast-error']
+        })
       }
 
-      if (form.name && form.name !== projectName) {
-        router.replace(`${path.split('/').slice(0, 3).join('/')}/${form.name}`)
-      } else {
-        e.target.reset()
+      if (!description && name !== defaultName) {
+        const changeProjectSettings = () => {
+          return new Promise((resolve, reject) => {
+            (async () => {
+              await supabase.from('projects').update({ name: name.split(' ').join('-') })
+                .eq('name', project.name)
+                .select()
+                .then(() => {
+                  resolve()
+                }).catch((error) => {
+                  console.error(error)
+                  reject(error)
+                })
+            })()
+          })
+        }
+
+        toast.promise(changeProjectSettings, {
+          loading: dictionary.projectSettings['toast-data-loading'],
+          success: () => dictionary.projectSettings['toast-data-success'],
+          error: () => dictionary.projectSettings['toast-error']
+        })
       }
+
+      if (name && description && (defaultName !== 'name' || defaultDescription !== 'description')) {
+        const changeProjectSettings = () => {
+          return new Promise((resolve, reject) => {
+            (async () => {
+              await supabase.from('projects').update({ name: name.split(' ').join('-'), description })
+                .eq('name', project.name)
+                .select()
+                .then(() => {
+                  resolve()
+                }).catch((error) => {
+                  console.error(error)
+                  reject(error)
+                })
+            })()
+          })
+        }
+
+        toast.promise(changeProjectSettings, {
+          loading: dictionary.projectSettings['toast-data-loading'],
+          success: () => dictionary.projectSettings['toast-data-success'],
+          error: () => dictionary.projectSettings['toast-error']
+        })
+      }
+    } catch (error) {
+      const { path, message } = JSON.parse(error.message)[0]
+      toast.error(path[0] + ': ' + message)
     }
 
-    return (
+    if (form.name && form.name !== project.name) {
+      router.replace(`${path.split('/').slice(0, 3).join('/')}/${form.name.split(' ').join('-')}`)
+    } else {
+      e.target.reset()
+    }
+  }
+
+  return (
       <div className="flex flex-col gap-4 max-w-[800px]">
         {/* <TabsContent value={value} className='space-y-6'> */}
 
@@ -161,7 +157,7 @@ export function ProjectSettings ({ projectName }) {
                   {isPublic ? dictionary.projectSettings['public-visibility'] : dictionary.projectSettings['private-visibility']}
                 </Label>
               </div>
-              <ConfirmationVisibilityButton isPublic={isPublic} projectName={projectName} />
+              <ConfirmationVisibilityButton isPublic={isPublic} projectName={project.name} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
@@ -171,7 +167,7 @@ export function ProjectSettings ({ projectName }) {
                   {isClosed ? dictionary.projectSettings['explain-open-project'] : dictionary.projectSettings['explain-close-project']}
                 </Label>
               </div>
-              <ConfirmationCloseButton isClose={isClosed} projectName={projectName} />
+              <ConfirmationCloseButton isClose={isClosed} projectName={project.name} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
@@ -181,12 +177,11 @@ export function ProjectSettings ({ projectName }) {
                   {dictionary.projectSettings['explain-delete-project']}
                 </Label>
               </div>
-              <ConfirmationDeleteButton projectName={projectName} />
+              <ConfirmationDeleteButton projectName={project.name} />
             </div>
           </div>
         </div>
         {/* </TabsContent> */}
       </div>
-    )
-  }
+  )
 }

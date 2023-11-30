@@ -51,6 +51,7 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
           <CommandGroup>
             {list.map((item) => (
               <CommandItem
+                id={item.value}
                 key={item.value}
                 onSelect={() => {
                   onChange(item.value)
@@ -106,6 +107,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
                 const isSelected = values.includes(option.value)
                 return (
                   <CommandItem
+                    id={option.value}
                     key={option.value}
                     onSelect={(e) => {
                       onChange(e)

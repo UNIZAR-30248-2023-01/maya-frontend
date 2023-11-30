@@ -3,7 +3,8 @@
 import { user, privateProject, publicProject, createUser, deleteUser, deletePublicProject, deletePrivateProject, createPrivateProject, createPublicProject } from '../setUp/setUp'
 
 const newProject = {
-  name: 'new-name-project',
+  name: 'new name project',
+  dbname: 'new-name-project',
   description: 'New description'
 }
 
@@ -19,7 +20,7 @@ describe('Edit project', async () => {
   afterEach(() => {
     deleteUser()
     if (editedName) {
-      deletePrivateProject(newProject.name)
+      deletePrivateProject(newProject.dbname)
       editedName = false
     } else {
       deletePrivateProject()
@@ -35,7 +36,7 @@ describe('Edit project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${privateProject.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -52,7 +53,7 @@ describe('Edit project', async () => {
 
     cy.get('input#filter-project').type(newProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${newProject.name} > :nth-child(1)`)
+    cy.get(`tr#${newProject.dbname} > :nth-child(1)`)
       .should('contain.text', newProject.name)
 
     editedName = true
@@ -66,7 +67,7 @@ describe('Edit project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${privateProject.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -83,7 +84,7 @@ describe('Edit project', async () => {
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${privateProject.name} > :nth-child(2)`)
+    cy.get(`tr#${privateProject.dbname} > :nth-child(2)`)
       .should('contain.text', newProject.description)
   })
 
@@ -95,7 +96,7 @@ describe('Edit project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${privateProject.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -113,9 +114,9 @@ describe('Edit project', async () => {
 
     cy.get('input#filter-project').type(newProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${newProject.name} > :nth-child(1)`)
+    cy.get(`tr#${newProject.dbname} > :nth-child(1)`)
       .should('contain.text', newProject.name)
-    cy.get(`tr#${newProject.name} > :nth-child(2)`)
+    cy.get(`tr#${newProject.dbname} > :nth-child(2)`)
       .should('contain.text', newProject.description)
 
     editedName = true
@@ -129,7 +130,7 @@ describe('Edit project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${privateProject.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -148,7 +149,7 @@ describe('Edit project', async () => {
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${privateProject.name} > :nth-child(1)`)
+    cy.get(`tr#${privateProject.dbname} > :nth-child(1)`)
       .should('contain.text', privateProject.name)
   })
 
@@ -160,7 +161,7 @@ describe('Edit project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${publicProject.name}`).click()
+    cy.get(`tr#${publicProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -179,7 +180,7 @@ describe('Edit project', async () => {
 
     cy.get('input#filter-project').type(publicProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${publicProject.name} > :nth-child(1)`)
+    cy.get(`tr#${publicProject.dbname} > :nth-child(1)`)
       .should('contain.text', publicProject.name)
   })
 })

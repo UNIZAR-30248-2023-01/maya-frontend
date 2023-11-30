@@ -15,15 +15,25 @@ const hashedPassword = crypto
   .toString('hex')
 
 export const publicProject = {
-  name: 'new-public-project',
+  name: 'new public project',
+  dbname: 'new-public-project',
   description: 'Description of the new project',
   organization: 'reign'
 }
 
 export const privateProject = {
-  name: 'new-private-project',
+  name: 'new private project',
+  dbname: 'new-private-project',
   description: 'Description of the new project',
   organization: 'reign'
+}
+
+export const task = {
+  name: 'Test Task',
+  label: 'ui',
+  status: 'new',
+  estimated: 3,
+  project: privateProject.dbname
 }
 
 export const createUser = () => {
@@ -69,9 +79,25 @@ export const createPrivateProject = () => {
       Prefer: 'return=minimal'
     },
     body: {
-      name: privateProject.name,
+      name: privateProject.dbname,
       description: privateProject.description,
       organization: privateProject.organization
+    }
+  })
+
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-project`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal'
+    },
+    body: {
+      username: user.username,
+      project: privateProject.dbname,
+      role: 'owner'
     }
   })
 }
@@ -87,10 +113,26 @@ export const createPublicProject = () => {
       Prefer: 'return=minimal'
     },
     body: {
-      name: publicProject.name,
+      name: publicProject.dbname,
       description: publicProject.description,
       organization: publicProject.organization,
       visibility: 'public'
+    }
+  })
+
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-project`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal'
+    },
+    body: {
+      username: user.username,
+      project: publicProject.dbname,
+      role: 'owner'
     }
   })
 }
@@ -98,7 +140,7 @@ export const createPublicProject = () => {
 export const deletePrivateProject = (name) => {
   cy.request({
     method: 'DELETE',
-    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${name ?? privateProject.name}`,
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${name ?? privateProject.dbname}`,
     headers: {
       apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
       Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
@@ -109,10 +151,30 @@ export const deletePrivateProject = (name) => {
 export const deletePublicProject = (name) => {
   cy.request({
     method: 'DELETE',
-    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${name ?? publicProject.name}`,
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/projects?name=eq.${name ?? publicProject.dbname}`,
     headers: {
       apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
       Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
+    }
+  })
+}
+
+export const addTasks = () => {
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/tasks`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal'
+    },
+    body: {
+      name: task.name,
+      estimated: task.estimated,
+      project: task.project,
+      label: task.label,
+      status: task.status
     }
   })
 }

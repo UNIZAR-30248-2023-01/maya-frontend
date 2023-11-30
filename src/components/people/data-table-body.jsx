@@ -8,7 +8,7 @@ import {
 import { flexRender } from '@tanstack/react-table'
 import { useLang } from '@/context/language-context'
 
-export function DataTableBody ({ table }) {
+export function DataTableBody ({ table, owner }) {
   const { dictionary } = useLang()
   return (
     <TableBody>
@@ -24,7 +24,8 @@ export function DataTableBody ({ table }) {
                     ...dictionary.roles,
                     ...dictionary.project,
                     ...dictionary.people
-                  }
+                  },
+                  owner
                 })}
               </TableCell>
             ))}

@@ -1,16 +1,16 @@
 /// <reference types="cypress" />
 
-import { user, project, createUser, deleteUser, deleteProject, createProject } from '../setUp/setUp'
+import { user, createUser, deleteUser, privateProject, createPrivateProject, deletePrivateProject } from '../setUp/setUp'
 
 describe('Store project', async () => {
   before(() => {
     createUser()
-    createProject()
+    createPrivateProject()
   })
 
   after(() => {
     deleteUser()
-    deleteProject()
+    deletePrivateProject()
   })
 
   it('Archive project', () => {
@@ -21,7 +21,7 @@ describe('Store project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${project.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -38,11 +38,11 @@ describe('Store project', async () => {
     cy.get('button#close-filter').click()
     cy.get('div#closed').click()
 
-    cy.get('input#filter-project').type(project.name, { force: true })
+    cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')
-      .should('contain.text', project.name)
+      .should('contain.text', privateProject.name)
   })
 
   it('Unarchive project', () => {
@@ -53,7 +53,7 @@ describe('Store project', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${project.name}`).click()
+    cy.get(`tr#${privateProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#project-settings').click()
@@ -70,10 +70,10 @@ describe('Store project', async () => {
     cy.get('button#close-filter').click()
     cy.get('div#open').click()
 
-    cy.get('input#filter-project').type(project.name, { force: true })
+    cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')
-      .should('contain.text', project.name)
+      .should('contain.text', privateProject.name)
   })
 })
