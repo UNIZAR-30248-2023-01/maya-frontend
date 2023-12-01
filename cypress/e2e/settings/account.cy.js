@@ -2,6 +2,16 @@
 
 import { user, createUser, deleteUser } from '../setUp/setUp'
 
+const exampleUserEdit = {
+  firstname: ' firstname change',
+  lastname: 'Test lastname change'
+}
+
+const backToOriginalUser = {
+  firstname: 'Test',
+  lastname: 'Test'
+}
+
 describe('Setting account tests', () => {
   before(() => {
     createUser()
@@ -16,31 +26,38 @@ describe('Setting account tests', () => {
 
     cy.wait(3000)
 
-    /* cy.visit('/es/settings')
-    cy.wait(5000)
+    cy.visit('/es/settings')
+    cy.wait(3000)
 
-    cy.get('button#new-manual-date').should('be.visible').click()
+    /* cy.get('input#firstname').type(exampleUserEdit.firstname)
+    cy.get('input#lastname').clear()
+    cy.get('input#lastname').type(exampleUserEdit.lastname) */
+
+    cy.get('input#firstname').clear().type(exampleUserEdit.firstname).then(($input) => {
+      const firstNameValue = $input.val()
+      cy.log('First Name Value:', firstNameValue)
+    })
+
+    cy.get('input#lastname').clear().type(exampleUserEdit.lastname).then(($input) => {
+      const lastNameValue = $input.val()
+      cy.log('Last Name Value:', lastNameValue)
+    })
 
     cy.wait(1000)
-    // Datepicker
-    cy.get('button#in_date').click()
-    // Buscar el botón con el atributo name=day y hacer clic en él
-    cy.get('button[name=day]').contains('12').click()
-    cy.get('h2#necesitoelid').click()
-    cy.get('input#in_hour').type(exampleClockin.in_hour)
-    cy.get('button#out_date').click()
-    cy.get('button[name=day]').contains('12').click()
-    cy.get('h2#necesitoelid').click()
-    cy.get('input#out_hour').type(exampleClockin.out_hour)
 
-    cy.get('button#fichar').click()
+    cy.get('button#buttonUpdate').click()
 
-    // Check if the new checkin is in the list
-    cy.get('tbody').contains('12:12')
-    cy.get('tbody').contains(exampleClockin.in_hour)
-    cy.get('tbody').contains(exampleClockin.out_hour)
+    cy.wait(1000)
 
-    // Edit the checkin
+    // Check if the update was successful
+    cy.get('input#firstname').invoke('val').then((firstNameValue) => {
+      expect(firstNameValue.trim()).to.equal('Test firstname change')
+    })
+    cy.get('input#lastname').invoke('val').then((firstNameValue) => {
+      expect(firstNameValue.trim()).to.equal('Test lastname change')
+    })
+
+    /* Edit the checkin
     cy.wait(2000)
     cy.get('#icon').click()
     // eliminar texto
