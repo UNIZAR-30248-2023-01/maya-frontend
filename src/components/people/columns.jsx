@@ -6,6 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import { DataTableRowActions } from '@/components/people/data-table-row-actions'
 import { Skeleton } from '@/components/ui/skeleton'
+import { roles } from '@/lib/constants'
 
 export const columns = [
   {
@@ -14,7 +15,6 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
-      console.log(row.original)
       if (!row.original.people?.username) {
         return (
           <div className='flex items-start space-x-2'>
@@ -59,8 +59,10 @@ export const columns = [
         return <Skeleton variant='outline' className='w-24 h-4'/>
       }
 
+      const role = roles.find(role => role.value === row.getValue('role'))
+
       return (
-        <Badge variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
+        <Badge id={role.id} variant='outline' className='max-w-fit'>{dictionary[role.value]}</Badge>
       )
     },
     filterFn: (row, id, value) => {

@@ -15,7 +15,7 @@ export function DataTableBody ({ table, owner }) {
       {table.getRowModel().rows?.length
         ? (
             table.getRowModel().rows.map((row) => (
-          <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+          <TableRow id={row.original.username} key={row.id} data-state={row.getIsSelected() && 'selected'}>
             {row.getVisibleCells().map((cell) => (
               <TableCell key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, {
@@ -33,7 +33,7 @@ export function DataTableBody ({ table, owner }) {
             ))
           )
         : (
-        <TableRow>
+        <TableRow id="not-found">
           <TableCell
             colSpan={table.getAllColumns().length}
             className="h-24 text-center"

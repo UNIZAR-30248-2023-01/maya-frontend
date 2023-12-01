@@ -76,7 +76,7 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange, dictionary }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange, dictionary, searchId }) {
   const [open, setOpen] = useState(false)
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
@@ -99,7 +99,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
       </div>
       <PopoverContent className="w-full p-0" align="start">
         <Command>
-          <CommandInput placeholder={placeholder} />
+          <CommandInput data-test-id={searchId} placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>

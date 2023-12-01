@@ -52,7 +52,7 @@ export default function TaskPage ({ params }) {
           (async () => {
             await supabase.from('task-comments').insert({
               task: params.taskId,
-              username: JSON.parse(localStorage.getItem('maya-user')).username,
+              username: user.username,
               comment: newComment
             }).select()
               .then(() => {
@@ -90,7 +90,7 @@ export default function TaskPage ({ params }) {
           (async () => {
             await supabase.from('task-hours').insert({
               id: params.taskId,
-              username: JSON.parse(localStorage.getItem('maya-user')).username,
+              username: user.username,
               hora: newHour
             }).select()
               .then(() => {
@@ -160,7 +160,7 @@ export default function TaskPage ({ params }) {
         <div className='flex flex-col gap-4'>
           <div className='flex flex-row justify-between'>
             <div className='flex flex-row gap-4 items-center'>
-              <Label className='text-4xl font-semibold text-foreground capitalize'>
+              <Label id="task-name" className='text-4xl font-semibold text-foreground capitalize'>
                 {task.name}
               </Label>
               {edit && (

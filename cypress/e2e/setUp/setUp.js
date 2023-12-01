@@ -9,6 +9,15 @@ export const user =
     password: Cypress.env('TEST_PASSWORD')
   }
 
+export const userMember =
+  {
+    username: Cypress.env('TEST_USERNAME') + '-member',
+    firstname: Cypress.env('TEST_FIRSTNAME'),
+    lastname: Cypress.env('TEST_LASTNAME'),
+    email: 'member-' + Cypress.env('TEST_EMAIL'),
+    password: Cypress.env('TEST_PASSWORD')
+  }
+
 const salt = crypto.randomBytes(16).toString('hex')
 const hashedPassword = crypto
   .pbkdf2Sync(user.password, salt, 10000, 64, 'sha512')
@@ -55,12 +64,38 @@ export const createUser = () => {
       salt
     }
   })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal'
+    },
+    body: {
+      email: userMember.email,
+      username: userMember.username,
+      firstname: userMember.firstname,
+      lastname: userMember.lastname,
+      passwd_hash: hashedPassword,
+      salt
+    }
+  })
 }
 
 export const deleteUser = () => {
   cy.request({
     method: 'DELETE',
     url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people?username=eq.${user.username}`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
+    }
+  })
+  cy.request({
+    method: 'DELETE',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people?username=eq.${userMember.username}`,
     headers: {
       apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
       Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
@@ -98,6 +133,21 @@ export const createPrivateProject = () => {
       username: user.username,
       project: privateProject.dbname,
       role: 'owner'
+    }
+  })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-project`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal'
+    },
+    body: {
+      username: userMember.username,
+      project: privateProject.dbname,
+      role: 'member'
     }
   })
 }

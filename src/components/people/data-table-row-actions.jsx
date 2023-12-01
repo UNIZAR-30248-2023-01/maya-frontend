@@ -17,6 +17,7 @@ export function DataTableRowActions ({ row }) {
       projectName={row.original.project}
       username={row.original.username}
       defaultRole={row.original.role}
+      id={row.original.username + '-edit'}
     />
   )
 }

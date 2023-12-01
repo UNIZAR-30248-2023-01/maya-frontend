@@ -66,7 +66,7 @@ export function RemoveUser ({
         </div>
 
         <AlertDialogTrigger asChild>
-            <Button className={'bg-red-500 hover:bg-red-700 w-32'}>{dictionary.common.delete}</Button>
+            <Button id='delete-member' className={'bg-red-500 hover:bg-red-700 w-32'}>{dictionary.common.delete}</Button>
         </AlertDialogTrigger>
       </div>
 
@@ -78,7 +78,7 @@ export function RemoveUser ({
           <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <DialogClose asChild>
-            <Button onClick={handleDeleteUser} className={'bg-red-500 hover:bg-red-700'}>{dictionary.confirmation['confirmation-delete']}</Button>
+            <Button id='confirmation-delete' onClick={handleDeleteUser} className={'bg-red-500 hover:bg-red-700'}>{dictionary.confirmation['confirmation-delete']}</Button>
           </DialogClose>
           </AlertDialogFooter>
       </AlertDialogContent>

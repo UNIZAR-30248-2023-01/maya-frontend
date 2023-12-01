@@ -390,22 +390,22 @@ export const loadingTasks = [
 
 export const roles = [
   {
-    id: 1,
+    id: 'owner',
     value: 'owner'
   }, {
-    id: 2,
+    id: 'developer',
     value: 'developer'
   }, {
-    id: 3,
-    value: 'scrum master'
+    id: 'scrum',
+    value: 'scrum-master'
   }, {
-    id: 4,
+    id: 'tester',
     value: 'tester'
   }, {
-    id: 5,
+    id: 'designer',
     value: 'designer'
   }, {
-    id: 6,
+    id: 'member',
     value: 'member'
   }
 ]

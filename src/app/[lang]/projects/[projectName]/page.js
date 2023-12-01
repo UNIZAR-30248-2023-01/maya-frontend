@@ -26,15 +26,15 @@ export default function ProjectPage ({ params }) {
     <>
       <Tabs defaultValue="tasks" className="w-full">
         <TabsList>
-          <TabsTrigger value="tasks" className="flex items-center gap-x-1.5 capitalize">
+          <TabsTrigger value="tasks" id="project-tasks" className="flex items-center gap-x-1.5 capitalize">
             <LuBoxes className="w-3.5 h-3.5" />
             {dictionary.tasks['tasks-tab']}
           </TabsTrigger>
-          <TabsTrigger value="people" className="flex items-center gap-x-1.5 capitalize">
+          <TabsTrigger value="people" id="project-members" className="flex items-center gap-x-1.5 capitalize">
             <LuUser className="w-3.5 h-3.5" />
             {dictionary.people['members-tab']}
           </TabsTrigger>
-          <TabsTrigger value="teams" className="flex items-center gap-x-1.5 capitalize">
+          <TabsTrigger value="teams" id="project-teams" className="flex items-center gap-x-1.5 capitalize">
             <LuUsers className="w-3.5 h-3.5"/>
             {dictionary.tasks['teams-tab']}
           </TabsTrigger>

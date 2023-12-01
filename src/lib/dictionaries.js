@@ -479,7 +479,7 @@ export const roles = {
     owner: 'Propietario',
     developer: 'Desarrollador',
     member: 'Miembro',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Diseñador'
   },
@@ -487,7 +487,7 @@ export const roles = {
     owner: 'Owner',
     developer: 'Developer',
     member: 'Member',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Designer'
   }
