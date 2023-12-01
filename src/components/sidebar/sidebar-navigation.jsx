@@ -19,8 +19,8 @@ export function SidebarNavigation ({ navigation }) {
             href={item.href}
             className={cn(
               getCurrent(item, id)
-                ? 'bg-custom-lightGray text-custom-mustard dark:text-black dark:bg-custom-ligthYellow '
-                : 'text-gray-700 dark:text-custom-mustard hover:text-white hover:bg-custom-mustard dark:hover:text-gray-700',
+                ? 'bg-custom-lightGray text-custom-mustard dark:text-black dark:bg-custom-mustard'
+                : 'text-gray-700 dark:text-custom-mustard hover:text-gray-700 hover:bg-custom-lightYellow dark:hover:text-gray-700',
               'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium capitalize'
             )}
           >

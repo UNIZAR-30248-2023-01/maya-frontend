@@ -19,7 +19,7 @@ module.exports = {
           lightGray: '#F1F1F1',
           beige: '#FCF2C1',
           lightBrown: '#BDB0A1',
-          ligthYellow: '#F4D35E'
+          lightYellow: '#F4D35E'
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
