@@ -1,26 +1,27 @@
-const exampleUser = {
-  name: 'jaimee.mt',
-  password: '1234567890'
-}
+import { user, createUser, deleteUser } from './setUp/setUp'
 
 describe('WorkSpaces', () => {
+  before(() => {
+    createUser()
+  })
+
+  after(() => {
+    deleteUser()
+  })
   it('Selecting a Workspace', () => {
-    cy.visit('/es/sign-in')
-
+    cy.login(user)
     cy.wait(3000)
-    cy.get('input#username').type(exampleUser.name)
-    cy.get('input#password').type(exampleUser.password)
-
-    cy.get('form').submit()
-    cy.wait(5000)
 
     cy.visit('/es/workspaces')
     cy.wait(3000)
+
+    cy.get('#filter-workspaces').type('Ebro')
 
     // Haz clic en el segundo elemento /es/workspaces
     cy.get('#row-1').click()
     cy.wait(3000)
 
+    cy.get('#filter-workspaces').type('Sala')
     // Haz clic en el segundo elemento /es/workspaces/$primerElemento
     cy.get('#row-1').click()
     cy.wait(3000)

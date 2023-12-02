@@ -11,17 +11,16 @@ import { supabase } from '@/lib/utils'
 
 export function DataTableBody ({ table }) {
   const router = useRouter()
-  // const goTo = (row) => router.push(`/workspaces/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
   const saveWorkspace = async (name, key, secretKey, evento) => {
     const { data: workspaces, error } = await supabase
       .from('workspaces')
       .select('*')
-      .eq('name', name) // Reemplaza 'usuario1' con el ID del usuario actual
+      .eq('name', name)
 
     if (error) console.log('error:', error)
     if (workspaces.length === 0) {
       console.log('No existe el workspace')
-      const { error } = await supabase.from('workspaces').insert([{
+      const { error } = await supabase.from('workspaces').upsert([{
         name,
         key,
         secretKey,
@@ -32,17 +31,8 @@ export function DataTableBody ({ table }) {
   }
   const goTo = (row, key, secretKey) => {
     // Construye la URL como destino
-    console.log('CLAVES:')
-    console.log('key:', key)
-    console.log('secretKey:', secretKey)
-    // const destinationURL = `/workspaces/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`
-    // // Pasa los valores como estado del historial de navegación
-    // router.push(destinationURL, null, { shallow: true, state: { key, secretKey } })
     const urlActual = window.location.href
-    console.log('URL actual 2:', urlActual)
-
     const name = String(row.original.name).toLowerCase().replace(/ /g, '-')
-    console.log('NOMBRE:', name)
     saveWorkspace(name, key, secretKey, true)
     router.push(`${urlActual}/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
   }

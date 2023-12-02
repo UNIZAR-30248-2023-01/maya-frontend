@@ -26,7 +26,6 @@ function MySeatingChart (name) {
   const lanCancel = dictionary.workspaces.cancel
   const username = user?.username
 
-  console.log('USER: ', username)
   // Obtiene la key del workspace y el secret key del evento
   const obtenerWorkspace = async () => {
     const { data: workspace, error } = await supabase
@@ -35,8 +34,8 @@ function MySeatingChart (name) {
       .eq('name', name.name)
     if (error) console.log('error:', error)
     if (workspace) {
-      console.log('workspace key:', workspace[0].key)
-      console.log('event secret key:', workspace[0].secretKey)
+      // console.log('workspace key:', workspace[0].key)
+      // console.log('event secret key:', workspace[0].secretKey)
       setWorkspace(workspace[0].key)
       setEvent(workspace[0].secretKey)
       setHasEvent(true)
@@ -54,7 +53,7 @@ function MySeatingChart (name) {
     oneDayAgo.setHours(oneDayAgo.getHours() - 24)
 
     console.log('Reservas :', reservas)
-    console.log('ONE DAY AGO:', oneDayAgo.toISOString())
+    // console.log('ONE DAY AGO:', oneDayAgo.toISOString())
 
     const reservasFiltradas = reservas.filter(reserva => {
       const dateObject = new Date(reserva.timeBooked)

@@ -13,7 +13,7 @@ export const columns = [
       if (!row.getValue('name')) return <Skeleton className='w-44 h-4'/>
 
       return (
-        <div className="max-w-[150px] truncate font-medium capitalize">
+        <div className="max-w-[400px] truncate font-medium capitalize">
           {row.getValue('name')}
         </div>
       )

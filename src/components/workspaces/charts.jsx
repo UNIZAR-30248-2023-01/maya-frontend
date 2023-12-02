@@ -1,7 +1,6 @@
 import { DataTable } from '@/components/workspaces/data-table-chart'
 import { columns } from '@/components/workspaces/columns'
-import { conectSeatsio } from '@/lib/seatsioUtils'
-import { ChartListParams } from 'seatsio'
+import { fetchWorkSpacesCharts } from '@/lib/seatsioUtils'
 import { supabase } from '@/lib/utils'
 import React, { useEffect, useState } from 'react'
 
@@ -21,10 +20,10 @@ function SpaceList (name) {
           return
         }
 
-        const chartsData = await conectSeatsio.charts.listFirstPage(new ChartListParams().withExpandEvents(true))
-
+        // const chartsData = await conectSeatsio.charts.listFirstPage(new ChartListParams().withExpandEvents(true))
+        const chartsData = await fetchWorkSpacesCharts(workspace[0].secretKey)
         // Modifica los datos según tus necesidades
-        const modifiedSpacesData = chartsData.items.map(element => {
+        const modifiedSpacesData = chartsData.map(element => {
           return {
             ...element,
             secretKey: element.events[0].key,
