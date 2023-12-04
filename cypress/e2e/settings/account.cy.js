@@ -24,10 +24,6 @@ describe('Setting account tests', () => {
     cy.visit('/es/settings')
     cy.wait(3000)
 
-    /* cy.get('input#firstname').type(exampleUserEdit.firstname)
-    cy.get('input#lastname').clear()
-    cy.get('input#lastname').type(exampleUserEdit.lastname) */
-
     cy.get('input#firstname').clear().type(exampleUserEdit.firstname).then(($input) => {
       const firstNameValue = $input.val()
       cy.log('First Name Value:', firstNameValue)
@@ -52,18 +48,14 @@ describe('Setting account tests', () => {
       expect(firstNameValue.trim()).to.equal('Test lastname change')
     })
 
+    cy.wait(2000)
+
     cy.get('#popupProfile').click()
 
     cy.get('img[src="/assets/avatars/memojis/1.webp"]').click()
     cy.get('button#updateProfilePhoto').click()
 
-    /*
-    cy.wait(2000)
-    cy.get('#icon').click()
-    cy.wait(1000)
-    cy.get('button#eliminar').click()
-
-    // Comprobar que el checkin ha sido eliminado
-    cy.get('tbody').contains('12:12').should('not.exist') */
+    // comprobar que se ha cambiado la foto de perfil
+    cy.get('#popupProfile').find('img[src="/assets/avatars/memojis/1.webp"]').should('exist')
   })
 })
