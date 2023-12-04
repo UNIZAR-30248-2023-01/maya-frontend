@@ -20,6 +20,7 @@ import {
   AvatarFallback,
   AvatarImage
 } from '@/components/ui/avatar'
+import { DialogClose } from '@radix-ui/react-dialog'
 
 export function PopupProfile ({
   user
@@ -105,30 +106,33 @@ export function PopupProfile ({
         </Avatar>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
-          <DialogDescription>
-            <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
-              {memojiList.map((memoji, index) => (
-                <img
-                  key={index}
-                  src={memoji}
-                  alt={`Memoji ${index + 1}`}
-                  className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
-                  onClick={() => {
-                    handleSelectAvatar(memoji)
-                    setter({ key: 'avatar', value: memoji })
-                  }}
-                />
-              ))}
+        <form onSubmit={e => handleSubmit(e)}>
+          <DialogHeader>
+            <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
+            <DialogDescription>
+              <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
+                {memojiList.map((memoji, index) => (
+                  <img
+                    key={index}
+                    src={memoji}
+                    alt={`Memoji ${index + 1}`}
+                    className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
+                    onClick={() => {
+                      handleSelectAvatar(memoji)
+                      setter({ key: 'avatar', value: memoji })
+                    }}
+                  />
+                ))}
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogClose>
+            <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
+                <Button className="bg-custom-mustard text-black" id="updateProfilePhoto" type='submit'>{dictionary.settingsAccount['update-avatar']}</Button>
             </div>
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
-          <Button id="updateProfilePhoto" type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
-        </div>
+          </DialogClose>
+        </form>
       </DialogContent>
     </Dialog>
-
   )
 }
