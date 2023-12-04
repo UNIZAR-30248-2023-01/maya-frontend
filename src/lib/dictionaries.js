@@ -200,12 +200,13 @@ export const settingsAccount = {
   es: {
     'account-tab': 'Cuenta',
     'appearance-tab': 'Apariencia',
-    'notifications-tab': 'Notificaciones',
+    'password-tab': 'Contraseña',
     'logout-tab': 'Cerrar sesión',
 
     'account-headline': 'Mi cuenta',
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
     'appearance-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
+    'password-headline': 'Cambia tu contraseña. Ambas deben coincidir para poder actualizarse.',
 
     'pick-avatar': 'Selecciona un avatar',
     'update-avatar': 'Actualizar',
@@ -234,7 +235,7 @@ export const settingsAccount = {
 
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
-    'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
+    'error-empty-password': 'Ambas contraseñas deben no estar vacías',
     'error-same-password': 'Ambas contraseñas deben ser las mismas',
 
     'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
@@ -244,12 +245,13 @@ export const settingsAccount = {
   en: {
     'account-tab': 'Account',
     'appearance-tab': 'Appearance',
-    'notifications-tab': 'Notifications',
+    'password-tab': 'Password',
     'logout-tab': 'Logout',
 
     'account-headline': 'My account',
     'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
     'appearance-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+    'password-headline': 'Change your password. Both must match the same in order to update.',
 
     'pick-avatar': 'Pick an avatar',
     'update-avatar': 'Update',
@@ -278,8 +280,8 @@ export const settingsAccount = {
 
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
-    'error-full-new-password': 'New password cannot be empty.',
-    'error-same-password': 'Both password should bethe same',
+    'error-empty-password': 'Both passwords must not be empty',
+    'error-same-password': 'Both password must be the same',
 
     'toast-loading': 'We are validating your info account. Please wait a moment.',
     'toast-success': 'Your info account has been updated successfully.',

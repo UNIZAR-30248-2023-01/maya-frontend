@@ -99,7 +99,7 @@ export function PopupProfile ({
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger id="popupProfile">
         <Avatar className="w-20 h-20">
           {displayAvatar}
         </Avatar>
@@ -125,14 +125,8 @@ export function PopupProfile ({
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
-          <Button type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
+          <Button id="updateProfilePhoto" type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
         </div>
-        {/* <DialogFooter>
-          <DialogClose className="flex justify-end mt-4" style={{ marginTop: '20px' }} onClick={handleSubmit}>
-            {dictionary.settingsAccount['update-avatar']}
-          </DialogClose>
-        </DialogFooter> */}
-
       </DialogContent>
     </Dialog>
 

@@ -19,7 +19,7 @@ import { PopupProfile } from '@/components/settings/popup-profile.jsx'
 import { useUser } from '@/context/user-context'
 
 export function AccountForm () {
-  const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
+  const [form, setForm] = useState({ ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   const [loading, setLoading] = useState(false)
@@ -58,16 +58,6 @@ export function AccountForm () {
       const updateUserAccount = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            if (form.password !== null) {
-              await fetch('http://localhost:3000/api/change-password', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password: form.password })
-              })
-                .then((res) => res.status ? resolve() : reject(new Error(res.status)))
-                .catch((error) => reject(error))
-            }
-
             await supabase.from('people')
               .update({ firstname: form.firstname, lastname: form.lastname })
               .eq('username', user?.username)
@@ -144,42 +134,6 @@ export function AccountForm () {
         <SheetDescription style={{ marginTop: '5px' }}>
             {dictionary.settingsAccount['message-email']}
         </SheetDescription>
-        <Text
-            label={dictionary.settingsAccount['user-password']}
-            placeholder="***********"
-            onChange={(e) => {
-              if (e.target.value.length > 0) {
-                e.target.classList.remove('border-red-500')
-                setter({ key: 'password', value: e.target.value })
-              } else {
-                e.target.classList.add('border-red-500')
-                // toast.error(dictionary.settingsAccount['error-lastname'])
-              }
-            }}
-        />
-        <Text
-          label={dictionary.settingsAccount['user-password-confirm']}
-          placeholder="***********"
-          onChange={(e) => {
-            if (form.password !== null) {
-              if (e.target.value.length > 8) {
-                e.target.classList.remove('border-red-500')
-                if (form.password !== e.target.value) {
-                  toast.error(dictionary.settingsAccount['error-same-password'])
-                } else {
-                  e.target.classList.remove('border-red-500')
-                  setter({ key: 'password', value: e.target.value })
-                }
-              } else {
-                e.target.classList.add('border-red-500')
-                // toast.error(dictionary.settingsAccount['error-lastname'])
-              }
-            } else {
-              e.target.value = ''
-              toast.error(dictionary.settingsAccount['error-full-new-password'])
-            }
-          }}
-        />
         <Button id="buttonUpdate" type="submit" className="text-black bg-custom-mustard" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
         </form>
     </Form>

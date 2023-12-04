@@ -39,6 +39,10 @@ export const profileNavItems = [
   {
     title: 'appearance',
     href: '/settings/appearance'
+  },
+  {
+    title: 'password',
+    href: '/settings/password'
   }
 ]
 

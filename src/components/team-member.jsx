@@ -52,6 +52,11 @@ export function TeamMember ({
               {dictionary.settingsAccount['appearance-tab']}
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/settings/password">
+              {dictionary.settingsAccount['password-tab']}
+            </Link>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
           <button onClick={() => {

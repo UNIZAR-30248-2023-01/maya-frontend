@@ -7,11 +7,6 @@ const exampleUserEdit = {
   lastname: 'Test lastname change'
 }
 
-const backToOriginalUser = {
-  firstname: 'Test',
-  lastname: 'Test'
-}
-
 describe('Setting account tests', () => {
   before(() => {
     createUser()
@@ -57,15 +52,12 @@ describe('Setting account tests', () => {
       expect(firstNameValue.trim()).to.equal('Test lastname change')
     })
 
-    /* Edit the checkin
-    cy.wait(2000)
-    cy.get('#icon').click()
-    // eliminar texto
-    cy.get('input#in_hour').clear()
-    cy.get('input#in_hour').type('11:13')
-    cy.get('button#fichar').click()
-    cy.get('tbody').contains('11:13')
+    cy.get('#popupProfile').click()
 
+    cy.get('img[src="/assets/avatars/memojis/1.webp"]').click()
+    cy.get('button#updateProfilePhoto').click()
+
+    /*
     cy.wait(2000)
     cy.get('#icon').click()
     cy.wait(1000)
