@@ -134,7 +134,7 @@ export function AccountForm () {
         <SheetDescription style={{ marginTop: '5px' }}>
             {dictionary.settingsAccount['message-email']}
         </SheetDescription>
-        <Button id="buttonUpdate" type="submit" className="text-black bg-custom-mustard" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
+        <Button id="buttonUpdate" type="submit" className="text-black hover:bg-custom-lighterYellow bg-custom-mustard" style={{ marginTop: '20px' }}>{dictionary.settingsAccount['account-update']}</Button>
         </form>
     </Form>
   )
