@@ -31,11 +31,12 @@ export function RemoveUser ({
       const removeUser = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            await supabase.from('people').delete()
+            await supabase.from('people-project').delete()
               .eq('username', username)
+              .eq('project', projectName)
               .then(() => {
               // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username,firstname,lastname,avatar,role`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

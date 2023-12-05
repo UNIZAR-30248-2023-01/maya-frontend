@@ -21,9 +21,15 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChange }) {
+export function ComboboxEnum ({ id, label, value, list, onChange }) {
   const [open, setOpen] = useState(false)
   const { dictionary } = useLang()
+  const dictionaries = {}
+
+  Object.keys(dictionary).forEach(key => {
+    Object.assign(dictionaries, dictionary[key])
+  })
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className='flex flex-col gap-1.5 w-full'>
@@ -38,7 +44,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
           >
             <div className='flex flex-row gap-2'>
               {<span>{list.find(e => e.value === value)?.icon}</span>}
-              {dictionary[value] || label}
+              {dictionaries[value] || label}
             </div>
 
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -48,12 +54,10 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
 
       <PopoverContent className='w-full p-0'>
         <Command>
-          <CommandInput placeholder={searchDictionary['search-placeholder']} className="h-9" />
-          <CommandEmpty>{searchDictionary['not-found']}</CommandEmpty>
+          <CommandInput placeholder={dictionaries['search-placeholder']} className="h-9" />
+          <CommandEmpty>{dictionaries['not-found']}</CommandEmpty>
           <CommandGroup>
-            {list
-              .sort((a, b) => a.label.localeCompare(b.label))
-              .map((item) => (
+            {list.map((item) => (
               <CommandItem
                 key={item.value}
                 onSelect={() => {
@@ -63,7 +67,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
                 className='capitalize flex flex-row gap-2'
               >
                 {item.icon && <span>{item.icon}</span>}
-                {dictionary[item.value]}
+                {dictionaries[item.value]}
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
@@ -71,7 +75,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
                   )}
                 />
               </CommandItem>
-              ))}
+            ))}
           </CommandGroup>
         </Command>
       </PopoverContent>
@@ -82,6 +86,11 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
 export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
   const { dictionary } = useLang()
+  const dictionaries = {}
+
+  Object.keys(dictionary).forEach(key => {
+    Object.assign(dictionaries, dictionary[key])
+  })
 
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
@@ -106,13 +115,11 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
         <Command>
           <CommandInput placeholder={placeholder} />
           <CommandList>
-            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
+            <CommandEmpty>{dictionaries['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
-              {list
-                .sort((a, b) => a.label.localeCompare(b.label))
-                .map((option) => {
-                  const isSelected = values.includes(option.value)
-                  return (
+              {list.map((option) => {
+                const isSelected = values.includes(option.value)
+                return (
                   <CommandItem
                     key={option.value}
                     onSelect={(e) => onChange(e)}
@@ -129,8 +136,8 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange 
                     </div>
                     <span className='capitalize'>{option.label}</span>
                   </CommandItem>
-                  )
-                })}
+                )
+              })}
             </CommandGroup>
           </CommandList>
         </Command>

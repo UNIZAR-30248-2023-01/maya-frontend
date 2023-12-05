@@ -81,7 +81,7 @@ export function SidePanel ({
               id="name"
               label={dictionary.projects['name-column']}
               placeholder={dictionary.projects['new-table-name-placeholder']}
-              onChange={(e) => setter({ key: 'name', value: e.target.value })}
+              onChange={(e) => setter({ key: 'name', value: String(e.target.value).toLowerCase().split(' ').join('-') })}
             />
             <TextArea
               id="description"

@@ -356,6 +356,61 @@ export const tasks = {
   }
 }
 
+export const staff = {
+  es: {
+    'members-tab': 'Miembros',
+    'member-column': 'Miembros',
+    filter: 'Filtrar por nombre de usuario',
+    role: 'Roles',
+    'new-person': 'reclutar',
+    'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
+    'new-person-create': 'invitar',
+    'invite-member': 'Recluta personal',
+    'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
+    invite: 'Añadir miembros',
+    search: 'Buscar miembros',
+    'invite-member-send': 'reclutar',
+    'manage-member-title': 'Gestionar %s',
+    'manage-member-description': 'Modifica la información de un usuario.',
+    'manage-member-submit': 'Cambiar rol',
+    'manage-member-delete-title': 'Eliminar usuario',
+    'manage-member-delete-description': 'Retira el permiso de un usuario a la aplicación.',
+    'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
+    'toast-success': 'Se han añadido los nuevos miembros correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
+    'toast-role-success': 'Se ha modificado la información correctamente.',
+    'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
+  },
+  en: {
+    'members-tab': 'Members',
+    'member-column': 'Members',
+    filter: 'Filter people by username',
+    role: 'Roles',
+    'new-person': 'recruit',
+    'new-table-description': 'Add people to your project to improve.',
+    'new-person-create': 'invite',
+    'invite-member': 'Recruit people',
+    'invite-member-description': 'Add members to your project to improve your team.',
+    invite: 'Add members',
+    search: 'Search members',
+    'invite-member-send': 'recruit',
+    'manage-member-title': 'Manage %s',
+    'manage-member-description': 'Modify the info of a user',
+    'manage-member-submit': 'Change role',
+    'manage-member-delete-title': 'Remove user',
+    'manage-member-delete-description': 'Remove the access of a user to this website',
+    'toast-loading': 'We are adding new members. Please wait a moment.',
+    'toast-success': 'New members added successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
+    'toast-role-success': 'Member info updated successfully.',
+    'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
+    'toast-remove-success': 'Member removed successfully.'
+  }
+}
+
 export const people = {
   es: {
     'members-tab': 'Miembros',

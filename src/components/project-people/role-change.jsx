@@ -19,7 +19,7 @@ import { mutate } from 'swr'
 import { roles } from '@/lib/constants'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { DialogClose } from '@radix-ui/react-dialog'
-// import { RemoveUser } from './remove-user'
+import { RemoveUser } from './remove-user'
 
 export function RoleChange ({
   title,
@@ -27,6 +27,7 @@ export function RoleChange ({
   actionBtn,
   deleteTitle,
   deleteDescription,
+  projectName,
   username,
   defaultRole
 }) {
@@ -46,12 +47,13 @@ export function RoleChange ({
         const changeRole = () => {
           return new Promise((resolve, reject) => {
             (async () => {
-              await supabase.from('people').update({ role })
+              await supabase.from('people-project').update({ role })
                 .eq('username', username)
+                .eq('project', projectName)
                 .select()
                 .then(() => {
                 // Actualización de los datos en la interfaz
-                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username,firstname,lastname,avatar,role`)
+                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
                   resolve()
                 }).catch((error) => {
                   console.error(error)
@@ -112,7 +114,7 @@ export function RoleChange ({
                 <Button type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
               </DialogClose>
             </div>
-            {/* <RemoveUser username={username} title={deleteTitle} description={deleteDescription} /> */}
+            <RemoveUser username={username} projectName={projectName} title={deleteTitle} description={deleteDescription} />
           </div>
         </form>
       </DialogContent>
