@@ -10,16 +10,13 @@ import { toast } from 'sonner'
 import { getForm } from '@/lib/utils'
 import { useLang } from '@/context/language-context'
 import { accountFormSchema } from '@/lib/schemas'
-import { Text } from '@/components/forms'
-// import { useUser } from '@/context/user-context'
+import { TextPassword } from '@/components/forms/textPassword'
 
 export function PasswordForm () {
   const [form, setForm] = useState({ password: null, ...getForm(accountFormSchema._def.shape()) })
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
 
   const [pssword, setPassword] = useState('')
-
-  // const { user } = useUser()
 
   const { dictionary } = useLang()
 
@@ -70,20 +67,26 @@ export function PasswordForm () {
   return (
     <Form>
       <form onSubmit={e => handleSubmit(e)} className="space-y-8">
-        <Text
+        <TextPassword
             label={dictionary.settingsAccount['user-password']}
             placeholder="***********"
             type="password"
+            autoCapitalize="none"
+            autoComplete="password"
+            autoCorrect="off"
             onChange={(e) => {
               if (e.target.value.length > 0) {
                 setPassword(e.target.value)
               }
             }}
         />
-        <Text
+        <TextPassword
           label={dictionary.settingsAccount['user-password-confirm']}
           placeholder="***********"
           type="password"
+          autoCapitalize="none"
+          autoComplete="password"
+          autoCorrect="off"
           onChange={(e) => {
             setter({ key: 'password', value: e.target.value })
           }}
