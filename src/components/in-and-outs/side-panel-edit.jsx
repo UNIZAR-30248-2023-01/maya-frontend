@@ -180,7 +180,7 @@ export function SidePanelEdit ({
 
   return (
     <Sheet>
-      <SheetTrigger className='py-3' onClick={handleOpenSidePanel}><LuClipboardEdit className="h-5 w-5 flex-shrink-0" aria-hidden="true" /></SheetTrigger>
+      <SheetTrigger id="icon" className='py-3' onClick={handleOpenSidePanel}><LuClipboardEdit className="h-5 w-5 flex-shrink-0" aria-hidden="true" /></SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
@@ -267,7 +267,7 @@ export function SidePanelEdit ({
             </SheetClose>
 
             <SheetClose asChild onClose={handleCloseSidePanel}>
-              <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>
