@@ -1,23 +1,17 @@
 /// <reference types="cypress" />
 
+import { defaultUser, createUser, deleteUser } from './setUp/setUp'
+
 const project = {
   name: 'New Project',
   description: 'Description of the new project'
 }
 
-const people = [
-  {
-    name: 'Hector Toral',
-    username: 'hec7orci7o',
-    email: 'hec7orci7o@example.com'
-  }
-]
-
 const task = {
   name: 'New Task',
   description: 'Description of the new task',
   assignees: [
-    people[0].username
+    defaultUser.username
   ],
   label: 'enhancement',
   status: 'new',
@@ -27,10 +21,27 @@ const task = {
 }
 
 describe('Tasks Resource', () => {
-  it('Creating a New Tasks', () => {
-    cy.visit(`/en/projects/${project.name}`)
+  before(() => createUser())
 
+  after(() => {
+    cy.request({
+      method: 'DELETE',
+      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/tasks?name=eq.${task.name}`,
+      headers: {
+        apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+        Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
+      }
+    })
+    deleteUser()
+  })
+
+  it('Creating a New Tasks', () => {
+    cy.login({ username: defaultUser.username, passwd: defaultUser.password })
     cy.wait(3000)
+
+    cy.visit(`/en/projects/${project.name}`)
+    cy.wait(3000)
+
     cy.get('button#new-task').click()
 
     cy.get('input#name').type(task.name)
@@ -64,16 +75,5 @@ describe('Tasks Resource', () => {
     cy.get('table tbody tr:first-child')
       .find('div')
       .should('contain.text', task.name)
-  })
-
-  after(() => {
-    cy.request({
-      method: 'DELETE',
-      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/tasks?name=eq.${task.name}`,
-      headers: {
-        apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
-        Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
-      }
-    })
   })
 })

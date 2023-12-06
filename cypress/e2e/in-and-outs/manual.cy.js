@@ -1,28 +1,22 @@
 /// <reference types="cypress" />
 
+import { defaultUser, createUser, deleteUser } from '../setUp/setUp'
+
 const exampleClockin = {
   in_hour: '11:11',
   out_hour: '12:12'
 }
 
-const exampleUser = {
-  name: 'jaimee.mt',
-  password: '1234567890'
-}
-
 describe('In and outs', () => {
+  before(() => createUser())
+  after(() => deleteUser())
+
   it('Creating and Deleting a Manual Checkin', () => {
-    cy.visit('/es/sign-in')
-
+    cy.login({ username: defaultUser.username, passwd: defaultUser.password })
     cy.wait(3000)
-    cy.get('input#username').type(exampleUser.name)
-    cy.get('input#password').type(exampleUser.password)
-
-    cy.get('form').submit()
-    cy.wait(5000)
 
     cy.visit('/es/in-and-outs')
-    cy.wait(5000)
+    cy.wait(3000)
 
     cy.get('button#new-manual-date').should('be.visible').click()
 

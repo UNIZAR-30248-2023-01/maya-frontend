@@ -1,26 +1,26 @@
 /// <reference types="cypress" />
 
-const people = [
-  {
-    name: 'Hector Toral',
-    username: 'hec7orci7o',
-    email: 'hec7orci7o@example.com'
-  }
-]
+import { defaultUser, createUser, deleteUser } from './setUp/setUp'
 
 const team = {
   name: 'New Team',
   description: 'Description of the new team',
   members: [
-    people[0].username
+    defaultUser.username
   ]
 }
 
 describe('Teams Resource', () => {
-  it('Creating a New Team', () => {
-    cy.visit('/en/teams')
+  before(() => createUser())
+  after(() => deleteUser())
 
+  it('Creating a New Team', () => {
+    cy.login({ username: defaultUser.username, passwd: defaultUser.password })
     cy.wait(3000)
+
+    cy.visit('/en/teams')
+    cy.wait(3000)
+
     cy.get('button#new-team').click()
 
     cy.get('input#name').type(team.name)
@@ -39,16 +39,5 @@ describe('Teams Resource', () => {
     cy.get('table tbody tr:first-child')
       .find('div')
       .should('contain.text', team.name)
-  })
-
-  after(() => {
-    cy.request({
-      method: 'DELETE',
-      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/teams?name=eq.${team.name}`,
-      headers: {
-        apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
-        Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
-      }
-    })
   })
 })
