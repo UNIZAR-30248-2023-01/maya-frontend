@@ -11,14 +11,17 @@ import Link from 'next/link'
 
 export function Navbar () {
   return (
-    <div className="z-40 flex items-center gap-x-6 light:bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0 dark:bg-dark">
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" id="sidebar-button">
-            <span className="sr-only">Open sidebar</span>
-            <LuMenu className="h-6 w-6" aria-hidden="true" />
-        </Button>
-      </SheetTrigger>
-      <Breadcrumbs />
+    <div className="z-40 flex items-center justify-between light:bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0 dark:bg-dark">
+      <div className='flex items-center gap-x-6'>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" id="sidebar-button">
+              <span className="sr-only">Open sidebar</span>
+              <LuMenu className="h-6 w-6" aria-hidden="true" />
+          </Button>
+        </SheetTrigger>
+        <Breadcrumbs />
+      </div>
+      <img className="h-10" src="/logo.webp" alt="logo de la empresa" />
     </div>
   )
 }
