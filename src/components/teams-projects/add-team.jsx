@@ -27,6 +27,7 @@ export function AddTeam ({
 }) {
   let { data: teams } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=name`)
   teams = teams?.map(t => t.name)
+  console.log(teams)
 
   const { dictionary } = useLang()
   const [form, setForm] = useState([])
@@ -85,7 +86,7 @@ export function AddTeam ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="capitalize h-8">{triggerBtn}</Button>
+        <Button id="add-team" className="capitalize h-8">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>

@@ -176,7 +176,7 @@ export function DataTableRowActions ({ row }) {
           <DropdownMenuItem
             className="cursor-pointer"
             >
-            <Link href={`/teams/${String(team).toLowerCase().replace(/ /g, '-')}`} className='w-full'>
+            <Link href={`/teams/${String(team).replace(/ /g, '-')}`} className='w-full'>
               View
             </Link>
           </DropdownMenuItem>

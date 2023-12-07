@@ -18,7 +18,17 @@ export function Layout ({ children }) {
   const { data: user, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${data?.user?.email}&select=username,firstname,lastname,email,avatar`)
 
   if (status === 'loading' || isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        <main className="mx-auto w-full max-w-7xl px-6 pt-10 pb-16 sm:pb-24 lg:px-8">
+          <img
+            className="mx-auto h-24 w-auto sm:h-12 animate-pulse"
+            src="/logo.webp"
+            alt="Your Company"
+          />
+        </main>
+      </div>
+    )
   } else if (status === 'unauthenticated') {
     return redirect('/sign-in')
   }

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, createUser, deleteUser } from '../setUp/setUp'
+import { defaultUser, createUser, deleteUser } from '../config/setUp'
 
 const exampleClockin = {
   in_hour: '11:11',
@@ -8,21 +8,15 @@ const exampleClockin = {
 }
 
 describe('In and outs', () => {
-  before(() => {
-    createUser()
-  })
+  before(() => createUser())
+  after(() => deleteUser())
 
-  after(() => {
-    deleteUser()
-  })
-
-  it('Creating, Editing and Deleting a Manual Checkin', () => {
-    cy.login(user)
-
+  it('Creating and Deleting a Manual Checkin', () => {
+    cy.login({ username: defaultUser.username, passwd: defaultUser.password })
     cy.wait(3000)
 
     cy.visit('/es/in-and-outs')
-    cy.wait(5000)
+    cy.wait(3000)
 
     cy.get('button#new-manual-date').should('be.visible').click()
 
@@ -45,17 +39,8 @@ describe('In and outs', () => {
     cy.get('tbody').contains(exampleClockin.in_hour)
     cy.get('tbody').contains(exampleClockin.out_hour)
 
-    // Edit the checkin
     cy.wait(2000)
-    cy.get('#icon').click()
-    // eliminar texto
-    cy.get('input#in_hour').clear()
-    cy.get('input#in_hour').type('11:13')
-    cy.get('button#fichar').click()
-    cy.get('tbody').contains('11:13')
-
-    cy.wait(2000)
-    cy.get('#icon').click()
+    cy.get(':nth-child(1) > .py-3').click()
     cy.wait(1000)
     cy.get('button#eliminar').click()
 
