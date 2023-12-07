@@ -129,7 +129,7 @@ export function SidePanel ({
 
               <Number
                 min={0}
-                id={dictionary.tasks['estimated-column']}
+                id={'estimated-time'}
                 label={dictionary.tasks['estimated-column'] + '*'}
                 placeholder={dictionary.tasks['new-task-estimated-placeholder']}
                 onChange={(e) => setter({ key: 'estimated', value: e.target.valueAsNumber })}

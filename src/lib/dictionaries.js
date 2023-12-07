@@ -785,3 +785,216 @@ export const landing = {
 
   }
 }
+
+export const privacy = {
+  es: {
+    title: 'Privacy',
+    introduction: 'En MaYA, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger sus datos personales. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información personal en relación con el uso de nuestro sitio web.',
+    subsections: [
+      {
+        title: 'Recopilación de información',
+        description: 'Podemos recopilar información personal de los usuarios cuando se registran en nuestro sitio, se suscriben a nuestro boletín informativo, participan en concursos o encuestas, o realizan una compra a través de nuestro sitio. Esta información puede incluir su nombre, dirección de correo electrónico, dirección postal, número de teléfono y fecha de nacimiento.También podemos recopilar información no personal, como la dirección IP del usuario, el tipo de navegador, la página de referencia y las páginas visitadas en nuestro sitio.'
+      },
+      {
+        title: 'Uso de la información',
+        description: 'La información personal que recopilamos se utiliza para procesar transacciones, enviar correos electrónicos informativos y promocionales, y mejorar la experiencia del usuario en nuestro sitio web. También podemos utilizar información no personal para analizar el tráfico del sitio y mejorar nuestro servicio.'
+      },
+      {
+        title: 'Divulgación de información',
+        description: 'No vendemos, intercambiamos ni transferimos información personal a terceros sin su consentimiento, excepto para cumplir con la ley, proteger nuestros derechos o propiedad, o hacer cumplir nuestras políticas del sitio.'
+      },
+      {
+        title: 'Seguridad de la información',
+        description: 'Nos esforzamos por proteger la información personal de nuestros usuarios mediante medidas de seguridad adecuadas, como la encriptación de datos y el acceso restringido a la información personal.Sin embargo, ninguna medida de seguridad puede garantizar la seguridad absoluta de la información. Por lo tanto, no podemos garantizar la seguridad de la información personal del usuario en todo momento.'
+      },
+      {
+        title: 'Cambios en la política de privacidad',
+        description: 'Podemos actualizar esta Política de Privacidad de vez en cuando. Se recomienda a los usuarios que revisen periódicamente esta página para estar informados de cualquier cambio. Al continuar utilizando nuestro sitio web después de la publicación de cambios en esta política, los usuarios aceptan los cambios.'
+      },
+      {
+        title: 'Contacto',
+        description: <>
+        Si tiene preguntas o inquietudes sobre esta Política de Privacidad, por favor contáctenos a través de <a href="mailto:help@gracehopper.xyz" target="_top" rel="noreferrer">help@gracehopper.xyz</a>.
+        </>
+      }
+    ]
+  },
+  en: {
+    title: 'Privacy',
+    introduction: 'At MaYA, we take the privacy of our users very seriously and are committed to protecting their personal data. This Privacy Policy explains how we collect, use, and protect your personal information in connection with the use of our website.',
+    subsections: [
+      {
+        title: 'Collection of Information',
+        description: "We may collect personal information from users when they register on our site, subscribe to our newsletter, participate in contests or surveys, or make a purchase through our site. This information may include your name, email address, postal address, phone number, and date of birth. We may also collect non-personal information, such as the user's IP address, browser type, referral page, and pages visited on our site."
+      },
+      {
+        title: 'Use of Information',
+        description: 'The personal information we collect is used to process transactions, send informational and promotional emails, and improve the user experience on our website. We may also use non-personal information to analyze site traffic and enhance our service.'
+      },
+      {
+        title: 'Disclosure of Information',
+        description: 'We do not sell, trade, or transfer personal information to third parties without consent, except to comply with the law, protect our rights or property, or enforce our site policies.'
+      },
+      {
+        title: 'Information Security',
+        description: 'We strive to protect the personal information of our users through appropriate security measures, such as data encryption and restricted access to personal information. However, no security measure can guarantee absolute security of information. Therefore, we cannot guarantee the security of user personal information at all times.'
+      },
+      {
+        title: 'Changes to Privacy Policy',
+        description: 'We may update this Privacy Policy from time to time. Users are advised to periodically review this page to be informed of any changes. By continuing to use our website after the publication of changes to this policy, users accept the changes.'
+      },
+      {
+        title: 'Contact',
+        description: <>
+        If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:help@gracehopper.xyz" target="_top" rel="noreferrer">help@gracehopper.xyz</a>.
+        </>
+      }
+    ]
+  }
+}
+
+export const terms = {
+  es: {
+    title: 'Términos de uso de MaYA',
+    introduction: 'Al utilizar nuestro sitio web, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso:',
+    subsections: [
+      {
+        title: 'Contenido del sitio web',
+        description: 'El contenido de este sitio web es solo para fines informativos y educativos. No garantizamos la exactitud, integridad o utilidad de la información proporcionada.'
+      },
+      {
+        title: 'Uso permitido',
+        description: 'Usted está autorizado a utilizar este sitio web para su uso personal y no comercial. No puede copiar, reproducir, distribuir, transmitir, modificar o crear obras derivadas de cualquier parte del sitio web sin nuestro permiso previo por escrito.'
+      },
+      {
+        title: 'Registro de usuario',
+        description: 'Para acceder a ciertas funciones de este sitio web, es posible que deba registrarse y crear una cuenta de usuario. Usted es responsable de proteger la confidencialidad de su información de registro y cualquier actividad que ocurra bajo su cuenta.'
+      },
+      {
+        title: 'Uso prohibido',
+        description: 'Usted no puede utilizar este sitio web para cualquier propósito ilegal o no autorizado. Usted acepta no interferir con el uso y disfrute de este sitio web por parte de otros usuarios.'
+      },
+      {
+        title: 'Propiedad intelectual',
+        description: 'Todos los derechos de propiedad intelectual en y para el sitio web son propiedad de MaYA y están protegidos por las leyes de derechos de autor y marcas registradas. No se le concede ninguna licencia o derecho a utilizar ninguna de estas marcas o logotipos sin nuestro permiso previo por escrito.'
+      },
+      {
+        title: 'Descargo de responsabilidad',
+        description: 'Este sitio web se proporciona "tal cual" sin garantías de ningún tipo, ya sean expresas o implícitas. No asumimos ninguna responsabilidad por cualquier daño que surja del uso de este sitio web.'
+      }, {
+        title: 'Enlaces a otros sitios web',
+        description: 'Este sitio web puede contener enlaces a otros sitios web de terceros que no son propiedad ni están controlados por MaYA. No tenemos control sobre el contenido, las políticas de privacidad o las prácticas de otros sitios web y no somos responsables de ellos.'
+      }, {
+        title: 'Modificaciones de los términos de uso',
+        description: 'Nos reservamos el derecho de modificar estos términos de uso en cualquier momento y sin previo aviso. Le recomendamos que revise estos términos de uso periódicamente para estar al tanto de cualquier cambio.'
+      }, {
+        title: 'Ley aplicable',
+        description: 'Estos términos de uso se regirán e interpretarán de acuerdo con las leyes del país o estado donde MaYA tiene su sede principal, sin referencia a los principios de conflicto de leyes.'
+      }
+    ]
+  },
+  en: {
+    title: 'Términos de uso de MaYA',
+    introduction: 'By using our website, you agree to comply with and be bound by the following terms and conditions of use:',
+    subsections: [
+      {
+        title: 'Website Content',
+        description: 'The content of this website is for informational and educational purposes only. We do not guarantee the accuracy, completeness, or usefulness of the provided information.'
+      },
+      {
+        title: 'Permitted Use',
+        description: 'You are authorized to use this website for personal and non-commercial use. You may not copy, reproduce, distribute, transmit, modify, or create derivative works from any part of the website without our prior written permission.'
+      },
+      {
+        title: 'User Registration',
+        description: 'To access certain features of this website, you may need to register and create a user account. You are responsible for protecting the confidentiality of your registration information and any activity that occurs under your account.'
+      },
+      {
+        title: 'Prohibited Use',
+        description: 'You may not use this website for any illegal or unauthorized purpose. You agree not to interfere with the use and enjoyment of this website by other users.'
+      },
+      {
+        title: 'Intellectual Property',
+        description: 'All intellectual property rights in and to the website are owned by MaYA and are protected by copyright and trademark laws. You are not granted any license or right to use any of these trademarks or logos without our prior written permission.'
+      },
+      {
+        title: 'Disclaimer',
+        description: "This website is provided 'as is' without warranties of any kind, whether express or implied. We assume no responsibility for any damages arising from the use of this website."
+      },
+      {
+        title: 'Links to Other Websites',
+        description: 'This website may contain links to third-party websites that are not owned or controlled by MaYA. We have no control over the content, privacy policies, or practices of other websites and are not responsible for them.'
+      },
+      {
+        title: 'Modifications to Terms of Use',
+        description: 'We reserve the right to modify these terms of use at any time and without prior notice. We recommend that you periodically review these terms of use to stay informed of any changes.'
+      },
+      {
+        title: 'Applicable Law',
+        description: 'These terms of use will be governed and interpreted in accordance with the laws of the country or state where MaYA has its principal place of business, without reference to the principles of conflict of laws.'
+      }
+    ]
+  }
+}
+
+export const faq = {
+  es: [
+    {
+      question: '¿Puedo personalizar mi perfil?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }, {
+      question: '¿Cómo puedo crear un proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo crear un equipo?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }
+  ],
+  en: [
+    {
+      question: '¿Puedo personalizar mi perfil?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }, {
+      question: '¿Cómo puedo crear un proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo crear un equipo?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }
+  ]
+}
+
+export const footer = {
+  es: {
+    sitemap: 'Mapa del sitio',
+    status: 'Estado',
+    privacy: 'Política de privacidad',
+    terms: 'Términos de uso',
+    faq: 'FAQ'
+  },
+  en: {
+    sitemap: 'Sitemap',
+    status: 'Status',
+    privacy: 'Privacy Policy',
+    terms: 'Term of use',
+    faq: 'FAQ'
+  }
+}

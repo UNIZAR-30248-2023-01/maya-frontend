@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-import { defaultUser, createUser, deleteUser } from '../setUp/setUp'
+import { defaultUser } from '../config/models'
+import { createUser, deleteUser } from '../config/setUp'
 
 describe('Sign out tests', () => {
   before(() => createUser())

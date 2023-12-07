@@ -52,7 +52,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
           <CommandEmpty>{searchDictionary['not-found']}</CommandEmpty>
           <CommandGroup>
             {list
-              .sort((a, b) => a.label.localeCompare(b.label))
+              .sort((a, b) => a?.label?.localeCompare(b?.label))
               .map((item) => (
               <CommandItem
                 key={item.value}
@@ -82,6 +82,7 @@ export function ComboboxEnum ({ id, label, value, list, searchDictionary, onChan
 export function ComboboxArray ({ id, label, placeholder, values, list, onChange }) {
   const [open, setOpen] = useState(false)
   const { dictionary } = useLang()
+  console.log('values', values)
 
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >

@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-import { defaultUser, deleteUser } from '../setUp/setUp'
+import { defaultUser } from '../config/models'
+import { deleteUser } from '../config/setUp'
 
 describe('Sign up tests', () => {
   after(() => deleteUser())
@@ -19,13 +20,8 @@ describe('Sign up tests', () => {
 
     cy.wait(3000)
 
-    cy.get('input#username').type(defaultUser.username)
-    cy.get('input#password').type(defaultUser.password)
-
-    cy.get('form').submit()
-
-    cy.wait(3000)
-
-    cy.get('a#home-button')
+    cy.login({ username: defaultUser.username, passwd: defaultUser.password }).then(() => {
+      cy.get('a#home-button')
+    })
   })
 })

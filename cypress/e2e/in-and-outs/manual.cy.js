@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { defaultUser, createUser, deleteUser } from '../setUp/setUp'
+import { defaultUser, createUser, deleteUser } from '../config/setUp'
 
 const exampleClockin = {
   in_hour: '11:11',
