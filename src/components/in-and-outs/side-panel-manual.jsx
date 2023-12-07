@@ -18,6 +18,7 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function SidePanelManual ({
   title,
@@ -30,6 +31,8 @@ export function SidePanelManual ({
   const [errorOutHour, setErrorOutHour] = useState('')
   const [errorInHour, setErrorInHour] = useState('')
   const [invalidHour, setInvalidHour] = useState(true)
+
+  const { user } = useUser()
 
   const currentDay = new Date(new Date().getTime())
 
@@ -78,13 +81,13 @@ export function SidePanelManual ({
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{
-            username: 'hec7orci7o',
+            username: user?.username,
             in_date: timestampIn,
             out_date: timestampOut,
             total: minutosTotales
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => reject(error))
@@ -110,7 +113,7 @@ export function SidePanelManual ({
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle className="capitalize">{title}</SheetTitle>
+            <SheetTitle id="necesitoelid" className="capitalize">{title}</SheetTitle>
             <SheetDescription style={{ marginBottom: '20px' }}>
               {description}
             </SheetDescription>
@@ -121,6 +124,7 @@ export function SidePanelManual ({
             </SheetDescription>
 
             <DatePicker
+              id="in_date"
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
@@ -194,7 +198,7 @@ export function SidePanelManual ({
           </div>
           <SheetFooter className="">
             <SheetClose asChild >
-              <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>

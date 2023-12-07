@@ -13,7 +13,8 @@ const defaultUser = {
   firstname: 'John',
   lastname: 'Doe',
   email: 'johndoe@example.com',
-  avatar: '/assets/avatars/animals/1.webp'
+  avatar: '/assets/avatars/animals/1.webp',
+  role: 'member'
 }
 
 export function UserProvider ({ children, user }) {

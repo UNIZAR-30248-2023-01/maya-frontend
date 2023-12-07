@@ -3,6 +3,7 @@
 import { DataTableColumnHeader } from '@/components/teams/data-table-column-header'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
+import { DataTableRowActions } from '@/components/teams/data-table-row-actions'
 
 export const columns = [
   {
@@ -55,6 +56,21 @@ export const columns = [
     filterFn: (row, id, value) => {
       const usernames = row.getValue(id).map(person => person.username)
       return value.some(username => usernames.includes(username))
+    }
+  }, {
+    id: 'actions',
+    cell: ({ row }) => {
+      const { name } = row.original
+      if (!name) return null
+
+      return (
+        <div className='flex justify-end pr-4'>
+          <DataTableRowActions row={row} />
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     }
   }
 ]

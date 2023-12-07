@@ -23,7 +23,7 @@ export function TeamMember ({
   lastname = 'Davis',
   username = 'm@example.com'
 }) {
-  const { dictionary, lang } = useLang()
+  const { dictionary } = useLang()
 
   return (
     <DropdownMenu>
@@ -60,9 +60,9 @@ export function TeamMember ({
         </DropdownMenuGroup>
         <DropdownMenuItem>
           <button onClick={() => {
-            signOut({ callbackUrl: `http://localhost:3000/${lang}` })
+            signOut({ callbackUrl: '/' })
           }} id="sign-out-button">
-            Log out
+            {dictionary.settingsAccount['logout-tab']}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

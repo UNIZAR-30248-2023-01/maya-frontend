@@ -6,7 +6,6 @@ import { SessionProvider } from 'next-auth/react'
 import { LanguageProvider } from '@/context/language-context'
 import { SWRProvider } from '@/context/swr-context'
 import { UserProvider } from '@/context/user-context'
-
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })

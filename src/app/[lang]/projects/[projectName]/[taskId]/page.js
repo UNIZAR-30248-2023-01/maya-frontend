@@ -75,7 +75,6 @@ export default function TaskPage ({ params }) {
       setNewComment(null)
       e.target.reset()
     } catch (error) {
-      console.log(error)
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
@@ -139,9 +138,6 @@ export default function TaskPage ({ params }) {
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/task-hours?id=eq.${params.taskId}&select=*`
   )
 
-  console.log(tasks)
-  console.log(people)
-
   if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading && !hoursLoading) {
     const task = tasks[0]
     const status = tasksStatuses.find(status => status.value === task.status)
@@ -152,8 +148,6 @@ export default function TaskPage ({ params }) {
 
     comments.sort((a, b) => a.created_at - b.created_at)
     comments.sort((a, b) => a.date - b.date)
-
-    console.log('comments', comments)
 
     return (
       <div className='flex flex-col gap-6'>
@@ -179,6 +173,7 @@ export default function TaskPage ({ params }) {
               <div className='flex gap-4'>
                 <Button
                   variant='outline'
+                  id='edit-task'
                   onClick={() => (edit ? handleCancel() : setEdit(true))}
                 >
                   {edit ? dictionary.common.cancel : dictionary.common.edit}
@@ -205,6 +200,7 @@ export default function TaskPage ({ params }) {
                 <Label className='text-xs font-semibold'>{task.project}</Label>
               </Badge>
               <Badge
+                id='task-label'
                 variant='outline'
                 className={cn(
                   'max-w-fit h-fit max-h-fit py-1 leading-none',
@@ -212,12 +208,13 @@ export default function TaskPage ({ params }) {
                 )}
               >
                 {
-                  <Label className='text-xs font-semibold capitalize'>
+                  <Label className='text-xs font-semibold capitalize' id={label.value}>
                     {dictionary.labels[label.value]}
                   </Label>
                 }
               </Badge>
               <Badge
+                id='task-status'
                 variant='outline'
                 className={cn(
                   'max-w-fit h-fit max-h-fit py-1 leading-none',
@@ -226,7 +223,7 @@ export default function TaskPage ({ params }) {
                 )}
               >
                 {status.icon && <span>{status.icon}</span>}
-                <Label className='capitalize text-xs font-semibold'>
+                <Label className='capitalize text-xs font-semibold' id={status.value}>
                   {dictionary.status[status.value]}
                 </Label>
               </Badge>
@@ -238,7 +235,7 @@ export default function TaskPage ({ params }) {
           {edit
             ? (
               <TextArea
-                id={dictionary.tasks['description-column']}
+                id='description'
                 label={dictionary.tasks['description-column']}
                 placeholder={task.description}
                 onChange={(e) => setter({ key: 'description', value: e.target.value })}
@@ -253,7 +250,7 @@ export default function TaskPage ({ params }) {
                   {normalize(dictionary.tasks['description-column'])}
                 </Label>
                 <Card className='min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm'>
-                  <CardContent className='p-0 first-letter:uppercase'>
+                  <CardContent className='p-0 first-letter:uppercase' id='description'>
                     {task.description}
                   </CardContent>
                 </Card>
@@ -302,7 +299,7 @@ export default function TaskPage ({ params }) {
                 </Label>
                 <div className='flex flex-row gap-6 px-3 py-2'>
                   {people.map((user) => (
-                    <div key={user.people.username} className="flex items-center space-x-4 group">
+                    <div id={user.people.username} key={user.people.username} className="flex items-center space-x-4 group">
                       <Avatar>
                         <AvatarImage src={user.people.avatar} />
                         <AvatarFallback>{String(user.people.firstname[0]).toUpperCase() + String(user.people.lastname[0]).toUpperCase()}</AvatarFallback>
@@ -339,7 +336,7 @@ export default function TaskPage ({ params }) {
                     {normalize(dictionary.tasks['end-date-column'])}
                   </Label>
                   <Card className='max-w-sm rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm'>
-                    <CardContent className='p-0 flex flex-row items-center gap-4'>
+                    <CardContent className='p-0 flex flex-row items-center gap-4' id='end-date'>
                       <CalendarIcon className='mr-2 h-4 w-4' />
                       {formattedDate}
                     </CardContent>
@@ -353,7 +350,7 @@ export default function TaskPage ({ params }) {
               ? (
                 <Number
                   min={0}
-                  id={dictionary.tasks['estimated-column']}
+                  id='estimated'
                   label={dictionary.tasks['estimated-column']}
                   placeholder={task.estimated}
                   onChange={(e) => setter({ key: 'estimated', value: e.target.valueAsNumber })}
@@ -368,7 +365,7 @@ export default function TaskPage ({ params }) {
                     {normalize(dictionary.tasks['estimated-column'])}
                   </Label>
                   <Card className='max-w-sm rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm'>
-                    <CardContent className='p-0'>{task.estimated}</CardContent>
+                    <CardContent className='p-0' id='estimated'>{task.estimated}</CardContent>
                   </Card>
                 </>
                 )}
@@ -415,8 +412,8 @@ export default function TaskPage ({ params }) {
           </div>
         )}
 
-        {!edit && people.find(e => e.username === user.username)
-          ? (
+        {people.find(e => e.username === user.username)
+          ? !edit && (
             <>
               <Tabs defaultValue="comments" className="w-full">
                 <TabsList>
@@ -429,9 +426,6 @@ export default function TaskPage ({ params }) {
                 </TabsList>
                 <TabsContent value="comments">
                 <div className='flex flex-col gap-1.5'>
-                  <Label className='capitalize'>
-                    {dictionary.comments.titulo}
-                  </Label>
                   <Card>
                     <CardContent className='p-8 flex flex-col gap-8'>
                       <ScrollArea className='h-96 p-4'>
@@ -453,9 +447,6 @@ export default function TaskPage ({ params }) {
                 </TabsContent>
                 <TabsContent value="time">
                   <div className='flex flex-col gap-1.5'>
-                    <Label className='capitalize'>
-                      {dictionary.hours.titulo}
-                    </Label>
                     <Card>
                       <CardContent className='p-8 flex flex-col'>
                         <div className='flex flex-row w-full justify-between items-center p-4 pl-8 pr-8 '>
@@ -488,7 +479,7 @@ export default function TaskPage ({ params }) {
               </Tabs>
             </>
             )
-          : (<div className='flex flex-col gap-1.5'>
+          : !edit && (<div className='flex flex-col gap-1.5'>
                 <Label className='capitalize'>
                   {dictionary.comments.titulo}
                 </Label>

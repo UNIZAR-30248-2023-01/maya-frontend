@@ -16,30 +16,38 @@ export const columns = [
     },
     cell: ({ row, dictionary }) => {
       if (!row.original.people?.username) {
-        return (
-          <div className='flex items-start space-x-2'>
-            <Skeleton className='rounded-full'>
-              <Avatar>
-                <AvatarImage />
-              </Avatar>
-            </Skeleton>
-            <div className='max-w-[150px] flex flex-col gap-y-1'>
-              <Skeleton className='w-44 h-4'/>
-              <Skeleton className='w-24 h-4'/>
+        const username = row?.original?.username || row?.original?.people?.username
+        if (!username) {
+          return (
+            <div className='flex items-start space-x-2'>
+              <Skeleton className='rounded-full'>
+                <Avatar>
+                  <AvatarImage />
+                </Avatar>
+              </Skeleton>
+              <div className='max-w-[150px] flex flex-col gap-y-1'>
+                <Skeleton className='w-44 h-4' />
+                <Skeleton className='w-24 h-4' />
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
       }
+
+      const avatar = row?.original?.avatar || row?.original?.people?.avatar
+      const username = row?.original?.avatar || row?.original?.people?.avatar
+      const firstname = row?.original?.firstname || row?.original?.people?.firstname
+      const lastname = row?.original?.lastname || row?.original?.people?.lastname
 
       return (
         <div className="flex items-center space-x-4 group">
           <Avatar>
-            <AvatarImage src={row.original.people.avatar} />
-            <AvatarFallback>{String(row.original.people.firstname[0]).toUpperCase() + String(row.original.people.lastname[0]).toUpperCase()}</AvatarFallback>
+            <AvatarImage src={avatar} />
+            <AvatarFallback>{String(firstname[0]).toUpperCase() + String(lastname[0]).toUpperCase()}</AvatarFallback>
           </Avatar>
           <div className='flex flex-col gap-0.5'>
-            <Label className="text-sm font-medium leading-none capitalize">{row.original.people.firstname + ' ' + row.original.people.lastname}</Label>
-            <Label className="text-sm text-muted-foreground font-normal">{row.original.people.username}</Label>
+            <Label className="text-sm font-medium leading-none capitalize">{firstname + ' ' + lastname}</Label>
+            <Label className="text-sm text-muted-foreground font-normal">{username}</Label>
           </div>
         </div>
 

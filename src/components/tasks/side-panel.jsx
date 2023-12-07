@@ -41,8 +41,6 @@ export function SidePanel ({
     e.preventDefault()
 
     const { assignees, ...task } = form
-    // console.log(form)
-    // console.log(tasksSchema.parse({ ...task, project: projectName }))
 
     try {
       tasksSchema.parse({ ...task, project: projectName })
@@ -120,7 +118,6 @@ export function SidePanel ({
                 dictionary={dictionary}
                 values={form.assignees || []}
                 onChange={(e) => {
-                  console.log(e)
                   const assigness = form.assignees || []
                   const isSelected = assigness ? assigness.includes(e) : false
                   if (isSelected) {

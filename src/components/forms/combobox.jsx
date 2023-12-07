@@ -6,6 +6,7 @@ import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { Label } from '@/components/ui/label'
 import { normalize, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useLang } from '@/context/language-context'
 import {
   Command,
   CommandEmpty,
@@ -20,8 +21,15 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 
-export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictionary, onChange }) {
+export function ComboboxEnum ({ id, label, value, list, onChange }) {
   const [open, setOpen] = useState(false)
+  const { dictionary } = useLang()
+  const dictionaries = {}
+
+  Object.keys(dictionary).forEach(key => {
+    Object.assign(dictionaries, dictionary[key])
+  })
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className='flex flex-col gap-1.5 w-full'>
@@ -36,7 +44,7 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
           >
             <div className='flex flex-row gap-2'>
               {<span>{list.find(e => e.value === value)?.icon}</span>}
-              {dictionary[value] || label}
+              {dictionaries[value] || label}
             </div>
 
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -46,8 +54,8 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
 
       <PopoverContent className='w-full p-0'>
         <Command>
-          <CommandInput placeholder={searchDictionary['search-placeholder']} className="h-9" />
-          <CommandEmpty>{searchDictionary['not-found']}</CommandEmpty>
+          <CommandInput placeholder={dictionaries['search-placeholder']} className="h-9" />
+          <CommandEmpty>{dictionaries['not-found']}</CommandEmpty>
           <CommandGroup>
             {list.map((item) => (
               <CommandItem
@@ -60,7 +68,7 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
                 className='capitalize flex flex-row gap-2'
               >
                 {item.icon && <span>{item.icon}</span>}
-                {dictionary[item.value]}
+                {dictionaries[item.value]}
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4',
@@ -76,8 +84,15 @@ export function ComboboxEnum ({ id, label, value, list, dictionary, searchDictio
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange, dictionary, searchId }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange, searchId }) {
   const [open, setOpen] = useState(false)
+  const { dictionary } = useLang()
+  const dictionaries = {}
+
+  Object.keys(dictionary).forEach(key => {
+    Object.assign(dictionaries, dictionary[key])
+  })
+
   return (
     <Popover className='w-full' open={open} onOpenChange={setOpen} >
       <div className='flex flex-col gap-1.5 w-full'>
@@ -101,7 +116,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
         <Command>
           <CommandInput data-test-id={searchId} placeholder={placeholder} />
           <CommandList>
-            <CommandEmpty>{dictionary.table['no-results']}</CommandEmpty>
+            <CommandEmpty>{dictionaries['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
               {list.map((option) => {
                 const isSelected = values.includes(option.value)
@@ -109,10 +124,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
                   <CommandItem
                     id={option.value}
                     key={option.value}
-                    onSelect={(e) => {
-                      onChange(e)
-                      setOpen(false)
-                    }}
+                    onSelect={(e) => onChange(e)}
                   >
                     <div
                       className={cn(

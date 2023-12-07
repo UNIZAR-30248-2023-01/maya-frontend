@@ -216,8 +216,7 @@ export const addTasks = () => {
     headers: {
       apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
       Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=minimal'
+      'Content-Type': 'application/json'
     },
     body: {
       name: task.name,

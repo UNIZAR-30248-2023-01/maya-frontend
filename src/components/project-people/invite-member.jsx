@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -33,10 +33,6 @@ export function InviteMember ({
   people = people?.filter(e => (!data.members.find(m => m.username === e.username)))
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
-
-  useEffect(() => {
-    console.log(form)
-  }, [form])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

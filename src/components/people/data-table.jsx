@@ -13,12 +13,9 @@ import { Table } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
-import { InviteMember } from '@/components/people/invite-member'
-import { useLang } from '@/context/language-context'
 import { useUser } from '@/context/user-context'
 
-export function DataTable ({ data, columns, projectName }) {
-  const { dictionary } = useLang()
+export function DataTable ({ data, columns }) {
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -49,16 +46,6 @@ export function DataTable ({ data, columns, projectName }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <DataTableToolbar table={table} />
-        { data.find(e => e.username === user.username && e.role === 'owner') &&
-          <InviteMember
-            title={dictionary.people['invite-member']}
-            description={dictionary.people['invite-member-description']}
-            triggerBtn={dictionary.people.invite}
-            actionBtn={dictionary.people['invite-member-send']}
-            data={{ members: data }}
-            projectName={projectName}
-          />
-        }
       </div>
       <div className="rounded-md border">
         <Table>

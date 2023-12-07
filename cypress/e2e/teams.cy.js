@@ -20,7 +20,7 @@ describe('Teams Resource', () => {
   it('Creating a New Team', () => {
     cy.visit('/en/teams')
 
-    cy.wait(1000)
+    cy.wait(3000)
     cy.get('button#new-team').click()
 
     cy.get('input#name').type(team.name)
