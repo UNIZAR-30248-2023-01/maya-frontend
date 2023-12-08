@@ -1,15 +1,19 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, createUser, deleteUser, createPrivateProject } from '../setUp/setUp'
+import { user, privateProject } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Delete project', async () => {
   before(() => {
     createUser()
-    createPrivateProject()
+    createOrg()
+    createProjects()
   })
 
   after(() => {
     deleteUser()
+    deleteProjects()
+    deleteOrg()
   })
 
   it('Deleting an existing project', () => {
@@ -30,6 +34,7 @@ describe('Delete project', async () => {
 
     cy.wait(1000)
     cy.get('button#accept-delete-project').click()
+    cy.wait(1000)
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get(`tr#${privateProject.name}`).should('not.exist')

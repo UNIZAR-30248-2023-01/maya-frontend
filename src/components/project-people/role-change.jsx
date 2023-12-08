@@ -79,6 +79,7 @@ export function RoleChange ({
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          id={`${username}-edit`}
           variant="ghost"
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
@@ -98,7 +99,7 @@ export function RoleChange ({
             <div className="flex flex-row w-full items-end space-x-2 mt-4">
               <div className='grid gap-4 w-full'>
                 <ComboboxEnum
-                  id="role"
+                  id="role-edit"
                   label={dictionary.people.role}
                   list={roles}
                   value={form.role || defaultRole}
@@ -111,7 +112,7 @@ export function RoleChange ({
                 />
               </div>
               <DialogClose asChild>
-                <Button type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
+                <Button id='confirm-edit' type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
               </DialogClose>
             </div>
             <RemoveUser username={username} projectName={projectName} title={deleteTitle} description={deleteDescription} />

@@ -84,7 +84,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange }) {
   )
 }
 
-export function ComboboxArray ({ id, label, placeholder, values, list, onChange, searchId }) {
+export function ComboboxArray ({ id, label, placeholder, values, list, onChange, searchId, normalized }) {
   const [open, setOpen] = useState(false)
   const { dictionary } = useLang()
   const dictionaries = {}
@@ -103,10 +103,10 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className={cn('w-full justify-between', values.length === 0 && 'text-muted-foreground font-normal')}
+            className={cn('w-full justify-between', values.length === 0 && 'text-muted-foreground font-normal', normalized && 'capitalize')}
           >
             {values.length > 0
-              ? values.join(', ')
+              ? normalized ? values.map(e => normalize(e)).join(', ') : values.join(', ')
               : placeholder}
             <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -114,7 +114,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
       </div>
       <PopoverContent className="w-full p-0" align="start">
         <Command>
-          <CommandInput data-test-id={searchId} placeholder={placeholder} />
+          <CommandInput data-testid={searchId} placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>{dictionaries['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
@@ -124,7 +124,10 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
                   <CommandItem
                     id={option.value}
                     key={option.value}
-                    onSelect={(e) => onChange(e)}
+                    onSelect={() => {
+                      console.log('selected', option.value)
+                      onChange(option.value)
+                    }}
                   >
                     <div
                       className={cn(
@@ -136,7 +139,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
                     >
                       <CheckIcon className={cn('h-4 w-4')} />
                     </div>
-                    <span className='capitalize'>{option.label}</span>
+                    <span className={normalized && 'capitalize'}>{option.label}</span>
                   </CommandItem>
                 )
               })}

@@ -113,7 +113,7 @@ export function SidePanelManual ({
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle id="necesitoelid" className="capitalize">{title}</SheetTitle>
+            <SheetTitle id="add-checkin-title" className="capitalize">{title}</SheetTitle>
             <SheetDescription style={{ marginBottom: '20px' }}>
               {description}
             </SheetDescription>

@@ -13,9 +13,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose,
-  DialogFooter
+  DialogTrigger
 } from '@/components/ui/dialog'
 
 export function PopupProfile ({
@@ -113,12 +111,12 @@ export function PopupProfile ({
         <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
           <Button type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
         </div>
-        {/*<DialogFooter>
+        {/* <DialogFooter>
           <DialogClose className="flex justify-end mt-4" style={{ marginTop: '20px' }} onClick={handleSubmit}>
             {dictionary.settingsAccount['update-avatar']}
           </DialogClose>
-        </DialogFooter>*/}
-        
+        </DialogFooter> */}
+
       </DialogContent>
     </Dialog>
 

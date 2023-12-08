@@ -1,18 +1,19 @@
 /// <reference types="cypress" />
 
-import { user, userMember, privateProject, publicProject, createUser, deleteUser, deletePublicProject, deletePrivateProject, createPrivateProject, createPublicProject } from '../setUp/setUp'
+import { user, userMember, privateProject, publicProject } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Edit project people', async () => {
   beforeEach(() => {
     createUser()
-    createPrivateProject()
-    createPublicProject()
+    createOrg()
+    createProjects()
   })
 
   afterEach(() => {
     deleteUser()
-    deletePrivateProject()
-    deletePublicProject()
+    deleteProjects()
+    deleteOrg()
   })
 
   it('Add a member', () => {
@@ -74,7 +75,7 @@ describe('Edit project people', async () => {
 
     cy.get('input#filter-people').type(userMember.username, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${userMember.username} > :nth-child(2) > div#scrum`)
+    cy.get(`tr#${userMember.username} > :nth-child(2) > div#scrum-master`)
       .should('exist')
   })
 

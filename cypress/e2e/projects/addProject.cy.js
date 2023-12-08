@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, createUser, deleteUser, deletePrivateProject } from '../setUp/setUp'
+import { user, publicProject } from '../config/models'
+import { createUser, deleteUser, deleteProjects } from '../config/setUp'
 
 describe('Add project', async () => {
   before(() => {
@@ -9,7 +10,7 @@ describe('Add project', async () => {
 
   after(() => {
     deleteUser()
-    deletePrivateProject()
+    deleteProjects()
   })
 
   it('Creating a New Project', () => {
@@ -22,15 +23,15 @@ describe('Add project', async () => {
     cy.wait(1000)
     cy.get('button#new-project').click()
 
-    cy.get('input#name').type(privateProject.name)
-    cy.get('textarea#description').type(privateProject.description)
+    cy.get('input#name').type(publicProject.name)
+    cy.get('textarea#description').type(publicProject.description)
     cy.get('button#visibility').click()
 
     cy.get('form').submit()
-    cy.get('input#filter-project').type(privateProject.name, { force: true })
+    cy.get('input#filter-project').type(publicProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
     cy.get('table tbody tr:first-child')
       .find('div')
-      .should('contain.text', privateProject.name)
+      .should('contain.text', publicProject.name)
   })
 })

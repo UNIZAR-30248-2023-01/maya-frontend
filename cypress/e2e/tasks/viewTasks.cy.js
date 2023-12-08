@@ -1,17 +1,19 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, task, createUser, deleteUser, createPrivateProject, deletePrivateProject, addTasks } from '../setUp/setUp'
+import { user, privateProject, task } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('View project', async () => {
   before(() => {
     createUser()
-    createPrivateProject()
-    addTasks()
+    createOrg()
+    createProjects()
   })
 
   after(() => {
     deleteUser()
-    deletePrivateProject()
+    deleteProjects()
+    deleteOrg()
   })
 
   it('View project', () => {

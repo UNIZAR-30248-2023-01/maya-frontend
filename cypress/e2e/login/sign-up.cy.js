@@ -1,11 +1,10 @@
 /// <reference types="cypress" />
 
-import { user, deleteUser } from '../setUp/setUp'
+import { user } from '../config/models'
+import { deleteUser } from '../config/setUp'
 
 describe('Sign up tests', () => {
-  after(() => {
-    deleteUser()
-  })
+  after(() => deleteUser())
 
   it('Sign up', () => {
     cy.visit('/en/sign-up')
@@ -21,13 +20,10 @@ describe('Sign up tests', () => {
 
     cy.wait(1000)
 
-    cy.get('input#username').type(user.username)
-    cy.get('input#password').type(user.password)
-
-    cy.get('form').submit()
+    cy.login(user)
 
     cy.wait(1000)
 
-    cy.get('a#home-button')
+    cy.get('a#home-button').should('exist')
   })
 })

@@ -64,7 +64,7 @@ export const columns = [
       }
 
       return (
-        <Badge variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
+        <Badge id={row.getValue('role')} variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
       )
     },
     filterFn: (row, id, value) => {

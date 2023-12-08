@@ -1,16 +1,19 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, createUser, deleteUser, createPrivateProject, deletePrivateProject } from '../setUp/setUp'
+import { user, privateProject } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('View project', async () => {
   before(() => {
     createUser()
-    createPrivateProject()
+    createOrg()
+    createProjects()
   })
 
   after(() => {
     deleteUser()
-    deletePrivateProject()
+    deleteProjects()
+    deleteOrg()
   })
 
   it('View project', () => {
@@ -22,6 +25,6 @@ describe('View project', async () => {
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
-    cy.get('tr#no-results').should('exist')
+    cy.get('tbody#tasks-table').should('exist')
   })
 })

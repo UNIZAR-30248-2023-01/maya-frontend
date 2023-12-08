@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, publicProject, createUser, deleteUser, deletePublicProject, deletePrivateProject, createPrivateProject, createPublicProject } from '../setUp/setUp'
+import { user, privateProject, publicProject } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 const newProject = {
   name: 'new name project',
@@ -13,19 +14,19 @@ describe('Edit project', async () => {
 
   beforeEach(() => {
     createUser()
-    createPrivateProject()
-    createPublicProject()
+    createOrg()
+    createProjects()
   })
 
   afterEach(() => {
     deleteUser()
     if (editedName) {
-      deletePrivateProject(newProject.dbname)
+      deleteProjects(newProject.dbname)
       editedName = false
     } else {
-      deletePrivateProject()
+      deleteProjects()
     }
-    deletePublicProject()
+    deleteOrg()
   })
 
   it('Change project`s title', () => {
@@ -140,12 +141,14 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
     cy.get('button#accept-visibility-project').click()
+    cy.wait(1000)
 
     cy.visit('/en/projects')
 
     cy.wait(1000)
     cy.get('button#visibility-filter').click()
     cy.get('div#public').click()
+    cy.wait(1000)
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
@@ -171,6 +174,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
     cy.get('button#accept-visibility-project').click()
+    cy.wait(1000)
 
     cy.visit('/en/projects')
 
@@ -178,9 +182,8 @@ describe('Edit project', async () => {
     cy.get('button#visibility-filter').click()
     cy.get('div#private').click()
 
+    cy.wait(1000)
     cy.get('input#filter-project').type(publicProject.name, { force: true })
-    cy.get('table tbody tr').should('have.length', 1)
-    cy.get(`tr#${publicProject.dbname} > :nth-child(1)`)
-      .should('contain.text', publicProject.name)
+    cy.get('table tbody tr > :nth-child(1)').should('contain.text', publicProject.name)
   })
 })

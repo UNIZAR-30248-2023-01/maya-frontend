@@ -14,6 +14,14 @@ on:
 env:
   NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
   NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+  VERCEL_URL: ${{ secrets.VERCEL_URL }}
+  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+  TEST_FIRSTNAME: ${{ secrets.TEST_FIRSTNAME }}
+  TEST_LASTNAME: ${{ secrets.TEST_LASTNAME }}
+  TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+  TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
 jobs:
   install:
@@ -35,3 +43,12 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build --if-present
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 30
+          command: npm run cypress:test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

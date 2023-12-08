@@ -1,16 +1,19 @@
 /// <reference types="cypress" />
 
-import { user, task, privateProject, createUser, deleteUser, deletePrivateProject, createPrivateProject } from '../setUp/setUp'
+import { user, publicProject, task } from '../config/models'
+import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Add task', async () => {
   before(() => {
     createUser()
-    createPrivateProject()
+    createOrg()
+    createProjects()
   })
 
   after(() => {
     deleteUser()
-    deletePrivateProject()
+    deleteProjects()
+    deleteOrg()
   })
 
   it('Creating a new task', () => {
@@ -21,7 +24,7 @@ describe('Add task', async () => {
     cy.visit('/en/projects')
 
     cy.wait(1000)
-    cy.get(`tr#${privateProject.dbname}`).click()
+    cy.get(`tr#${publicProject.dbname}`).click()
 
     cy.wait(1000)
     cy.get('button#new-task').click()
@@ -34,10 +37,10 @@ describe('Add task', async () => {
     cy.get('div#ui').click()
 
     cy.get('button#create-task').click()
+    cy.wait(1000)
     cy.get('input#filter-tasks').type(task.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get('table tbody tr:first-child')
-      .find('div')
+    cy.get('table tbody tr:first-child > :nth-child(1)')
       .should('contain.text', task.name)
   })
 })

@@ -15,7 +15,7 @@ export function DataTableBody ({ table }) {
   const goTo = (row) => router.push(`/projects/${row.original.project}/${row.original.id}`)
 
   return (
-    <TableBody>
+    <TableBody id='tasks-table'>
       {table.getRowModel().rows?.length
         ? (
             table.getRowModel().rows.map((row) => (

@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
-import { getToken } from "next-auth/jwt"
+import { getToken } from 'next-auth/jwt'
 
 // problema cambio contraseña
 export async function POST (req) {

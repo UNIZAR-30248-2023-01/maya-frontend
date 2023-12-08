@@ -1,6 +1,6 @@
 'use client'
 
-import { Footer } from '@/components/landing/footer'
+import { Footer } from '@/components/footer'
 import { useLang } from '@/context/language-context'
 import Link from 'next/link'
 

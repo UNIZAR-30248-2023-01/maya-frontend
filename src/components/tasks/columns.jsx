@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { tasksLabels, tasksStatuses } from '@/lib/constants'
-import { cn } from '@/lib/utils'
+import { cn, normalize } from '@/lib/utils'
 import { format, parseISO } from 'date-fns'
 
 export const columns = [
@@ -25,7 +25,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
+      return normalize(row.getValue(id).includes(value))
     }
   },
   {
