@@ -43,8 +43,7 @@ describe('Store project', async () => {
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get('table tbody tr:first-child')
-      .find('div')
+    cy.get('table tbody tr > :nth-child(1)')
       .should('contain.text', privateProject.name)
   })
 
@@ -75,8 +74,7 @@ describe('Store project', async () => {
 
     cy.get('input#filter-project').type(privateProject.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)
-    cy.get('table tbody tr:first-child')
-      .find('div')
+    cy.get('table tbody tr > :nth-child(1)')
       .should('contain.text', privateProject.name)
   })
 })
