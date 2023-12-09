@@ -25,7 +25,10 @@ export const navigation = {
     staff: 'personal',
     workSpaces: 'lugares de trabajo',
     'in-and-outs': 'fichajes',
-    tickets: 'tickets'
+    tickets: 'tickets',
+    settings: 'ajustes',
+    appearance: 'apariencia',
+    password: 'contraseña'
   },
   en: {
     overview: 'overview',
@@ -34,7 +37,10 @@ export const navigation = {
     staff: 'staff',
     workSpaces: 'workspaces',
     'in-and-outs': 'in-and-outs',
-    tickets: 'tickets'
+    tickets: 'tickets',
+    settings: 'settings',
+    appearance: 'appearance',
+    password: 'password'
   }
 }
 
