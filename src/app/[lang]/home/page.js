@@ -160,11 +160,16 @@ export default function Home () {
       currentDate.setHours(0, 0, 0, 0)
       const currentDay = currentDate.getDay()
       const startDate = new Date(currentDate)
-      startDate.setDate(startDate.getDate() - currentDay + 1) // Retrocede al lunes
+      // startDate.setDate(startDate.getDate() - currentDay + 1) // Retrocede al lunes
+      startDate.setDate(startDate.getDate() - (currentDay + 6) % 7);
+
+      console.log('startDate ', startDate)
 
       // Obtén la fecha de finalización de la semana (domingo)
-      const endDate = new Date(startDate)
+      const endDate = new Date(currentDate)
       endDate.setDate(endDate.getDate() + 6) // Avanza al domingo
+
+      console.log('endDate ', endDate)
 
       const fetchData = async () => {
         const { data: timeData } = await supabase
@@ -215,6 +220,15 @@ export default function Home () {
   }
 
   return (
+    <>
+    <header className="text-center inline-flex items-center">
+      <h1 className="text-custom-mustard text-2xl border-r-2 ml-2 pr-3">
+        MaYA
+      </h1>
+      <h1 className="text-gray-300 text-2xl ml-2 pl-3">
+        Manage Your Assigments
+      </h1>
+    </header>
     <main className="">
       <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
         <Card className='col-span-2'>
@@ -286,5 +300,6 @@ export default function Home () {
         </Card>
       </Grid>
     </main>
+    </>
   )
 }
