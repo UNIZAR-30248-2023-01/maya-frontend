@@ -14,6 +14,9 @@ import {
   BadgeDelta,
   Metric
 } from '@tremor/react'
+import { useLang } from '@/context/language-context'
+import { useUser } from '@/context/user-context'
+import useSWR from 'swr'
 
 const cities = [
   {
@@ -61,7 +64,7 @@ const chartdata = [
 
 const data = [
   {
-    name: 'Twitter',
+    name: 'Twitteree',
     value: 456,
     href: 'https://twitter.com/tremorlabs',
     icon: function TwitterIcon () {
@@ -147,6 +150,38 @@ const customTooltip = ({ payload, active }) => {
 }
 
 export default function Home () {
+  const { dictionary } = useLang()
+  const { user } = useUser()
+  console.log('user ', user)
+
+  const { data: salary } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&select=salary`)
+  const salario = salary?.[0]?.salary
+
+  // Suposiciones
+  const cotizacionSeguridadSocial = 0.0635 // 6.35%
+  const impuestosRenta = 0.30 // Suponiendo un promedio del 30%
+
+  // Función para calcular salario neto y bruto
+  function calcularSalarioNetoYBruto (salario) {
+    const cotizacionSS = salario * cotizacionSeguridadSocial
+    const impuestoRenta = salario * impuestosRenta
+    const salarioNeto = salario - cotizacionSS - impuestoRenta
+
+    // Redondear a dos decimales
+    const salarioNetoRedondeado = parseFloat(salarioNeto.toFixed(2))
+    const salarioBrutoRedondeado = parseFloat(salario.toFixed(2))
+    const porcentaje = ((salarioNetoRedondeado / salarioBrutoRedondeado) * 100).toFixed(2)
+
+    return {
+      salarioNeto: salarioNetoRedondeado,
+      salarioBruto: salarioBrutoRedondeado,
+      porcentaje
+    }
+  }
+
+  // Utilización de la función
+  const { salarioNeto, salarioBruto, porcentaje } = calcularSalarioNetoYBruto(salario)
+
   return (
     <main className="">
       <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
@@ -163,20 +198,19 @@ export default function Home () {
         </Card>
         <div className="flex flex-col gap-6">
         <Card className="flex flex-col h-full max-w-sm justify-center items-center gap-y-4">
-          <Bold>Sales</Bold>
-          <Metric>$ 23,456</Metric>
+          <Bold>{dictionary.home['salary-value']}</Bold>
           <Text className='flex items-center gap-2.5'>
-            <BadgeDelta deltaType="moderateIncrease" isIncreasePositive={true} size="xs"/>
-            <span>+7200€</span> que el sueldo medio del país
+            <Metric>{salario} {dictionary.home['symbol-money']}</Metric>
+            <BadgeDelta deltaType="moderateIncrease" className='text-custom-mustard bg-custom-lighterYellow' isIncreasePositive={true} size="xs"/>
           </Text>
         </Card>
           <Card className="max-w-sm mx-auto space-y-2">
             <Title>Balance</Title>
             <Flex>
-              <Text>$ 9,012 &bull; 45%</Text>
-              <Text>$ 20,000</Text>
+              <Text>$ {salarioNeto} &bull; {porcentaje}%</Text>
+              <Text>$ {salarioBruto}</Text>
             </Flex>
-            <ProgressBar value={45} color="teal" className="mt-3" />
+            <ProgressBar value={porcentaje} color="teal" className="mt-3" />
           </Card>
         </div>
       </Grid>

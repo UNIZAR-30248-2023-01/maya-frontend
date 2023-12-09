@@ -8,10 +8,8 @@ import { useUser } from '@/context/user-context'
 
 export function BottonController () {
   const { user } = useUser()
-  console.log('usssser ', user)
   const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
-  console.log('innnnAndOuts ', inAndOuts)
-  console.log('inAndOuts?.length ', inAndOuts?.length)
+
   const [isClockInVisible, setIsClockInVisible] = useState(inAndOuts?.length === 0)
   const [isClockOutVisible, setIsClockOutVisible] = useState(inAndOuts?.length !== 0)
   const { dictionary } = useLang()

@@ -1078,3 +1078,15 @@ export const footer = {
     faq: 'FAQ'
   }
 }
+
+export const home = {
+  es: {
+    'salary-value': 'Sueldo actual',
+    'symbol-money': '€'
+  },
+  en: {
+    'salary-value': 'Actual salary',
+    'symbol-money': '$'
+  }
+
+}
