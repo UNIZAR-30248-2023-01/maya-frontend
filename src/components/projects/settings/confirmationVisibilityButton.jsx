@@ -57,6 +57,7 @@ export function ConfirmationVisibilityButton ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          id="visibility-project"
           variant="secondary"
           className="text-red-600 font-medium whitespace-nowrap w-36"
         >
@@ -75,6 +76,7 @@ export function ConfirmationVisibilityButton ({
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <AlertDialogAction
+            id="accept-visibility-project"
             onClick={handleChangeVisibility}
             className={
               isPublic

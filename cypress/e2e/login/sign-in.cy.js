@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { defaultUser } from '../config/models'
+import { user } from '../config/models'
 import { createUser, deleteUser } from '../config/setUp'
 
 describe('Login tests', () => {
@@ -8,8 +8,9 @@ describe('Login tests', () => {
   after(() => deleteUser())
 
   it('Sign in', () => {
-    cy.login({ username: defaultUser.username, passwd: defaultUser.password }).then(() => {
-      cy.get('a#home-button')
-    })
+    cy.login(user)
+    cy.wait(1000)
+
+    cy.get('a#home-button').should('exist')
   })
 })

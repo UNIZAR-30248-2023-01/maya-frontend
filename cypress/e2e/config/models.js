@@ -1,46 +1,58 @@
 export const users = [
   {
-    username: 'johndoe',
-    firstname: 'john',
-    lastname: 'doe',
-    email: 'johndoe@example.com',
-    password: '12345678'
+    username: 'test',
+    firstname: 'Test',
+    lastname: 'Test',
+    email: 'test@maya',
+    password: 'password'
+  },
+  {
+    username: 'test-member',
+    firstname: 'Test',
+    lastname: 'Test',
+    email: 'member-test@maya.com',
+    password: 'password'
   }
 ]
 
 export const organizations = [
   {
-    name: 'My first organization',
+    name: 'test-organization',
     description: 'This is my first organization'
   }
 ]
 
 export const projects = [
   {
-    name: 'My first project',
-    description: 'This is my first project',
-    organization: organizations[0].name
+    name: 'new public project',
+    dbname: 'new-public-project',
+    description: 'Description of the new project',
+    organization: organizations[0].name,
+    visibility: 'public'
+  },
+  {
+    name: 'new private project',
+    dbname: 'new-private-project',
+    description: 'Description of the new project',
+    organization: organizations[0].name,
+    visibility: 'private'
   }
 ]
 
 export const tasks = [
   {
-    name: 'My first task',
-    description: 'This is my first task',
-    assignees: [
-      users[0].username
-    ],
-    label: 'enhancement',
+    name: 'test task',
+    label: 'ui',
     status: 'new',
     estimated: 3,
-    end_date: new Date(),
-    project: projects[0].name
+    project: projects[1].dbname
   }
 ]
 
 export const teams = [
   {
-    name: 'My first team',
+    name: 'test team',
+    dbname: 'test-team',
     description: 'This is my first team',
     members: [
       users[0].username
@@ -48,8 +60,14 @@ export const teams = [
   }
 ]
 
-export const defaultUser = users[0]
-export const defaultOrganization = organizations[0]
-export const defaultProject = projects[0]
-export const defaultTask = tasks[0]
-export const defaultTeam = teams[0]
+export const user = users[0]
+export const userMember = users[1]
+
+export const publicProject = projects[0]
+export const privateProject = projects[1]
+
+export const task = tasks[0]
+
+export const organization = organizations[0]
+
+export const team = teams[0]

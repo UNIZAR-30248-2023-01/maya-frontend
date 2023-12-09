@@ -1,7 +1,7 @@
 'use client'
 
-import { DataTable } from '@/components/people/data-table'
-import { columns } from '@/components/people/columns'
+import { DataTable } from '@/components/project-people/data-table'
+import { columns } from '@/components/project-people/columns'
 import { loadingPeople } from '@/lib/constants'
 import useSWR from 'swr'
 

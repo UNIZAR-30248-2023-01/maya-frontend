@@ -19,6 +19,7 @@ export function UserSignIn ({ className, ...props }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = event.target
+    console.log(username, password)
 
     try {
       const logIn = () => {

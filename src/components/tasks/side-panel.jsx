@@ -100,7 +100,7 @@ export function SidePanel ({
                 id='name'
                 label={dictionary.tasks['name-column'] + '*'}
                 placeholder={dictionary.tasks['new-task-name-placeholder']}
-                onChange={(e) => setter({ key: 'name', value: e.target.value })}
+                onChange={(e) => setter({ key: 'name', value: String(e.target.value).toLowerCase() })}
               />
 
               <TextArea
@@ -129,7 +129,7 @@ export function SidePanel ({
 
               <Number
                 min={0}
-                id={'estimated-time'}
+                id='estimated'
                 label={dictionary.tasks['estimated-column'] + '*'}
                 placeholder={dictionary.tasks['new-task-estimated-placeholder']}
                 onChange={(e) => setter({ key: 'estimated', value: e.target.valueAsNumber })}
@@ -173,7 +173,7 @@ export function SidePanel ({
             </div>
             <SheetFooter className='pb-12'>
               <SheetClose asChild>
-                <Button type='submit' disabled={badForm}>{actionBtn}</Button>
+                <Button id="create-task" type='submit' disabled={badForm}>{actionBtn}</Button>
               </SheetClose>
             </SheetFooter>
           </div>

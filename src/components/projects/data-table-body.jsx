@@ -12,7 +12,7 @@ import { useLang } from '@/context/language-context'
 export function DataTableBody ({ table }) {
   const { dictionary } = useLang()
   const router = useRouter()
-  const goTo = (row) => router.push(`/projects/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
+  const goTo = (row) => router.push(`/projects/${String(row.original.name)}`)
 
   return (
     <TableBody>
@@ -20,6 +20,7 @@ export function DataTableBody ({ table }) {
         ? (
             table.getRowModel().rows.map((row) => (
           <TableRow
+            id={row.original.name}
             key={row.id}
             data-state={row.getIsSelected() && 'selected'}
             onClick={() => goTo(row)}
@@ -37,8 +38,9 @@ export function DataTableBody ({ table }) {
             ))
           )
         : (
-        <TableRow>
+        <TableRow id="no-results">
           <TableCell
+            id="no-results"
             colSpan={table.getAllColumns().length}
             className="h-24 text-center"
           >

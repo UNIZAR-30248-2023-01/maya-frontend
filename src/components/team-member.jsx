@@ -25,7 +25,6 @@ export function TeamMember ({
 }) {
   const { dictionary } = useLang()
 
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild id="team-member">

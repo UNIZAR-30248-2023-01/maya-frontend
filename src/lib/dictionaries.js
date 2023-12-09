@@ -219,23 +219,18 @@ export const settingsAccount = {
     'user-password': 'Contraseña',
     'user-password-confirm': 'Confirmar contraseña',
     'account-update': 'Actualizar',
-
     'submitted-values': 'Has actualizado los siguientes valores',
     'theme-submit': 'El color del tema se ha actualizado correctamente.',
-
     'message-username': '* El nombre de usuario no se puede modificar.',
     'message-email': '* El correo electrónico no se puede modificar.',
-
     'appearance-theme': 'Tema',
     'appearance-theme-light': 'Claro',
     'appearance-theme-dark': 'Oscuro',
     'appearance-subheadline': 'Selecciona el tema para el panel de control.',
     'appearance-update': 'Actualizar color del tema',
-
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
     'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
-
     'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
     'toast-success': 'Tu cuenta se ha actualizada correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
@@ -245,14 +240,11 @@ export const settingsAccount = {
     'apperance-tab': 'Appearance',
     'notifications-tab': 'Notifications',
     'logout-tab': 'Logout',
-
     'account-headline': 'My account',
     'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
     'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
-
     'pick-avatar': 'Pick an avatar',
     'update-avatar': 'Update',
-
     language: 'en-US',
     'user-firstname': 'Name',
     'user-lastname': 'Lastname',
@@ -262,23 +254,18 @@ export const settingsAccount = {
     'user-password': 'Password',
     'user-password-confirm': 'Confirm password',
     'account-update': 'Update',
-
     'submitted-values': 'You submitted the following values.',
     'theme-submit': 'Theme color has been updated successfully.',
-
     'message-username': '* Username cannot be modified.',
     'message-email': '* E-mail cannot be modified.',
-
     'appearance-theme': 'Theme',
     'appearance-theme-light': 'Light',
     'appearance-theme-dark': 'Dark',
     'appearance-subheadline': 'Select the theme for the dashboard.',
     'appearance-update': 'Update theme color',
-
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
     'error-full-new-password': 'New password cannot be empty.',
-
     'toast-loading': 'We are validating your info account. Please wait a moment.',
     'toast-success': 'Your info account has been updated successfully.',
     'toast-error': 'Something went wrong. Please try again.'
@@ -353,6 +340,61 @@ export const tasks = {
     'toast-delete-success': 'Your tasks has been deleted successfully.',
     'toast-edit-loading': 'We are editing your tasks Please wait a moment.',
     'toast-edit-success': 'Your task has been edited successfully.'
+  }
+}
+
+export const staff = {
+  es: {
+    'members-tab': 'Miembros',
+    'member-column': 'Miembros',
+    filter: 'Filtrar por nombre de usuario',
+    role: 'Roles',
+    'new-person': 'reclutar',
+    'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
+    'new-person-create': 'invitar',
+    'invite-member': 'Recluta personal',
+    'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
+    invite: 'Añadir miembros',
+    search: 'Buscar miembros',
+    'invite-member-send': 'reclutar',
+    'manage-member-title': 'Gestionar %s',
+    'manage-member-description': 'Modifica la información de un usuario.',
+    'manage-member-submit': 'Cambiar rol',
+    'manage-member-delete-title': 'Eliminar usuario',
+    'manage-member-delete-description': 'Retira el permiso de un usuario a la aplicación.',
+    'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
+    'toast-success': 'Se han añadido los nuevos miembros correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
+    'toast-role-success': 'Se ha modificado la información correctamente.',
+    'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
+  },
+  en: {
+    'members-tab': 'Members',
+    'member-column': 'Members',
+    filter: 'Filter people by username',
+    role: 'Roles',
+    'new-person': 'recruit',
+    'new-table-description': 'Add people to your project to improve.',
+    'new-person-create': 'invite',
+    'invite-member': 'Recruit people',
+    'invite-member-description': 'Add members to your project to improve your team.',
+    invite: 'Add members',
+    search: 'Search members',
+    'invite-member-send': 'recruit',
+    'manage-member-title': 'Manage %s',
+    'manage-member-description': 'Modify the info of a user',
+    'manage-member-submit': 'Change role',
+    'manage-member-delete-title': 'Remove user',
+    'manage-member-delete-description': 'Remove the access of a user to this website',
+    'toast-loading': 'We are adding new members. Please wait a moment.',
+    'toast-success': 'New members added successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
+    'toast-role-success': 'Member info updated successfully.',
+    'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
+    'toast-remove-success': 'Member removed successfully.'
   }
 }
 
@@ -505,7 +547,7 @@ export const roles = {
     owner: 'Propietario',
     developer: 'Desarrollador',
     member: 'Miembro',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Diseñador'
   },
@@ -513,7 +555,7 @@ export const roles = {
     owner: 'Owner',
     developer: 'Developer',
     member: 'Member',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Designer'
   }
@@ -630,6 +672,31 @@ export const comments = {
   }
 }
 
+export const hours = {
+  es: {
+    titulo: 'Registro de horas',
+    placeholder: 'Escribe aquí tu tiempo invertido (en horas)...',
+    button: 'Añadir horas',
+    hours: 'Horas',
+    date: 'Fecha',
+    user: 'Usuario',
+    'toast-loading': 'Estamos enviando tu comentario. Por favor, espera un momento.',
+    'toast-success': 'Tu comentario se ha enviado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    titulo: 'Time log',
+    placeholder: 'Type here your time spent (in hours)...',
+    button: 'Add hours',
+    hours: 'Time spent',
+    date: 'Date',
+    user: 'Username',
+    'toast-loading': 'We are sending your comment. Please wait a moment.',
+    'toast-success': 'Your comment has been sent successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
 export const auth = {
   es: {
     'signin-loading': 'Estamos iniciando sesión. Por favor, espera un momento.',
@@ -661,7 +728,7 @@ export const signin = {
     'signin-and': 'y',
     'signin-username': 'Usuario',
     'signin-password': 'Contraseña',
-    'signin-sigin': 'Iniciar sesión con el correo',
+    'signin-sigin': 'Iniciar sesión con el nombre de usuario',
     'signin-continuee': 'O continuar con'
 
   },
@@ -676,7 +743,7 @@ export const signin = {
     'signin-and': 'and',
     'signin-username': 'Username',
     'signin-password': 'Password',
-    'signin-sigin': 'Sign In with Email',
+    'signin-sigin': 'Sign in with username',
     'signin-continuee': 'Or continue with'
 
   }

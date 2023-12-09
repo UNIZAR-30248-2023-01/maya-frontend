@@ -180,7 +180,7 @@ export function SidePanelEdit ({
 
   return (
     <Sheet>
-      <SheetTrigger id="icon" className='py-3' onClick={handleOpenSidePanel}><LuClipboardEdit className="h-5 w-5 flex-shrink-0" aria-hidden="true" /></SheetTrigger>
+      <SheetTrigger id="edit-checkin" className='py-3' onClick={handleOpenSidePanel}><LuClipboardEdit className="h-5 w-5 flex-shrink-0" aria-hidden="true" /></SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
