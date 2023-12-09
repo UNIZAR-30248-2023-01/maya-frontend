@@ -859,8 +859,6 @@ export const landing = {
 
   }
 }
-<<<<<<< HEAD
-=======
 
 export const privacy = {
   es: {
@@ -1074,4 +1072,3 @@ export const footer = {
     faq: 'FAQ'
   }
 }
->>>>>>> develop
