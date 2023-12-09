@@ -10,7 +10,8 @@ export const users = [
     username: 'test-member',
     firstname: 'Test',
     lastname: 'Test',
-    email: 'member-test@maya.com'
+    email: 'member-test@maya.com',
+    password: 'password'
   }
 ]
 
