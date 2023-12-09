@@ -41,7 +41,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run start
-          wait-on: "http://localhost:3000"
+          wait-on: ${{ env.VERCEL_URL }}
           wait-on-timeout: 30
           command: npm run cypress:test
         env:

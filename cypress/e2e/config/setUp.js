@@ -9,13 +9,8 @@ export const createUser = () => {
   })
   cy.request({
     method: 'POST',
-    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people`,
-    headers: {
-      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
-      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=minimal'
-    },
+    url: `${Cypress.env('VERCEL_URL')}/api/sign-up`,
+    headers: { 'Content-Type': 'application/json' },
     body: userMember
   })
 }
