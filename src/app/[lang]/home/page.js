@@ -17,17 +17,8 @@ import {
 import { useLang } from '@/context/language-context'
 import { useUser } from '@/context/user-context'
 import useSWR from 'swr'
-
-const cities = [
-  {
-    name: 'New York',
-    sales: 9800
-  },
-  {
-    name: 'Zurich',
-    sales: 1398
-  }
-]
+import { useState, useEffect } from 'react'
+import { supabase } from '@/lib/utils'
 
 const chartdata = [
   {
@@ -64,7 +55,7 @@ const chartdata = [
 
 const data = [
   {
-    name: 'Twitteree',
+    name: 'Twitter',
     value: 456,
     href: 'https://twitter.com/tremorlabs',
     icon: function TwitterIcon () {
@@ -126,40 +117,20 @@ const valueFormatter = function (number) {
   return '$ ' + new Intl.NumberFormat('us').format(number).toString()
 }
 
-const customTooltip = ({ payload, active }) => {
-  if (!active || !payload) return null
-  const categoryPayload = payload?.[0]
-  if (!categoryPayload) return null
-  return (
-    <div className="w-56 rounded-tremor-default text-tremor-default bg-tremor-background p-2 shadow-tremor-dropdown border border-tremor-border">
-      <div className="flex flex-1 space-x-2.5">
-        <div className={`w-1.5 flex flex-col bg-${categoryPayload?.color}-500 rounded`} />
-        <div className="w-full">
-          <div className="flex items-center justify-between space-x-8">
-            <p className="text-right text-tremor-content whitespace-nowrap">
-              {categoryPayload.name}
-            </p>
-            <p className="font-medium text-right whitespace-nowrap text-tremor-content-emphasis">
-              {categoryPayload.value}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function Home () {
   const { dictionary } = useLang()
   const { user } = useUser()
-  console.log('user ', user)
 
+  const horasSemanales = 45
+
+  /*
+   * Obtener salario del usuario
+   */
   const { data: salary } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?username=eq.${user?.username}&select=salary`)
   const salario = salary?.[0]?.salary
 
-  // Suposiciones
-  const cotizacionSeguridadSocial = 0.0635 // 6.35%
-  const impuestosRenta = 0.30 // Suponiendo un promedio del 30%
+  const cotizacionSeguridadSocial = 0.0638 // 6.38%
+  const impuestosRenta = 0.0923 // 9,23%
 
   // Función para calcular salario neto y bruto
   function calcularSalarioNetoYBruto (salario) {
@@ -169,18 +140,79 @@ export default function Home () {
 
     // Redondear a dos decimales
     const salarioNetoRedondeado = parseFloat(salarioNeto.toFixed(2))
-    const salarioBrutoRedondeado = parseFloat(salario.toFixed(2))
-    const porcentaje = ((salarioNetoRedondeado / salarioBrutoRedondeado) * 100).toFixed(2)
+    const porcentaje = ((salarioNetoRedondeado / salario) * 100).toFixed(2)
 
     return {
       salarioNeto: salarioNetoRedondeado,
-      salarioBruto: salarioBrutoRedondeado,
       porcentaje
     }
   }
 
-  // Utilización de la función
-  const { salarioNeto, salarioBruto, porcentaje } = calcularSalarioNetoYBruto(salario)
+  const { salarioNeto, porcentaje } = calcularSalarioNetoYBruto(salario)
+
+  /*
+   * Obtener tiempo de trabajo semanal
+   */
+  useEffect(() => {
+    if (user?.username) {
+      // Calcula la fecha actual y retrocede para encontrar el inicio de la semana (lunes)
+      const currentDate = new Date()
+      currentDate.setHours(0, 0, 0, 0)
+      const currentDay = currentDate.getDay()
+      const startDate = new Date(currentDate)
+      startDate.setDate(startDate.getDate() - currentDay + 1) // Retrocede al lunes
+
+      // Obtén la fecha de finalización de la semana (domingo)
+      const endDate = new Date(startDate)
+      endDate.setDate(endDate.getDate() + 6) // Avanza al domingo
+
+      const fetchData = async () => {
+        const { data: timeData } = await supabase
+          .from('in-and-outs')
+          .select('total')
+          .gte('in_date', startDate.toDateString())
+          .lte('out_date', endDate.toDateString())
+          .eq('username', user?.username)
+
+        console.log('timeData ', timeData)
+
+        // Suma las horas del listado
+        const totalHours = (timeData.reduce((total, entry) => total + entry.total, 0) / 60)
+        console.log('totalHours ', totalHours)
+
+        // Actualiza el estado de time
+        setTime([
+          {
+            name: dictionary.home['time-to-spend'],
+            hours: horasSemanales - totalHours >= 0 ? horasSemanales - totalHours : 0
+          },
+          {
+            name: dictionary.home['time-spent'],
+            hours: totalHours
+          }
+        ])
+
+        console.log('Total de horas:', totalHours)
+      }
+
+      fetchData()
+    }
+  }, [user?.username])
+
+  const [time, setTime] = useState([
+    {
+      name: dictionary.home['time-spent'],
+      hours: 0
+    },
+    {
+      name: dictionary.home['time-to-spend'],
+      hours: 0
+    }
+  ])
+
+  const valueFormatterTime = function (number) {
+    return new Intl.NumberFormat('us').format(number).toString() + ' h'
+  }
 
   return (
     <main className="">
@@ -200,17 +232,17 @@ export default function Home () {
         <Card className="flex flex-col h-full max-w-sm justify-center items-center gap-y-4">
           <Bold>{dictionary.home['salary-value']}</Bold>
           <Text className='flex items-center gap-2.5'>
-            <Metric>{salario} {dictionary.home['symbol-money']}</Metric>
+            <Metric>{salarioNeto} {dictionary.home['symbol-money']}</Metric>
             <BadgeDelta deltaType="moderateIncrease" className='text-custom-mustard bg-custom-lighterYellow' isIncreasePositive={true} size="xs"/>
           </Text>
         </Card>
           <Card className="max-w-sm mx-auto space-y-2">
-            <Title>Balance</Title>
+            <Title>{dictionary.home['gross-net']}</Title>
             <Flex>
               <Text>$ {salarioNeto} &bull; {porcentaje}%</Text>
-              <Text>$ {salarioBruto}</Text>
+              <Text>$ {salario}</Text>
             </Flex>
-            <ProgressBar value={porcentaje} color="teal" className="mt-3" />
+            <ProgressBar value={porcentaje} color="yellow" className="mt-3"/>
           </Card>
         </div>
       </Grid>
@@ -227,6 +259,7 @@ export default function Home () {
           </Flex>
           <BarList data={data} className="mt-2" />
         </Card>
+
         <Card className="max-w-lg">
           <Title>Website Analytics</Title>
           <Flex className="mt-4">
@@ -239,14 +272,16 @@ export default function Home () {
           </Flex>
           <BarList data={data} className="mt-2" />
         </Card>
+
         <Card className="mx-auto">
+          <Title>{dictionary.home['time-spent-vs']}</Title>
           <DonutChart
             className="mt-6"
-            data={cities}
-            category="sales"
+            data={time}
+            category="hours"
             index="name"
-            valueFormatter={valueFormatter}
-            customTooltip={customTooltip}
+            valueFormatter={valueFormatterTime}
+            colors={['yellow', 'orange']}
           />
         </Card>
       </Grid>

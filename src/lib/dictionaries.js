@@ -1082,11 +1082,19 @@ export const footer = {
 export const home = {
   es: {
     'salary-value': 'Sueldo actual',
-    'symbol-money': '€'
+    'symbol-money': '€',
+    'time-spent-vs': 'Tiempo invertido vs tiempo por invertir por semana',
+    'time-spent': 'Tiempo invertido',
+    'time-to-spend': 'Tiempo por invertir',
+    'gross-net': 'Sueldo bruto vs sueldo neto'
   },
   en: {
     'salary-value': 'Actual salary',
-    'symbol-money': '$'
+    'symbol-money': '$',
+    'time-spent-vs': 'Time spent vs time to spend per week',
+    'time-spent': 'Time spent',
+    'time-to-spend': 'Time to spend',
+    'gross-net': 'Gross salary vs net salary'
   }
 
 }
