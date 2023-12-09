@@ -25,6 +25,7 @@ function MySeatingChart (name) {
   const lanSave = dictionary.workspaces.save
   const lanCancel = dictionary.workspaces.cancel
   const username = user?.username
+  const nombre = name.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 
   // Obtiene la key del workspace y el secret key del evento
   const obtenerWorkspace = async () => {
@@ -145,17 +146,38 @@ function MySeatingChart (name) {
 
   // Muestra los asientos seleccionados
   const renderSelectedSeats = () => {
-    return selectedSeats.map((seat, index) => (
-      <div key={index}>{`${lanNumber} ${seat}`}</div>
-    ))
+    // return selectedSeats.map((seat, index) => (
+    //   <div key={index}>{`${lanNumber} ${seat}`}</div>
+    // ))
+
+    return (
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      {selectedSeats.map((seat, index) => (
+        <div key={index} style={{ display: 'flex', padding: '10px', boxSizing: 'border-box' }}>
+          <span style={{ marginRight: '5px' }}>{lanNumber}</span>
+          <span>{seat}</span>
+        </div>
+      ))}
+    </div>
+    )
   }
 
   // Muestra los asientos reservados
   const renderReservationsSeats = () => {
     console.log('reservations:', reservations)
-    return reservations.map((seat, index) => (
-      <div key={index}>{`${lanNumber} ${seat.seatId}`}</div>
-    ))
+    // return reservations.map((seat, index) => (
+    //   <div key={index}>{`${lanNumber} ${seat.seatId}`}</div>
+    // ))
+    return (
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      {reservations.map((seat, index) => (
+        <div key={index} style={{ display: 'flex', padding: '10px', boxSizing: 'border-box' }}>
+          <span style={{ marginRight: '5px' }}>{lanNumber}</span>
+          <span>{seat.seatId}</span>
+        </div>
+      ))}
+    </div>
+    )
   }
 
   // Para verificar si el usuario actual tiene una reserva
@@ -269,28 +291,32 @@ function MySeatingChart (name) {
       />
     </div>
     )}
-  <div className='rounded-md border min-h-full flex flex-col items-center justify-start h-96 w-1/3 p-4' style={{ margin: '10px', alignItems: 'center' }}>
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    {hasReservation && (
-      <div id="selected-seats-container">
-        <h1 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'center', marginTop: '0' }}>{lanReservedSeats}</h1>
-        {renderReservationsSeats()}
-      </div>
-    )}
-    {!hasReservation && (
-      <div id="selected-seats-container">
-        <h1 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'center', marginTop: '0' }}>{lanSelectedSeats}</h1>
+  <div className='rounded-md border min-h-full flex flex-col items-left justify-start h-96 w-1/3 p-4' style={{ margin: '10px', display: 'flex', flexDirection: 'column' }}>
+  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'flex-start' }}>
+  <h1 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'center', marginTop: '0' }}>{nombre}</h1>
+  <hr style={{ border: 'none', height: '1px', background: 'linear-gradient(to right, transparent, #ccc, transparent)' }} />
+    {/* {!hasReservation && ( */}
+      <div id="selected-seats-container" className='h-1/2'>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'left', marginTop: '10px' }}>{lanSelectedSeats}</h2>
         {renderSelectedSeats()}
       </div>
+    {/* )} */}
+    <hr style={{ width: '100%', margin: '0', background: '#ccc' }} />
+    {/* {hasReservation && ( */}
+    <div id="selected-seats-container" className='h-1/2'>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'left', marginTop: '10px' }}>{lanReservedSeats}</h2>
+        {renderReservationsSeats()}
+      </div>
+    {/* )} */}
+  </div>
+  <hr/>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', marginTop: 'auto', width: '100%' }}>
+    {!hasReservation && (
+      <button className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleSaveSeats}>{lanSave}</button>
     )}
-    <div class="w-full flex flex-col sm:flex-row sm:justify-center sm:space-x-2">
-      {!hasReservation && (
-        <button class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleSaveSeats}>{lanSave}</button>
-      )}
-      {hasReservation && (
-        <button class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleCancelReservation}>{lanCancel}</button>
-      )}
-    </div>
+    {hasReservation && (
+      <button className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleCancelReservation}>{lanCancel}</button>
+    )}
   </div>
 </div>
 </div>
