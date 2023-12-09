@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState()
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -30,7 +30,9 @@ export function UserSignIn ({ className, ...props }) {
             password: password.value,
             redirect: false
           })
-            .then(() => {
+            .then((res) => {
+              if (res.error) throw new Error(res.error)
+
               setIsLoading(false)
               router.push('/home')
               resolve()
@@ -99,7 +101,11 @@ export function UserSignIn ({ className, ...props }) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => signIn('github', { callbackUrl: '/home' })}
+      >
         <LuGithub className="mr-2 h-4 w-4" />
         Github
       </Button>

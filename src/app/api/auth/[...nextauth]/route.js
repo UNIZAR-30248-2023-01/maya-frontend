@@ -1,17 +1,12 @@
 /* eslint-disable camelcase */
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import DiscordProvider from 'next-auth/providers/discord'
 import GitHubProvider from 'next-auth/providers/github'
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
 export const authOptions = {
   providers: [
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET
-    }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
@@ -44,6 +39,46 @@ export const authOptions = {
       }
     })
   ],
+  callbacks: {
+    async signIn ({ profile: { id, name, email, login: username } }) {
+      try {
+        const [firstname, lastname] = name.split(' ')
+
+        // Check if user exists
+        const { data: users, error } = await supabase
+          .from('people')
+          .select('*')
+          .or(`username.eq.${username}`, `email.eq.${email}`)
+
+        // Error handling
+        if (error) return new Response(error.message, { status: 500 })
+
+        // Create user if not exists
+        if (users.length === 0) {
+          const { data: account, error } = await supabase
+            .from('people')
+            .insert([
+              {
+                email,
+                username,
+                firstname: firstname ?? '',
+                lastname: lastname ?? ''
+              }
+            ])
+
+          if (error) return new Response(error.message, { status: 500 })
+          // Once user is created, return account
+          return { ...account[0] }
+        } else {
+          // User already exists so return account
+          const account = users.filter((user) => user.email === email)[0]
+          return { ...account }
+        }
+      } catch (error) {
+        return '/sign-in'
+      }
+    }
+  },
   session: {
     strategy: 'jwt',
     maxAge: 2 * 60 * 60 // 2 hours
