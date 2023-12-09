@@ -1,27 +1,16 @@
-import crypto from 'crypto'
-
-const salt = crypto.randomBytes(16).toString('hex')
-const hashedPassword = crypto
-  .pbkdf2Sync(Cypress.env('TEST_PASSWORD'), salt, 10000, 64, 'sha512')
-  .toString('hex')
-
 export const users = [
   {
-    username: Cypress.env('TEST_USERNAME'),
-    firstname: Cypress.env('TEST_FIRSTNAME'),
-    lastname: Cypress.env('TEST_LASTNAME'),
-    email: Cypress.env('TEST_EMAIL'),
-    password: Cypress.env('TEST_PASSWORD'),
-    passwd_hash: hashedPassword,
-    salt
+    username: 'test',
+    firstname: 'Test',
+    lastname: 'Test',
+    email: 'test@maya',
+    password: 'password'
   },
   {
-    username: Cypress.env('TEST_USERNAME') + '-member',
-    firstname: Cypress.env('TEST_FIRSTNAME'),
-    lastname: Cypress.env('TEST_LASTNAME'),
-    email: 'member-' + Cypress.env('TEST_EMAIL'),
-    passwd_hash: hashedPassword,
-    salt
+    username: 'test-member',
+    firstname: 'Test',
+    lastname: 'Test',
+    email: 'member-test@maya.com'
   }
 ]
 

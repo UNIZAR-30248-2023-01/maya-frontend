@@ -28,6 +28,7 @@ describe('Delete tasks', async () => {
 
     cy.wait(1000)
     cy.get('table tbody tr:first-child').click()
+    cy.wait(1000)
 
     cy.get('button#confirmation-button').click()
     cy.get('button#confirmation').click()
