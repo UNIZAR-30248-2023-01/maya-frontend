@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sidebar } from '@/components/sidebar/sidebar'
 import { Search } from '@/components/sidebar/search'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
@@ -15,10 +15,39 @@ import useSWR from 'swr'
 export function Layout ({ children }) {
   const [open, setOpen] = useState(false)
   const { status, data } = useSession()
-  const { data: user, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${data?.user?.email}&select=username,firstname,lastname,email,avatar`)
+  const { data: user, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?email=eq.${data?.user?.email}&select=username,firstname,lastname,email,avatar,role`)
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Verifica si la tecla presionada es 'K' y si también se presionó la tecla Ctrl o Cmd
+      if ((event.key === 'k' || event.key === 'K') && (event.ctrlKey || event.metaKey)) {
+        // Realiza la lógica que deseas cuando se presiona Ctrl+K o Cmd+K
+        event.preventDefault()
+        setOpen(value => !value)
+      }
+    }
+
+    // Agrega el event listener al montar el componente
+    document.addEventListener('keydown', handleKeyPress)
+
+    // Remueve el event listener al desmontar el componente para evitar pérdidas de memoria
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, []) // El array vacío [] asegura que el efecto se ejecute solo una vez al montar el componente
 
   if (status === 'loading' || isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        <main className="mx-auto w-full max-w-7xl px-6 pt-10 pb-16 sm:pb-24 lg:px-8">
+          <img
+            className="mx-auto h-24 w-auto sm:h-12 animate-pulse"
+            src="/logo.webp"
+            alt="Your Company"
+          />
+        </main>
+      </div>
+    )
   } else if (status === 'unauthenticated') {
     return redirect('/sign-in')
   }

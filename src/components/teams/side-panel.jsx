@@ -88,7 +88,7 @@ export function SidePanel ({
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle className="capitalize">{title}</SheetTitle>
+            <SheetTitle id='add-team-title' className="capitalize">{title}</SheetTitle>
             <SheetDescription>
               {description}
             </SheetDescription>
@@ -98,7 +98,7 @@ export function SidePanel ({
               id="name"
               label={dictionary.teams['name-column']}
               placeholder={dictionary.teams['new-team-name-placeholder']}
-              onChange={(e) => setter({ key: 'name', value: e.target.value })}
+              onChange={(e) => setter({ key: 'name', value: String(e.target.value).toLowerCase().split(' ').join('-') })}
             />
             <TextArea
               id="description"
@@ -108,6 +108,7 @@ export function SidePanel ({
             />
             <ComboboxArray
               id="members"
+              searchId='add-team-member'
               label={dictionary.teams['member-column']}
               placeholder={dictionary.teams['new-team-member-placeholder']}
               list={data.members.map((member) => ({ value: member.username, label: member.username }))}

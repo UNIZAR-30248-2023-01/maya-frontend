@@ -35,7 +35,7 @@ export function Breadcrumbs () {
               </svg>
               <Link
                 href={`/${pages.slice(0, pages.indexOf(page) + 1).join('/')}`}
-                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 capitalize"
+                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 first-letter:uppercase"
                 aria-current={page === pages[pages.length - 1] ? 'page' : undefined}
               >
                 {dictionary.navigation[page] ?? page.toLowerCase().replace(/-/g, ' ')}

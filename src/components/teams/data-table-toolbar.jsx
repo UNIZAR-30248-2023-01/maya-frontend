@@ -17,7 +17,7 @@ export function DataTableToolbar ({ table, people }) {
           id="filter-teams"
           placeholder={`${dictionary.teams.filter}...`}
           value={(table.getColumn('name')?.getFilterValue()) ?? ''}
-          onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
+          onChange={(event) => table.getColumn('name')?.setFilterValue(String(event.target.value).toLowerCase())}
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn('people') && (

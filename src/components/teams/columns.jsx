@@ -4,6 +4,7 @@ import { DataTableColumnHeader } from '@/components/teams/data-table-column-head
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
 import { DataTableRowActions } from '@/components/teams/data-table-row-actions'
+import { normalize } from '@/lib/utils'
 
 export const columns = [
   {
@@ -16,12 +17,12 @@ export const columns = [
 
       return (
         <div className="max-w-[150px] truncate font-medium capitalize">
-          {row.getValue('name')}
+          {normalize(row.getValue('name'))}
         </div>
       )
     },
     filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
+      return normalize(row.getValue(id)).includes(value)
     }
   }, {
     accessorKey: 'people',

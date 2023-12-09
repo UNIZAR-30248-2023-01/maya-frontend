@@ -130,6 +130,7 @@ export function ConfirmationTaskButton ({
       <AlertDialogTrigger asChild>
         <Button
           type="submit"
+          id="confirmation-button"
           disabled={isEdit && badForm}
           className={!isEdit && 'bg-red-500 hover:bg-red-700'}
         >
@@ -150,6 +151,7 @@ export function ConfirmationTaskButton ({
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <AlertDialogAction
+            id="confirmation"
             onClick={handleSubmit}
             className={
               isEdit

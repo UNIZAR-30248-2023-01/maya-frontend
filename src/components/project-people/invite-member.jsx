@@ -94,6 +94,7 @@ export function InviteMember ({
                 id="members"
                 label={dictionary.people['member-column']}
                 placeholder={dictionary.people.search}
+                searchId="invite-filter"
                 list={people?.map((member) => ({ value: member.username, label: member.username }))}
                 values={form.members || []}
                 dictionary={dictionary}

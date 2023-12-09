@@ -27,7 +27,7 @@
 Cypress.Commands.add('login', (user) => {
   cy.visit('/en/sign-in')
 
-  cy.wait(3000)
+  cy.wait(1000)
   cy.get('input#username').type(user.username)
   cy.get('input#password').type(user.password)
 

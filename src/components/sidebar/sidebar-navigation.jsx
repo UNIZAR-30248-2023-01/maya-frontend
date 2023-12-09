@@ -4,13 +4,16 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useCallback } from 'react'
+import { useUser } from '@/context/user-context'
 
 export function SidebarNavigation ({ navigation }) {
   let routes = usePathname()
   routes = routes.split('/').slice(2)
+  const { user } = useUser()
 
   const getCurrent = useCallback((item, id) => routes.length > 0 ? routes.includes(item.href.replace('/', '')) : id === 0, [routes])
-
+  console.log(user,
+    navigation)
   return (
     <ul role="list" className=" space-y-1">
       {navigation.map((item, id) => (

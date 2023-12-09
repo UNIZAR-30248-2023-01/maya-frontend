@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { ComboboxArray } from '@/components/forms'
 import { useLang } from '@/context/language-context'
-import { supabase } from '@/lib/utils'
+import { normalize, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import useSWR, { mutate } from 'swr'
 import { DialogClose } from '@radix-ui/react-dialog'
@@ -85,7 +85,7 @@ export function AddTeam ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="capitalize h-8">{triggerBtn}</Button>
+        <Button id="add-team" className="capitalize h-8">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>
@@ -100,12 +100,16 @@ export function AddTeam ({
               <ComboboxArray
                 id="teams"
                 label={dictionary.teams['teams-column']}
+                searchId={'add-team-project-input'}
                 placeholder={dictionary.teams.search}
-                list={teams?.map((team) => ({ value: team, label: team }))}
+                list={teams?.map((team) => ({ value: team, label: normalize(team) }))}
                 values={form || []}
                 dictionary={dictionary}
+                normalized={true}
                 onChange={(e) => {
+                  console.log('form', form)
                   const teams = form
+                  console.log('value', e)
                   const isSelected = teams ? teams.includes(e) : false
                   if (isSelected) {
                     return setForm(teams?.filter((team) => team !== e))
