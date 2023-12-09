@@ -9,17 +9,14 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
-import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState()
-  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = event.target
-    console.log(username, password)
 
     try {
       const logIn = () => {
@@ -28,14 +25,15 @@ export function UserSignIn ({ className, ...props }) {
           signIn('credentials', {
             username: username.value,
             password: password.value,
-            redirect: false
+            callbackUrl: '/home'
           })
             .then((res) => {
-              if (res.error) throw new Error(res.error)
-
-              setIsLoading(false)
-              router.push('/home')
-              resolve()
+              console.log(res)
+              if (res.status === 200) {
+                setIsLoading(false)
+                resolve()
+              }
+              throw new Error(res.error)
             })
             .catch((error) => {
               setIsLoading(false)
@@ -56,7 +54,7 @@ export function UserSignIn ({ className, ...props }) {
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="username">
