@@ -15,7 +15,7 @@ export function DataTableBody ({ table }) {
   const goTo = (row) => router.push(`/projects/${row.original.project}/${row.original.id}`)
 
   return (
-    <TableBody>
+    <TableBody id='tasks-table'>
       {table.getRowModel().rows?.length
         ? (
             table.getRowModel().rows.map((row) => (
@@ -41,7 +41,7 @@ export function DataTableBody ({ table }) {
             ))
           )
         : (
-        <TableRow>
+        <TableRow id="no-results">
           <TableCell
             colSpan={table.getAllColumns().length}
             className="h-24 text-center"

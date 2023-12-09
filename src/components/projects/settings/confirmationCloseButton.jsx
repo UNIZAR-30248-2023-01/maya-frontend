@@ -56,6 +56,7 @@ export function ConfirmationCloseButton ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          id="close-project"
           variant='secondary'
           className={
             isClose
@@ -82,6 +83,7 @@ export function ConfirmationCloseButton ({
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <AlertDialogAction
+            id="accept-close-project"
             onClick={handleChangeStatus}
             className={
               isClose

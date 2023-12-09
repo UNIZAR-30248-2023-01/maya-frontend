@@ -19,7 +19,7 @@ import { mutate } from 'swr'
 import { roles } from '@/lib/constants'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { DialogClose } from '@radix-ui/react-dialog'
-import { RemoveUser } from './remove-user'
+// import { RemoveUser } from './remove-user'
 
 export function RoleChange ({
   title,
@@ -27,16 +27,14 @@ export function RoleChange ({
   actionBtn,
   deleteTitle,
   deleteDescription,
-  projectName,
   username,
-  defaultRole
+  defaultRole,
+  id
 }) {
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(roleSchema._def.shape()))
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
-
-  console.log(username, projectName, defaultRole)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -49,13 +47,12 @@ export function RoleChange ({
         const changeRole = () => {
           return new Promise((resolve, reject) => {
             (async () => {
-              await supabase.from('people-project').update({ role })
+              await supabase.from('people').update({ role })
                 .eq('username', username)
-                .eq('project', projectName)
                 .select()
                 .then(() => {
                 // Actualización de los datos en la interfaz
-                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?project=eq.${projectName}&select=*,people(*)`)
+                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username,firstname,lastname,avatar,role`)
                   resolve()
                 }).catch((error) => {
                   console.error(error)
@@ -81,6 +78,7 @@ export function RoleChange ({
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          id={id}
           variant="ghost"
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
@@ -100,7 +98,7 @@ export function RoleChange ({
             <div className="flex flex-row w-full items-end space-x-2 mt-4">
               <div className='grid gap-4 w-full'>
                 <ComboboxEnum
-                  id="role"
+                  id='role-edit'
                   label={dictionary.people.role}
                   list={roles}
                   value={form.role || defaultRole}
@@ -108,16 +106,15 @@ export function RoleChange ({
                   searchDictionary={dictionary.search}
                   onChange={(e) => {
                     const original = Object.keys(dictionary.roles).find(key => key === e)
-                    console.log(original)
                     setter({ key: 'role', value: original === form.role ? null : original })
                   }}
                 />
               </div>
               <DialogClose asChild>
-                <Button type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
+                <Button id='confirm-edit' type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
               </DialogClose>
             </div>
-            <RemoveUser username={username} projectName={projectName} title={deleteTitle} description={deleteDescription} />
+            {/* <RemoveUser username={username} title={deleteTitle} description={deleteDescription} /> */}
           </div>
         </form>
       </DialogContent>

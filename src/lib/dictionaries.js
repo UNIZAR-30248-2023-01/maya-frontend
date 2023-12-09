@@ -138,27 +138,26 @@ export const inandouts = {
     'new-check-out': 'Fichar salida',
     edit: 'Editar',
     delete: 'Eliminar',
-
     'new-table-description': 'Selecciona la fecha de entrada y salida para registrar tus horas.',
     'new-table-description-in': 'Selecciona la fecha y la hora de entrada.',
     'new-table-description-out': 'Selecciona la fecha y la hora de salida.',
     'new-table-name': 'Nombre',
     'new-table-desc': 'Descripción',
-
     'new-table-in-placeholder': 'Fecha de entrada',
     'new-table-out-placeholder': 'Fecha de salida',
     'new-table-hour-placeholder': '00:00',
-
-    'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida',
-    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada',
-    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada',
-    'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida',
-    'error-hour': 'Formato de hora no válido',
-
+    'error-in-date': 'La fecha de entrada no puede ser mayor que la fecha de salida.',
+    'error-out-date': 'La fecha de salida no puede ser menor que la fecha de entrada.',
+    'error-out-hour': 'La hora de salida no puede ser menor que la hora de entrada.',
+    'error-in-hour': 'La hora de entrada no puede ser mayor que la hora de salida.',
+    'error-current-day': 'La fecha no puede ser posterior a la fecha actual.',
+    'error-hour': 'Formato de hora no válido.',
     'new-table-create': 'Fichar',
     'toast-loading': 'Estamos chequeando tu fichaje. Por favor, espera un momento.',
     'toast-success': 'Tu fichaje se ha almacenado correctamente.',
-    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-delete-loading': 'Estamos eliminando tu fichaje. Por favor, espera un momento.',
+    'toast-delete-success': 'Tu fichaje se ha eliminado correctamente.'
   },
   en: {
     language: 'en-US',
@@ -174,26 +173,101 @@ export const inandouts = {
     'new-check-out': 'Clock-out',
     edit: 'Edit',
     delete: 'Delete',
-
     'new-table-description': 'Select your clock-in and clock-out date to register your hours.',
     'new-table-description-in': 'Select your clock-in date and hour.',
     'new-table-description-out': 'Select your clock-out date and hour',
     'new-table-name': 'Name',
     'new-table-desc': 'Short description',
-
     'new-table-in-placeholder': 'Clock-in date',
     'new-table-out-placeholder': 'Clock-out date',
     'new-table-hour-placeholder': '00:00',
-
-    'error-in-date': 'Clock-in date cannot be greater than clock-out date',
-    'error-out-date': 'Clock-out date cannot be less than clock-in date',
-    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour',
-    'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour',
-    'error-hour': 'Invalid hour format',
-
+    'error-in-date': 'Clock-in date cannot be greater than clock-out date.',
+    'error-out-date': 'Clock-out date cannot be less than clock-in date.',
+    'error-out-hour': 'Clock-out hour cannot be less than clock-in hour.',
+    'error-in-hour': 'Clock-in hour cannot be greater than clock-out hour.',
+    'error-current-day': 'Date cannot be after current date.',
+    'error-hour': 'Invalid hour format.',
     'new-table-create': 'Clock in/clock out',
     'toast-loading': 'We are validating your clock-in/clock-out. Please wait a moment.',
     'toast-success': 'Your clock-in/clock-out has been registered successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-delete-loading': 'We are deleting your clock-in/clock-out. Please wait a moment.',
+    'toast-delete-success': 'Your clock-in/clock-out has been deleted successfully.'
+  }
+}
+
+export const settingsAccount = {
+  es: {
+    'account-tab': 'Cuenta',
+    'apperance-tab': 'Apariencia',
+    'notifications-tab': 'Notificaciones',
+    'logout-tab': 'Cerrar sesión',
+
+    'account-headline': 'Mi cuenta',
+    'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
+    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
+
+    'pick-avatar': 'Selecciona un avatar',
+    'update-avatar': 'Actualizar',
+
+    language: 'es-ES',
+    'user-firstname': 'Nombre',
+    'user-lastname': 'Apellido',
+    'user-username': 'Nombre de usuario',
+    'user-avatar': 'Imagen de perfil',
+    'user-email': 'Correo electrónico',
+    'user-password': 'Contraseña',
+    'user-password-confirm': 'Confirmar contraseña',
+    'account-update': 'Actualizar',
+    'submitted-values': 'Has actualizado los siguientes valores',
+    'theme-submit': 'El color del tema se ha actualizado correctamente.',
+    'message-username': '* El nombre de usuario no se puede modificar.',
+    'message-email': '* El correo electrónico no se puede modificar.',
+    'appearance-theme': 'Tema',
+    'appearance-theme-light': 'Claro',
+    'appearance-theme-dark': 'Oscuro',
+    'appearance-subheadline': 'Selecciona el tema para el panel de control.',
+    'appearance-update': 'Actualizar color del tema',
+    'error-firstname': 'El nombre no puede estar vacío.',
+    'error-lastname': 'El apellido no puede estar vacío',
+    'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
+    'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
+    'toast-success': 'Tu cuenta se ha actualizada correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'account-tab': 'Account',
+    'apperance-tab': 'Appearance',
+    'notifications-tab': 'Notifications',
+    'logout-tab': 'Logout',
+    'account-headline': 'My account',
+    'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
+    'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+    'pick-avatar': 'Pick an avatar',
+    'update-avatar': 'Update',
+    language: 'en-US',
+    'user-firstname': 'Name',
+    'user-lastname': 'Lastname',
+    'user-username': 'User name',
+    'user-avatar': 'Profil photo',
+    'user-email': 'E-mail',
+    'user-password': 'Password',
+    'user-password-confirm': 'Confirm password',
+    'account-update': 'Update',
+    'submitted-values': 'You submitted the following values.',
+    'theme-submit': 'Theme color has been updated successfully.',
+    'message-username': '* Username cannot be modified.',
+    'message-email': '* E-mail cannot be modified.',
+    'appearance-theme': 'Theme',
+    'appearance-theme-light': 'Light',
+    'appearance-theme-dark': 'Dark',
+    'appearance-subheadline': 'Select the theme for the dashboard.',
+    'appearance-update': 'Update theme color',
+    'error-firstname': 'Name cannot be empty.',
+    'error-lastname': 'Lastname cannot be empty',
+    'error-full-new-password': 'New password cannot be empty.',
+    'toast-loading': 'We are validating your info account. Please wait a moment.',
+    'toast-success': 'Your info account has been updated successfully.',
     'toast-error': 'Something went wrong. Please try again.'
   }
 }
@@ -269,6 +343,61 @@ export const tasks = {
   }
 }
 
+export const staff = {
+  es: {
+    'members-tab': 'Miembros',
+    'member-column': 'Miembros',
+    filter: 'Filtrar por nombre de usuario',
+    role: 'Roles',
+    'new-person': 'reclutar',
+    'new-table-description': 'Añade personas a tu proyecto para mejorar tu equipo.',
+    'new-person-create': 'invitar',
+    'invite-member': 'Recluta personal',
+    'invite-member-description': 'Añade miembros a tu proyecto para mejorar tu equipo.',
+    invite: 'Añadir miembros',
+    search: 'Buscar miembros',
+    'invite-member-send': 'reclutar',
+    'manage-member-title': 'Gestionar %s',
+    'manage-member-description': 'Modifica la información de un usuario.',
+    'manage-member-submit': 'Cambiar rol',
+    'manage-member-delete-title': 'Eliminar usuario',
+    'manage-member-delete-description': 'Retira el permiso de un usuario a la aplicación.',
+    'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
+    'toast-success': 'Se han añadido los nuevos miembros correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
+    'toast-role-success': 'Se ha modificado la información correctamente.',
+    'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
+  },
+  en: {
+    'members-tab': 'Members',
+    'member-column': 'Members',
+    filter: 'Filter people by username',
+    role: 'Roles',
+    'new-person': 'recruit',
+    'new-table-description': 'Add people to your project to improve.',
+    'new-person-create': 'invite',
+    'invite-member': 'Recruit people',
+    'invite-member-description': 'Add members to your project to improve your team.',
+    invite: 'Add members',
+    search: 'Search members',
+    'invite-member-send': 'recruit',
+    'manage-member-title': 'Manage %s',
+    'manage-member-description': 'Modify the info of a user',
+    'manage-member-submit': 'Change role',
+    'manage-member-delete-title': 'Remove user',
+    'manage-member-delete-description': 'Remove the access of a user to this website',
+    'toast-loading': 'We are adding new members. Please wait a moment.',
+    'toast-success': 'New members added successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
+    'toast-role-success': 'Member info updated successfully.',
+    'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
+    'toast-remove-success': 'Member removed successfully.'
+  }
+}
+
 export const people = {
   es: {
     'members-tab': 'Miembros',
@@ -330,13 +459,20 @@ export const teams = {
     'team-column': 'Equipos',
     'member-column': 'Miembros',
     'name-column': 'Nombre',
+    'teams-column': 'Equipos',
     'description-column': 'Descripción',
     'new-team-name-placeholder': 'Repartidores',
     'new-team-desc-placeholder': 'Ayuda a tu equipo a entender el propósito de este equipo',
     public: 'público',
     private: 'privado',
     filter: 'Filtrar por nombre de equipo',
+    search: 'Buscar equipos',
     'new-team': 'nuevo equipo',
+    'edit-team': 'editar equipo',
+    'add-team': 'Añade equipos',
+    invite: 'Añadir equipos',
+    'add-team-description': 'Añade equipos a tu proyecto para crecer tu proyecto.',
+    'add-team-send': 'añadir',
     'new-team-member-placeholder': 'Elige a tu equipo',
     'new-table-description': 'Los equipos son una forma de organizar a las personas que trabajan en tu proyecto.',
     'new-team-create': 'Crear',
@@ -348,6 +484,7 @@ export const teams = {
     'team-tab': 'Teams',
     'team-column': 'Teams',
     'member-column': 'Members',
+    'teams-column': 'Teams',
     'name-column': 'Name',
     'description-column': 'Description',
     'new-team-name-placeholder': 'Delivery',
@@ -355,7 +492,13 @@ export const teams = {
     public: 'public',
     private: 'private',
     filter: 'Filter by team name',
+    search: 'Search teams',
     'new-team': 'new team',
+    'edit-team': 'edit team',
+    'add-team': 'Add teams',
+    invite: 'Add teams',
+    'add-team-description': 'Add teams to your project to grow your project.',
+    'add-team-send': 'add',
     'new-team-member-placeholder': 'Choose your team',
     'new-table-description': 'Teams are a way of organizing the people working on your project.',
     'new-team-create': 'Create',
@@ -404,7 +547,7 @@ export const roles = {
     owner: 'Propietario',
     developer: 'Desarrollador',
     member: 'Miembro',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Diseñador'
   },
@@ -412,7 +555,7 @@ export const roles = {
     owner: 'Owner',
     developer: 'Developer',
     member: 'Member',
-    'scrum master': 'Scrum Master',
+    'scrum-master': 'Scrum Master',
     tester: 'QA',
     designer: 'Designer'
   }
@@ -529,6 +672,31 @@ export const comments = {
   }
 }
 
+export const hours = {
+  es: {
+    titulo: 'Registro de horas',
+    placeholder: 'Escribe aquí tu tiempo invertido (en horas)...',
+    button: 'Añadir horas',
+    hours: 'Horas',
+    date: 'Fecha',
+    user: 'Usuario',
+    'toast-loading': 'Estamos enviando tu comentario. Por favor, espera un momento.',
+    'toast-success': 'Tu comentario se ha enviado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    titulo: 'Time log',
+    placeholder: 'Type here your time spent (in hours)...',
+    button: 'Add hours',
+    hours: 'Time spent',
+    date: 'Date',
+    user: 'Username',
+    'toast-loading': 'We are sending your comment. Please wait a moment.',
+    'toast-success': 'Your comment has been sent successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}
+
 export const auth = {
   es: {
     'signin-loading': 'Estamos iniciando sesión. Por favor, espera un momento.',
@@ -560,7 +728,7 @@ export const signin = {
     'signin-and': 'y',
     'signin-username': 'Usuario',
     'signin-password': 'Contraseña',
-    'signin-sigin': 'Iniciar sesión con el correo',
+    'signin-sigin': 'Iniciar sesión con el nombre de usuario',
     'signin-continuee': 'O continuar con'
 
   },
@@ -575,7 +743,7 @@ export const signin = {
     'signin-and': 'and',
     'signin-username': 'Username',
     'signin-password': 'Password',
-    'signin-sigin': 'Sign In with Email',
+    'signin-sigin': 'Sign in with username',
     'signin-continuee': 'Or continue with'
 
   }
@@ -682,5 +850,218 @@ export const landing = {
     'feat-3-title': 'Book your workspace',
     'feat-3-description': 'Forget about the old way of booking your workspace. With our tool you can book your workspace in a few clicks.'
 
+  }
+}
+
+export const privacy = {
+  es: {
+    title: 'Privacy',
+    introduction: 'En MaYA, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger sus datos personales. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información personal en relación con el uso de nuestro sitio web.',
+    subsections: [
+      {
+        title: 'Recopilación de información',
+        description: 'Podemos recopilar información personal de los usuarios cuando se registran en nuestro sitio, se suscriben a nuestro boletín informativo, participan en concursos o encuestas, o realizan una compra a través de nuestro sitio. Esta información puede incluir su nombre, dirección de correo electrónico, dirección postal, número de teléfono y fecha de nacimiento.También podemos recopilar información no personal, como la dirección IP del usuario, el tipo de navegador, la página de referencia y las páginas visitadas en nuestro sitio.'
+      },
+      {
+        title: 'Uso de la información',
+        description: 'La información personal que recopilamos se utiliza para procesar transacciones, enviar correos electrónicos informativos y promocionales, y mejorar la experiencia del usuario en nuestro sitio web. También podemos utilizar información no personal para analizar el tráfico del sitio y mejorar nuestro servicio.'
+      },
+      {
+        title: 'Divulgación de información',
+        description: 'No vendemos, intercambiamos ni transferimos información personal a terceros sin su consentimiento, excepto para cumplir con la ley, proteger nuestros derechos o propiedad, o hacer cumplir nuestras políticas del sitio.'
+      },
+      {
+        title: 'Seguridad de la información',
+        description: 'Nos esforzamos por proteger la información personal de nuestros usuarios mediante medidas de seguridad adecuadas, como la encriptación de datos y el acceso restringido a la información personal.Sin embargo, ninguna medida de seguridad puede garantizar la seguridad absoluta de la información. Por lo tanto, no podemos garantizar la seguridad de la información personal del usuario en todo momento.'
+      },
+      {
+        title: 'Cambios en la política de privacidad',
+        description: 'Podemos actualizar esta Política de Privacidad de vez en cuando. Se recomienda a los usuarios que revisen periódicamente esta página para estar informados de cualquier cambio. Al continuar utilizando nuestro sitio web después de la publicación de cambios en esta política, los usuarios aceptan los cambios.'
+      },
+      {
+        title: 'Contacto',
+        description: <>
+        Si tiene preguntas o inquietudes sobre esta Política de Privacidad, por favor contáctenos a través de <a href="mailto:help@gracehopper.xyz" target="_top" rel="noreferrer">help@gracehopper.xyz</a>.
+        </>
+      }
+    ]
+  },
+  en: {
+    title: 'Privacy',
+    introduction: 'At MaYA, we take the privacy of our users very seriously and are committed to protecting their personal data. This Privacy Policy explains how we collect, use, and protect your personal information in connection with the use of our website.',
+    subsections: [
+      {
+        title: 'Collection of Information',
+        description: "We may collect personal information from users when they register on our site, subscribe to our newsletter, participate in contests or surveys, or make a purchase through our site. This information may include your name, email address, postal address, phone number, and date of birth. We may also collect non-personal information, such as the user's IP address, browser type, referral page, and pages visited on our site."
+      },
+      {
+        title: 'Use of Information',
+        description: 'The personal information we collect is used to process transactions, send informational and promotional emails, and improve the user experience on our website. We may also use non-personal information to analyze site traffic and enhance our service.'
+      },
+      {
+        title: 'Disclosure of Information',
+        description: 'We do not sell, trade, or transfer personal information to third parties without consent, except to comply with the law, protect our rights or property, or enforce our site policies.'
+      },
+      {
+        title: 'Information Security',
+        description: 'We strive to protect the personal information of our users through appropriate security measures, such as data encryption and restricted access to personal information. However, no security measure can guarantee absolute security of information. Therefore, we cannot guarantee the security of user personal information at all times.'
+      },
+      {
+        title: 'Changes to Privacy Policy',
+        description: 'We may update this Privacy Policy from time to time. Users are advised to periodically review this page to be informed of any changes. By continuing to use our website after the publication of changes to this policy, users accept the changes.'
+      },
+      {
+        title: 'Contact',
+        description: <>
+        If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:help@gracehopper.xyz" target="_top" rel="noreferrer">help@gracehopper.xyz</a>.
+        </>
+      }
+    ]
+  }
+}
+
+export const terms = {
+  es: {
+    title: 'Términos de uso de MaYA',
+    introduction: 'Al utilizar nuestro sitio web, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso:',
+    subsections: [
+      {
+        title: 'Contenido del sitio web',
+        description: 'El contenido de este sitio web es solo para fines informativos y educativos. No garantizamos la exactitud, integridad o utilidad de la información proporcionada.'
+      },
+      {
+        title: 'Uso permitido',
+        description: 'Usted está autorizado a utilizar este sitio web para su uso personal y no comercial. No puede copiar, reproducir, distribuir, transmitir, modificar o crear obras derivadas de cualquier parte del sitio web sin nuestro permiso previo por escrito.'
+      },
+      {
+        title: 'Registro de usuario',
+        description: 'Para acceder a ciertas funciones de este sitio web, es posible que deba registrarse y crear una cuenta de usuario. Usted es responsable de proteger la confidencialidad de su información de registro y cualquier actividad que ocurra bajo su cuenta.'
+      },
+      {
+        title: 'Uso prohibido',
+        description: 'Usted no puede utilizar este sitio web para cualquier propósito ilegal o no autorizado. Usted acepta no interferir con el uso y disfrute de este sitio web por parte de otros usuarios.'
+      },
+      {
+        title: 'Propiedad intelectual',
+        description: 'Todos los derechos de propiedad intelectual en y para el sitio web son propiedad de MaYA y están protegidos por las leyes de derechos de autor y marcas registradas. No se le concede ninguna licencia o derecho a utilizar ninguna de estas marcas o logotipos sin nuestro permiso previo por escrito.'
+      },
+      {
+        title: 'Descargo de responsabilidad',
+        description: 'Este sitio web se proporciona "tal cual" sin garantías de ningún tipo, ya sean expresas o implícitas. No asumimos ninguna responsabilidad por cualquier daño que surja del uso de este sitio web.'
+      }, {
+        title: 'Enlaces a otros sitios web',
+        description: 'Este sitio web puede contener enlaces a otros sitios web de terceros que no son propiedad ni están controlados por MaYA. No tenemos control sobre el contenido, las políticas de privacidad o las prácticas de otros sitios web y no somos responsables de ellos.'
+      }, {
+        title: 'Modificaciones de los términos de uso',
+        description: 'Nos reservamos el derecho de modificar estos términos de uso en cualquier momento y sin previo aviso. Le recomendamos que revise estos términos de uso periódicamente para estar al tanto de cualquier cambio.'
+      }, {
+        title: 'Ley aplicable',
+        description: 'Estos términos de uso se regirán e interpretarán de acuerdo con las leyes del país o estado donde MaYA tiene su sede principal, sin referencia a los principios de conflicto de leyes.'
+      }
+    ]
+  },
+  en: {
+    title: 'Términos de uso de MaYA',
+    introduction: 'By using our website, you agree to comply with and be bound by the following terms and conditions of use:',
+    subsections: [
+      {
+        title: 'Website Content',
+        description: 'The content of this website is for informational and educational purposes only. We do not guarantee the accuracy, completeness, or usefulness of the provided information.'
+      },
+      {
+        title: 'Permitted Use',
+        description: 'You are authorized to use this website for personal and non-commercial use. You may not copy, reproduce, distribute, transmit, modify, or create derivative works from any part of the website without our prior written permission.'
+      },
+      {
+        title: 'User Registration',
+        description: 'To access certain features of this website, you may need to register and create a user account. You are responsible for protecting the confidentiality of your registration information and any activity that occurs under your account.'
+      },
+      {
+        title: 'Prohibited Use',
+        description: 'You may not use this website for any illegal or unauthorized purpose. You agree not to interfere with the use and enjoyment of this website by other users.'
+      },
+      {
+        title: 'Intellectual Property',
+        description: 'All intellectual property rights in and to the website are owned by MaYA and are protected by copyright and trademark laws. You are not granted any license or right to use any of these trademarks or logos without our prior written permission.'
+      },
+      {
+        title: 'Disclaimer',
+        description: "This website is provided 'as is' without warranties of any kind, whether express or implied. We assume no responsibility for any damages arising from the use of this website."
+      },
+      {
+        title: 'Links to Other Websites',
+        description: 'This website may contain links to third-party websites that are not owned or controlled by MaYA. We have no control over the content, privacy policies, or practices of other websites and are not responsible for them.'
+      },
+      {
+        title: 'Modifications to Terms of Use',
+        description: 'We reserve the right to modify these terms of use at any time and without prior notice. We recommend that you periodically review these terms of use to stay informed of any changes.'
+      },
+      {
+        title: 'Applicable Law',
+        description: 'These terms of use will be governed and interpreted in accordance with the laws of the country or state where MaYA has its principal place of business, without reference to the principles of conflict of laws.'
+      }
+    ]
+  }
+}
+
+export const faq = {
+  es: [
+    {
+      question: '¿Puedo personalizar mi perfil?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }, {
+      question: '¿Cómo puedo crear un proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo crear un equipo?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }
+  ],
+  en: [
+    {
+      question: '¿Puedo personalizar mi perfil?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }, {
+      question: '¿Cómo puedo crear un proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo crear un equipo?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    },
+    {
+      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      answer:
+        'Se el primero en contestar a esta pregunta'
+    }
+  ]
+}
+
+export const footer = {
+  es: {
+    sitemap: 'Mapa del sitio',
+    status: 'Estado',
+    privacy: 'Política de privacidad',
+    terms: 'Términos de uso',
+    faq: 'FAQ'
+  },
+  en: {
+    sitemap: 'Sitemap',
+    status: 'Status',
+    privacy: 'Privacy Policy',
+    terms: 'Term of use',
+    faq: 'FAQ'
   }
 }

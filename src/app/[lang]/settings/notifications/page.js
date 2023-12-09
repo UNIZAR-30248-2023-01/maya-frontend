@@ -1,5 +1,7 @@
+'use client'
+
 import { Separator } from '@/components/ui/separator'
-import { NotificationsForm } from './notifications-form'
+import { NotificationsForm } from '@/components/settings/notifications-form'
 
 export default function SettingsNotificationsPage () {
   return (

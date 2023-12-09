@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { tasksLabels, tasksStatuses } from '@/lib/constants'
-import { cn } from '@/lib/utils'
+import { cn, normalize } from '@/lib/utils'
 import { format, parseISO } from 'date-fns'
 
 export const columns = [
@@ -25,7 +25,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
+      return normalize(row.getValue(id).includes(value))
     }
   },
   {
@@ -35,7 +35,6 @@ export const columns = [
     ),
     cell: ({ row }) => {
       const { id } = row.original
-      console.log(id)
       if (!id) {
         return (
           <div className="flex">
@@ -52,12 +51,27 @@ export const columns = [
 
       return (
         <div className="flex">
-          {row.getValue('people').map((person, id) => (
-            <Avatar key={id} className="h-8 w-8">
-              <AvatarImage src={person?.avatar} />
-              <AvatarFallback>{person?.firstname[0] + person?.lastname[0]}</AvatarFallback>
-            </Avatar>
-          ))}
+          {row.getValue('people').length > 3
+            ? (
+              <>
+                {row.getValue('people').slice(0, 2).map((person, id) => (
+                  <Avatar key={id} className="h-8 w-8">
+                    <AvatarImage src={person?.avatar} />
+                    <AvatarFallback>{person?.firstname[0] + person?.lastname[0]}</AvatarFallback>
+                  </Avatar>
+                ))}
+                <Avatar key={id} className="h-8 w-8">
+                    <AvatarFallback>+{row.getValue('people').length - 2}</AvatarFallback>
+                </Avatar>
+              </>
+              )
+            : (
+                row.getValue('people').map((person, id) => (
+                  <Avatar key={id} className="h-8 w-8">
+                    <AvatarImage src={person?.avatar} />
+                    <AvatarFallback>{person?.firstname[0] + person?.lastname[0]}</AvatarFallback>
+                  </Avatar>
+                )))}
         </div>
       )
     },

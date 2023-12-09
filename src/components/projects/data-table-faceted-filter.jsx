@@ -21,7 +21,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { useLang } from '@/context/language-context'
 
-export function DataTableFacetedFilter ({ column, title, options }) {
+export function DataTableFacetedFilter ({ column, title, options, id }) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue())
   const { dictionary } = useLang()
@@ -29,7 +29,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8 border-dashed">
+        <Button variant="outline" size="sm" className="h-8 border-dashed" id={id}>
           <PlusCircledIcon className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
@@ -79,6 +79,7 @@ export function DataTableFacetedFilter ({ column, title, options }) {
                 const isSelected = selectedValues.has(option.value)
                 return (
                   <CommandItem
+                    id={option.value}
                     key={option.value}
                     onSelect={() => {
                       if (isSelected) {

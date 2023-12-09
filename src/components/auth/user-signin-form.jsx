@@ -19,6 +19,7 @@ export function UserSignIn ({ className, ...props }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = event.target
+    console.log(username, password)
 
     try {
       const logIn = () => {
@@ -83,7 +84,7 @@ export function UserSignIn ({ className, ...props }) {
               disabled={isLoading}
             />
           </div>
-          <Button disabled={isLoading}>
+          <Button id="sign-in-button" disabled={isLoading}>
           {dictionary.signin['signin-sigin']}
           </Button>
         </div>

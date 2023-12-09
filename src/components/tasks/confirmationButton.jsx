@@ -30,7 +30,6 @@ export function ConfirmationTaskButton ({
   const router = useRouter()
 
   const badForm = !(form.description || form.estimated || form.label || form.status || form.end_date || form.assignees)
-  console.log(form)
   const handleSubmit = () => {
     if (isEdit) {
       try {
@@ -62,10 +61,8 @@ export function ConfirmationTaskButton ({
                         }
                       })
                     }
-                    console.log(taskPeople)
                     taskPeople.forEach(async member => {
                       if (!form.assignees.includes(member.username)) {
-                        console.log('eliminar', member)
                         await supabase.from('people-tasks').delete()
                           .eq('tasks', taskId)
                           .eq('username', member.username)
@@ -133,6 +130,7 @@ export function ConfirmationTaskButton ({
       <AlertDialogTrigger asChild>
         <Button
           type="submit"
+          id="confirmation-button"
           disabled={isEdit && badForm}
           className={!isEdit && 'bg-red-500 hover:bg-red-700'}
         >
@@ -153,6 +151,7 @@ export function ConfirmationTaskButton ({
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
           <AlertDialogAction
+            id="confirmation"
             onClick={handleSubmit}
             className={
               isEdit

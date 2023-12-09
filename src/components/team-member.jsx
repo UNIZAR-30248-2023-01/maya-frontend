@@ -14,62 +14,55 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { signOut } from 'next-auth/react'
-import { Link } from 'next/link'
+import Link from 'next/link'
+import { useLang } from '@/context/language-context'
 
 export function TeamMember ({
-  user = {
-    src: '/assets/avatars/memojis/4.webp',
-    name: 'Sofia',
-    lastname: 'Davis',
-    username: 'm@example.com'
-  }
+  image = '/assets/avatars/memojis/4.webp',
+  firstname = 'Sofia',
+  lastname = 'Davis',
+  username = 'm@example.com'
 }) {
+  const { dictionary } = useLang()
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild id="team-member">
         <div className="flex items-center space-x-4 group hover:cursor-pointer">
           <Avatar>
-            <AvatarImage src={user.src} />
-            <AvatarFallback>{user.name[0] + user.lastname[0]}</AvatarFallback>
+            <AvatarImage src={image} />
+            <AvatarFallback className="capitalize">{firstname[0] + lastname[0]}</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-medium leading-none">{user.name + ' ' + user.lastname}</p>
-            <p className="text-sm text-muted-foreground">{user?.email}</p>
+            <p className="text-sm font-medium leading-none capitalize">{firstname} {lastname}</p>
+            <p className="text-sm text-muted-foreground lowercase">@{username}</p>
           </div>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuLabel>{dictionary.settingsAccount['account-headline']}</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link href="/settings">
-              Profile
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/account">
-              Account
+              {dictionary.settingsAccount['account-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/appearance">
-              Appearance
+              {dictionary.settingsAccount['apperance-tab']}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/settings/notifications">
-              Notifications
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/display">
-              Display
+              {dictionary.settingsAccount['notifications-tab']}
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuItem>
-          <button onClick={() => signOut({ redirect: false })}>
-            Log out
+          <button onClick={() => {
+            signOut({ callbackUrl: '/' })
+          }} id="sign-out-button">
+            {dictionary.settingsAccount['logout-tab']}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

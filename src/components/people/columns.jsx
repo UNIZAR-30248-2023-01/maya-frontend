@@ -6,6 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import { DataTableRowActions } from '@/components/people/data-table-row-actions'
 import { Skeleton } from '@/components/ui/skeleton'
+import { roles } from '@/lib/constants'
 
 export const columns = [
   {
@@ -14,32 +15,39 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['member-column']} />
     },
     cell: ({ row, dictionary }) => {
-      console.log(row.original)
       if (!row.original.people?.username) {
-        return (
-          <div className='flex items-start space-x-2'>
-            <Skeleton className='rounded-full'>
-              <Avatar>
-                <AvatarImage />
-              </Avatar>
-            </Skeleton>
-            <div className='max-w-[150px] flex flex-col gap-y-1'>
-              <Skeleton className='w-44 h-4'/>
-              <Skeleton className='w-24 h-4'/>
+        const username = row?.original?.username || row?.original?.people?.username
+        if (!username) {
+          return (
+            <div className='flex items-start space-x-2'>
+              <Skeleton className='rounded-full'>
+                <Avatar>
+                  <AvatarImage />
+                </Avatar>
+              </Skeleton>
+              <div className='max-w-[150px] flex flex-col gap-y-1'>
+                <Skeleton className='w-44 h-4' />
+                <Skeleton className='w-24 h-4' />
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
       }
+
+      const avatar = row?.original?.avatar || row?.original?.people?.avatar
+      const username = row?.original?.avatar || row?.original?.people?.avatar
+      const firstname = row?.original?.firstname || row?.original?.people?.firstname
+      const lastname = row?.original?.lastname || row?.original?.people?.lastname
 
       return (
         <div className="flex items-center space-x-4 group">
           <Avatar>
-            <AvatarImage src={row.original.people.avatar} />
-            <AvatarFallback>{String(row.original.people.firstname[0]).toUpperCase() + String(row.original.people.lastname[0]).toUpperCase()}</AvatarFallback>
+            <AvatarImage src={avatar} />
+            <AvatarFallback>{String(firstname[0]).toUpperCase() + String(lastname[0]).toUpperCase()}</AvatarFallback>
           </Avatar>
           <div className='flex flex-col gap-0.5'>
-            <Label className="text-sm font-medium leading-none capitalize">{row.original.people.firstname + ' ' + row.original.people.lastname}</Label>
-            <Label className="text-sm text-muted-foreground font-normal">{row.original.people.username}</Label>
+            <Label className="text-sm font-medium leading-none capitalize">{firstname + ' ' + lastname}</Label>
+            <Label className="text-sm text-muted-foreground font-normal">{username}</Label>
           </div>
         </div>
 
@@ -59,8 +67,10 @@ export const columns = [
         return <Skeleton variant='outline' className='w-24 h-4'/>
       }
 
+      const role = roles.find(role => role.value === row.getValue('role'))
+
       return (
-        <Badge variant='outline' className='max-w-fit'>{dictionary[row.getValue('role')]}</Badge>
+        <Badge id={role.id} variant='outline' className='max-w-fit'>{dictionary[role.value]}</Badge>
       )
     },
     filterFn: (row, id, value) => {
@@ -68,9 +78,9 @@ export const columns = [
     }
   }, {
     id: 'actions',
-    cell: ({ row }) => {
+    cell: ({ row, owner }) => {
       const { username } = row.original
-      if (!username) return null
+      if (!username || !owner) return null
 
       return <div className='flex justify-end pr-4'><DataTableRowActions row={row} /></div>
     },

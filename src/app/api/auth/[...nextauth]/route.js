@@ -25,7 +25,6 @@ export const authOptions = {
       },
       async authorize (credentials, req) {
         const { username, password } = credentials
-        console.log(username, password)
 
         const { data: user, error } = await supabase
           .from('people')

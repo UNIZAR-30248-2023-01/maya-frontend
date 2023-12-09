@@ -18,6 +18,7 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function SidePanelManual ({
   title,
@@ -30,6 +31,10 @@ export function SidePanelManual ({
   const [errorOutHour, setErrorOutHour] = useState('')
   const [errorInHour, setErrorInHour] = useState('')
   const [invalidHour, setInvalidHour] = useState(true)
+
+  const { user } = useUser()
+
+  const currentDay = new Date(new Date().getTime())
 
   const { dictionary } = useLang()
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
@@ -76,13 +81,13 @@ export function SidePanelManual ({
       const createManualClockin = () => {
         return new Promise((resolve, reject) => {
           supabase.from('in-and-outs').insert([{
-            username: 'hec7orci7o',
+            username: user?.username,
             in_date: timestampIn,
             out_date: timestampOut,
             total: minutosTotales
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
               resolve()
             })
             .catch((error) => reject(error))
@@ -103,12 +108,12 @@ export function SidePanelManual ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-manual-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle className="capitalize">{title}</SheetTitle>
+            <SheetTitle id="add-checkin-title" className="capitalize">{title}</SheetTitle>
             <SheetDescription style={{ marginBottom: '20px' }}>
               {description}
             </SheetDescription>
@@ -119,12 +124,15 @@ export function SidePanelManual ({
             </SheetDescription>
 
             <DatePicker
+              id="in_date"
               label={dictionary.inandouts['in-column']}
               value={form.in_date}
               placeholder={dictionary.inandouts['new-table-in-placeholder']}
               onChange={(e) => {
                 if (form.out_date !== null && form.out_date < e) {
                   toast.error(dictionary.inandouts['error-in-date'])
+                } else if (e > currentDay) {
+                  toast.error(dictionary.inandouts['error-current-day'])
                 } else {
                   setter({ key: 'in_date', value: e })
                 }
@@ -158,6 +166,8 @@ export function SidePanelManual ({
               onChange={(e) => {
                 if (form.in_date > e) {
                   toast.error(dictionary.inandouts['error-out-date'])
+                } else if (e > currentDay) {
+                  toast.error(dictionary.inandouts['error-current-day'])
                 } else {
                   setter({ key: 'out_date', value: e })
                 }
@@ -188,7 +198,7 @@ export function SidePanelManual ({
           </div>
           <SheetFooter className="">
             <SheetClose asChild >
-              <Button type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>
