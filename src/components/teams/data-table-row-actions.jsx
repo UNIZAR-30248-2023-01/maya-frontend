@@ -175,19 +175,26 @@ export function DataTableRowActions ({ row }) {
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem
             className="cursor-pointer"
+          >
+            <Link
+              id="view-team"
+              href={`/teams/${String(team).replace(/ /g, '-')}`} className='w-full'
             >
-            <Link href={`/teams/${String(team).replace(/ /g, '-')}`} className='w-full'>
               View
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer"
           >
-            <SheetTrigger className='w-full text-left'>
+            <SheetTrigger
+              id="edit-team"
+              className='w-full text-left'
+            >
               Edit
             </SheetTrigger>
           </DropdownMenuItem>
           <DropdownMenuItem
+            id="delete-team"
             className="cursor-pointer"
             onClick={(e) => handleRemove(e)}
             >
@@ -209,8 +216,8 @@ export function DataTableRowActions ({ row }) {
               id="name"
               label={dictionary.teams['name-column']}
               placeholder={dictionary.teams['new-team-name-placeholder']}
-              value={form.name}
-              onChange={(e) => setter({ key: 'name', value: e.target.value })}
+              defaultValue={String(form.name).split('-').join(' ')}
+              onChange={(e) => setter({ key: 'name', value: String(e.target.value).toLowerCase().split(' ').join('-') })}
             />
             <TextArea
               id="description"
