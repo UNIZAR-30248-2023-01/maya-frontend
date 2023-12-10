@@ -1065,3 +1065,36 @@ export const footer = {
     faq: 'FAQ'
   }
 }
+
+export const org = {
+  es: {
+    'create-org-or': 'o',
+    'create-org-title': '¿Todavía no tienes una organización?',
+    'create-org-button': 'Creala ahora mismo!',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'new-table-name-placeholder': 'Tu organización',
+    'new-table-desc-placeholder': 'Una breve descripción sobre tu organización.',
+    'dialog-title': 'Nueva organización',
+    'dialog-description': 'Una organizarción te permite tener agrupada toda la gestión de tu empresa.',
+    'create-button': 'Crear organización',
+    'toast-loading': 'Estamos creando tu organización. Por favor, espera un momento.',
+    'toast-success': 'Tu organización se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    'create-org-or': 'or',
+    'create-org-title': 'Don\'t have an organization yet?',
+    'create-org-button': 'Create it right now!',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'new-table-name-placeholder': 'Your organization',
+    'new-table-desc-placeholder': 'A short description about this organization.',
+    'dialog-title': 'New organization',
+    'dialog-description': 'An organization allows you to have all the management of your company grouped together.',
+    'create-button': 'Create organization',
+    'toast-loading': 'We are creating your organization. Please wait a moment.',
+    'toast-success': 'Your organization has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.'
+  }
+}

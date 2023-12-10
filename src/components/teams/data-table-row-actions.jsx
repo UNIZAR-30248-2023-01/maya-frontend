@@ -27,6 +27,7 @@ import {
 import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
 
 const initialize = ({ data }) => {
   const form = getForm(teamSchema._def.shape())
@@ -47,12 +48,14 @@ export function DataTableRowActions ({ row }) {
   const { name: team } = row.original
   const [form, setForm] = useState(initialize({ data: row.original }))
   const [people, setPeople] = useState([])
+  const organization = usePathname().split('/')[2]
 
   useEffect(() => {
     const fetchPeople = async () => {
       return await supabase
-        .from('people')
+        .from('people-org')
         .select('*')
+        .eq('organization', organization)
         .then(({ data, error }) => {
           if (error) return
           setPeople(data)
@@ -61,7 +64,7 @@ export function DataTableRowActions ({ row }) {
     }
 
     fetchPeople()
-  }, [])
+  }, [organization])
 
   const handleRemove = async (e) => {
     e.preventDefault()
@@ -75,8 +78,8 @@ export function DataTableRowActions ({ row }) {
               .delete()
               .eq('name', team)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -105,14 +108,14 @@ export function DataTableRowActions ({ row }) {
     const members2add = members.filter((member) => !oldMembers?.includes(member))
 
     try {
-      teamSchema.parse({ ...team, organization: 'reign' })
+      teamSchema.parse({ ...team, organization })
       const createTeam = () => {
         return new Promise((resolve, reject) => {
           (async () => {
             // Primera inserción en la tabla 'teams'
             await supabase
               .from('teams')
-              .update([{ ...team, organization: 'reign' }])
+              .update([{ ...team, organization }])
               .eq('name', row.original.name)
               .select()
               .then(async (res) => {
@@ -130,8 +133,8 @@ export function DataTableRowActions ({ row }) {
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -176,7 +179,7 @@ export function DataTableRowActions ({ row }) {
           <DropdownMenuItem
             className="cursor-pointer"
             >
-            <Link href={`/teams/${String(team).replace(/ /g, '-')}`} className='w-full'>
+            <Link href={`/${organization}/teams/${String(team).replace(/ /g, '-')}`} className='w-full'>
               View
             </Link>
           </DropdownMenuItem>

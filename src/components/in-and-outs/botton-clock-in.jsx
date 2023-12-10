@@ -11,7 +11,8 @@ import { mutate } from 'swr'
 import { useUser } from '@/context/user-context'
 
 export function ClockIn ({
-  triggerBtn
+  triggerBtn,
+  organization
 }) {
   const { dictionary } = useLang()
   const [form] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
@@ -53,11 +54,12 @@ export function ClockIn ({
             username: user?.username,
             in_date: timestampIn,
             out_date: null,
-            total: 0
+            total: 0,
+            organization
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&out_date=is.null&select=*`)
               resolve()
             })
             .catch((error) => {

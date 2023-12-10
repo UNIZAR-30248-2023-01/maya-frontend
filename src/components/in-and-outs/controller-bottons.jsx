@@ -6,10 +6,10 @@ import { inAndOutsSchema } from '@/lib/schemas'
 import useSWR from 'swr'
 import { useUser } from '@/context/user-context'
 
-export function BottonController () {
+export function BottonController ({ organization }) {
   const { user } = useUser()
   console.log('usssser ', user)
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&out_date=is.null&select=*`)
   console.log('innnnAndOuts ', inAndOuts)
   console.log('inAndOuts?.length ', inAndOuts?.length)
   const [isClockInVisible, setIsClockInVisible] = useState(inAndOuts?.length === 0)
@@ -31,6 +31,7 @@ export function BottonController () {
           dictionary={dictionary}
           setIsClockInVisible={setIsClockInVisible}
           setIsClockOutVisible={setIsClockOutVisible}
+          organization={organization}
         />
       )}
 
@@ -41,6 +42,7 @@ export function BottonController () {
           dictionary={dictionary}
           setIsClockInVisible={setIsClockInVisible}
           setIsClockOutVisible={setIsClockOutVisible}
+          organization={organization}
         />
       )}
     </div>

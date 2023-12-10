@@ -79,6 +79,7 @@ export function SidePanel ({
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
+    setForm({})
   }
 
   return (

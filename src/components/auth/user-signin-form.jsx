@@ -32,7 +32,7 @@ export function UserSignIn ({ className, ...props }) {
           })
             .then(() => {
               setIsLoading(false)
-              router.push('/home')
+              router.push('/organizations')
               resolve()
             })
             .catch((error) => {

@@ -32,7 +32,7 @@ export function ConfirmationCloseButton ({
               .eq('name', projectName)
               .select()
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*,people:people-project(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

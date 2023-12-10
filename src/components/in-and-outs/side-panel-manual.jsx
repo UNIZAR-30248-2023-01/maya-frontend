@@ -26,7 +26,8 @@ export function SidePanelManual ({
   descriptionIn,
   descriptionOut,
   triggerBtn,
-  actionBtn
+  actionBtn,
+  organization
 }) {
   const [errorOutHour, setErrorOutHour] = useState('')
   const [errorInHour, setErrorInHour] = useState('')
@@ -40,6 +41,8 @@ export function SidePanelManual ({
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
+
+  console.log(organization)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -84,10 +87,11 @@ export function SidePanelManual ({
             username: user?.username,
             in_date: timestampIn,
             out_date: timestampOut,
-            total: minutosTotales
+            total: minutosTotales,
+            organization
           }])
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&select=*`)
               resolve()
             })
             .catch((error) => reject(error))
