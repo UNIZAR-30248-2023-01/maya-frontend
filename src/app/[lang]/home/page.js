@@ -376,10 +376,9 @@ export default function Home () {
         </Card>
         <div className="flex flex-col gap-6">
         <Card className="flex flex-col h-full max-w-sm justify-center items-center gap-y-4">
-          <Bold>{dictionary.home['salary-value']}</Bold>
+          <Bold className="text-custom-mustard text-2xl">{dictionary.home['salary-value']}</Bold>
           <Text className='flex items-center gap-2.5'>
-            <Metric>{salarioNeto} {dictionary.home['symbol-money']}</Metric>
-            <BadgeDelta deltaType="moderateIncrease" className='text-custom-mustard bg-custom-lighterYellow' isIncreasePositive={true} size="xs"/>
+            <Metric className="text-5xl">{salarioNeto} {dictionary.home['symbol-money']}</Metric>
           </Text>
         </Card>
           <Card className="max-w-sm mx-auto space-y-2">
