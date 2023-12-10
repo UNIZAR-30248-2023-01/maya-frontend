@@ -11,7 +11,6 @@ import {
   BarList,
   Bold,
   DonutChart,
-  BadgeDelta,
   Metric
 } from '@tremor/react'
 import { useLang } from '@/context/language-context'
@@ -21,7 +20,8 @@ import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/utils'
 
 const valueFormatter = function (number) {
-  return new Intl.NumberFormat('us').format(number).toString()
+  const roundedNumber = Math.round(number)
+  return new Intl.NumberFormat('us').format(roundedNumber).toString()
 }
 
 export default function Home () {
@@ -154,9 +154,8 @@ export default function Home () {
     let bloqueadas = 0
     let completadas = 0
     let enProgreso = 0
-    for (let i = 0; i < tasks.length; i++) {
-      const id = tasks[i].tasks
-      console.log('id ', id)
+    for (const element of tasks) {
+      const id = element.tasks
       const { data: estado, error } = await supabase
         .from('tasks')
         .select('status')
@@ -178,6 +177,7 @@ export default function Home () {
   useEffect(() => {
     const obtenerDatosAsync = async () => {
       try {
+        console.log('user ', user)
         if (tasks) {
           const { nuevas, bloqueadas, completadas, enProgreso } = await obtenerTareas(tasks)
           setTasks([
@@ -225,8 +225,8 @@ export default function Home () {
     let open = 0
     let closed = 0
     if (projects) {
-      for (let i = 0; i < projects.length; i++) {
-        if (projects[i].status === 'open') {
+      for (const element of projects) {
+        if (element.status === 'open') {
           open++
         } else {
           closed++
@@ -282,23 +282,9 @@ export default function Home () {
       // startDate.setDate(startDate.getDate() - currentDay + 1) // Retrocede al lunes
       startDate.setDate(startDate.getDate() - (currentDay + 6) % 7)
 
-      console.log('startDate ', startDate)
-
       // Obtén la fecha de finalización de la semana (domingo)
       const endDate = new Date(currentDate)
-      endDate.setDate(startDate.getDate() + 7) // Avanza al domingo
-
-      const martes = new Date(startDate)
-      martes.setDate(martes.getDate() + 1)
-      const miercoles = new Date(startDate)
-      miercoles.setDate(miercoles.getDate() + 2)
-      const jueves = new Date(startDate)
-      jueves.setDate(jueves.getDate() + 3)
-      const viernes = new Date(startDate)
-      viernes.setDate(viernes.getDate() + 4)
-      const sabado = new Date(startDate)
-      sabado.setDate(sabado.getDate() + 5)
-
+      endDate.setDate(startDate.getDate() + 7) // Avanza al doming)
       console.log('endDate ', endDate)
 
       const taskDoneWeek = async () => {
@@ -326,20 +312,20 @@ export default function Home () {
           const formattedDate = day.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 
           // Filtrar las tareas realizadas para el día actual
-          const tasksDoneForDay = tasksDone.filter(taskDone =>
+          const tasksDoneForDay = filteredTasksDone.filter(taskDone =>
             new Date(taskDone.updated_at).toLocaleDateString() === day.toLocaleDateString()
           )
-
+          console.log('tasksDoneForDay ', tasksDoneForDay)
           // Agregar un objeto al array para el día actual
           if (lang === 'es') {
             resultArray.push({
               date: formattedDate,
-              'Tareas completadas': tasksDoneForDay.length
+              Tareas: tasksDoneForDay.length
             })
           } else {
             resultArray.push({
               date: formattedDate,
-              'Tasks done': tasksDoneForDay.length
+              Tasks: tasksDoneForDay.length
             })
           }
         }
@@ -369,9 +355,11 @@ export default function Home () {
             className="h-72 mt-4"
             data={taskWeek}
             index="date"
-            categories={[dictionary.home['task-done']]}
+            categories={[dictionary.home.tasks]}
             colors={['yellow']}
             valueFormatter={valueFormatter}
+            yAxisWidth={30}
+            connectNulls={true}
           />
         </Card>
         <div className="flex flex-col gap-6">
