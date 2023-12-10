@@ -41,6 +41,14 @@ module.exports = {
         'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }]
       },
       colors: {
+        custom: {
+          mustard: '#DEB841',
+          lightGray: '#F1F1F1',
+          beige: '#FCF2C1',
+          lighterYellow: '#FAD876',
+          lightBrown: '#BDB0A1',
+          lightYellow: '#F4D35E'
+        },
         tremor: {
           brand: {
             faint: '#eff6ff', // blue-50

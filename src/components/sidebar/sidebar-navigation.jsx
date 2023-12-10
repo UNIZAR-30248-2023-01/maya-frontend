@@ -17,27 +17,26 @@ export function SidebarNavigation ({ navigation }) {
   return (
     <ul role="list" className=" space-y-1">
       {navigation.map((item, id) => (
-        (item.name !== 'personal' || (item.name === 'personal' && user.role === 'owner')) &&
-            <li key={item.name}>
-              <Link
-                href={item.href}
-                className={cn(
-                  getCurrent(item, id)
-                    ? 'bg-gray-50 text-indigo-600'
-                    : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                  'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium capitalize'
-                )}
-              >
-                <item.icon
-                  className={cn(
-                    getCurrent(item, id) ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                    'h-5 w-5 shrink-0 stroke-1'
-                  )}
-                  aria-hidden="true"
-                />
-                {item.name}
-              </Link>
-            </li>
+        <li key={item.name}>
+          <Link
+            href={item.href}
+            className={cn(
+              getCurrent(item, id)
+                ? 'bg-custom-lightGray text-custom-mustard dark:text-black dark:bg-custom-mustard'
+                : 'text-gray-700 dark:text-custom-mustard hover:text-gray-700 hover:bg-custom-lightYellow dark:hover:text-gray-700',
+              'group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium capitalize'
+            )}
+          >
+            <item.icon
+              className={cn(
+                getCurrent(item, id) ? 'text-custom-mustard dark:text-black' : 'text-gray-400 group-hover:text-gray-700 dark:text-custom-mustard',
+                'h-5 w-5 shrink-0 stroke-1'
+              )}
+              aria-hidden="true"
+            />
+            {item.name}
+          </Link>
+        </li>
       ))}
     </ul>
   )

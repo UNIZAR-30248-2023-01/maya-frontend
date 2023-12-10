@@ -25,7 +25,10 @@ export const navigation = {
     staff: 'personal',
     workSpaces: 'lugares de trabajo',
     'in-and-outs': 'fichajes',
-    tickets: 'tickets'
+    tickets: 'tickets',
+    settings: 'ajustes',
+    appearance: 'apariencia',
+    password: 'contraseña'
   },
   en: {
     overview: 'overview',
@@ -34,7 +37,10 @@ export const navigation = {
     staff: 'staff',
     workSpaces: 'workspaces',
     'in-and-outs': 'in-and-outs',
-    tickets: 'tickets'
+    tickets: 'tickets',
+    settings: 'settings',
+    appearance: 'appearance',
+    password: 'password'
   }
 }
 
@@ -199,13 +205,14 @@ export const inandouts = {
 export const settingsAccount = {
   es: {
     'account-tab': 'Cuenta',
-    'apperance-tab': 'Apariencia',
-    'notifications-tab': 'Notificaciones',
+    'appearance-tab': 'Apariencia',
+    'password-tab': 'Contraseña',
     'logout-tab': 'Cerrar sesión',
 
     'account-headline': 'Mi cuenta',
     'account-under-headline': 'Actualiza la configuración de tu cuenta. Establece tu nombre, apellido, correo electrónico y avatar. También puedes cambiar tu contraseña',
-    'appearace-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
+    'appearance-headline': 'Personaliza la apariencia de la aplicación. Cambia automáticamente entre tema a claro o a oscuro.',
+    'password-headline': 'Cambia tu contraseña. Ambas deben coincidir para poder actualizarse.',
 
     'pick-avatar': 'Selecciona un avatar',
     'update-avatar': 'Actualizar',
@@ -230,19 +237,23 @@ export const settingsAccount = {
     'appearance-update': 'Actualizar color del tema',
     'error-firstname': 'El nombre no puede estar vacío.',
     'error-lastname': 'El apellido no puede estar vacío',
-    'error-full-new-password': 'La nueva contraseña no puede estar vacía.',
+    'error-empty-password': 'Ambas contraseñas deben no estar vacías',
+    'error-same-password': 'Ambas contraseñas deben ser las mismas',
+
     'toast-loading': 'Estamos validando tu cuenta. Por favor, espera un momento.',
     'toast-success': 'Tu cuenta se ha actualizada correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
   },
   en: {
     'account-tab': 'Account',
-    'apperance-tab': 'Appearance',
-    'notifications-tab': 'Notifications',
+    'appearance-tab': 'Appearance',
+    'password-tab': 'Password',
     'logout-tab': 'Logout',
     'account-headline': 'My account',
     'account-under-headline': 'Update your account settings. Set your firstname, lastname, email and avatar. You can also change your password.',
-    'appearace-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+    'appearance-headline': 'Customize the appearance of the app. Automatically switch between day and night themes.',
+    'password-headline': 'Change your password. Both must match the same in order to update.',
+
     'pick-avatar': 'Pick an avatar',
     'update-avatar': 'Update',
     language: 'en-US',
@@ -265,7 +276,9 @@ export const settingsAccount = {
     'appearance-update': 'Update theme color',
     'error-firstname': 'Name cannot be empty.',
     'error-lastname': 'Lastname cannot be empty',
-    'error-full-new-password': 'New password cannot be empty.',
+    'error-empty-password': 'Both passwords must not be empty',
+    'error-same-password': 'Both password must be the same',
+
     'toast-loading': 'We are validating your info account. Please wait a moment.',
     'toast-success': 'Your info account has been updated successfully.',
     'toast-error': 'Something went wrong. Please try again.'
@@ -853,6 +866,40 @@ export const landing = {
   }
 }
 
+export const workspaces = {
+  es: {
+    'workspace-column': 'Lugares de trabajo',
+    seats: 'Asientos',
+    seat: 'Asiento',
+    filter: 'Filtrar por nombre',
+    reservedSeats: 'Asientos reservados',
+    selectedSeats: 'Asientos seleccionados',
+    number: 'Número',
+    save: 'Guardar',
+    cancel: 'Cancelar Reserva',
+    'toast-loading': 'Estamos cancelando tu reserva. Por favor, espera un momento.',
+    'toast-success': 'Tu reserva se ha cancelado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-res-loading': 'Estamos realizando tu reserva. Por favor, espera un momento.',
+    'toast-res-success': 'Tu reserva se ha realizado correctamente.'
+  },
+  en: {
+    'workspace-column': 'Workspaces',
+    seats: 'Seats',
+    seat: 'Seat',
+    filter: 'Filter by name',
+    reservedSeats: 'Reserved Seats ',
+    selectedSeats: 'Selected Seats',
+    number: 'Number',
+    save: 'Save',
+    cancel: 'Cancel Reservation',
+    'toast-loading': 'We are canceling your reservation. Please wait a moment.',
+    'toast-success': 'Your reservation has been successfully cancelled.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-res-loading': 'We are in the process of making your reservation. Please wait a moment.',
+    'toast-res-success': 'Your reservation has been successfully completed.'
+  }
+}
 export const privacy = {
   es: {
     title: 'Privacy',
@@ -1064,4 +1111,48 @@ export const footer = {
     terms: 'Term of use',
     faq: 'FAQ'
   }
+}
+
+export const home = {
+  es: {
+    'salary-value': 'Sueldo actual',
+    'symbol-money': '€',
+    'time-spent-vs': 'Tiempo invertido vs tiempo por invertir por semana',
+    'time-spent': 'Tiempo invertido',
+    'time-to-spend': 'Tiempo por invertir',
+    'gross-net': 'Sueldo bruto vs sueldo neto',
+    'task-new': 'Tareas Nuevas',
+    'task-done': 'Tareas completadas',
+    'task-in-progress': 'Tareas en progreso',
+    'task-blocked': 'Tareas bloqueadas',
+    'task-title': 'Análisis de Tareas',
+    tasks: 'Tareas',
+    'project-title': 'Análisis de Proyectos',
+    'project-open': 'Proyectos abiertos',
+    'project-closed': 'Proyectos cerrados',
+    projects: 'Proyectos',
+    number: 'Número',
+    week: 'Vista semanal'
+  },
+  en: {
+    'salary-value': 'Actual salary',
+    'symbol-money': '$',
+    'time-spent-vs': 'Time spent vs time to spend per week',
+    'time-spent': 'Time spent',
+    'time-to-spend': 'Time to spend',
+    'gross-net': 'Gross salary vs net salary',
+    'task-new': 'New tasks',
+    'task-done': 'Tasks done',
+    'task-in-progress': 'Tasks in progress',
+    'task-blocked': 'Tasks blocked',
+    'task-title': 'Tasks Analysis',
+    tasks: 'Tasks',
+    'project-title': 'Projects Analysis',
+    'project-open': 'Open projects',
+    'project-closed': 'Closed projects',
+    projects: 'Projects',
+    number: 'Number',
+    week: 'Weekly view'
+  }
+
 }

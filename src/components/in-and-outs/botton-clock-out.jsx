@@ -89,6 +89,6 @@ export function ClockOut ({
   }
 
   return (
-    <Button id="new-automatic-out-date" variant="outline" className='capitalize' onClick={handleSubmit}>{triggerBtn}</Button>
+    <Button id="new-date-out" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' onClick={handleSubmit}>{triggerBtn}</Button>
   )
 }
