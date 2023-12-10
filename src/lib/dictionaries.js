@@ -1086,7 +1086,19 @@ export const home = {
     'time-spent-vs': 'Tiempo invertido vs tiempo por invertir por semana',
     'time-spent': 'Tiempo invertido',
     'time-to-spend': 'Tiempo por invertir',
-    'gross-net': 'Sueldo bruto vs sueldo neto'
+    'gross-net': 'Sueldo bruto vs sueldo neto',
+    'task-new': 'Tareas Nuevas',
+    'task-done': 'Tareas completadas',
+    'task-in-progress': 'Tareas en progreso',
+    'task-blocked': 'Tareas bloqueadas',
+    'task-title': 'Análisis de Tareas',
+    tasks: 'Tareas',
+    'project-title': 'Análisis de Proyectos',
+    'project-open': 'Proyectos abiertos',
+    'project-closed': 'Proyectos cerrados',
+    projects: 'Proyectos',
+    number: 'Número',
+    week: 'Vista semanal'
   },
   en: {
     'salary-value': 'Actual salary',
@@ -1094,7 +1106,19 @@ export const home = {
     'time-spent-vs': 'Time spent vs time to spend per week',
     'time-spent': 'Time spent',
     'time-to-spend': 'Time to spend',
-    'gross-net': 'Gross salary vs net salary'
+    'gross-net': 'Gross salary vs net salary',
+    'task-new': 'New tasks',
+    'task-done': 'Tasks done',
+    'task-in-progress': 'Tasks in progress',
+    'task-blocked': 'Tasks blocked',
+    'task-title': 'Tasks Analysis',
+    tasks: 'Tasks',
+    'project-title': 'Projects Analysis',
+    'project-open': 'Open projects',
+    'project-closed': 'Closed projects',
+    projects: 'Projects',
+    number: 'Number',
+    week: 'Weekly view'
   }
 
 }
