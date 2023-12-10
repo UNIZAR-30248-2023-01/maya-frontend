@@ -12,7 +12,7 @@ describe('Team tests', async () => {
 
   after(() => {
     deleteUser()
-    deleteTeam()
+    deleteTeam(String(team.name).toLowerCase().split(' ').join('-') + '-edited')
     deleteOrg()
   })
 

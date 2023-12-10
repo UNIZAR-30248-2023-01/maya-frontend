@@ -216,8 +216,8 @@ export function DataTableRowActions ({ row }) {
               id="name"
               label={dictionary.teams['name-column']}
               placeholder={dictionary.teams['new-team-name-placeholder']}
-              value={form.name}
-              onChange={(e) => setter({ key: 'name', value: e.target.value })}
+              defaultValue={String(form.name).split('-').join(' ')}
+              onChange={(e) => setter({ key: 'name', value: String(e.target.value).toLowerCase().split(' ').join('-') })}
             />
             <TextArea
               id="description"
