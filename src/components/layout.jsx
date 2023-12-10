@@ -43,7 +43,7 @@ export function Layout ({ children }) {
           <img
             className="mx-auto h-24 w-auto sm:h-12 animate-pulse"
             src="/logo.webp"
-            alt="Your Company"
+            alt="MaYA"
           />
         </main>
       </div>

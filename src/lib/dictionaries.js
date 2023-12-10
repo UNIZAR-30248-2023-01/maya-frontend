@@ -741,7 +741,7 @@ export const signin = {
     'signin-and': 'y',
     'signin-username': 'Usuario',
     'signin-password': 'Contraseña',
-    'signin-sigin': 'Iniciar sesión con el nombre de usuario',
+    'signin-sigin': 'Iniciar sesión',
     'signin-continuee': 'O continuar con'
 
   },
@@ -756,7 +756,7 @@ export const signin = {
     'signin-and': 'and',
     'signin-username': 'Username',
     'signin-password': 'Password',
-    'signin-sigin': 'Sign in with username',
+    'signin-sigin': 'Sign in',
     'signin-continuee': 'Or continue with'
 
   }

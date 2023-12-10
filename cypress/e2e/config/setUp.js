@@ -47,6 +47,20 @@ export const createOrg = () => {
   })
 }
 
+export const createTeam = () => {
+  const { dbname, description } = team
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/teams`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json'
+    },
+    body: { name: dbname, description, organization: organization.name }
+  })
+}
+
 export const deleteOrg = () => {
   cy.request({
     method: 'DELETE',
@@ -175,10 +189,10 @@ export const deleteProjects = (name) => {
   })
 }
 
-export const deleteTeam = () => {
+export const deleteTeam = (name) => {
   cy.request({
     method: 'DELETE',
-    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/teams?name=eq.${team.dbname}`,
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/teams?name=eq.${name ?? team.dbname}`,
     headers: {
       apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
       Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`
