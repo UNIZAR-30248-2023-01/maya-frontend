@@ -7,9 +7,8 @@ import {
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
 import { useLang } from '@/context/language-context'
-import { SidePanelEdit } from '@/components/in-and-outs/side-panel-edit'
 
-export function DataTableBody ({ table }) {
+export function DataTableBody ({ table, organization }) {
   // const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const { dictionary } = useLang()
 
@@ -33,17 +32,6 @@ export function DataTableBody ({ table }) {
                 )}
               </TableCell>
             ))}
-              <SidePanelEdit
-                title={dictionary.inandouts.edit}
-                description={dictionary.inandouts['new-table-description']} // Descripcion del panel
-                descriptionIn={dictionary.inandouts['new-table-description-in']}
-                descriptionOut={dictionary.inandouts['new-table-description-out']}
-                actionBtn={dictionary.inandouts.edit}
-                fechaEntrada={row.original.in_date}
-                fechaSalida={row.original.out_date}
-                deleteBtn={dictionary.inandouts.delete}
-              />
-
           </TableRow>
           )))
         : (

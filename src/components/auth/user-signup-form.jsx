@@ -149,7 +149,7 @@ export function UserSignUp ({ className, ...props }) {
       <Button
         variant="outline"
         type="button"
-        onClick={() => signIn('github', { callbackUrl: '/home' })}
+        onClick={() => signIn('github', { callbackUrl: '/organizations' })}
       >
         <LuGithub className="mr-2 h-4 w-4" />
         Github

@@ -16,6 +16,7 @@ export function DataTableRowActions ({ row }) {
       deleteDescription={dictionary.staff['manage-member-delete-description']}
       username={row.original.username}
       defaultRole={row.original.role}
+      organization={row.original.organization}
       id={row.original.username + '-edit'}
     />
   )

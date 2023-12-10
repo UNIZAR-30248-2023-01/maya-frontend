@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -29,7 +29,8 @@ export function SidePanelEdit ({
   actionBtn,
   fechaEntrada,
   fechaSalida,
-  deleteBtn
+  deleteBtn,
+  organization
 }) {
   const [errorOutHour, setErrorOutHour] = useState('')
   const [errorInHour, setErrorInHour] = useState('')
@@ -39,16 +40,6 @@ export function SidePanelEdit ({
   const { user } = useUser()
 
   const setter = ({ key, value }) => setForm({ ...form, [key]: value })
-
-  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false)
-
-  const handleOpenSidePanel = () => {
-    setIsSidePanelOpen(true)
-  }
-
-  const handleCloseSidePanel = () => {
-    setIsSidePanelOpen(true)
-  }
 
   const [form, setForm] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
 
@@ -66,21 +57,16 @@ export function SidePanelEdit ({
 
   const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${formattedInitialDate}&out_date=eq.${formattedFinalDate}&select=*`)
 
-  // useEffect para actualizar el estado del formulario con los valores iniciales
-  useEffect(() => {
-    console.log('El useEffect se ha ejecutado')
-    if (isSidePanelOpen) {
-      console.log('El useEffect se ha ejecutado y el sidepanel está abierto')
-      setForm({
-        ...form,
-        in_hour: initialHour,
-        out_hour: finalHour,
-        in_date: initialDate,
-        out_date: finalDate
-        // ... otras propiedades del formulario según tu esquema
-      })
-    }
-  }, [isSidePanelOpen])
+  const handleOpenSidePanel = () => {
+    setForm({
+      ...form,
+      in_hour: initialHour,
+      out_hour: finalHour,
+      in_date: initialDate,
+      out_date: finalDate
+      // ... otras propiedades del formulario según tu esquema
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -124,12 +110,12 @@ export function SidePanelEdit ({
           supabase.from('in-and-outs').update({
             in_date: timestampIn,
             out_date: timestampOut,
-            total: horasRedondeadas
+            total: horasRedondeadas,
+            organization
           })
             .eq('id', inAndOuts[0].id)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${timestampIn}&out_date=eq.${timestampOut}&total=eq.${horasRedondeadas}&select=*`)
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -156,9 +142,9 @@ export function SidePanelEdit ({
       inAndOutsSchema.parse({ in_date: null, out_date: null, total: 0 })
       const deleteManualClockin = () => {
         return new Promise((resolve, reject) => {
-          supabase.from('in-and-outs').delete().eq('id', inAndOuts[0].id)
+          supabase.from('in-and-outs').delete().eq('id', inAndOuts[0].id).eq('organization', organization)
             .then(() => {
-              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
+              mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&select=*`)
               resolve()
             })
             .catch((error) => {
@@ -260,13 +246,13 @@ export function SidePanelEdit ({
 
           </div>
           <SheetFooter className="">
-            <SheetClose asChild onClose={handleCloseSidePanel}>
+            <SheetClose asChild>
               <Button id="eliminar" className="bg-rose-500 text-white" variant="outline" type="button" onClick={handleDelete}>
                 {deleteBtn}
               </Button>
             </SheetClose>
 
-            <SheetClose asChild onClose={handleCloseSidePanel}>
+            <SheetClose asChild>
               <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>

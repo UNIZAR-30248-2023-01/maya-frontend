@@ -7,12 +7,13 @@ import {
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
 import { useLang } from '@/context/language-context'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 export function DataTableBody ({ table }) {
   const { dictionary } = useLang()
   const router = useRouter()
-  const goTo = (row) => router.push(`/projects/${row.original.project}/${row.original.id}`)
+  const routes = usePathname().split('/')[2]
+  const goTo = (row) => router.push(`/${routes}/projects/${row.original.project}/${row.original.id}`)
 
   return (
     <TableBody id='tasks-table'>

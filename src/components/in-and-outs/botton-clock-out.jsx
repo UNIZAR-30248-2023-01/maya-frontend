@@ -10,11 +10,12 @@ import useSWR, { mutate } from 'swr'
 import { useUser } from '@/context/user-context'
 
 export function ClockOut ({
-  triggerBtn
+  triggerBtn,
+  organization
 }) {
   const { user } = useUser()
 
-  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
+  const { data: inAndOuts } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&out_date=is.null&select=*`)
 
   const { dictionary } = useLang()
   const [form] = useState({ in_hour: '', out_hour: '', ...getForm(inAndOutsSchema._def.shape()) }) // devuelve unos objetos
@@ -66,9 +67,9 @@ export function ClockOut ({
               .update({ out_date: timestampOut, total: minutosTotales })
               .eq('id', inAndOuts[0].id)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&in_date=eq.${timestampIn}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&select=*`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&out_date=is.null&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&in_date=eq.${timestampIn}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/in-and-outs?username=eq.${user?.username}&organization=eq.${organization}&out_date=is.null&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))

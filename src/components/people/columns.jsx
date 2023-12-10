@@ -35,7 +35,7 @@ export const columns = [
       }
 
       const avatar = row?.original?.avatar || row?.original?.people?.avatar
-      const username = row?.original?.avatar || row?.original?.people?.avatar
+      const username = row?.original?.username || row?.original?.people?.username
       const firstname = row?.original?.firstname || row?.original?.people?.firstname
       const lastname = row?.original?.lastname || row?.original?.people?.lastname
 

@@ -15,7 +15,7 @@ import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
 import { useUser } from '@/context/user-context'
 
-export function DataTable ({ data, columns }) {
+export function DataTable ({ data, columns, organization }) {
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -50,7 +50,7 @@ export function DataTable ({ data, columns }) {
       <div className="rounded-md border">
         <Table>
           <DataTableHeader table={table}/>
-          <DataTableBody table={table} owner={data.find(e => e.username === user.username && e.role === 'owner')} />
+          <DataTableBody table={table} owner={data.find(e => e.username === user.username && e.role === 'owner')} organization={organization} />
         </Table>
       </div>
       <DataTablePagination table={table} />

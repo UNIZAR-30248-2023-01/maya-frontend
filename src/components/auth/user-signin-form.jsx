@@ -25,7 +25,7 @@ export function UserSignIn ({ className, ...props }) {
           signIn('credentials', {
             username: username.value,
             password: password.value,
-            callbackUrl: '/home'
+            callbackUrl: '/organizations'
           })
             .then((res) => {
               console.log(res)
@@ -102,7 +102,7 @@ export function UserSignIn ({ className, ...props }) {
       <Button
         variant="outline"
         type="button"
-        onClick={() => signIn('github', { callbackUrl: '/home' })}
+        onClick={() => signIn('github', { callbackUrl: '/organizations' })}
       >
         <LuGithub className="mr-2 h-4 w-4" />
         Github

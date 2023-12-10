@@ -34,6 +34,12 @@ export const roleSchema = z.object({
   role: z.enum(['owner', 'developer', 'scrum-master', 'tester', 'designer', 'member']).default('member')
 })
 
+export const organizationSchema = z.object({
+  name: z.string().min(1).max(30),
+  description: z.string().optional().nullable()
+  // plan: z.enum(['personal', 'educational', 'team', 'enterprise']).default('personal')
+})
+
 export const teamSchema = z.object({
   name: z.string().min(1).max(30),
   description: z.string().max(150).nullable(),

@@ -2,6 +2,7 @@
 
 import { DataTableColumnHeader } from '@/components/in-and-outs/data-table-column-header'
 import { Skeleton } from '@/components/ui/skeleton'
+import { SidePanelEdit } from '@/components/in-and-outs/side-panel-edit'
 
 // Funcion para formatear la fecha
 function formatDate (timestamp, language) {
@@ -102,6 +103,21 @@ export const columns = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
+    }
+  }, {
+    id: 'actions',
+    cell: ({ row, dictionary }) => {
+      return <SidePanelEdit
+                title={dictionary.edit}
+                description={dictionary['new-table-description']} // Descripcion del panel
+                descriptionIn={dictionary['new-table-description-in']}
+                descriptionOut={dictionary['new-table-description-out']}
+                actionBtn={dictionary.edit}
+                fechaEntrada={row.original.in_date}
+                fechaSalida={row.original.out_date}
+                deleteBtn={dictionary.delete}
+              organization={row.original.organization}
+              />
     }
   }
 ]

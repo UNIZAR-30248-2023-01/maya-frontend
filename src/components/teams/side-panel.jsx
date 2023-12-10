@@ -24,7 +24,8 @@ export function SidePanel ({
   triggerBtn,
   actionBtn,
   dictionary,
-  data
+  data,
+  organization
 }) {
   const [form, setForm] = useState(getForm(teamSchema._def.shape()))
 
@@ -42,12 +43,12 @@ export function SidePanel ({
     const { members, ...team } = form
 
     try {
-      teamSchema.parse({ ...team, organization: 'reign' })
+      teamSchema.parse({ ...team, organization })
       const createTeam = () => {
         return new Promise((resolve, reject) => {
           (async () => {
             // Primera inserción en la tabla 'teams'
-            await supabase.from('teams').insert([{ ...team, organization: 'reign' }]).select()
+            await supabase.from('teams').insert([{ ...team, organization }]).select()
               .then(async (res) => {
                 if (res.error !== null) return
                 // Segunda inserción en la tabla 'people-teams'
@@ -58,8 +59,8 @@ export function SidePanel ({
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

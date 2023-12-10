@@ -1,10 +1,11 @@
 import { DataTable } from '@/components/workspaces/data-table'
 import { columns } from '@/components/workspaces/columns'
-import { fetchWorkSpaces } from '@/lib/seatsioUtils'
-import React, { useEffect, useState } from 'react'
+import useSWR from 'swr'
 
-function WorkspaceList () {
-  const [workspacesData, setWorkspacesData] = useState(null)
+export function WorkspaceList ({ organization }) {
+  const { data: workspaces } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/workspaces?organization=eq.${organization}&evento=eq.${'FALSE'}&select=*`)
+
+  /* const [workspacesData, setWorkspacesData] = useState(null)
   useEffect(() => {
     const fetch = async () => {
       const workspaces = await fetchWorkSpaces()
@@ -14,12 +15,10 @@ function WorkspaceList () {
 
     fetch()
   }, [])
-
+*/
   return (
-    <div>
-      {workspacesData ? <DataTable data={workspacesData} columns={columns} /> : <p>Cargando...</p>}
-    </div>
+      <div>
+        <DataTable data={workspaces || []} columns={columns} />
+      </div>
   )
 }
-
-export { WorkspaceList }

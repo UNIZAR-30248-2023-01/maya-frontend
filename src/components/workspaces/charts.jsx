@@ -4,7 +4,7 @@ import { fetchWorkSpacesCharts } from '@/lib/seatsioUtils'
 import { supabase } from '@/lib/utils'
 import React, { useEffect, useState } from 'react'
 
-function SpaceList (name) {
+export function SpaceList (name) {
   const [spacesData, setSpacesData] = useState(null)
 
   useEffect(() => {
@@ -40,11 +40,5 @@ function SpaceList (name) {
     fetchSpaces()
   }, [name.name])
 
-  return (
-    <div>
-      {spacesData ? <DataTable data={spacesData} columns={columns} /> : <p>Cargando...</p>}
-    </div>
-  )
+  return (<DataTable data={spacesData || []} columns={columns} />)
 }
-
-export { SpaceList }

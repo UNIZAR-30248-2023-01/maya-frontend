@@ -24,9 +24,10 @@ export function InviteMember ({
   triggerBtn,
   actionBtn,
   data,
-  projectName
+  projectName,
+  organization
 }) {
-  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username`)
+  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?organization=eq.${organization}&select=username`)
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(peopleSchema._def.shape()))
 

@@ -20,7 +20,7 @@ import { mutate } from 'swr'
 
 export function RemoveUser ({
   username,
-  projectName,
+  organization,
   title,
   description
 }) {
@@ -31,11 +31,12 @@ export function RemoveUser ({
       const removeUser = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            await supabase.from('people').delete()
+            await supabase.from('people-org').delete()
               .eq('username', username)
+              .eq('organization', organization)
               .then(() => {
               // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username,firstname,lastname,avatar,role`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?organization=eq.${organization}&select=username,organization,role,people(firstname,lastname,avatar)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

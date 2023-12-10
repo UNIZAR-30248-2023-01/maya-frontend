@@ -19,13 +19,19 @@ export async function fetchWorkSpaces () {
         Authorization: `Basic ${Buffer.from(adminKey).toString('base64')}`
       }
     }
-    const response = await axios.get(url, config)
-    if (response.status !== 200) {
-      throw new Error('Error fetching workspace:', response.statusText)
-    }
-    const data = response.data
-    console.log('data:', data)
-    return data.items
+    const { items } = await axios.get(url, config)
+      .then((res) => {
+        console.log(res.data)
+        if (res.status !== 200) {
+          throw new Error('Error fetching workspace:', res.statusText)
+        }
+        return res.data
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    console.log(items)
+    return items
   } catch (error) {
     console.error(error)
   }
@@ -43,13 +49,18 @@ export async function fetchWorkSpacesCharts (secretKey) {
       }
     }
     console.log('config:', secretKey)
-    const response = await axios.get(url, config)
-    if (response.status !== 200) {
-      throw new Error('Error fetching workspace:', response.statusText)
-    }
-    const data = response.data
-    console.log('data:', data)
-    return data.items
+    const { items } = await axios.get(url, config)
+      .then((res) => {
+        console.log(res)
+        if (res.status !== 200) {
+          throw new Error('Error fetching workspace:', res.statusText)
+        }
+        return res.data
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    return items
   } catch (error) {
     console.error(error)
   }

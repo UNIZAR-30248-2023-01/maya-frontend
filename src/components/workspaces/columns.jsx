@@ -2,6 +2,7 @@
 
 import { DataTableColumnHeader } from '@/components/workspaces/data-table-column-header'
 import { Skeleton } from '@/components/ui/skeleton'
+import { normalize } from '@/lib/utils'
 
 export const columns = [
   {
@@ -14,16 +15,16 @@ export const columns = [
 
       return (
         <div className="max-w-[400px] truncate font-medium capitalize">
-          {row.getValue('name')}
+          {normalize(row.getValue('name'))}
         </div>
       )
     },
     filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
+      return normalize(row.getValue(id)).includes(value)
     }
-  },
+  }
   // Columna privada 1
-  {
+  /* {
     accessorKey: 'key',
     header: ({ column, dictionary }) => {
       return <div/>
@@ -49,5 +50,5 @@ export const columns = [
       return <div></div>
     },
     isVisible: false // Oculta la columna
-  }
+  } */
 ]

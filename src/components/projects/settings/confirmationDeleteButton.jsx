@@ -33,7 +33,7 @@ export function ConfirmationDeleteButton ({
             await supabase.from('projects').delete()
               .eq('name', projectName)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*,people:people-project(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -52,7 +52,7 @@ export function ConfirmationDeleteButton ({
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
-    router.replace(`${path.split('/').slice(0, 3).join('/')}`)
+    router.replace(`${path.split('/').slice(0, 4).join('/')}`)
   }
 
   return (
