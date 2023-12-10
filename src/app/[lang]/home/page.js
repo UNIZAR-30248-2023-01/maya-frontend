@@ -385,8 +385,8 @@ export default function Home () {
           <Card className="max-w-sm mx-auto space-y-2">
             <Title>{dictionary.home['gross-net']}</Title>
             <Flex>
-              <Text>$ {salarioNeto} &bull; {porcentaje}%</Text>
-              <Text>$ {salario}</Text>
+              <Text>{salarioNeto} {dictionary.home['symbol-money']} &bull; {porcentaje}%</Text>
+              <Text>{salario} {dictionary.home['symbol-money']}</Text>
             </Flex>
             <ProgressBar value={porcentaje} color="yellow" className="mt-3"/>
           </Card>
