@@ -78,7 +78,7 @@ export function InviteMember ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="capitalize h-8">{triggerBtn}</Button>
+        <Button className="capitalize h-8 text-black hover:bg-custom-lighterYellow bg-custom-mustard">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>
@@ -94,6 +94,7 @@ export function InviteMember ({
                 id="members"
                 label={dictionary.people['member-column']}
                 placeholder={dictionary.people.search}
+                searchId="invite-filter"
                 list={people?.map((member) => ({ value: member.username, label: member.username }))}
                 values={form.members || []}
                 dictionary={dictionary}
@@ -108,7 +109,7 @@ export function InviteMember ({
               />
             </div>
             <DialogClose asChild>
-              <Button type="submit" className="capitalize">{actionBtn}</Button>
+              <Button type="submit" className="capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard">{actionBtn}</Button>
             </DialogClose>
           </div>
         </form>

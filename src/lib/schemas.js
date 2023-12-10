@@ -31,7 +31,7 @@ export const peopleSchema = z.object({
 })
 
 export const roleSchema = z.object({
-  role: z.enum(['owner', 'developer', 'scrum master', 'tester', 'designer', 'member']).default('member')
+  role: z.enum(['owner', 'developer', 'scrum-master', 'tester', 'designer', 'member']).default('member')
 })
 
 export const teamSchema = z.object({

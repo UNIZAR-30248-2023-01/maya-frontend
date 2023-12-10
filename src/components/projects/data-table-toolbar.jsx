@@ -18,12 +18,13 @@ export function DataTableToolbar ({ table }) {
         placeholder={`${dictionary.projects.filter}...`}
         value={(table.getColumn('name')?.getFilterValue()) ?? ''}
         onChange={(event) =>
-          table.getColumn('name')?.setFilterValue(event.target.value)
+          table.getColumn('name')?.setFilterValue(String(event.target.value).toLowerCase())
         }
         className="h-8 w-[150px] lg:w-[250px]"
       />
       {table.getColumn('status') && (
         <DataTableFacetedFilter
+          id='close-filter'
           column={table.getColumn('status')}
           title={dictionary.projects.status}
           options={projectStatuses.map(status => ({ ...status, value: status.value }))}
@@ -31,6 +32,7 @@ export function DataTableToolbar ({ table }) {
       )}
       {table.getColumn('visibility') && (
         <DataTableFacetedFilter
+          id='visibility-filter'
           column={table.getColumn('visibility')}
           title={dictionary.projects.visibility}
           options={visibility.map(v => ({ ...v, value: v.value }))}

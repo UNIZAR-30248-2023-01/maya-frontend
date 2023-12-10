@@ -108,12 +108,12 @@ export function SidePanelManual ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-manual-date" variant="outline" className='capitalize'>{triggerBtn}</Button>
+        <Button id="new-manual-date" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
           <SheetHeader>
-            <SheetTitle id="necesitoelid" className="capitalize">{title}</SheetTitle>
+            <SheetTitle id="add-checkin-title" className="capitalize">{title}</SheetTitle>
             <SheetDescription style={{ marginBottom: '20px' }}>
               {description}
             </SheetDescription>
@@ -198,7 +198,7 @@ export function SidePanelManual ({
           </div>
           <SheetFooter className="">
             <SheetClose asChild >
-              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" className="text-black hover:bg-custom-lighterYellow bg-custom-mustard" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>

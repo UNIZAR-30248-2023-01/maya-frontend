@@ -7,6 +7,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.2",
     "@headlessui/react": "^1.7.17",
+    "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -29,6 +30,7 @@
     "@tailwindcss/forms": "^0.5.6",
     "@tanstack/react-table": "^8.10.3",
     "axios": "^1.6.2",
+    "@tremor/react": "^3.11.1",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.3.2",
     "clsx": "^2.0.0",
@@ -52,6 +54,7 @@
     "swr": "^2.2.4",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "theme": "^0.1.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {

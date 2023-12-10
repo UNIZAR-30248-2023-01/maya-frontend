@@ -9,12 +9,10 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
-import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const { dictionary } = useLang()
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,12 +25,15 @@ export function UserSignIn ({ className, ...props }) {
           signIn('credentials', {
             username: username.value,
             password: password.value,
-            redirect: false
+            callbackUrl: '/home'
           })
-            .then(() => {
-              setIsLoading(false)
-              router.push('/home')
-              resolve()
+            .then((res) => {
+              console.log(res)
+              if (res.status === 200) {
+                setIsLoading(false)
+                resolve()
+              }
+              throw new Error(res.error)
             })
             .catch((error) => {
               setIsLoading(false)
@@ -53,7 +54,7 @@ export function UserSignIn ({ className, ...props }) {
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="username">
@@ -98,7 +99,11 @@ export function UserSignIn ({ className, ...props }) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => signIn('github', { callbackUrl: '/home' })}
+      >
         <LuGithub className="mr-2 h-4 w-4" />
         Github
       </Button>

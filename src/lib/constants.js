@@ -41,8 +41,8 @@ export const profileNavItems = [
     href: '/settings/appearance'
   },
   {
-    title: 'notifications',
-    href: '/settings/notifications'
+    title: 'password',
+    href: '/settings/password'
   }
 ]
 
@@ -388,22 +388,69 @@ export const loadingTasks = [
 
 export const roles = [
   {
-    id: 1,
+    id: 'owner',
     value: 'owner'
   }, {
-    id: 2,
+    id: 'developer',
     value: 'developer'
   }, {
-    id: 3,
-    value: 'scrum master'
+    id: 'scrum',
+    value: 'scrum-master'
   }, {
-    id: 4,
+    id: 'tester',
     value: 'tester'
   }, {
-    id: 5,
+    id: 'designer',
     value: 'designer'
   }, {
-    id: 6,
+    id: 'member',
     value: 'member'
+  }
+]
+
+export const footer = [
+  { name: 'sitemap', href: '/sitemap' },
+  { name: 'status', href: 'https://reign.betteruptime.com/' },
+  { name: 'privacy', href: '/privacy' },
+  { name: 'terms', href: '/terms' },
+  { name: 'faq', href: '/faq' }
+]
+
+export const sites = [
+  {
+    url: `${process.env.VERCEL_URL}/`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 1
+  },
+  {
+    url: `${process.env.VERCEL_URL}/privacy`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.75
+  },
+  {
+    url: `${process.env.VERCEL_URL}/terms`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.75
+  },
+  {
+    url: `${process.env.VERCEL_URL}/faq`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.9
+  },
+  {
+    url: `${process.env.VERCEL_URL}/status`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.75
+  },
+  {
+    url: `${process.env.VERCEL_URL}/sitemap`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.75
   }
 ]

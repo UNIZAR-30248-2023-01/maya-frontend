@@ -2,6 +2,34 @@ import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { createClient } from '@supabase/supabase-js'
 
+export function mayaSays () {
+  console.clear()
+  console.log('          &&&&                       &&&')
+  console.log('          (&&&&&&                 &&&&&')
+  console.log('             (&&&               &&&&')
+  console.log('                &&            /&&')
+  console.log('             *&&&&&&&&&&&&&&&&&&&&&/')
+  console.log('          &@&&&&&&&&&&&&&&&&&&&&&&&&&&')
+  console.log('         ,&&&&    &@%       .@@    &&&&')
+  console.log('       %&&&&     &@@@#      @@@@     &&&&')
+  console.log('      &&&&                           &&&&&')
+  console.log('     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+  console.log('    &&&&                                 @&&&,(')
+  console.log('  (&&&&   *,,,,,,,,,,,,,,,,,,,,,,,,,,,,**,%&&&*')
+  console.log('   *&&&% ./////////////////////////////////*&&&#')
+  console.log('   */&&&&//////////////////////////////////@&&&')
+  console.log('     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&%')
+  console.log('      %@&&&/                            &&&&')
+  console.log('       &.&&&@                        .#&&&&')
+  console.log('         @&&&(//////////////////////@&&&')
+  console.log('          .&&&@@*////////////////#@&&&&')
+  console.log('            &&&&&&&&&&&&&&&&&&&&&&&&')
+  console.log('                     &&&&&&')
+  console.log('                      /&&&(')
+  console.log('                       &&&')
+  console.log('                       (&')
+}
+
 export function getForm (zodShape) {
   const entries = Object.keys(zodShape).map((key) => {
     const localSchema = zodShape[key]._def

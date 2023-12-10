@@ -32,7 +32,7 @@ export function middleware (request) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    '/((?!api|sitemap|static|.*\\..*|_next).*)'
+    '/((?!api|sitemap.xml|static|.*\\..*|_next).*)'
     // Optional: only run on root (/) URL
     // '/'
   ]

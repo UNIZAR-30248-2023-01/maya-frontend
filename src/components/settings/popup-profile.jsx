@@ -13,15 +13,21 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose,
-  DialogFooter
+  DialogTrigger
 } from '@/components/ui/dialog'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from '@/components/ui/avatar'
+import { DialogClose } from '@radix-ui/react-dialog'
 
 export function PopupProfile ({
   user
 }) {
   // console.log('username', username)
+
+  //  <AvatarFallback className="uppercase">{user?.firstname + lastname[0]}</AvatarFallback>
 
   const originalAvatar = user?.avatar ? user?.avatar : '/assets/avatars/memojis/4.webp'
 
@@ -83,44 +89,50 @@ export function PopupProfile ({
     }
   }
 
+  const displayAvatar =
+    user?.avatar
+      ? (<AvatarImage src={user?.avatar} />)
+      : (
+      <AvatarFallback className="uppercase">
+        {user?.firstname[0] + user?.lastname[0]}
+      </AvatarFallback>
+        )
+
   return (
     <Dialog>
-      <DialogTrigger><img
-        src={originalAvatar || form.avatar}
-        alt=""
-        className="w-24 h-24 rounded-full"
-      /></DialogTrigger>
+      <DialogTrigger id="popupProfile">
+        <Avatar className="w-20 h-20">
+          {displayAvatar}
+        </Avatar>
+      </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
-          <DialogDescription>
-            <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
-              {memojiList.map((memoji, index) => (
-                <img
-                  key={index}
-                  src={memoji}
-                  alt={`Memoji ${index + 1}`}
-                  className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
-                  onClick={() => {
-                    handleSelectAvatar(memoji)
-                    setter({ key: 'avatar', value: memoji })
-                  }}
-                />
-              ))}
+        <form onSubmit={e => handleSubmit(e)}>
+          <DialogHeader>
+            <DialogTitle>{dictionary.settingsAccount['pick-avatar']}</DialogTitle>
+            <DialogDescription>
+              <div className="grid grid-cols-6 gap-4" style={{ marginTop: '20px' }}>
+                {memojiList.map((memoji, index) => (
+                  <img
+                    key={index}
+                    src={memoji}
+                    alt={`Memoji ${index + 1}`}
+                    className={`w-16 h-16 cursor-pointer ${selectedAvatar === memoji ? 'border-2 border-black rounded-full' : 'rounded-full'}`}
+                    onClick={() => {
+                      handleSelectAvatar(memoji)
+                      setter({ key: 'avatar', value: memoji })
+                    }}
+                  />
+                ))}
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogClose>
+            <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
+                <Button className="bg-custom-mustard text-black" id="updateProfilePhoto" type='submit'>{dictionary.settingsAccount['update-avatar']}</Button>
             </div>
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex justify-end mt-4" style={{ marginTop: '20px' }}>
-          <Button type='submit' onClick={handleSubmit}>{dictionary.settingsAccount['update-avatar']}</Button>
-        </div>
-        {/*<DialogFooter>
-          <DialogClose className="flex justify-end mt-4" style={{ marginTop: '20px' }} onClick={handleSubmit}>
-            {dictionary.settingsAccount['update-avatar']}
           </DialogClose>
-        </DialogFooter>*/}
-        
+        </form>
       </DialogContent>
     </Dialog>
-
   )
 }

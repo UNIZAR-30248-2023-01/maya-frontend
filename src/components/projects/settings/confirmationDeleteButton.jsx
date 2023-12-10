@@ -59,6 +59,7 @@ export function ConfirmationDeleteButton ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          id="delete-project"
           variant='secondary'
           className='text-red-600 font-medium whitespace-nowrap w-36'
         >
@@ -72,7 +73,7 @@ export function ConfirmationDeleteButton ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{dictionary.common.cancel}</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteProject} className={'bg-red-500 hover:bg-red-700'}>{dictionary.confirmation['confirmation-delete']}</AlertDialogAction>
+          <AlertDialogAction id="accept-delete-project" onClick={handleDeleteProject} className={'bg-red-500 hover:bg-red-700'}>{dictionary.confirmation['confirmation-delete']}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
