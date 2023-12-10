@@ -123,7 +123,7 @@ export default function Home () {
   ])
 
   const valueFormatterTime = function (number) {
-    return '$' + new Intl.NumberFormat('us').format(number).toString() + ' h'
+    return new Intl.NumberFormat('us').format(number).toString() + ' h'
   }
 
   /**
