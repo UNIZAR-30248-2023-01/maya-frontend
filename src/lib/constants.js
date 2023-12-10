@@ -41,8 +41,8 @@ export const profileNavItems = [
     href: '/settings/appearance'
   },
   {
-    title: 'notifications',
-    href: '/settings/notifications'
+    title: 'password',
+    href: '/settings/password'
   }
 ]
 

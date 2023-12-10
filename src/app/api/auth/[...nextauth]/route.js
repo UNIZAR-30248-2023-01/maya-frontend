@@ -1,17 +1,12 @@
 /* eslint-disable camelcase */
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import DiscordProvider from 'next-auth/providers/discord'
 import GitHubProvider from 'next-auth/providers/github'
 import { supabase } from '@/lib/utils'
 import crypto from 'crypto'
 
 export const authOptions = {
   providers: [
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET
-    }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
@@ -40,15 +35,56 @@ export const authOptions = {
           .toString('hex')
 
         if (passwd_hash !== hashedPassword) return new Response(error.message, { status: 400 })
-        return { ...account }
+        return {
+          name: account.username,
+          email: account.email
+        }
       }
     })
   ],
+  callbacks: {
+    async jwt ({ token, account, profile }) {
+      if (account?.provider && account?.provider === 'github') {
+        const { name, email, login: username } = profile
+
+        const [firstname, lastname] = name.split(' ')
+
+        // Check if user exists
+        const { data: users, error } = await supabase
+          .from('people')
+          .select('*')
+          .or(`username.eq.${username}`, `email.eq.${email}`)
+
+        // Error handling
+        if (error) return new Response(error.message, { status: 500 })
+
+        // Create user if not exists
+        if (users.length === 0) {
+          const { error } = await supabase
+            .from('people')
+            .insert([{ email, username, firstname: firstname ?? '', lastname: lastname ?? '' }])
+
+          if (error) return new Response(error.message, { status: 500 })
+        }
+      }
+
+      return token
+    },
+    async redirect ({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    }
+
+  },
   session: {
     strategy: 'jwt',
     maxAge: 2 * 60 * 60 // 2 hours
   },
   pages: {
+    error: '/sign-in',
     signIn: '/sign-in',
     signOut: '/',
     newUser: '/home'

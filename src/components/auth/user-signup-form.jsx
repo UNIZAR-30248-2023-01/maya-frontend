@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
+import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { useLang } from '@/context/language-context'
 import { useRouter } from 'next/navigation'
@@ -145,7 +146,11 @@ export function UserSignUp ({ className, ...props }) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => signIn('github', { callbackUrl: '/organizations' })}
+      >
         <LuGithub className="mr-2 h-4 w-4" />
         Github
       </Button>

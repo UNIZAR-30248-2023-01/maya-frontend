@@ -1,8 +1,11 @@
-export default function WorkspacesPage () {
+'use client'
+
+import { WorkspaceList } from '@/components/workspaces/workspaces'
+
+export default function WorkspacesList ({ params }) {
   return (
     <>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-24 w-full p-4'/>
-      <div className='border-2 border-dashed min-h-full flex items-center justify-start h-96 w-full p-4'/>
+      <WorkspaceList organization={params.organization} /> {/* Renderiza el componente MySeatingChart aquí */}
     </>
   )
 }

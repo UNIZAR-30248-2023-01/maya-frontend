@@ -78,7 +78,7 @@ export function SidePanel ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button id="new-project" className='capitalize h-8'>{triggerBtn}</Button>
+        <Button id="new-project" className='capitalize h-8 hover:bg-custom-lighterYellow text-black bg-custom-mustard'>{triggerBtn}</Button>
       </SheetTrigger>
       <SheetContent>
         <form onSubmit={e => handleSubmit(e)}>
@@ -111,7 +111,7 @@ export function SidePanel ({
           <SheetFooter className="">
             <SheetClose asChild>
               <Button
-                type="submit"
+                type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'
               >
                 {actionBtn}
               </Button>
