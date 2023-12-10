@@ -59,3 +59,9 @@ export const accountFormSchema = z.object({
 export const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark']).default('light')
 })
+
+export const workspacesSchema = z.object({
+  name: z.string().min(1).max(30),
+  key: z.enum(['public', 'private']).default('private'),
+  secretkey: z.enum(['public', 'private']).default('private')
+})

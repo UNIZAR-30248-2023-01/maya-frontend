@@ -866,6 +866,40 @@ export const landing = {
   }
 }
 
+export const workspaces = {
+  es: {
+    'workspace-column': 'Lugares de trabajo',
+    seats: 'Asientos',
+    seat: 'Asiento',
+    filter: 'Filtrar por nombre',
+    reservedSeats: 'Asientos reservados',
+    selectedSeats: 'Asientos seleccionados',
+    number: 'Número',
+    save: 'Guardar',
+    cancel: 'Cancelar Reserva',
+    'toast-loading': 'Estamos cancelando tu reserva. Por favor, espera un momento.',
+    'toast-success': 'Tu reserva se ha cancelado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-res-loading': 'Estamos realizando tu reserva. Por favor, espera un momento.',
+    'toast-res-success': 'Tu reserva se ha realizado correctamente.'
+  },
+  en: {
+    'workspace-column': 'Workspaces',
+    seats: 'Seats',
+    seat: 'Seat',
+    filter: 'Filter by name',
+    reservedSeats: 'Reserved Seats ',
+    selectedSeats: 'Selected Seats',
+    number: 'Number',
+    save: 'Save',
+    cancel: 'Cancel Reservation',
+    'toast-loading': 'We are canceling your reservation. Please wait a moment.',
+    'toast-success': 'Your reservation has been successfully cancelled.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-res-loading': 'We are in the process of making your reservation. Please wait a moment.',
+    'toast-res-success': 'Your reservation has been successfully completed.'
+  }
+}
 export const privacy = {
   es: {
     title: 'Privacy',

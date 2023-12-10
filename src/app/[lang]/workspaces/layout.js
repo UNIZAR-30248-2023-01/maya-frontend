@@ -1,7 +1,7 @@
 import { Layout } from '@/components/layout'
 
 export const metadata = {
-  title: 'Workspaces',
+  title: 'WorkSpaces',
   description: 'Here is a list of your workspaces'
 }
 
