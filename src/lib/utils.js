@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { createClient } from '@supabase/supabase-js'
 
 export function mayaSays () {
+  if (process.env.NODE_ENV !== 'production') return
   console.clear()
   console.log('          &&&&                       &&&')
   console.log('          (&&&&&&                 &&&&&')

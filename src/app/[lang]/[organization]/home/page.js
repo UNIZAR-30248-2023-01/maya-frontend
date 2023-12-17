@@ -11,7 +11,6 @@ import {
   BarList,
   Bold,
   DonutChart,
-  BadgeDelta,
   Metric
 } from '@tremor/react'
 import { useLang } from '@/context/language-context'
