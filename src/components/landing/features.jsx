@@ -29,9 +29,9 @@ export function Feature1 () {
   ]
 
   return (
-    <section className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+    <section id="features" className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-base font-semibold leading-7 text-indigo-500">{dictionary.landing['features-pre-1']}</h2>
+        <h2 className="text-base font-semibold leading-7 text-custom-mustard">{dictionary.landing['features-pre-1']}</h2>
         <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
           {dictionary.landing['features-title-1']}
         </p>
@@ -44,7 +44,7 @@ export function Feature1 () {
           {primaryFeatures.map((feature) => (
             <div key={feature.name} className="flex flex-col">
               <dt className="text-base font-semibold leading-7">
-                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500">
+                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-custom-mustard">
                   <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
                 {feature.name}
@@ -63,10 +63,10 @@ export function Feature1 () {
 export function Feature2 () {
   const { dictionary } = useLang()
   return (
-    <section className="mt-32 sm:mt-56">
+    <section id="news" className="mt-32 sm:mt-56">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-500">{dictionary.landing['features-pre-2']}</h2>
+          <h2 className="text-base font-semibold leading-7 text-custom-mustard">{dictionary.landing['features-pre-2']}</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{dictionary.landing['features-title-2']}</p>
           <p className="mt-6 text-lg leading-8 text-gray-700">
           {dictionary.landing['features-description-2']}

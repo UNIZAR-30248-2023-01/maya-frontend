@@ -1056,42 +1056,42 @@ export const faq = {
     {
       question: '¿Puedo personalizar mi perfil?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Sí, desde tu perfil puedes cambiar tu nombre, apellidos, foto de perfil y contraseña.'
     }, {
       question: '¿Cómo puedo crear un proyecto?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu organización, puedes crear un proyecto desde el menú lateral siempre y cuando tengas permisos de propietario o administrador.'
     },
     {
       question: '¿Cómo puedo crear un equipo?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu organización, puedes crear un equipo desde el menú lateral siempre y cuando tengas permisos de propietario o administrador.'
     },
     {
       question: '¿Cómo puedo añadir un equipo a mi proyecto?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu proyecto, puedes añadir un equipo desde el menú superior siempre y cuando tengas permisos de propietario o administrador.'
     }
   ],
   en: [
     {
-      question: '¿Puedo personalizar mi perfil?',
+      question: '¿Can I customize my profile?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Yes, from your profile you can change your name, last name, profile picture and password.'
     }, {
-      question: '¿Cómo puedo crear un proyecto?',
+      question: 'How can I create a project?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your organization, you can create a project from the side menu as long as you have owner or administrator permissions.'
     },
     {
-      question: '¿Cómo puedo crear un equipo?',
+      question: 'How can I create a team?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your organization, you can create a team from the side menu as long as you have owner or administrator permissions.'
     },
     {
-      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      question: '¿How can I add a team to my project?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your project, you can add a team from the top menu as long as you have owner or administrator permissions.'
     }
   ]
 }
@@ -1147,6 +1147,7 @@ export const org = {
 }
 export const home = {
   es: {
+    title: 'Gestionar tu trabajo nunca fue tan fácil',
     'salary-value': 'Sueldo actual',
     'symbol-money': '€',
     'time-spent-vs': 'Tiempo invertido vs tiempo por invertir por semana',
@@ -1167,6 +1168,7 @@ export const home = {
     week: 'Vista semanal'
   },
   en: {
+    title: 'Manage your work has never been so easy',
     'salary-value': 'Actual salary',
     'symbol-money': '$',
     'time-spent-vs': 'Time spent vs time to spend per week',

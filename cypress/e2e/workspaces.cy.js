@@ -1,4 +1,4 @@
-import { user, createUser, deleteUser } from './setUp/setUp'
+import { user, createUser, deleteUser } from './config/setUp'
 
 describe('WorkSpaces', () => {
   before(() => {

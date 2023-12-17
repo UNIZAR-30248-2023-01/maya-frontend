@@ -27,7 +27,7 @@ export default function Home () {
   const { lang, dictionary } = useLang()
   const { user } = useUser()
 
-  const horasSemanales = 45
+  const horasSemanales = 40
 
   /*
    * Obtener salario del usuario
@@ -209,7 +209,6 @@ export default function Home () {
    * Obtener proyectos abiertos y cerrados
    */
   const { data: projects } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?&select=status`)
-  console.log('projects ', projects)
   const [pjts, setProjects] = useState([
     {
       name: dictionary.home['project-open'],
@@ -281,8 +280,6 @@ export default function Home () {
       // startDate.setDate(startDate.getDate() - currentDay + 1) // Retrocede al lunes
       startDate.setDate(startDate.getDate() - (currentDay + 6) % 7)
 
-      console.log('startDate ', startDate)
-
       // Obtén la fecha de finalización de la semana (domingo)
       const endDate = new Date(currentDate)
       endDate.setDate(startDate.getDate() + 7) // Avanza al domingo
@@ -297,8 +294,6 @@ export default function Home () {
       viernes.setDate(viernes.getDate() + 4)
       const sabado = new Date(startDate)
       sabado.setDate(sabado.getDate() + 5)
-
-      console.log('endDate ', endDate)
 
       const taskDoneWeek = async () => {
         const { data: tasksDone } = await supabase
@@ -356,9 +351,9 @@ export default function Home () {
       <h1 className="text-custom-mustard text-2xl border-r-2 ml-2 pr-3">
         MaYA
       </h1>
-      <h1 className="text-gray-300 text-2xl ml-2 pl-3">
-        Manage Your Assigments
-      </h1>
+      <p className="text-gray-300 text-2xl ml-2 pl-3">
+        {dictionary.home.title}
+      </p>
     </header>
     <main className="">
       <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
