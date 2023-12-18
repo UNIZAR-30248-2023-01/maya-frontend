@@ -79,7 +79,7 @@ export function InviteMember ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="capitalize h-8 text-black hover:bg-custom-lighterYellow bg-custom-mustard">{triggerBtn}</Button>
+        <Button id="invite-button" className="capitalize h-8 text-black hover:bg-custom-lighterYellow bg-custom-mustard">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>

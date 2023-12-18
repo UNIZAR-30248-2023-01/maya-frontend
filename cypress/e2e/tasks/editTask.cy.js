@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, privateProject } from '../config/models'
+import { user, privateProject, organization } from '../config/models'
 import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 const newTask = {
@@ -27,12 +27,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(2000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(1000)
@@ -54,12 +54,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(1000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(1000)
@@ -98,12 +98,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(1000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(2000)
@@ -127,12 +127,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(1000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(1000)
@@ -154,12 +154,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(1000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(1000)
@@ -182,12 +182,12 @@ describe('Edit tasks', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
 
-    cy.wait(1000)
+    cy.wait(5000)
     cy.get('table tbody tr:first-child').click()
 
     cy.wait(1000)

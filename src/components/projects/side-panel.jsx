@@ -47,7 +47,7 @@ export function SidePanel ({
       const createProject = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            await supabase.from('projects').insert([{ ...form, organization: 'reign' }]).select()
+            await supabase.from('projects').insert([{ ...form, organization }]).select()
               .then(async (res) => {
                 if (res.error !== null) return
                 await supabase.from('people-project').insert({

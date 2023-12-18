@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useRouter, usePathname } from 'next/navigation'
 
-export function ProjectSettings ({ project }) {
+export function ProjectSettings ({ project, organization }) {
   const { dictionary } = useLang()
   const path = usePathname()
   const router = useRouter()
@@ -110,7 +110,7 @@ export function ProjectSettings ({ project }) {
     }
 
     if (form.name && form.name !== project.name) {
-      router.replace(`${path.split('/').slice(0, 3).join('/')}/${form.name.split(' ').join('-')}`)
+      router.replace(`${path.split('/').slice(0, 4).join('/')}/${form.name.split(' ').join('-')}`)
     } else {
       e.target.reset()
     }
@@ -138,7 +138,7 @@ export function ProjectSettings ({ project }) {
             onChange={(e) => setter({ key: 'description', value: e.target.value })}
           />
           <div className='flex justify-end'>
-            <Button type="submit" disabled={!form.name && !form.description}>{dictionary.common.save}</Button>
+            <Button type="submit" className='capitalize h-8 hover:bg-custom-lighterYellow text-black bg-custom-mustard' disabled={!form.name && !form.description}>{dictionary.common.save}</Button>
           </div>
         </form>
 
@@ -157,7 +157,7 @@ export function ProjectSettings ({ project }) {
                   {isPublic ? dictionary.projectSettings['public-visibility'] : dictionary.projectSettings['private-visibility']}
                 </Label>
               </div>
-              <ConfirmationVisibilityButton isPublic={isPublic} projectName={project.name} />
+              <ConfirmationVisibilityButton isPublic={isPublic} projectName={project.name} organization={organization} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
@@ -167,7 +167,7 @@ export function ProjectSettings ({ project }) {
                   {isClosed ? dictionary.projectSettings['explain-open-project'] : dictionary.projectSettings['explain-close-project']}
                 </Label>
               </div>
-              <ConfirmationCloseButton isClose={isClosed} projectName={project.name} />
+              <ConfirmationCloseButton isClose={isClosed} projectName={project.name} organization={organization} />
             </div>
 
             <div className="w-full flex flex-row items-center justify-between gap-8 p-4">
@@ -177,7 +177,7 @@ export function ProjectSettings ({ project }) {
                   {dictionary.projectSettings['explain-delete-project']}
                 </Label>
               </div>
-              <ConfirmationDeleteButton projectName={project.name} />
+              <ConfirmationDeleteButton projectName={project.name} organization={organization} />
             </div>
           </div>
         </div>

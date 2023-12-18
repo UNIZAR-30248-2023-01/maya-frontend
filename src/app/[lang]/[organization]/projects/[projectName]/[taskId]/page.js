@@ -142,7 +142,7 @@ export default function TaskPage ({ params }) {
   )
 
   if (!taskLoadig && !peopleLoading && !projecteopleLoading && !commentsLoading && !hoursLoading && !isLoading) {
-    if (project[0].visibility === 'private' && !project[0].people.find(e => e.username === user.username)) {
+    if (project[0]?.visibility === 'private' && !project[0].people.find(e => e.username === user.username)) {
       return router.back()
     }
 
@@ -164,7 +164,7 @@ export default function TaskPage ({ params }) {
       <div className='flex flex-col gap-6'>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-row justify-between'>
-            <div className='flex flex-row gap-4 items-center'>
+            <div className='flex flex-col gap-4 items-start'>
               <Label id="task-name" className='text-4xl font-semibold text-foreground capitalize'>
                 {task.name}
               </Label>
@@ -308,12 +308,12 @@ export default function TaskPage ({ params }) {
                 >
                   {normalize(dictionary.tasks['assignees-column'])}
                 </Label>
-                <div className='flex flex-row gap-6 px-3 py-2'>
+                <div className='flex flex-row flex-wrap gap-6 px-3 py-2'>
                   {people.map((user) => (
                     <div id={user.people.username} key={user.people.username} className="flex items-center space-x-4 group">
                       <Avatar>
-                        <AvatarImage src={user.people.avatar} />
-                        <AvatarFallback>{String(user.people.firstname[0]).toUpperCase() + String(user.people.lastname[0]).toUpperCase()}</AvatarFallback>
+                        <AvatarImage src={user.people.avatar} className='h-10 w-10' />
+                        <AvatarFallback className='h-10 w-10'>{String(user.people.firstname[0]).toUpperCase() + String(user.people.lastname[0]).toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <div className='flex flex-col gap-0.5'>
                         <Label className="text-sm font-medium leading-none capitalize">{user.people.firstname + ' ' + user.people.lastname}</Label>
@@ -450,7 +450,7 @@ export default function TaskPage ({ params }) {
                       <form onSubmit={(e) => handleAddComment(e)}
                         className='flex flex-row gap-4'>
                         <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
-                        <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+                        <Button className='px-4 flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
                       </form>
                     </CardContent>
                   </Card>
@@ -481,7 +481,7 @@ export default function TaskPage ({ params }) {
                             id={'time-log-input'}
                             placeholder={dictionary.hours.placeholder}
                             onChange={(e) => setNewHour(e.target.valueAsNumber)}/>
-                          <Button className='px-4 flex flex-row gap-2 min-w-fit'> {dictionary.hours.button} <LuPlus /></Button>
+                          <Button className='px-4 flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'> {dictionary.hours.button} <LuPlus /></Button>
                         </form>
                       </CardContent>
                     </Card>
@@ -507,7 +507,7 @@ export default function TaskPage ({ params }) {
                     <form onSubmit={(e) => handleAddComment(e)}
                       className='flex flex-row gap-4'>
                       <Input type='text' placeholder={dictionary.comments.placeholder} onChange={(e) => { setNewComment(e.target.value) }} />
-                      <Button className='px-4 flex flex-row gap-2' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
+                      <Button className='px-4 flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' disabled={!newComment}> {dictionary.comments.button} <LuSend /></Button>
                     </form>
                   </CardContent>
                 </Card>

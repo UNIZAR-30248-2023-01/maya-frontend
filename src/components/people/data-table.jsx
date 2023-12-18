@@ -14,6 +14,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { DataTableHeader } from '@/components/people/data-table-header'
 import { DataTableBody } from '@/components/people/data-table-body'
 import { useUser } from '@/context/user-context'
+import { InvitationLink } from './invitation-link'
 
 export function DataTable ({ data, columns, organization }) {
   const [sorting, setSorting] = useState([])
@@ -46,6 +47,7 @@ export function DataTable ({ data, columns, organization }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <DataTableToolbar table={table} />
+        <InvitationLink organization={organization}/>
       </div>
       <div className="rounded-md border">
         <Table>

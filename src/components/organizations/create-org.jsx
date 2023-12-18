@@ -84,7 +84,7 @@ export function CreateOrg ({ separator }) {
 
       <Dialog>
       <DialogTrigger asChild>
-        <Button size='lg' className='w-fit font-semibold'>{dictionary.org['create-org-button']}</Button>
+        <Button size='lg' className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard w-fit font-semibold'>{dictionary.org['create-org-button']}</Button>
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={e => handleSubmit(e)}>

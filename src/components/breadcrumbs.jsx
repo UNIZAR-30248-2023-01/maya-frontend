@@ -5,9 +5,8 @@ import { LuHome } from 'react-icons/lu'
 import { usePathname } from 'next/navigation'
 import { useLang } from '@/context/language-context'
 
-export function Breadcrumbs () {
+export function Breadcrumbs ({ organization }) {
   let pages = usePathname()
-  const organization = pages.split('/')[2]
   pages = pages.split('/').slice(3, 5).filter(page => page !== 'home')
 
   const { dictionary } = useLang()
@@ -17,7 +16,7 @@ export function Breadcrumbs () {
       <ol className="flex items-center space-x-4">
         <li>
           <div>
-            <Link id="home-button" href="/home" className="text-gray-400 hover:text-gray-500">
+            <Link id="home-button" href={`/${organization}/home`} className="text-gray-400 hover:text-gray-500">
               <LuHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </Link>

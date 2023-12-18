@@ -28,13 +28,14 @@ import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
+import { useUser } from '@/context/user-context'
 
 const initialize = ({ data }) => {
   const form = getForm(teamSchema._def.shape())
 
   for (const key in form) {
     if (key === 'members') {
-      form.members = data.people.map((member) => member.username)
+      form.members = data.people?.map((member) => member.username)
     } else {
       form[key] = data[key]
     }
@@ -49,6 +50,8 @@ export function DataTableRowActions ({ row }) {
   const [form, setForm] = useState(initialize({ data: row.original }))
   const [people, setPeople] = useState([])
   const organization = usePathname().split('/')[2]
+
+  const { user } = useUser()
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -78,8 +81,8 @@ export function DataTableRowActions ({ row }) {
               .delete()
               .eq('name', team)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -103,9 +106,9 @@ export function DataTableRowActions ({ row }) {
 
     const { members, ...team } = form
 
-    const oldMembers = row.original.people.map((person) => person.username)
-    const members2del = oldMembers.filter((member) => !members.includes(member))
-    const members2add = members.filter((member) => !oldMembers?.includes(member))
+    const oldMembers = row.original.people?.map((person) => person.username)
+    const members2del = oldMembers?.filter((member) => !members.includes(member))
+    const members2add = members?.filter((member) => !oldMembers?.includes(member))
 
     try {
       teamSchema.parse({ ...team, organization })
@@ -133,8 +136,8 @@ export function DataTableRowActions ({ row }) {
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

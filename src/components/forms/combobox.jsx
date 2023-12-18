@@ -43,7 +43,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange }) {
             className={cn('w-full justify-between capitalize', !value && 'text-muted-foreground font-normal')}
           >
             <div className='flex flex-row gap-2'>
-              {<span>{list.find(e => e.value === value)?.icon}</span>}
+              {<span>{list?.find(e => e.value === value)?.icon}</span>}
               {dictionaries[value] || label}
             </div>
 
@@ -57,7 +57,7 @@ export function ComboboxEnum ({ id, label, value, list, onChange }) {
           <CommandInput placeholder={dictionaries['search-placeholder']} className="h-9" />
           <CommandEmpty>{dictionaries['not-found']}</CommandEmpty>
           <CommandGroup>
-            {list.map((item) => (
+            {list?.map((item) => (
               <CommandItem
                 id={item.value}
                 key={item.value}
@@ -118,7 +118,7 @@ export function ComboboxArray ({ id, label, placeholder, values, list, onChange,
           <CommandList>
             <CommandEmpty>{dictionaries['no-results']}</CommandEmpty>
             <CommandGroup id={`${id}-menu`}>
-              {list.map((option) => {
+              {list?.map((option) => {
                 const isSelected = values.includes(option.value)
                 return (
                   <CommandItem

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, privateProject, publicProject } from '../config/models'
+import { user, privateProject, publicProject, organization } from '../config/models'
 import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 const newProject = {
@@ -34,7 +34,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -48,7 +48,7 @@ describe('Edit project', async () => {
     cy.get('form').submit()
 
     cy.wait(1000)
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
 
@@ -65,7 +65,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -79,7 +79,7 @@ describe('Edit project', async () => {
     cy.get('form').submit()
 
     cy.wait(1000)
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
 
@@ -94,7 +94,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -109,7 +109,7 @@ describe('Edit project', async () => {
     cy.get('form').submit()
 
     cy.wait(1000)
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
 
@@ -128,7 +128,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -143,7 +143,7 @@ describe('Edit project', async () => {
     cy.get('button#accept-visibility-project').click()
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get('button#visibility-filter').click()
@@ -161,7 +161,7 @@ describe('Edit project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${publicProject.dbname}`).click()
@@ -176,7 +176,7 @@ describe('Edit project', async () => {
     cy.get('button#accept-visibility-project').click()
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get('button#visibility-filter').click()

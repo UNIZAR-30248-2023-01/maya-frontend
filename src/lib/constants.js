@@ -23,7 +23,7 @@ export const supportedLanguages = [
 ]
 
 export const navigation = [
-  { name: 'overview', href: '/', icon: LuLayoutGrid, current: true },
+  { name: 'overview', href: '/home', icon: LuLayoutGrid, current: true },
   { name: 'projects', href: '/projects', icon: LuFileText, current: false },
   { name: 'teams', href: '/teams', icon: LuUsers, current: false },
   { name: 'staff', href: '/staff', icon: LuUser, current: false },

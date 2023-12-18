@@ -1,22 +1,25 @@
 /// <reference types="cypress" />
 
-import { user, createUser, deleteUser } from '../setUp/setUp'
+import { user, organization } from '../config/models'
+import { createUser, deleteUser, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Setting appearance tests', () => {
   before(() => {
     createUser()
+    createOrg()
   })
 
   after(() => {
     deleteUser()
+    deleteOrg()
   })
 
-  it('Editing name, surname, pasword and profile pic', () => {
+  it('Change theme', () => {
     cy.login(user)
 
-    cy.wait(3000)
+    cy.wait(1000)
 
-    cy.visit('/es/settings/appearance')
+    cy.visit(`/en/${organization.name}/settings/appearance`)
     cy.wait(1000)
 
     cy.get('#darkTheme').click()

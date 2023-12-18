@@ -19,9 +19,13 @@ export default function TeamsPage ({ params }) {
     return <DataTable data={loadingTeam} columns={columns} people={[]} />
   }
 
-  const myTeams = teams.filter(e => e?.teamValue?.organization === organization && e?.teamValue.visibility === 'private').map(e => e.teamValueValue)
+  console.log(teams.filter(e => e?.teamValue?.organization === organization && e?.teamValue.visibility === 'private'))
+  const myTeams = teams.filter(e => e?.teamValue?.organization === organization && e?.teamValue.visibility === 'private')?.map(e => e.teamValue)
+
+  console.log(myTeams)
+  console.log(publicTeams)
 
   if (myTeams && publicTeams) {
-    return <DataTable data={[...myTeams, ...publicTeams]} columns={columns} people={people || []} organization={organization} />
+    return <DataTable data={[...myTeams, ...publicTeams].filter(e => e !== undefined) || loadingTeam} columns={columns} people={people || []} organization={organization} />
   }
 }

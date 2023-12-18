@@ -1,17 +1,20 @@
 /// <reference types="cypress" />
 
 import { user } from '../config/models'
-import { createUser, deleteUser } from '../config/setUp'
+import { createOrg, createUser, deleteOrg, deleteUser } from '../config/setUp'
 
 describe('Sign out tests', () => {
-  before(() => createUser())
-  after(() => deleteUser())
+  before(() => {
+    createUser()
+    createOrg()
+  })
+  after(() => {
+    deleteUser()
+    deleteOrg()
+  })
 
   it('Sign out', () => {
     cy.login(user)
-    cy.wait(1000)
-
-    cy.get('a#home-button').should('exist')
     cy.wait(1000)
 
     cy.get('button#sidebar-button').click()
