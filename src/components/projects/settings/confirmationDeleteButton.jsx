@@ -17,13 +17,16 @@ import { supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
 import { useRouter, usePathname } from 'next/navigation'
+import { useUser } from '@/context/user-context'
 
 export function ConfirmationDeleteButton ({
-  projectName
+  projectName,
+  organization
 }) {
   const { dictionary } = useLang()
   const path = usePathname()
   const router = useRouter()
+  const { user } = useUser()
 
   const handleDeleteProject = () => {
     try {
@@ -33,7 +36,8 @@ export function ConfirmationDeleteButton ({
             await supabase.from('projects').delete()
               .eq('name', projectName)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?username=eq.${user.username}&select=project,projectValue:projects(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?organization=eq.${organization}&visibility=eq.${'public'}&select=*`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -52,7 +56,7 @@ export function ConfirmationDeleteButton ({
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
-    router.replace(`${path.split('/').slice(0, 3).join('/')}`)
+    router.replace(`${path.split('/').slice(0, 4).join('/')}`)
   }
 
   return (

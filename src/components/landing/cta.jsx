@@ -38,7 +38,7 @@ export function CTA () {
           aria-hidden="true"
         >
           <div
-            className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
+            className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#BDB0A1] to-[#DEB841] opacity-20"
             style={{
               clipPath:
                 'polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)'
@@ -55,7 +55,7 @@ export function CTA () {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
               href="/sign-up"
-              className="rounded-md border-2 border-black hover:font-semibold hover:border-black duration-300 bg-black px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-transparent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="rounded-md border-2 border-custom-mustard hover:font-semibold hover:border-custom-mustard duration-300 bg-custom-mustard px-3.5 py-2 text-sm font-semibold shadow-sm hover:bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-mustard"
             >
               {dictionary.landing['cta-action']}
             </Link>

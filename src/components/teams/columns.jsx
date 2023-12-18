@@ -13,7 +13,7 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['team-column']} />
     },
     cell: ({ row, dictionary }) => {
-      if (!row.getValue('name')) return <Skeleton className='w-44 h-4'/>
+      if (!row?.getValue('name')) return <Skeleton className='w-44 h-4'/>
 
       return (
         <div className="max-w-[150px] truncate font-medium capitalize">
@@ -22,7 +22,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return normalize(row.getValue(id)).includes(value)
+      return normalize(row.getValue(id))?.includes(value)
     }
   }, {
     accessorKey: 'people',
@@ -32,7 +32,7 @@ export const columns = [
       if (!name) {
         return (
           <div className="flex items-end space-x-0.5">
-            {row.getValue('people').map((person, id) => (
+            {row.getValue('people')?.map((person, id) => (
               <Skeleton key={id} className="rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage />
@@ -45,7 +45,7 @@ export const columns = [
 
       return (
         <div className="flex items-end space-x-0.5">
-          {row.getValue('people').map((person, id) => (
+          {row.getValue('people')?.map((person, id) => (
             <Avatar key={id}>
               <AvatarImage src={person.avatar} />
               <AvatarFallback className="uppercase">{String(person.firstname)[0] + String(person.lastname)[0]}</AvatarFallback>

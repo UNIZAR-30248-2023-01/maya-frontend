@@ -17,6 +17,7 @@ import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function SidePanel ({
   title,
@@ -24,9 +25,11 @@ export function SidePanel ({
   triggerBtn,
   actionBtn,
   dictionary,
-  data
+  data,
+  organization
 }) {
   const [form, setForm] = useState(getForm(teamSchema._def.shape()))
+  const { user } = useUser()
 
   const setter = ({ key, value, type }) => {
     if (type === 'bool') {
@@ -42,12 +45,12 @@ export function SidePanel ({
     const { members, ...team } = form
 
     try {
-      teamSchema.parse({ ...team, organization: 'reign' })
+      teamSchema.parse({ ...team, organization })
       const createTeam = () => {
         return new Promise((resolve, reject) => {
           (async () => {
             // Primera inserción en la tabla 'teams'
-            await supabase.from('teams').insert([{ ...team, organization: 'reign' }]).select()
+            await supabase.from('teams').insert([{ ...team, organization }]).select()
               .then(async (res) => {
                 if (res.error !== null) return
                 // Segunda inserción en la tabla 'people-teams'
@@ -58,8 +61,8 @@ export function SidePanel ({
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -132,7 +135,7 @@ export function SidePanel ({
           <SheetFooter className="">
             <SheetClose asChild>
               <Button
-                type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'
+                type="submit" id='create-team-button' className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'
               >
                 {actionBtn}
               </Button>

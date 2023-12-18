@@ -16,7 +16,7 @@ import { DataTableBody } from '@/components/project-people/data-table-body'
 import { InviteMember } from '@/components/project-people/invite-member'
 import { useLang } from '@/context/language-context'
 
-export function DataTable ({ data, columns, projectName }) {
+export function DataTable ({ data, columns, projectName, organization }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -53,6 +53,7 @@ export function DataTable ({ data, columns, projectName }) {
           actionBtn={dictionary.people['invite-member-send']}
           data={{ members: data }}
           projectName={projectName}
+          organization={organization}
         />
       </div>
       <div className="rounded-md border">

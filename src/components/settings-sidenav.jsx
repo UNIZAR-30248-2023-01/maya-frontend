@@ -9,7 +9,8 @@ import { useLang } from '@/context/language-context'
 
 export function SidebarNav ({ className, items, ...props }) {
   let pathname = usePathname()
-  pathname = '/' + pathname.split('/').slice(2).join('/')
+  const organization = pathname.split('/')[2]
+  pathname = '/' + pathname.split('/').slice(3).join('/')
 
   const { dictionary } = useLang()
 
@@ -24,7 +25,7 @@ export function SidebarNav ({ className, items, ...props }) {
       {items.map((item) => (
         <Link
           key={item.href}
-          href={item.href}
+          href={'/' + organization + item.href}
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             pathname === item.href

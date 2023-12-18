@@ -19,7 +19,7 @@ import { mutate } from 'swr'
 import { roles } from '@/lib/constants'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { DialogClose } from '@radix-ui/react-dialog'
-// import { RemoveUser } from './remove-user'
+import { RemoveUser } from './remove-user'
 
 export function RoleChange ({
   title,
@@ -29,6 +29,7 @@ export function RoleChange ({
   deleteDescription,
   username,
   defaultRole,
+  organization,
   id
 }) {
   const { dictionary } = useLang()
@@ -47,12 +48,13 @@ export function RoleChange ({
         const changeRole = () => {
           return new Promise((resolve, reject) => {
             (async () => {
-              await supabase.from('people').update({ role })
+              await supabase.from('people-org').update({ role })
                 .eq('username', username)
+                .eq('organization', organization)
                 .select()
                 .then(() => {
                 // Actualización de los datos en la interfaz
-                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username,firstname,lastname,avatar,role`)
+                  mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?organization=eq.${organization}&select=username,organization,role,people(firstname,lastname,avatar)`)
                   resolve()
                 }).catch((error) => {
                   console.error(error)
@@ -111,10 +113,10 @@ export function RoleChange ({
                 />
               </div>
               <DialogClose asChild>
-                <Button id='confirm-edit' type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
+                <Button id='confirm-edit' type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'>{actionBtn}</Button>
               </DialogClose>
             </div>
-            {/* <RemoveUser username={username} title={deleteTitle} description={deleteDescription} /> */}
+            <RemoveUser username={username} organization={ organization } title={deleteTitle} description={deleteDescription} />
           </div>
         </form>
       </DialogContent>

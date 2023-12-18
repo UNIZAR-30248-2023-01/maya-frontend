@@ -21,7 +21,8 @@ export function TeamMember ({
   image = '/assets/avatars/memojis/4.webp',
   firstname = 'Sofia',
   lastname = 'Davis',
-  username = 'm@example.com'
+  username = 'm@example.com',
+  organization
 }) {
   const { dictionary } = useLang()
 
@@ -39,32 +40,33 @@ export function TeamMember ({
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64">
+      <DropdownMenuContent className="w-60">
       <DropdownMenuLabel>{dictionary.settingsAccount['account-headline']}</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/settings">
+          <Link href={`/${organization}/settings`}>
+            <DropdownMenuItem className="w-full cursor-pointer">
               {dictionary.settingsAccount['account-tab']}
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/appearance">
+            </DropdownMenuItem>
+          </Link>
+          <Link href={`/${organization}/settings/appearance`}>
+            <DropdownMenuItem className="w-full cursor-pointer">
               {dictionary.settingsAccount['appearance-tab']}
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/settings/password">
+            </DropdownMenuItem>
+          </Link>
+          <Link href={`/${organization}/settings/password`}>
+            <DropdownMenuItem className="w-full cursor-pointer">
               {dictionary.settingsAccount['password-tab']}
-            </Link>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
-        <DropdownMenuItem>
-          <button onClick={() => {
-            signOut({ callbackUrl: '/' })
-          }} id="sign-out-button">
+
+        <button onClick={() => {
+          signOut({ callbackUrl: '/' })
+        }} id="sign-out-button" className="w-full">
+          <DropdownMenuItem>
             {dictionary.settingsAccount['logout-tab']}
-          </button>
-        </DropdownMenuItem>
+          </DropdownMenuItem>
+        </button>
       </DropdownMenuContent>
     </DropdownMenu>
   )

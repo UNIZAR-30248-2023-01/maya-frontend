@@ -49,7 +49,7 @@ export function DataTableRowActions ({ row }) {
       const removeTeam = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            const data = await getTeams({ project: 'reign-frontend' })
+            const data = await getTeams({ project: row.original.project })
             const peopleInOtherTeams = unique(data.map(item => item.people).flat(), 'username').map(item => item.username)
             const people2rm = people.filter(item => !peopleInOtherTeams.includes(item.username)).map(item => item.username)
 
@@ -65,8 +65,8 @@ export function DataTableRowActions ({ row }) {
                   .eq('project', 'reign-frontend')
                   .in('username', people2rm)
                   .then(() => {
-                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,teams-project(*),people(*)`)
-                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?select=*`)
+                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams-project?project=eq.${row.original.project}&select=team`)
+                    mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${row.original.organization}&select=*,people(*)`)
                     resolve()
                   })
                   .catch((err) => reject(err))
@@ -102,7 +102,7 @@ export function DataTableRowActions ({ row }) {
         <DropdownMenuItem
           className="cursor-pointer"
         >
-          <Link href={`/teams/${String(team).toLowerCase().replace(/ /g, '-')}`} className='w-full'>
+          <Link href={`/${row.original.organization}/teams/${String(team).toLowerCase().replace(/ /g, '-')}`} className='w-full'>
           View
           </Link>
         </DropdownMenuItem>

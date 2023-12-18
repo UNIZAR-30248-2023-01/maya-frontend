@@ -17,7 +17,7 @@ import { SidePanel } from '@/components/teams/side-panel'
 import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 
-export function DataTable ({ data, columns, people }) {
+export function DataTable ({ data, columns, people, organization }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -55,6 +55,7 @@ export function DataTable ({ data, columns, people }) {
           schema={teamSchema}
           dictionary={dictionary}
           data={{ members: people }}
+          organization={organization}
         />
       </div>
       <div className="rounded-md border">

@@ -16,7 +16,7 @@ import { DataTableBody } from '@/components/teams-projects/data-table-body'
 import { AddTeam } from '@/components/teams-projects/add-team'
 import { useLang } from '@/context/language-context'
 
-export function DataTable ({ data, columns, people }) {
+export function DataTable ({ data, columns, people, teams2add, projectName, organization }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -51,8 +51,9 @@ export function DataTable ({ data, columns, people }) {
           description={dictionary.teams['add-team-description']}
           triggerBtn={dictionary.teams.invite}
           actionBtn={dictionary.teams['add-team-send']}
-          data={{ teams: data }}
-          projectName="reign-frontend"
+          teams={teams2add}
+          projectName={projectName}
+          organization={organization}
         />
       </div>
       <div className="rounded-md border">

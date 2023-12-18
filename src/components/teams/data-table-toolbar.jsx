@@ -9,6 +9,7 @@ import { DataTableFacetedFilter } from '@/components/teams/data-table-faceted-fi
 export function DataTableToolbar ({ table, people }) {
   const isFiltered = table.getState().columnFilters.length > 0
   const { dictionary } = useLang()
+  console.log(people)
 
   return (
     <div className="flex items-center justify-between">

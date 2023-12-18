@@ -24,9 +24,10 @@ export function InviteMember ({
   triggerBtn,
   actionBtn,
   data,
-  projectName
+  projectName,
+  organization
 }) {
-  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=username`)
+  let { data: people } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?organization=eq.${organization}&select=username`)
   const { dictionary } = useLang()
   const [form, setForm] = useState(getForm(peopleSchema._def.shape()))
 
@@ -78,7 +79,7 @@ export function InviteMember ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="capitalize h-8 text-black hover:bg-custom-lighterYellow bg-custom-mustard">{triggerBtn}</Button>
+        <Button id="invite-button" className="capitalize h-8 text-black hover:bg-custom-lighterYellow bg-custom-mustard">{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>

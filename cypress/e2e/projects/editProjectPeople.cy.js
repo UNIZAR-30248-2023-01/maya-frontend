@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, userMember, privateProject, publicProject } from '../config/models'
+import { user, userMember, privateProject, publicProject, organization } from '../config/models'
 import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Edit project people', async () => {
@@ -21,7 +21,7 @@ describe('Edit project people', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${publicProject.dbname}`).click()
@@ -51,7 +51,7 @@ describe('Edit project people', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -84,7 +84,7 @@ describe('Edit project people', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()

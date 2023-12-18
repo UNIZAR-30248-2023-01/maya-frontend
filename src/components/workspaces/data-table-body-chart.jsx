@@ -6,35 +6,16 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
-import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/utils'
+import { useRouter, usePathname } from 'next/navigation'
 
 export function DataTableBody ({ table }) {
   const router = useRouter()
-  const saveWorkspace = async (name, key, secretKey, evento) => {
-    const { data: workspaces, error } = await supabase
-      .from('workspaces')
-      .select('*')
-      .eq('name', name)
-
-    if (error) console.log('error:', error)
-    if (workspaces.length === 0) {
-      console.log('No existe el workspace')
-      const { error } = await supabase.from('workspaces').upsert([{
-        name,
-        key,
-        secretKey,
-        evento
-      }])
-      if (error) console.log('error:', error)
-    }
-  }
+  const org = usePathname().split('/')[2]
+  const workspace = usePathname().split('/')[4]
   const goTo = (row, key, secretKey) => {
     // Construye la URL como destino
-    const urlActual = window.location.href
     const name = String(row.original.name).toLowerCase().replace(/ /g, '-')
-    saveWorkspace(name, key, secretKey, true)
-    router.push(`${urlActual}/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
+    router.push(`/${org}/workspaces/${workspace}/${name}`)
   }
 
   return (

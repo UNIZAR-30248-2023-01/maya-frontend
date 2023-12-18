@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { user } from '../config/models'
-import { createUser, deleteUser } from '../config/setUp'
+import { user, organization } from '../config/models'
+import { createOrg, createUser, deleteOrg, deleteUser } from '../config/setUp'
 
 const exampleClockin = {
   in_hour: '11:11',
@@ -16,17 +16,19 @@ const editedClockin = {
 describe('In and outs', () => {
   before(() => {
     createUser()
+    createOrg()
   })
 
   after(() => {
     deleteUser()
+    deleteOrg()
   })
 
   it('Creating Manual Checkin', () => {
     cy.login(user)
     cy.wait(1000)
 
-    cy.visit('/es/in-and-outs')
+    cy.visit(`/es/${organization.name}/in-and-outs`)
     cy.wait(1000)
 
     cy.get('button#new-manual-date').should('be.visible').click()
@@ -54,7 +56,7 @@ describe('In and outs', () => {
     cy.login(user)
     cy.wait(1000)
 
-    cy.visit('/es/in-and-outs')
+    cy.visit(`/es/${organization.name}/in-and-outs`)
     cy.wait(1000)
 
     // Edit the checkin
@@ -76,7 +78,7 @@ describe('In and outs', () => {
     cy.login(user)
     cy.wait(1000)
 
-    cy.visit('/es/in-and-outs')
+    cy.visit(`/es/${organization.name}/in-and-outs`)
     cy.wait(1000)
 
     // Edit the checkin

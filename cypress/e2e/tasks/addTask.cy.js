@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, publicProject, task } from '../config/models'
+import { user, publicProject, task, organization } from '../config/models'
 import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Add task', async () => {
@@ -21,7 +21,7 @@ describe('Add task', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${publicProject.dbname}`).click()
@@ -36,7 +36,7 @@ describe('Add task', async () => {
     cy.get('button#label').click()
     cy.get('div#ui').click()
 
-    cy.get('button#create-task').click()
+    cy.get('form').submit()
     cy.wait(1000)
     cy.get('input#filter-tasks').type(task.name, { force: true })
     cy.get('table tbody tr').should('have.length', 1)

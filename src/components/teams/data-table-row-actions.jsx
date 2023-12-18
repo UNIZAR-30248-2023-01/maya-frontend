@@ -27,13 +27,15 @@ import {
 import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+import { useUser } from '@/context/user-context'
 
 const initialize = ({ data }) => {
   const form = getForm(teamSchema._def.shape())
 
   for (const key in form) {
     if (key === 'members') {
-      form.members = data.people.map((member) => member.username)
+      form.members = data.people?.map((member) => member.username)
     } else {
       form[key] = data[key]
     }
@@ -47,12 +49,16 @@ export function DataTableRowActions ({ row }) {
   const { name: team } = row.original
   const [form, setForm] = useState(initialize({ data: row.original }))
   const [people, setPeople] = useState([])
+  const organization = usePathname().split('/')[2]
+
+  const { user } = useUser()
 
   useEffect(() => {
     const fetchPeople = async () => {
       return await supabase
-        .from('people')
+        .from('people-org')
         .select('*')
+        .eq('organization', organization)
         .then(({ data, error }) => {
           if (error) return
           setPeople(data)
@@ -61,7 +67,7 @@ export function DataTableRowActions ({ row }) {
     }
 
     fetchPeople()
-  }, [])
+  }, [organization])
 
   const handleRemove = async (e) => {
     e.preventDefault()
@@ -75,8 +81,8 @@ export function DataTableRowActions ({ row }) {
               .delete()
               .eq('name', team)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               })
               .catch((error) => reject(error))
@@ -100,19 +106,19 @@ export function DataTableRowActions ({ row }) {
 
     const { members, ...team } = form
 
-    const oldMembers = row.original.people.map((person) => person.username)
-    const members2del = oldMembers.filter((member) => !members.includes(member))
-    const members2add = members.filter((member) => !oldMembers?.includes(member))
+    const oldMembers = row.original.people?.map((person) => person.username)
+    const members2del = oldMembers?.filter((member) => !members.includes(member))
+    const members2add = members?.filter((member) => !oldMembers?.includes(member))
 
     try {
-      teamSchema.parse({ ...team, organization: 'reign' })
+      teamSchema.parse({ ...team, organization })
       const createTeam = () => {
         return new Promise((resolve, reject) => {
           (async () => {
             // Primera inserción en la tabla 'teams'
             await supabase
               .from('teams')
-              .update([{ ...team, organization: 'reign' }])
+              .update([{ ...team, organization }])
               .eq('name', row.original.name)
               .select()
               .then(async (res) => {
@@ -130,8 +136,8 @@ export function DataTableRowActions ({ row }) {
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -176,10 +182,7 @@ export function DataTableRowActions ({ row }) {
           <DropdownMenuItem
             className="cursor-pointer"
           >
-            <Link
-              id="view-team"
-              href={`/teams/${String(team).replace(/ /g, '-')}`} className='w-full'
-            >
+            <Link id='view-team' href={`/${organization}/teams/${String(team).replace(/ /g, '-')}`} className='w-full'>
               View
             </Link>
           </DropdownMenuItem>

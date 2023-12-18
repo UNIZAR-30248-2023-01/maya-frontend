@@ -24,7 +24,8 @@ export function SidePanel ({
   title,
   description,
   triggerBtn,
-  actionBtn
+  actionBtn,
+  organization
 }) {
   const { dictionary } = useLang()
   const { user } = useUser()
@@ -42,11 +43,11 @@ export function SidePanel ({
     e.preventDefault()
 
     try {
-      projectSchema.parse({ ...form, organization: 'reign' })
+      projectSchema.parse({ ...form, organization })
       const createProject = () => {
         return new Promise((resolve, reject) => {
           (async () => {
-            await supabase.from('projects').insert([{ ...form, organization: 'reign' }]).select()
+            await supabase.from('projects').insert([{ ...form, organization }]).select()
               .then(async (res) => {
                 if (res.error !== null) return
                 await supabase.from('people-project').insert({
@@ -54,7 +55,8 @@ export function SidePanel ({
                   project: form.name,
                   role: 'owner'
                 })
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?username=eq.${user.username}&select=project,projectValue:projects(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?organization=eq.${organization}&visibility=eq.${'public'}&select=*`)
                 resolve()
               })
               .catch((error) => reject(error))

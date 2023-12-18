@@ -18,7 +18,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination'
 import { useLang } from '@/context/language-context'
 import { inAndOutsSchema } from '@/lib/schemas'
 
-export function DataTable ({ data, columns }) {
+export function DataTable ({ data, columns, organization }) {
   const { dictionary } = useLang()
   const [sorting, setSorting] = useState([])
   const [columnFilters, setColumnFilters] = useState([])
@@ -57,8 +57,9 @@ export function DataTable ({ data, columns }) {
           actionBtn={dictionary.inandouts['new-table-create']}
           schema={inAndOutsSchema}
           dictionary={dictionary}
+          organization={organization}
         />
-        <BottonController />
+        <BottonController organization={organization} />
 
       </div>
       <div className="rounded-md border">

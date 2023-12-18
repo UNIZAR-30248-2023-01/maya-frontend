@@ -14,6 +14,7 @@ export const columns = [
       return <DataTableColumnHeader column={column} title={dictionary['name-column']} />
     },
     cell: ({ row, dictionary }) => {
+      console.log(row.original)
       const { name } = row.original
       const vis = visibility.find((v) => v.value === row.original.visibility)
       const status = projectStatuses.find((status) => status.value === row.getValue('status'))
@@ -44,7 +45,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return normalize(row.getValue(id)).includes(value)
+      return normalize(row.getValue(id))?.includes(value)
     }
   },
   {

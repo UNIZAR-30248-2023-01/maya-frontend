@@ -28,7 +28,8 @@ export const navigation = {
     tickets: 'tickets',
     settings: 'ajustes',
     appearance: 'apariencia',
-    password: 'contraseña'
+    password: 'contraseña',
+    organizations: 'organizaciones'
   },
   en: {
     overview: 'overview',
@@ -40,7 +41,8 @@ export const navigation = {
     tickets: 'tickets',
     settings: 'settings',
     appearance: 'appearance',
-    password: 'password'
+    password: 'password',
+    organizations: 'organizations'
   }
 }
 
@@ -1056,42 +1058,42 @@ export const faq = {
     {
       question: '¿Puedo personalizar mi perfil?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Sí, desde tu perfil puedes cambiar tu nombre, apellidos, foto de perfil y contraseña.'
     }, {
       question: '¿Cómo puedo crear un proyecto?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu organización, puedes crear un proyecto desde el menú lateral siempre y cuando tengas permisos de propietario o administrador.'
     },
     {
       question: '¿Cómo puedo crear un equipo?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu organización, puedes crear un equipo desde el menú lateral siempre y cuando tengas permisos de propietario o administrador.'
     },
     {
       question: '¿Cómo puedo añadir un equipo a mi proyecto?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Una vez dentro de tu proyecto, puedes añadir un equipo desde el menú superior siempre y cuando tengas permisos de propietario o administrador.'
     }
   ],
   en: [
     {
-      question: '¿Puedo personalizar mi perfil?',
+      question: '¿Can I customize my profile?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Yes, from your profile you can change your name, last name, profile picture and password.'
     }, {
-      question: '¿Cómo puedo crear un proyecto?',
+      question: 'How can I create a project?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your organization, you can create a project from the side menu as long as you have owner or administrator permissions.'
     },
     {
-      question: '¿Cómo puedo crear un equipo?',
+      question: 'How can I create a team?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your organization, you can create a team from the side menu as long as you have owner or administrator permissions.'
     },
     {
-      question: '¿Cómo puedo añadir un equipo a mi proyecto?',
+      question: '¿How can I add a team to my project?',
       answer:
-        'Se el primero en contestar a esta pregunta'
+        'Once inside your project, you can add a team from the top menu as long as you have owner or administrator permissions.'
     }
   ]
 }
@@ -1113,8 +1115,50 @@ export const footer = {
   }
 }
 
+export const org = {
+  es: {
+    'create-org-or': 'o',
+    'create-org-title': '¿Todavía no tienes una organización?',
+    'create-org-button': 'Creala ahora mismo!',
+    'name-column': 'Nombre',
+    'description-column': 'Descripción',
+    'new-table-name-placeholder': 'Tu organización',
+    'new-table-desc-placeholder': 'Una breve descripción sobre tu organización.',
+    'dialog-title': 'Nueva organización',
+    'dialog-description': 'Una organizarción te permite tener agrupada toda la gestión de tu empresa.',
+    'create-button': 'Crear organización',
+    'toast-loading': 'Estamos creando tu organización. Por favor, espera un momento.',
+    'toast-success': 'Tu organización se ha creado correctamente.',
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-loading-join': 'Estamos uniendote a tu nueva organización. Por favor, espera un momento.',
+    'toast-success-join': 'Te has unido correctamente.',
+    'join-org-title': 'Estas a punto de unirte a la organización %s',
+    'join-org-button': 'Unirme ahora'
+
+  },
+  en: {
+    'create-org-or': 'or',
+    'create-org-title': 'Don\'t have an organization yet?',
+    'create-org-button': 'Create it right now!',
+    'name-column': 'Name',
+    'description-column': 'Description',
+    'new-table-name-placeholder': 'Your organization',
+    'new-table-desc-placeholder': 'A short description about this organization.',
+    'dialog-title': 'New organization',
+    'dialog-description': 'An organization allows you to have all the management of your company grouped together.',
+    'create-button': 'Create organization',
+    'toast-loading': 'We are creating your organization. Please wait a moment.',
+    'toast-success': 'Your organization has been created successfully.',
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-loading-join': 'We are joining you to your new organization. Pleae wait a moment.',
+    'toast-success-join': 'You have been joined succesfully.',
+    'join-org-title': 'You are going to join %s\'s organization',
+    'join-org-button': 'Join now'
+  }
+}
 export const home = {
   es: {
+    title: 'Gestionar tu trabajo nunca fue tan fácil',
     'salary-value': 'Sueldo actual',
     'symbol-money': '€',
     'time-spent-vs': 'Tiempo invertido vs tiempo por invertir por semana',
@@ -1135,6 +1179,7 @@ export const home = {
     week: 'Vista semanal'
   },
   en: {
+    title: 'Manage your work has never been so easy',
     'salary-value': 'Actual salary',
     'symbol-money': '$',
     'time-spent-vs': 'Time spent vs time to spend per week',
