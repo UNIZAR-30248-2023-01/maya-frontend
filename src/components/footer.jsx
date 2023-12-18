@@ -20,7 +20,7 @@ export function Footer () {
           ))}
         </nav>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {new Date().getFullYear()} <a href="https://github.com/UNIZAR-30226-2023-01" target="_blank" referrerPolicy="no-referrer" rel="noreferrer">Grace Hopper</a>, Inc. {dictionary.landing['all-right-reserved']}.
+          &copy; {new Date().getFullYear()} <a href="https://github.com/UNIZAR-30248-2023-01" target="_blank" referrerPolicy="no-referrer" rel="noreferrer">Grace Hopper</a>, Inc. {dictionary.landing['all-right-reserved']}.
         </p>
       </div>
     </footer>

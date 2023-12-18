@@ -9,8 +9,10 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
+  const router = useRouter()
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState()
 
@@ -25,12 +27,12 @@ export function UserSignIn ({ className, ...props }) {
           signIn('credentials', {
             username: username.value,
             password: password.value,
-            callbackUrl: '/organizations'
+            redirect: false
           })
             .then((res) => {
-              console.log(res)
               if (res.status === 200) {
                 setIsLoading(false)
+                router.push('/organizations')
                 resolve()
               }
               throw new Error(res.error)
@@ -84,7 +86,7 @@ export function UserSignIn ({ className, ...props }) {
               disabled={isLoading}
             />
           </div>
-          <Button id="sign-in-button" disabled={isLoading}>
+          <Button id="sign-in-button" disabled={isLoading} className="rounded-md border-2 border-custom-mustard hover:font-semibold hover:border-custom-mustard duration-300 bg-custom-mustard px-3.5 py-2 text-sm font-semibold shadow-sm hover:bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-mustard text-black">
           {dictionary.signin['signin-sigin']}
           </Button>
         </div>

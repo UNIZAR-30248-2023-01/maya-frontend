@@ -131,7 +131,7 @@ export function UserSignUp ({ className, ...props }) {
               required={true}
             />
           </div>
-          <Button disabled={isLoading} className="col-span-2">
+          <Button id="sign-up-button" disabled={isLoading} className="col-span-2 rounded-md border-2 border-custom-mustard hover:font-semibold hover:border-custom-mustard duration-300 bg-custom-mustard px-3.5 py-2 text-sm font-semibold shadow-sm hover:bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-mustard text-black">
             {dictionary.signin['signin-register']}
           </Button>
         </div>
