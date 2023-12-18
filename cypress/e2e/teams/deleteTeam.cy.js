@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { user, team } from '../config/models'
-import { createUser, deleteUser, createOrg, createTeam, deleteOrg, deleteTeam } from '../config/setUp'
+import { user, team, organization } from '../config/models'
+import { createUser, deleteUser, createOrg, createTeam, deleteOrg } from '../config/setUp'
 
 describe('Team tests', async () => {
   before(() => {
@@ -12,7 +12,6 @@ describe('Team tests', async () => {
 
   after(() => {
     deleteUser()
-    deleteTeam()
     deleteOrg()
   })
 
@@ -20,7 +19,7 @@ describe('Team tests', async () => {
     cy.login(user)
     cy.wait(1000)
 
-    cy.visit('/en/teams')
+    cy.visit(`/en/${organization.name}/teams`)
     cy.wait(1000)
 
     cy.get('input#filter-teams').type(team.name, { force: true })

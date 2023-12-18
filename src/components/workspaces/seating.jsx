@@ -6,6 +6,8 @@ import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
 import React, { useRef, useState, useEffect } from 'react'
 import { useUser } from '@/context/user-context'
+import { Button } from '../ui/button'
+import { Separator } from '../ui/separator'
 
 function MySeatingChart (name) {
   const seatingChartRef = useRef(null)
@@ -294,14 +296,13 @@ function MySeatingChart (name) {
   <div className='rounded-md border min-h-full flex flex-col items-left justify-start h-96 w-1/3 p-4' style={{ margin: '10px', display: 'flex', flexDirection: 'column' }}>
   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'flex-start' }}>
   <h1 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'center', marginTop: '0' }}>{nombre}</h1>
-  <hr style={{ border: 'none', height: '1px', background: 'linear-gradient(to right, transparent, #ccc, transparent)' }} />
+  <Separator />
     {/* {!hasReservation && ( */}
       <div id="selected-seats-container" className='h-1/2'>
         <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'left', marginTop: '10px' }}>{lanSelectedSeats}</h2>
         {renderSelectedSeats()}
       </div>
     {/* )} */}
-    <hr style={{ width: '100%', margin: '0', background: '#ccc' }} />
     {/* {hasReservation && ( */}
     <div id="selected-seats-container" className='h-1/2'>
         <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#47433E', textAlign: 'left', marginTop: '10px' }}>{lanReservedSeats}</h2>
@@ -309,13 +310,12 @@ function MySeatingChart (name) {
       </div>
     {/* )} */}
   </div>
-  <hr/>
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', marginTop: 'auto', width: '100%' }}>
     {!hasReservation && (
-      <button className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleSaveSeats}>{lanSave}</button>
+      <Button className='w-full capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' type="submit" onClick={handleSaveSeats}>{lanSave}</Button>
     )}
     {hasReservation && (
-      <button className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#47433E] text-primary-foreground shadow hover:bg-[#47433E]/90 h-12 px-6 py-3" type="submit" onClick={handleCancelReservation}>{lanCancel}</button>
+      <Button className='w-full capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' type="submit" onClick={handleCancelReservation}>{lanCancel}</Button>
     )}
   </div>
 </div>

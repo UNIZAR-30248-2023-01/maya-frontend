@@ -132,7 +132,7 @@ export function ConfirmationTaskButton ({
           type="submit"
           id="confirmation-button"
           disabled={isEdit && badForm}
-          className={!isEdit && 'bg-red-500 hover:bg-red-700'}
+          className={!isEdit ? 'bg-red-500 hover:bg-red-700' : 'first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard'}
         >
           {isEdit ? dictionary.common.save : dictionary.common.delete}
         </Button>

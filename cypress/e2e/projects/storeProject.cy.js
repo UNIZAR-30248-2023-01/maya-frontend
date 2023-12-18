@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { user, privateProject } from '../config/models'
+import { user, privateProject, organization } from '../config/models'
 import { createUser, deleteUser, deleteProjects, createProjects, createOrg, deleteOrg } from '../config/setUp'
 
 describe('Store project', async () => {
@@ -21,7 +21,7 @@ describe('Store project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -35,7 +35,7 @@ describe('Store project', async () => {
     cy.wait(1000)
     cy.get('button#accept-close-project').click()
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get('button#close-filter').click()
@@ -52,7 +52,7 @@ describe('Store project', async () => {
 
     cy.wait(1000)
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get(`tr#${privateProject.dbname}`).click()
@@ -66,7 +66,7 @@ describe('Store project', async () => {
     cy.wait(1000)
     cy.get('button#accept-close-project').click()
 
-    cy.visit('/en/projects')
+    cy.visit(`/en/${organization.name}/projects`)
 
     cy.wait(1000)
     cy.get('button#close-filter').click()

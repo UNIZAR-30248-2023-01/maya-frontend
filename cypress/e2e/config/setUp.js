@@ -45,6 +45,32 @@ export const createOrg = () => {
     },
     body: organization
   })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-org`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json'
+    },
+    body: {
+      organization: organization.name,
+      username: user.username
+    }
+  })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-org`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json'
+    },
+    body: {
+      organization: organization.name,
+      username: userMember.username
+    }
+  })
 }
 
 export const createTeam = () => {
@@ -58,6 +84,32 @@ export const createTeam = () => {
       'Content-Type': 'application/json'
     },
     body: { name: dbname, description, organization: organization.name }
+  })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-teams`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json'
+    },
+    body: {
+      team: team.dbname,
+      username: user.username
+    }
+  })
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-teams`,
+    headers: {
+      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+      'Content-Type': 'application/json'
+    },
+    body: {
+      team: team.dbname,
+      username: userMember.username
+    }
   })
 }
 

@@ -17,6 +17,7 @@ import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function SidePanel ({
   title,
@@ -28,6 +29,7 @@ export function SidePanel ({
   organization
 }) {
   const [form, setForm] = useState(getForm(teamSchema._def.shape()))
+  const { user } = useUser()
 
   const setter = ({ key, value, type }) => {
     if (type === 'bool') {
@@ -59,8 +61,8 @@ export function SidePanel ({
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?oragnization=eq.${organization}&select=*,people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?oragnization=eq.${organization}&select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -133,7 +135,7 @@ export function SidePanel ({
           <SheetFooter className="">
             <SheetClose asChild>
               <Button
-                type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'
+                type="submit" id='create-team-button' className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard'
               >
                 {actionBtn}
               </Button>

@@ -50,7 +50,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return row.getValue(id).includes(value)
+      return row.getValue(id)?.includes(value)
     }
   }, {
     accessorKey: 'role',

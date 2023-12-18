@@ -14,7 +14,7 @@ import { ComboboxArray } from '@/components/forms'
 import { useLang } from '@/context/language-context'
 import { normalize, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
-import useSWR, { mutate } from 'swr'
+import { mutate } from 'swr'
 import { DialogClose } from '@radix-ui/react-dialog'
 
 export function AddTeam ({
@@ -22,18 +22,17 @@ export function AddTeam ({
   description,
   triggerBtn,
   actionBtn,
-  data,
-  projectName
+  teams,
+  projectName,
+  organization
 }) {
-  let { data: teams } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=name`)
-  teams = teams?.map(t => t.name)
-
   const { dictionary } = useLang()
   const [form, setForm] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    console.log(form)
     try {
       // Se añade un equipo a un proyecto existente y se actualiza el proyecto para que
       // contenga a los integrantes del equipo añadido si no los tenía ya.
@@ -56,12 +55,11 @@ export function AddTeam ({
                 // Inserto los integrantes de los equipos añadidos en el proyecto
                 await supabase.from('people-project').upsert(members.map((member) => ({
                   username: member,
-                  project: projectName,
-                  role: 'member'
+                  project: projectName
                 })))
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?select=*,teams-project(*),people(*)`)
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?select=*`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams-project?project=eq.${projectName}&select=team`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
                 console.error(error)
@@ -85,7 +83,7 @@ export function AddTeam ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button id="add-team" className="capitalize h-8">{triggerBtn}</Button>
+        <Button id="add-team" className='capitalize h-8 hover:bg-custom-lighterYellow text-black bg-custom-mustard'>{triggerBtn}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={e => handleSubmit(e)}>
@@ -102,7 +100,7 @@ export function AddTeam ({
                 label={dictionary.teams['teams-column']}
                 searchId={'add-team-project-input'}
                 placeholder={dictionary.teams.search}
-                list={teams?.map((team) => ({ value: team, label: normalize(team) }))}
+                list={teams?.map((team) => ({ value: team.name, label: normalize(team.name) }))}
                 values={form || []}
                 dictionary={dictionary}
                 normalized={true}
@@ -119,7 +117,7 @@ export function AddTeam ({
               />
             </div>
             <DialogClose asChild>
-              <Button type="submit" className="capitalize">{actionBtn}</Button>
+              <Button id='add-team-project'type="submit" className="capitalize">{actionBtn}</Button>
             </DialogClose>
           </div>
         </form>

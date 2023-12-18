@@ -20,10 +20,16 @@ describe('Sign up tests', () => {
 
     cy.wait(1000)
 
-    cy.login(user)
+    cy.visit('/en/sign-in')
+
+    cy.wait(1000)
+    cy.get('input#username').type(user.username)
+    cy.get('input#password').type(user.password)
+
+    cy.get('form').submit()
 
     cy.wait(1000)
 
-    cy.get('a#home-button').should('exist')
+    cy.get('button#sign-out-button').should('exist')
   })
 })

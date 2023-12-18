@@ -113,7 +113,7 @@ export function RoleChange ({
                 />
               </div>
               <DialogClose asChild>
-                <Button id='confirm-edit' type="submit" className="capitalize min-w-fit">{actionBtn}</Button>
+                <Button id='confirm-edit' type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'>{actionBtn}</Button>
               </DialogClose>
             </div>
             <RemoveUser username={username} organization={ organization } title={deleteTitle} description={deleteDescription} />

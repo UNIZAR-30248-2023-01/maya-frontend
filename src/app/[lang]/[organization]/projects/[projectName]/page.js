@@ -57,7 +57,7 @@ export default function ProjectPage ({ params }) {
           <PeoplePage projectName={projectName} organization={params.organization}/>
         </TabsContent>
         <TabsContent value="teams">
-          <TeamPage/>
+          <TeamPage projectName={projectName} organization={params.organization}/>
         </TabsContent>
         <TabsContent value="settings" className='flex justify-around'>
           <ProjectSettings project={project[0]} />

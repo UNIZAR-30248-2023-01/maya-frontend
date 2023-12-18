@@ -20,7 +20,7 @@ export const columns = [
       )
     },
     filterFn: (row, id, value) => {
-      return normalize(row.getValue(id)).includes(value)
+      return normalize(row.getValue(id))?.includes(value)
     }
   }
   // Columna privada 1

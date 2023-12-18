@@ -9,7 +9,7 @@ import { Dialog } from '@headlessui/react'
 import { HiBars3, HiXMark } from 'react-icons/hi2'
 import Link from 'next/link'
 
-export function Navbar () {
+export function Navbar ({ organization }) {
   return (
     <div className="z-40 flex items-center justify-between light:bg-white px-4 py-4 shadow-sm sm:px-6 sticky top-0 dark:bg-dark">
       <div className='flex items-center gap-x-6'>
@@ -19,7 +19,7 @@ export function Navbar () {
               <LuMenu className="h-6 w-6" aria-hidden="true" />
           </Button>
         </SheetTrigger>
-        <Breadcrumbs />
+        <Breadcrumbs organization={organization} />
       </div>
       <img className="h-10" src="/logo.webp" alt="logo de la empresa" />
     </div>

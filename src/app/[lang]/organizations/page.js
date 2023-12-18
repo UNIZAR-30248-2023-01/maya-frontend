@@ -20,7 +20,7 @@ export default function OrganizationsPage () {
     }
 
     return (
-      <div className='flex min-h-screen justify-evenly items-center flex-col p-4'>
+      <div className='h-full flex justify-evenly items-center flex-col p-4'>
         <div className='flex flex-row flex-wrap gap-12 w-[800px] justify-center items-center'>
           {organizations.map(org => (
           <Org key={org.organization} name={org.organization} plan={org.plan.plan} />

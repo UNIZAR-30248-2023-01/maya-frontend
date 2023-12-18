@@ -16,12 +16,15 @@ import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
+import { useUser } from '@/context/user-context'
 
 export function ConfirmationCloseButton ({
   isClose,
-  projectName
+  projectName,
+  organization
 }) {
   const { dictionary } = useLang()
+  const { user } = useUser()
 
   const handleChangeStatus = () => {
     try {
@@ -32,7 +35,8 @@ export function ConfirmationCloseButton ({
               .eq('name', projectName)
               .select()
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?name=eq.${projectName}&select=*,people:people-project(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-project?username=eq.${user.username}&select=project,projectValue:projects(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?organization=eq.${organization}&visibility=eq.${'public'}&select=*`)
                 resolve()
               }).catch((error) => {
                 console.error(error)

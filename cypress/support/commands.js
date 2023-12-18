@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import { organization } from '../e2e/config/models'
+
 Cypress.Commands.add('login', (user) => {
   cy.visit('/en/sign-in')
 
@@ -32,4 +34,7 @@ Cypress.Commands.add('login', (user) => {
   cy.get('input#password').type(user.password)
 
   cy.get('form').submit()
+
+  cy.get(`a#${organization.name}`).click()
+  cy.wait(1000)
 })

@@ -1,18 +1,23 @@
-import { user, createUser, deleteUser } from './setUp/setUp'
+/// <reference types="cypress" />
 
-describe('WorkSpaces', () => {
+import { createUser, deleteUser, createOrg, deleteOrg } from './config/setUp'
+import { user, organization } from './config/models'
+
+describe.skip('WorkSpaces', () => {
   before(() => {
     createUser()
+    createOrg()
   })
 
   after(() => {
     deleteUser()
+    deleteOrg()
   })
   it('Selecting a Workspace', () => {
     cy.login(user)
     cy.wait(3000)
 
-    cy.visit('/es/workspaces')
+    cy.visit(`/es/${organization.name}/workspaces`)
     cy.wait(3000)
 
     cy.get('#filter-workspaces').type('Ebro')

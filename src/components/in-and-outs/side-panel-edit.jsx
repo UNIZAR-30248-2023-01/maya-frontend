@@ -253,7 +253,7 @@ export function SidePanelEdit ({
             </SheetClose>
 
             <SheetClose asChild>
-              <Button id="fichar" type="submit" disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
+              <Button id="fichar" type="submit" className='capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard' disabled={!form.in_date || !form.out_date || !form.in_hour || !form.out_hour || !invalidHour}>
                 {actionBtn}
               </Button>
             </SheetClose>

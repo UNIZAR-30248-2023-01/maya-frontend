@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-
-import { user, createUser, deleteUser } from '../setUp/setUp'
+import { user, organization } from '../config/models'
+import { createUser, deleteUser, createOrg, deleteOrg } from '../config/setUp'
 
 const exampleUserEdit = {
   firstname: ' firstname change',
@@ -10,19 +10,21 @@ const exampleUserEdit = {
 describe('Setting account tests', () => {
   before(() => {
     createUser()
+    createOrg()
   })
 
   after(() => {
     deleteUser()
+    deleteOrg()
   })
 
   it('Editing name, surname, pasword and profile pic', () => {
     cy.login(user)
 
-    cy.wait(3000)
+    cy.wait(1000)
 
-    cy.visit('/es/settings')
-    cy.wait(3000)
+    cy.visit(`/en/${organization.name}/settings`)
+    cy.wait(1000)
 
     cy.get('input#firstname').clear().type(exampleUserEdit.firstname).then(($input) => {
       const firstNameValue = $input.val()

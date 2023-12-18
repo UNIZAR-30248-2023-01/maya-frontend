@@ -28,7 +28,8 @@ export const navigation = {
     tickets: 'tickets',
     settings: 'ajustes',
     appearance: 'apariencia',
-    password: 'contraseña'
+    password: 'contraseña',
+    organizations: 'organizaciones'
   },
   en: {
     overview: 'overview',
@@ -40,7 +41,8 @@ export const navigation = {
     tickets: 'tickets',
     settings: 'settings',
     appearance: 'appearance',
-    password: 'password'
+    password: 'password',
+    organizations: 'organizations'
   }
 }
 
@@ -1127,7 +1129,12 @@ export const org = {
     'create-button': 'Crear organización',
     'toast-loading': 'Estamos creando tu organización. Por favor, espera un momento.',
     'toast-success': 'Tu organización se ha creado correctamente.',
-    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.'
+    'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
+    'toast-loading-join': 'Estamos uniendote a tu nueva organización. Por favor, espera un momento.',
+    'toast-success-join': 'Te has unido correctamente.',
+    'join-org-title': 'Estas a punto de unirte a la organización %s',
+    'join-org-button': 'Unirme ahora'
+
   },
   en: {
     'create-org-or': 'or',
@@ -1142,7 +1149,11 @@ export const org = {
     'create-button': 'Create organization',
     'toast-loading': 'We are creating your organization. Please wait a moment.',
     'toast-success': 'Your organization has been created successfully.',
-    'toast-error': 'Something went wrong. Please try again.'
+    'toast-error': 'Something went wrong. Please try again.',
+    'toast-loading-join': 'We are joining you to your new organization. Pleae wait a moment.',
+    'toast-success-join': 'You have been joined succesfully.',
+    'join-org-title': 'You are going to join %s\'s organization',
+    'join-org-button': 'Join now'
   }
 }
 export const home = {

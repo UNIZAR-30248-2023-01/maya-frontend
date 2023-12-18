@@ -22,7 +22,7 @@ export function Org ({ name, plan }) {
     }
   }
   return (
-    <Link href={'/' + lang + '/' + name + '/home'}>
+    <Link id={name} href={'/' + lang + '/' + name + '/home'}>
       <Card>
         <CardContent className='p-2 flex flex-col justify-center gap-4 items-center w-36 h-36'>
           <Icon />
