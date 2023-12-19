@@ -29,7 +29,7 @@ export function PasswordForm () {
         return new Promise((resolve, reject) => {
           (async () => {
             if (form.password !== null && pssword === form.password) {
-              await fetch(`${process.env.VERCEL_URL}/api/change-password`, {
+              await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/change-password`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: form.password })
