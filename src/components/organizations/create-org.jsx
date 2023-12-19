@@ -84,7 +84,7 @@ export function CreateOrg ({ separator }) {
 
       <Dialog>
       <DialogTrigger asChild>
-        <Button size='lg' className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard w-fit font-semibold'>{dictionary.org['create-org-button']}</Button>
+        <Button id='create-org' size='lg' className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard w-fit font-semibold'>{dictionary.org['create-org-button']}</Button>
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={e => handleSubmit(e)}>
@@ -110,7 +110,7 @@ export function CreateOrg ({ separator }) {
                 />
               </div>
               <DialogClose asChild>
-                <Button id='confirm-edit' type="submit" className="capitalize">{dictionary.org['create-button']}</Button>
+                <Button id='confirm-edit' type="submit" className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard font-semibold'>{dictionary.org['create-button']}</Button>
               </DialogClose>
             {/* <RemoveUser username={username} title={deleteTitle} description={deleteDescription} /> */}
           </div>

@@ -34,7 +34,7 @@ export function InvitationLink ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button id="new-date" className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard w-fit font-semibold' onClick={handleCreateInvitationLink}>{dictionary.people['invite-member']}</Button>
+        <Button id="invite-member-to-org" className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard w-fit font-semibold' onClick={handleCreateInvitationLink}>{dictionary.people['invite-member']}</Button>
       </DialogTrigger>
       <DialogContent>
           <DialogHeader>
@@ -44,9 +44,9 @@ export function InvitationLink ({
           </DialogDescription>
           <Card>
             <CardContent className='p-2 flex justify-between h-auto items-center'>
-              <Label className='p-2'>{invitationLink}</Label>
+              <Label className='p-2' id='invitation-link'>{invitationLink}</Label>
               <DialogClose asChild>
-                <Button onClick={copylink} id='confirm-edit' type="submit" className='flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'>
+                <Button onClick={copylink} id='invitation-link-button' type="submit" className='flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'>
                   <Label>Copy</Label>
                   <LuCopy />
                 </Button>

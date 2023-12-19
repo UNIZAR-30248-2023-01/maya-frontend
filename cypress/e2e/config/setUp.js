@@ -34,7 +34,7 @@ export const deleteUser = () => {
   })
 }
 
-export const createOrg = () => {
+export const createOrg = (noMember) => {
   cy.request({
     method: 'POST',
     url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/organization`,
@@ -55,22 +55,25 @@ export const createOrg = () => {
     },
     body: {
       organization: organization.name,
-      username: user.username
+      username: user.username,
+      role: 'owner'
     }
   })
-  cy.request({
-    method: 'POST',
-    url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-org`,
-    headers: {
-      apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
-      Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
-      'Content-Type': 'application/json'
-    },
-    body: {
-      organization: organization.name,
-      username: userMember.username
-    }
-  })
+  if (!noMember) {
+    cy.request({
+      method: 'POST',
+      url: `${Cypress.env('NEXT_PUBLIC_SUPABASE_URL')}/rest/v1/people-org`,
+      headers: {
+        apikey: Cypress.env('NEXT_PUBLIC_SUPABASE_KEY'),
+        Authorization: `Bearer ${Cypress.env('NEXT_PUBLIC_SUPABASE_KEY')}`,
+        'Content-Type': 'application/json'
+      },
+      body: {
+        organization: organization.name,
+        username: userMember.username
+      }
+    })
+  }
 }
 
 export const createTeam = () => {

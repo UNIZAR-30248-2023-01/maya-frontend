@@ -1,3 +1,5 @@
+require('crypto')
+
 export const users = [
   {
     username: 'test',
@@ -15,10 +17,13 @@ export const users = [
   }
 ]
 
+const uuid = crypto.randomUUID()
+
 export const organizations = [
   {
     name: 'test-organization',
-    description: 'This is my first organization'
+    description: 'This is my first organization',
+    uuid
   }
 ]
 
