@@ -47,7 +47,7 @@ export function InvitationLink ({
               <Label className='p-2' id='invitation-link'>{invitationLink}</Label>
               <DialogClose asChild>
                 <Button onClick={copylink} id='invitation-link-button' type="submit" className='flex flex-row gap-2 capitalize hover:bg-custom-lighterYellow text-black bg-custom-mustard min-w-fit'>
-                  <Label>Copy</Label>
+                  <Label>{dictionary.people.copy}</Label>
                   <LuCopy />
                 </Button>
               </DialogClose>

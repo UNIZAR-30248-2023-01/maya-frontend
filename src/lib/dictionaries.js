@@ -429,16 +429,20 @@ export const people = {
     'invite-member-send': 'reclutar',
     'manage-member-title': 'Gestionar %s',
     'manage-member-description': 'Modifica la información de un usuario en este proyecto.',
+    'manage-member-description-team': 'Modifica la información de un usuario en este equipo.',
     'manage-member-submit': 'Cambiar rol',
     'manage-member-delete-title': 'Eliminar del proyecto',
     'manage-member-delete-description': 'Retira el permiso de un usuario a este proyecto.',
+    'manage-member-delete-title-team': 'Eliminar del equipo',
+    'manage-member-delete-description-team': 'Retira el permiso de un usuario a este equipo.',
     'toast-loading': 'Estamos añadiendo a los nuevos miembros. Por favor, espera un momento.',
     'toast-success': 'Se han añadido los nuevos miembros correctamente.',
     'toast-error': 'Algo ha ido mal. Por favor, inténtalo de nuevo.',
     'toast-role-loading': 'Estamos modificando la información del miembro. Por favor, espera un momento.',
     'toast-role-success': 'Se ha modificado la información correctamente.',
     'toast-remove-loading': 'Estamos eliminando al miembro del proyecto. Por favor, espera un momento.',
-    'toast-remove-success': 'Se ha eliminado el miembro correctamente.'
+    'toast-remove-success': 'Se ha eliminado el miembro correctamente.',
+    copy: 'Copiar'
   },
   en: {
     'members-tab': 'Members',
@@ -455,16 +459,20 @@ export const people = {
     'invite-member-send': 'recruit',
     'manage-member-title': 'Manage %s',
     'manage-member-description': 'Modify the info of a user in this project',
+    'manage-member-description-team': 'Modify the info of a user in this team',
     'manage-member-submit': 'Change role',
     'manage-member-delete-title': 'Remove from this project',
     'manage-member-delete-description': 'Remove the access of a user to this project',
+    'manage-member-delete-title-team': 'Remove from this team',
+    'manage-member-delete-description-team': 'Remove the access of a user to this team',
     'toast-loading': 'We are adding new members. Please wait a moment.',
     'toast-success': 'New members added successfully.',
     'toast-error': 'Something went wrong. Please try again.',
     'toast-role-loading': 'We are modifying the info of this member. Please wait a moment.',
     'toast-role-success': 'Member info updated successfully.',
     'toast-remove-loading': 'We are removing this member from the project. Please wait a moment.',
-    'toast-remove-success': 'Member removed successfully.'
+    'toast-remove-success': 'Member removed successfully.',
+    copy: 'Copy'
   }
 }
 

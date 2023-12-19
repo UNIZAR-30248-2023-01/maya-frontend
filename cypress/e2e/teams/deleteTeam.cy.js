@@ -30,7 +30,7 @@ describe('Team tests', async () => {
       .click()
     cy.get('div#delete-team').click()
 
-    cy.get('table tbody tr:first-child')
-      .contains('results')
+    cy.wait(1000)
+    cy.get('tr#no-results').should('exist')
   })
 })

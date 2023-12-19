@@ -1,8 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { Bool, ComboboxArray, Text, TextArea } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -11,9 +9,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { toast } from 'sonner'
-import { mutate } from 'swr'
-import { useLang } from '@/context/language-context'
 import {
   Sheet,
   SheetClose,
@@ -24,11 +19,15 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import { Text, TextArea, ComboboxArray, Bool } from '@/components/forms'
+import { useLang } from '@/context/language-context'
 import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
+import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useUser } from '@/context/user-context'
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import { mutate } from 'swr'
 
 const initialize = ({ data }) => {
   const form = getForm(teamSchema._def.shape())
@@ -50,8 +49,6 @@ export function DataTableRowActions ({ row }) {
   const [form, setForm] = useState(initialize({ data: row.original }))
   const [people, setPeople] = useState([])
   const organization = usePathname().split('/')[2]
-
-  const { user } = useUser()
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -81,7 +78,7 @@ export function DataTableRowActions ({ row }) {
               .delete()
               .eq('name', team)
               .then(() => {
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'private'}&select=*,people(*)`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               })
@@ -136,7 +133,7 @@ export function DataTableRowActions ({ row }) {
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'private'}&select=*,people(*)`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
