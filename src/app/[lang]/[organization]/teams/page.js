@@ -12,15 +12,15 @@ export default function TeamsPage ({ params }) {
 
   const { data: people, isLoadingPeople } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-org?organization=eq.${organization}&select=*`)
 
-  const { data: teams, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+  const { data: teams, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'private'}&select=*,people(*)`)
   const { data: publicTeams, isLoadingPublic } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
 
   if (isLoading || isLoadingPublic || isLoadingPeople) {
     return <DataTable data={loadingTeam} columns={columns} people={[]} />
   }
-
-  console.log(teams.filter(e => e?.teamValue?.organization === organization && e?.teamValue.visibility === 'private'))
-  const myTeams = teams.filter(e => e?.teamValue?.organization === organization && e?.teamValue.visibility === 'private')?.map(e => e.teamValue)
+  console.log(teams)
+  console.log(teams?.filter(e => e?.people.find(e => e.username === user.username)))
+  const myTeams = teams.filter(e => e?.people.find(e => e.username === user.username))
 
   console.log(myTeams)
   console.log(publicTeams)

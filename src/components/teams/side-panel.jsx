@@ -17,7 +17,6 @@ import { teamSchema } from '@/lib/schemas'
 import { getForm, supabase } from '@/lib/utils'
 import { toast } from 'sonner'
 import { mutate } from 'swr'
-import { useUser } from '@/context/user-context'
 
 export function SidePanel ({
   title,
@@ -29,7 +28,6 @@ export function SidePanel ({
   organization
 }) {
   const [form, setForm] = useState(getForm(teamSchema._def.shape()))
-  const { user } = useUser()
 
   const setter = ({ key, value, type }) => {
     if (type === 'bool') {
@@ -61,7 +59,7 @@ export function SidePanel ({
                   })))
                 }
                 // Actualización de los datos en la interfaz
-                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/people-teams?username=eq.${user.username}&select=team,teamValue:teams(*),people(*)`)
+                mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'private'}&select=*,people(*)`)
                 mutate(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/teams?organization=eq.${organization}&visibility=eq.${'public'}&select=*,people(*)`)
                 resolve()
               }).catch((error) => {
@@ -81,6 +79,7 @@ export function SidePanel ({
       const { path, message } = JSON.parse(error.message)[0]
       toast.error(path[0] + ': ' + message)
     }
+    setForm({})
   }
 
   return (

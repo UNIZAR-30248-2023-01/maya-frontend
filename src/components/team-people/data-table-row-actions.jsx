@@ -11,10 +11,10 @@ export function DataTableRowActions ({ row }) {
   return (
     <RoleChange
       title={row.original?.people?.firstname + ' ' + row.original?.people?.lastname}
-      description={dictionary.people['manage-member-description']}
+      description={dictionary.people['manage-member-description-team']}
       actionBtn={dictionary.people['manage-member-submit']}
-      deleteTitle={dictionary.people['manage-member-delete-title']}
-      deleteDescription={dictionary.people['manage-member-delete-description']}
+      deleteTitle={dictionary.people['manage-member-delete-title-team']}
+      deleteDescription={dictionary.people['manage-member-delete-description-team']}
       teamName={row.original.team}
       username={row.original.username}
       defaultRole={row.original.role}

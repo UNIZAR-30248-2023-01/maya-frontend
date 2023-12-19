@@ -29,10 +29,11 @@ export const columns = [
     header: null,
     cell: ({ row }) => {
       const { name } = row.original
+      console.log(row)
       if (!name) {
         return (
           <div className="flex items-end space-x-0.5">
-            {row.getValue('people')?.map((person, id) => (
+            {row?.getValue('people')?.map((person, id) => (
               <Skeleton key={id} className="rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage />
@@ -45,7 +46,7 @@ export const columns = [
 
       return (
         <div className="flex items-end space-x-0.5">
-          {row.getValue('people')?.map((person, id) => (
+          {row?.getValue('people')?.map((person, id) => (
             <Avatar key={id}>
               <AvatarImage src={person.avatar} />
               <AvatarFallback className="uppercase">{String(person.firstname)[0] + String(person.lastname)[0]}</AvatarFallback>
