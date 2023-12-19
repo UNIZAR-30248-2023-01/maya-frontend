@@ -835,8 +835,8 @@ export const landing = {
     'feat-3-description': 'Olvídate de la antigua forma de reservar tu espacio de trabajo. Con nuestra herramienta puedes reservar tu espacio de trabajo en unos pocos clics.'
   },
   en: {
-    title: 'Manage your work has never been so easy',
-    description: 'Manage projects, tasks, book workspaces and record your in-and-outs with total confidence. Optimize your workflow and maximize efficiency.',
+    title: 'Managing your work has never been easier',
+    description: 'Manage projects, tasks, reserve workspaces and record your inputs and outputs with complete confidence. Optimize your workflow and maximize efficiency.',
     start: 'Start now',
     demo: 'Live demo',
     'cta-title': 'Boost your productivity.',
