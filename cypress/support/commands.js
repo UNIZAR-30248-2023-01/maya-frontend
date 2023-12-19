@@ -34,7 +34,19 @@ Cypress.Commands.add('login', (user) => {
   cy.get('input#password').type(user.password)
 
   cy.get('form').submit()
+  cy.wait(1000)
 
   cy.get(`a#${organization.name}`).click()
+  cy.wait(1000)
+})
+
+Cypress.Commands.add('loginWithNoOrg', (user) => {
+  cy.visit('/en/sign-in')
+
+  cy.wait(1000)
+  cy.get('input#username').type(user.username)
+  cy.get('input#password').type(user.password)
+
+  cy.get('form').submit()
   cy.wait(1000)
 })

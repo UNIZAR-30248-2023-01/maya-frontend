@@ -56,8 +56,8 @@ export default function JoinOrgPage ({ params }) {
   return !isLoading && (
     <div className='w-full h-full flex justify-around items-center'>
       <div className='flex flex-col gap-4 items-center'>
-        <Label className='font-bold text-2xl'>{String(dictionary.org['join-org-title']).replace('%s', organization[0].name)}</Label>
-        <Button onClick={handleSubmit} className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard font-semibold w-fit'>{dictionary.org['join-org-button']}</Button>
+        <Label className='font-bold text-2xl'>{String(dictionary.org['join-org-title']).replace('%s', organization?.at(0)?.name)}</Label>
+        <Button id='join-org' onClick={handleSubmit} className='first-letter:uppercase hover:bg-custom-lighterYellow text-black bg-custom-mustard font-semibold w-fit'>{dictionary.org['join-org-button']}</Button>
       </div>
     </div>
 
