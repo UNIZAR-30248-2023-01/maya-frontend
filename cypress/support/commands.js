@@ -34,7 +34,7 @@ Cypress.Commands.add('login', (user) => {
   cy.get('input#password').type(user.password)
 
   cy.get('form').submit()
-  cy.wait(1000)
+  cy.wait(3000)
 
   cy.get(`a#${organization.name}`).click()
   cy.wait(1000)

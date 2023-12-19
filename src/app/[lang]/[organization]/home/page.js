@@ -23,7 +23,7 @@ const valueFormatter = function (number) {
   return new Intl.NumberFormat('us').format(number).toString()
 }
 
-export default function Home () {
+export default function Home ({ params }) {
   const { lang, dictionary } = useLang()
   const { user } = useUser()
 
@@ -208,7 +208,7 @@ export default function Home () {
   /**
    * Obtener proyectos abiertos y cerrados
    */
-  const { data: projects } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?&select=status`)
+  const { data: projects } = useSWR(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?organization=eq.${params.organization}&select=status`)
   const [pjts, setProjects] = useState([
     {
       name: dictionary.home['project-open'],
