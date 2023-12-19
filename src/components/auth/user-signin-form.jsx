@@ -9,8 +9,10 @@ import { signIn } from 'next-auth/react'
 import { LuGithub } from 'react-icons/lu'
 import { toast } from 'sonner'
 import { useLang } from '@/context/language-context'
+import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
+  const router = useRouter()
   const { dictionary } = useLang()
   const [isLoading, setIsLoading] = useState()
 
@@ -25,11 +27,12 @@ export function UserSignIn ({ className, ...props }) {
           signIn('credentials', {
             username: username.value,
             password: password.value,
-            callbackUrl: '/organizations'
+            redirect: false
           })
             .then((res) => {
               if (res.status === 200) {
                 setIsLoading(false)
+                router.push('/organizations')
                 resolve()
               }
               throw new Error(res.error)
