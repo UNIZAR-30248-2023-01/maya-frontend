@@ -2,8 +2,8 @@ import { Footer } from '@/components/footer'
 import { RootNavbar } from '@/components/navbar'
 
 export const metadata = {
-  title: 'Privacy Policy',
-  description: 'Here you can read our privacy policy.'
+  title: 'Sitemap',
+  description: 'Here you can find all the public pages of the website.'
 }
 
 export default function SignUpLayout ({ children }) {
