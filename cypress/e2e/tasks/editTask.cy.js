@@ -6,7 +6,7 @@ import { createUser, deleteUser, deleteProjects, createProjects, createOrg, dele
 const newTask = {
   description: 'New description',
   estimated: '10',
-  date: 'November 26th, 2023'
+  date: 'December 31st, 2023'
 }
 
 describe('Edit tasks', async () => {

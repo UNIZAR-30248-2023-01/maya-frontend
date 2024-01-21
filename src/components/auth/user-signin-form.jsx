@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 
 export function UserSignIn ({ className, ...props }) {
   const router = useRouter()
-  const { dictionary } = useLang()
+  const { dictionary, lang } = useLang()
   const [isLoading, setIsLoading] = useState()
 
   const handleSubmit = async (e) => {
@@ -32,7 +32,7 @@ export function UserSignIn ({ className, ...props }) {
             .then((res) => {
               if (res.status === 200) {
                 setIsLoading(false)
-                router.push('/organizations')
+                router.push(`/${lang}/organizations`)
                 resolve()
               }
               throw new Error(res.error)
