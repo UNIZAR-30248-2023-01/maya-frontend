@@ -44,7 +44,5 @@ jobs:
           wait-on: ${{ env.VERCEL_URL }}
           wait-on-timeout: 30
           command: npm run cypress:test
-      - name: Code coverage
-        run: npx nyc report --reporter=text-summary --remove /node_modules
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
