@@ -5,17 +5,19 @@ import {
   TableCell,
   TableRow
 } from '@/components/ui/table'
+import { useLang } from '@/context/language-context'
 import { flexRender } from '@tanstack/react-table'
 import { useRouter, usePathname } from 'next/navigation'
 
 export function DataTableBody ({ table }) {
+  const { lang } = useLang()
   const router = useRouter()
   const org = usePathname().split('/')[2]
   const workspace = usePathname().split('/')[4]
   const goTo = (row, key, secretKey) => {
     // Construye la URL como destino
     const name = String(row.original.name).toLowerCase().replace(/ /g, '-')
-    router.push(`/${org}/workspaces/${workspace}/${name}`)
+    router.push(`/${lang}/${org}/workspaces/${workspace}/${name}`)
   }
 
   return (

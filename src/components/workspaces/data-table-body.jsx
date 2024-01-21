@@ -7,16 +7,18 @@ import {
 } from '@/components/ui/table'
 import { flexRender } from '@tanstack/react-table'
 import { usePathname, useRouter } from 'next/navigation'
+import { useLang } from '@/context/language-context'
 
 export function DataTableBody ({ table }) {
   const router = useRouter()
+  const { lang } = useLang()
   const path = usePathname().split('/')[2]
   // const goTo = (row) => router.push(`/workspaces/${String(row.original.name).toLowerCase().replace(/ /g, '-')}`)
 
   const goTo = (row, key, secretKey) => {
     // Construye la URL como destino
     const name = String(row.original.name).toLowerCase().replace(/ /g, '-')
-    router.push(`/${path}/workspaces/${name}`)
+    router.push(`/${lang}/${path}/workspaces/${name}`)
   }
 
   return (
