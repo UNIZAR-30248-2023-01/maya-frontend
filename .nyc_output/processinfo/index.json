@@ -1,0 +1,1 @@
+{"processes":{"0b323d63-7dba-4d7a-92db-08f87041619f":{"parent":"8822b1ed-90ca-4e85-bf07-cf9ac6121962","children":[]},"8822b1ed-90ca-4e85-bf07-cf9ac6121962":{"parent":null,"children":["0b323d63-7dba-4d7a-92db-08f87041619f"]}},"files":{"C:\\Users\\hector\\Desktop\\maya-frontend\\cypress.config.js":["0b323d63-7dba-4d7a-92db-08f87041619f"]},"externalIds":{}}
