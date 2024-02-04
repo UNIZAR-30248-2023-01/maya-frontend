@@ -10,10 +10,10 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useLang } from '@/context/language-context'
 
 export function DataTableBody ({ table }) {
-  const { dictionary, lang } = useLang()
+  const { dictionary } = useLang()
   const router = useRouter()
   const routes = usePathname().split('/')[2]
-  const goTo = (row) => router.push(`/${lang}/${routes}/projects/${String(row.original.name)}`)
+  const goTo = (row) => router.push(`/${routes}/projects/${String(row.original.name)}`)
 
   return (
     <TableBody>

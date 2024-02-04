@@ -52,7 +52,3 @@ next-env.d.ts
 /cypress/screenshots
 /cypress/reports
 /cypress/fixtures
-
-.husky
-.nyc_output
-.nyc_output/*
